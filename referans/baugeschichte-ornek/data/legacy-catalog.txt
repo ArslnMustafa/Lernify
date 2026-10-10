@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="de" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baugeschichte II | Minimalist Beige Edition</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        stone: {
+                            50: '#fcfbfa',
+                            100: '#f5f2eb',
+                            200: '#e8e2d5',
+                            300: '#d9cfbe',
+                            400: '#b8ab97',
+                            500: '#948773',
+                            600: '#736856',
+                            700: '#595042',
+                            800: '#3d372c',
+                            900: '#24211a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .card-inner { transition: transform 0.5s cubic-bezier(0.3, 0, 0.2, 1); transform-style: preserve-3d; }
+        .card-flipped { transform: rotateY(180deg); }
+        .card-front, .card-back { backface-visibility: hidden; }
+        .card-back { transform: rotateY(180deg); }
+        #sim-img, #card-img, #trainer-img { transition: opacity 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="bg-[#f2eee9] text-[#3d372c] font-sans min-h-full flex flex-col antialiased selection:bg-[#d9cfbe] selection:text-[#24211a]">
+
+    <!-- Responsive Top Navigation -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-[#e8e2d5]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 md:h-20 flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-start">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded-full bg-[#3d372c] text-[#f2eee9] flex items-center justify-center font-bold text-sm tracking-wider shadow-sm flex-shrink-0">
+                        B2
+                    </div>
+                    <div>
+                        <h1 class="text-sm font-bold tracking-tight text-[#24211a]">Baugeschichte II</h1>
+                        <p class="text-[11px] text-[#736856]">Architektur & Struktur-System</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobil Uyumlu Sekmeler -->
+            <nav class="flex flex-wrap justify-center md:flex-nowrap gap-1 p-1.5 bg-[#f5f2eb] rounded-2xl md:rounded-full border border-[#e8e2d5] shadow-inner w-full md:w-auto">
+                <button onclick="switchTab('summary')" id="tab-summary" class="flex-grow md:flex-grow-0 px-3 py-1.5 rounded-xl md:rounded-full text-xs font-medium transition bg-white text-[#24211a] shadow-sm whitespace-nowrap text-center">
+                    Zusammenfassung
+                </button>
+                <button onclick="switchTab('trainer')" id="tab-trainer" class="flex-grow md:flex-grow-0 px-3 py-1.5 rounded-xl md:rounded-full text-xs font-medium transition text-[#736856] hover:text-[#24211a] whitespace-nowrap text-center">
+                    Führerschein-Modus
+                </button>
+                <button onclick="switchTab('cards')" id="tab-cards" class="flex-grow md:flex-grow-0 px-3 py-1.5 rounded-xl md:rounded-full text-xs font-medium transition text-[#736856] hover:text-[#24211a] whitespace-nowrap text-center">
+                    Karteikarten
+                </button>
+                <button onclick="switchTab('sim')" id="tab-sim" class="flex-grow md:flex-grow-0 px-3 py-1.5 rounded-xl md:rounded-full text-xs font-medium transition text-[#736856] hover:text-[#24211a] whitespace-nowrap text-center">
+                    Simulator
+                </button>
+                <button onclick="switchTab('exam')" id="tab-exam" class="flex-grow md:flex-grow-0 px-3 py-1.5 rounded-xl md:rounded-full text-xs font-medium transition text-[#736856] hover:text-[#24211a] whitespace-nowrap text-center">
+                    Klausur
+                </button>
+                <button onclick="switchTab('theory')" id="tab-theory" class="flex-grow md:flex-grow-0 px-3 py-1.5 rounded-xl md:rounded-full text-xs font-medium transition text-[#736856] hover:text-[#24211a] whitespace-nowrap text-center">
+                    Prüfung
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-5xl w-full mx-auto p-4 sm:p-10">
+        
+        <!-- ZUSAMMENFASSUNG -->
+        <section id="sec-summary" class="space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#e8e2d5] shadow-sm space-y-6">
+                <div class="border-b border-[#f5f2eb] pb-6">
+                    <h2 class="text-xl font-bold tracking-tight text-[#24211a]">Architektur-Epochen & Fragen im Überblick</h2>
+                    <p class="text-xs text-[#736856] mt-1">Kurz & prägnant: Zeiträume, Merkmale, Architekten und erweiterte Skript-Fragen</p>
+                </div>
+
+                <div id="random-epochs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Javascript ile doldurulacak -->
+                </div>
+
+                <hr class="border-t border-[#f5f2eb] my-6">
+
+                <div>
+                    <h3 class="text-sm font-bold text-[#24211a] mb-4">Ausführlicher Fragen- und Antwortenkatalog (Skript & Klausurvorbereitung)</h3>
+                    <div id="theory-list" class="space-y-3" data-done="1">
+                        <!-- Javascript ile doldurulacak -->
+                    </div>
+                    
+                    <!-- Sayfalandırma Kontrolleri -->
+                    <div class="flex justify-between items-center mt-6 pt-4 border-t border-[#f5f2eb]">
+                        <button id="theory-prev-btn" onclick="prevTheoryPage()" class="px-4 py-2 bg-[#f5f2eb] hover:bg-[#e8e2d5] text-[#24211a] text-xs font-medium rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-chevron-left mr-1"></i> Zurück
+                        </button>
+                        <span id="theory-page-info" class="text-xs font-semibold text-[#736856]">Seite 1 von 1</span>
+                        <button id="theory-next-btn" onclick="nextTheoryPage()" class="px-4 py-2 bg-[#f5f2eb] hover:bg-[#e8e2d5] text-[#24211a] text-xs font-medium rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed">
+                            Weiter <i class="fa-solid fa-chevron-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KARTEIKARTEN -->
+        <section id="sec-cards" class="hidden space-y-6">
+            <div class="flex justify-between items-center bg-white p-5 sm:p-6 rounded-3xl border border-[#e8e2d5] shadow-sm">
+                <h2 class="text-sm font-bold text-[#24211a]">Karteikarten-Trainer</h2>
+                <div class="flex items-center space-x-3">
+                    <button onclick="prevCard()" class="w-8 h-8 rounded-full bg-[#f5f2eb] hover:bg-[#e8e2d5] text-[#24211a] flex items-center justify-center transition"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                    <span id="card-counter" class="text-xs font-semibold w-16 text-center text-[#736856]"></span>
+                    <button onclick="nextCard()" class="w-8 h-8 rounded-full bg-[#f5f2eb] hover:bg-[#e8e2d5] text-[#24211a] flex items-center justify-center transition"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <div class="w-full max-w-xl h-[420px] sm:h-[480px] cursor-pointer" onclick="flipCard()">
+                    <div id="card-inner-elem" class="card-inner relative w-full h-full shadow-sm rounded-3xl border border-[#e8e2d5]">
+                        <div class="card-front absolute inset-0 bg-white rounded-3xl flex flex-col overflow-hidden">
+                            <div class="flex-grow flex items-center justify-center p-6 bg-[#f5f2eb]">
+                                <img id="card-img" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23f5f2eb\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23948773\' font-family=\'sans-serif\' font-size=\'12px\'>Kein Bild</text></svg>'" class="max-h-full max-w-full object-contain rounded-xl">
+                            </div>
+                            <div class="p-4 text-center text-[11px] text-[#736856] bg-white border-t border-[#f5f2eb]">
+                                Klicken zum Umdrehen
+                            </div>
+                        </div>
+                        <div class="card-back absolute inset-0 bg-[#3d372c] text-[#f2eee9] p-6 sm:p-8 rounded-3xl flex flex-col justify-between overflow-y-auto">
+                            <div>
+                                <span class="text-[10px] bg-[#595042] text-[#d9cfbe] px-3 py-1 rounded-full font-medium uppercase tracking-wider inline-block mb-4">Lösung</span>
+                                <h3 id="card-title" class="text-lg sm:text-xl font-bold tracking-tight text-white mb-4"></h3>
+                                <div class="grid grid-cols-2 gap-3 py-3 border-y border-[#595042] my-3 text-xs">
+                                    <div><span class="text-[#b8ab97] text-[10px] block">Architekt:</span><span id="card-arch" class="font-semibold text-white"></span></div>
+                                    <div><span class="text-[#b8ab97] text-[10px] block">Jahr:</span><span id="card-year" class="font-semibold text-white"></span></div>
+                                    <div class="col-span-2"><span class="text-[#b8ab97] text-[10px] block">Epoche / Stil:</span><span id="card-style" class="font-semibold text-[#d9cfbe]"></span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="text-[#b8ab97] text-[10px] block mb-1 uppercase tracking-wider">Merkmale:</span>
+                                <ul id="card-features" class="list-disc list-inside text-xs space-y-1 text-[#d9cfbe]"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WIEDERHOLEN (EHLİYET MODU) -->
+        <section id="sec-trainer" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#e8e2d5] shadow-sm">
+                <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-8">
+                    <div class="bg-[#f5f2eb] p-3 sm:p-4 rounded-2xl border border-[#e8e2d5] text-center cursor-pointer hover:bg-[#e8e2d5]/50 transition" onclick="setTrainerFilter('box1')">
+                        <span class="text-[10px] sm:text-[11px] font-semibold text-red-700 uppercase tracking-wider block mb-1">In Wiederholung</span>
+                        <span id="stat-box1" class="text-base sm:text-xl font-bold text-red-800">0</span>
+                    </div>
+                    <div class="bg-[#f5f2eb] p-3 sm:p-4 rounded-2xl border border-[#e8e2d5] text-center cursor-pointer hover:bg-[#e8e2d5]/50 transition" onclick="setTrainerFilter('box2')">
+                        <span class="text-[10px] sm:text-[11px] font-semibold text-amber-700 uppercase tracking-wider block mb-1">Verstanden</span>
+                        <span id="stat-box2" class="text-base sm:text-xl font-bold text-amber-800">0</span>
+                    </div>
+                    <div class="bg-[#f5f2eb] p-3 sm:p-4 rounded-2xl border border-[#e8e2d5] text-center cursor-pointer hover:bg-[#e8e2d5]/50 transition" onclick="setTrainerFilter('box3')">
+                        <span class="text-[10px] sm:text-[11px] font-semibold text-emerald-700 uppercase tracking-wider block mb-1">Beherrscht</span>
+                        <span id="stat-box3" class="text-base sm:text-xl font-bold text-emerald-800">0</span>
+                    </div>
+                </div>
+
+                <div id="trainer-active-area" class="space-y-6">
+                    <div class="flex justify-between items-center text-xs border-b border-[#f5f2eb] pb-4">
+                        <span id="trainer-category-badge" class="px-3 py-1 rounded-full font-semibold uppercase tracking-wider bg-red-100 text-red-800">In Wiederholung</span>
+                        <div class="flex items-center space-x-3">
+                            <button onclick="showHint()" class="bg-[#f5f2eb] hover:bg-[#e8e2d5] text-[#24211a] px-3 py-1.5 rounded-lg font-medium transition">
+                                <i class="fa-solid fa-lightbulb mr-1 text-amber-600"></i> Tipp
+                            </button>
+                            <span id="trainer-progress" class="font-medium text-[#736856]"></span>
+                        </div>
+                    </div>
+
+                    <div id="trainer-hint-box" class="hidden bg-amber-50 border border-amber-200 text-amber-900 p-3.5 rounded-xl text-xs font-medium">
+                        <i class="fa-solid fa-circle-info mr-1.5"></i> <span id="trainer-hint-text"></span>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                        <div class="lg:col-span-5">
+                            <div class="w-full h-64 sm:h-72 bg-[#f5f2eb] rounded-2xl overflow-hidden border border-[#e8e2d5] flex items-center justify-center">
+                                <img id="trainer-img" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23f5f2eb\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23948773\' font-family=\'sans-serif\' font-size=\'12px\'>Kein Bild</text></svg>'" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-7 flex flex-col justify-between space-y-4">
+                            <div class="space-y-4">
+                                <h3 id="trainer-question-title" class="text-sm font-bold text-[#24211a]">Frage wird geladen...</h3>
+                                <div id="trainer-options" class="space-y-2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="trainer-solution" class="hidden mt-4 p-4 rounded-2xl border-l-2">
+                        <h4 id="trainer-result-title" class="font-bold text-xs mb-1"></h4>
+                        <p id="trainer-result-detail" class="text-xs mb-3 text-[#736856]"></p>
+                        <button onclick="nextTrainerCard()" class="bg-[#3d372c] text-white px-4 py-2 rounded-xl text-xs font-medium hover:bg-[#24211a] transition">
+                            Nächste Frage
+                        </button>
+                    </div>
+                </div>
+
+                <div id="trainer-empty" class="hidden text-center py-12 space-y-3">
+                    <h3 class="text-base font-bold text-[#24211a]">Super gemacht!</h3>
+                    <p class="text-xs text-[#736856]">In dieser Box befinden sich aktuell keine Karten mehr.</p>
+                    <button onclick="setTrainerFilter('box1')" class="bg-[#3d372c] text-white px-4 py-2 rounded-xl text-xs font-medium">Zu In Wiederholung</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- KLAUSUR-SIMULATOR -->
+        <section id="sec-sim" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#e8e2d5] shadow-sm">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#f5f2eb] pb-6 mb-8 gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold tracking-tight text-[#24211a]">Architektur-Analyse</h2>
+                        <p class="text-xs text-[#736856] mt-1">Strukturierte Gebäude- und Stilerkennung</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span id="sim-progress" class="text-xs font-semibold text-[#595042] bg-[#f5f2eb] px-3 py-1.5 rounded-lg"></span>
+                        <button onclick="nextSimBuilding()" class="bg-[#3d372c] hover:bg-[#24211a] text-white px-4 py-2 rounded-xl text-xs font-medium transition flex items-center space-x-2">
+                            <span>Nächstes</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-6">
+                        <div class="w-full h-64 sm:h-[400px] bg-[#f5f2eb] rounded-2xl overflow-hidden border border-[#e8e2d5] relative flex items-center justify-center">
+                            <img id="sim-img" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23f5f2eb\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23948773\' font-family=\'sans-serif\' font-size=\'12px\'>Kein Bild</text></svg>'" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-[11px] font-semibold text-[#736856] uppercase tracking-wider mb-1">1. Bauwerk & Ort</label>
+                                <input type="text" id="in-name" class="w-full px-4 py-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-xs focus:ring-1 focus:ring-[#3d372c] focus:outline-none transition">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-[#736856] uppercase tracking-wider mb-1">2. Architekt</label>
+                                    <input type="text" id="in-arch" class="w-full px-4 py-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-xs focus:ring-1 focus:ring-[#3d372c] focus:outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-[#736856] uppercase tracking-wider mb-1">3. Zeitraum</label>
+                                    <input type="text" id="in-year" class="w-full px-4 py-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-xs focus:ring-1 focus:ring-[#3d372c] focus:outline-none transition">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-[#736856] uppercase tracking-wider mb-1">4. Epoche / Stil</label>
+                                <input type="text" id="in-style" class="w-full px-4 py-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-xs focus:ring-1 focus:ring-[#3d372c] focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-[#736856] uppercase tracking-wider mb-1">5. Merkmale</label>
+                                <textarea id="in-features" rows="2" class="w-full px-4 py-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-xs focus:ring-1 focus:ring-[#3d372c] focus:outline-none transition resize-none"></textarea>
+                            </div>
+                        </div>
+                        <button onclick="checkSimAnswer()" class="w-full bg-[#d9cfbe]/40 hover:bg-[#d9cfbe]/70 text-[#24211a] font-semibold py-3 px-4 rounded-xl transition text-xs border border-[#d9cfbe]">
+                            Lösung aufdecken
+                        </button>
+                    </div>
+                </div>
+
+                <div id="sim-solution" class="hidden mt-8 pt-6 border-t border-[#f5f2eb]">
+                    <h3 class="text-xs font-bold text-[#24211a] uppercase tracking-wider mb-4">Offizielle Skript-Lösung</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-4">
+                        <div class="bg-[#f5f2eb] p-3 rounded-xl border border-[#e8e2d5]"><span class="text-[10px] text-[#736856] block">Bauwerk</span><span id="sol-name" class="font-bold text-[#24211a]"></span></div>
+                        <div class="bg-[#f5f2eb] p-3 rounded-xl border border-[#e8e2d5]"><span class="text-[10px] text-[#736856] block">Architekt</span><span id="sol-arch" class="font-bold text-[#24211a]"></span></div>
+                        <div class="bg-[#f5f2eb] p-3 rounded-xl border border-[#e8e2d5]"><span class="text-[10px] text-[#736856] block">Zeitraum</span><span id="sol-year" class="font-bold text-[#24211a]"></span></div>
+                        <div class="bg-[#f5f2eb] p-3 rounded-xl border border-[#e8e2d5]"><span class="text-[10px] text-[#736856] block">Epoche</span><span id="sol-style" class="font-bold text-[#24211a]"></span></div>
+                    </div>
+                    <div class="bg-[#3d372c] text-[#f2eee9] p-4 rounded-xl text-xs">
+                        <span class="text-[10px] text-[#b8ab97] block mb-1 uppercase tracking-wider">Merkmale:</span>
+                        <ul id="sol-features" class="list-disc list-inside space-y-1 text-[#d9cfbe]"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROBEKLAUSUR (EVAEXAM MODU) -->
+        <section id="sec-exam" class="hidden space-y-6">
+            <div id="exam-start" class="bg-white p-6 rounded-3xl shadow-sm border border-[#e8e2d5] space-y-5">
+                <div>
+                    <h2 class="text-xl font-bold text-[#24211a]"><i class="fa-solid fa-file-pen text-amber-600 mr-2"></i>Probeklausur</h2>
+                    <p class="text-xs text-[#736856] mt-1">Klausur-Format der letzten Jahre (evaexam): Bild erkennen → Unterfragen mit Punkten beantworten → Musterlösung aufdecken & selbst bewerten. Themen werden nach Klausur-Häufigkeit gezogen.</p>
+                </div>
+                <div class="grid sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-[#736856] uppercase mb-1">Anzahl Aufgaben</label>
+                        <select id="exam-count" class="w-full p-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-xs outline-none">
+                            <option value="3">3 Aufgaben (kurz)</option>
+                            <option value="5" selected>5 Aufgaben</option>
+                            <option value="8">8 Aufgaben (lang)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-[#736856] uppercase mb-1">Themenauswahl</label>
+                        <select id="exam-scope" class="w-full p-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-xs outline-none">
+                            <option value="weighted" selected>Gewichtet (Kernthemen häufiger)</option>
+                            <option value="core">Nur Kernthemen</option>
+                            <option value="all">Alle gleich</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-[#736856] uppercase mb-1">Timer</label>
+                        <select id="exam-timer" class="w-full p-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-xs outline-none">
+                            <option value="0" selected>Kein Timer</option>
+                            <option value="180">3 min / Aufgabe</option>
+                            <option value="300">5 min / Aufgabe</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="startExam()" class="w-full bg-[#3d372c] hover:bg-[#24211a] text-white font-bold py-3 rounded-xl shadow-md transition text-xs"><i class="fa-solid fa-play mr-2"></i>Klausur starten</button>
+                <div id="exam-lastresult" class="hidden text-xs bg-[#f5f2eb] border border-[#e8e2d5] rounded-xl p-3 text-[#3d372c]"></div>
+
+                <div class="border-t border-[#f5f2eb] pt-4">
+                    <div class="flex flex-wrap items-end gap-2">
+                        <div class="flex-1 min-w-[140px]">
+                            <label class="block text-[11px] font-bold text-[#736856] uppercase mb-1">Bestimmte Aufgabe öffnen (Nr.)</label>
+                            <input type="number" id="exam-goto" min="1" placeholder="z. B. 1" class="w-full p-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-xs outline-none" onkeydown="if(event.key==='Enter')openExamById()">
+                        </div>
+                        <button onclick="openExamById()" class="bg-[#595042] hover:bg-[#3d372c] text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition"><i class="fa-solid fa-arrow-right-to-bracket mr-1"></i>Öffnen</button>
+                        <button onclick="document.getElementById('exam-index').classList.toggle('hidden')" class="text-xs text-[#736856] hover:underline px-2 py-2"><i class="fa-solid fa-list-ol mr-1"></i>Alle Aufgaben</button>
+                    </div>
+                    <div id="exam-index" class="hidden mt-3 border border-[#e8e2d5] rounded-xl divide-y divide-[#f5f2eb] max-h-72 overflow-y-auto bg-white p-2"></div>
+                </div>
+            </div>
+
+            <!-- Aktif Sınav Görünümü (Evaexam Tarzı: Ayrı Textboxlar) -->
+            <div id="exam-active" class="hidden bg-white p-6 rounded-3xl shadow-sm border border-[#e8e2d5] space-y-4">
+                <div class="flex justify-between items-center border-b border-[#f5f2eb] pb-3">
+                    <div class="flex items-center gap-2">
+                        <span id="exam-prog-text" class="text-xs font-bold text-[#736856]"></span>
+                        <span class="bg-fuchsia-100 text-fuchsia-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Kernthema</span>
+                        <span class="text-xs text-[#736856]">10 Punkte</span>
+                    </div>
+                    <button onclick="endExamEarly()" class="text-xs text-red-600 hover:underline">Abbrechen</button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <!-- Sol: Görsel -->
+                    <div class="lg:col-span-5">
+                        <div class="w-full h-64 sm:h-80 bg-[#f5f2eb] rounded-2xl overflow-hidden border border-[#e8e2d5] flex items-center justify-center">
+                            <img id="exam-img" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23f5f2eb\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23948773\' font-family=\'sans-serif\' font-size=\'12px\'>Kein Bild</text></svg>'" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <!-- Sağ: 3 Ayrı Soru und Textbox Bloğu -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="bg-[#f5f2eb]/50 p-4 rounded-2xl border border-[#e8e2d5] space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span id="q1-title" class="font-bold text-[#24211a]">8.1 Welches Ensemble ist zu sehen, von wem und wann?</span>
+                                <span class="font-bold text-[#736856]">2 P.</span>
+                            </div>
+                            <textarea rows="2" class="w-full p-2.5 bg-white border border-[#e8e2d5] rounded-xl text-xs outline-none focus:ring-1 focus:ring-[#3d372c]" placeholder="Deine Antwort (optional – zum Selbsttest)"></textarea>
+                        </div>
+
+                        <div class="bg-[#f5f2eb]/50 p-4 rounded-2xl border border-[#e8e2d5] space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span id="q2-title" class="font-bold text-[#24211a]">8.2 Beschreiben Sie die Bildsignale und das zugrunde liegende Leitbild.</span>
+                                <span class="font-bold text-[#736856]">4 P.</span>
+                            </div>
+                            <textarea rows="2" class="w-full p-2.5 bg-white border border-[#e8e2d5] rounded-xl text-xs outline-none focus:ring-1 focus:ring-[#3d372c]" placeholder="Deine Antwort (optional – zum Selbsttest)"></textarea>
+                        </div>
+
+                        <div class="bg-[#f5f2eb]/50 p-4 rounded-2xl border border-[#e8e2d5] space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span id="q3-title" class="font-bold text-[#24211a]">8.3 Stellen Sie das Gegenbild Hansaviertel (Interbau 1957) gegenüber.</span>
+                                <span class="font-bold text-[#736856]">4 P.</span>
+                            </div>
+                            <textarea rows="2" class="w-full p-2.5 bg-white border border-[#e8e2d5] rounded-xl text-xs outline-none focus:ring-1 focus:ring-[#3d372c]" placeholder="Deine Antwort (optional – zum Selbsttest)"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gizli Musterlösung Alanı -->
+                <div id="exam-sol-box" class="hidden p-5 bg-[#3d372c] text-[#f2eee9] rounded-2xl space-y-3 text-xs">
+                    <h5 class="font-bold text-[#d9cfbe] uppercase tracking-wider">Offizielle Musterlösung:</h5>
+                    <div id="exam-sol-content" class="space-y-1 text-[#d9cfbe]"></div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center pt-4 border-t border-[#f5f2eb] gap-3">
+                    <button onclick="toggleExamSolution()" class="w-full sm:w-auto px-5 py-3 bg-[#d9cfbe]/40 hover:bg-[#d9cfbe]/70 text-[#24211a] font-bold rounded-xl text-xs transition border border-[#d9cfbe] flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Musterlösung aufdecken</span>
+                    </button>
+                    <button onclick="nextExamQuestion()" class="w-full sm:w-auto px-6 py-3 bg-[#3d372c] hover:bg-[#24211a] text-white font-bold rounded-xl text-xs transition">
+                        Nächste Aufgabe <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÜFUNGSFRAGEN -->
+        <section id="sec-theory" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#e8e2d5] shadow-sm">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#f5f2eb] pb-6 mb-6 gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold tracking-tight text-[#24211a]">Theoretische Fragen</h2>
+                        <p class="text-xs text-[#736856] mt-1">Skript-Fragen im Zufallsmodus</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span id="theory-progress" class="text-xs font-semibold text-[#595042] bg-[#f5f2eb] px-3 py-1.5 rounded-lg"></span>
+                        <button onclick="nextTheoryQuestion()" class="bg-[#3d372c] hover:bg-[#24211a] text-white px-4 py-2 rounded-xl text-xs font-medium transition">
+                            Nächste Frage
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-[#f5f2eb] p-5 rounded-2xl border border-[#e8e2d5]">
+                        <span class="text-[10px] font-semibold uppercase tracking-wider text-[#736856] block mb-1">Frage</span>
+                        <h3 id="theory-q-text" class="text-sm font-bold text-[#24211a]"></h3>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-[#736856] uppercase tracking-wider mb-1">Deine Antwort</label>
+                        <textarea id="theory-user-answer" rows="3" placeholder="Antwort hier eintippen..." class="w-full p-3.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-xs outline-none text-[#24211a] focus:ring-1 focus:ring-[#3d372c] transition resize-none"></textarea>
+                    </div>
+
+                    <button onclick="revealTheoryAnswer()" class="w-full bg-[#d9cfbe]/40 hover:bg-[#d9cfbe]/70 text-[#24211a] font-semibold py-3 px-4 rounded-xl transition text-xs border border-[#d9cfbe]">
+                        Antwort prüfen & anzeigen
+                    </button>
+
+                    <div id="theory-solution" class="hidden bg-[#3d372c] text-[#f2eee9] p-5 rounded-2xl space-y-2">
+                        <span class="text-[10px] bg-[#595042] text-[#d9cfbe] px-2.5 py-0.5 rounded font-medium uppercase">Offizielle Skript-Antwort</span>
+                        <p id="theory-a-text" class="text-xs sm:text-sm text-[#d9cfbe] leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        let baseBuildings = [
+            { "name": "Pilgerkirche", "location": "Neviges", "architect": "Gottfried Böhm", "year": "1963–1972", "style": "Brutalismus", "image": "https://upload.wikimedia.org/wikipedia/commons/0/06/Gottfried_böhm%2C_pilgrimage_church%2C_neviges_1963-1972_-_02.jpg", "features": ["Beton brût", "Kristalline Faltwerk-Dachkonstruktion"] },
+            { "name": "Frankfurter Küche", "location": "Frankfurt a.M.", "architect": "Margarete Schütte-Lihotzky", "year": "1926", "style": "Neues Bauen", "image": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Frankfurterkueche.jpg", "features": ["Ergonomie, kurze Wege", "Taylorismus im Haushalt"] },
+            { "name": "Zeppelinfeld", "location": "Nürnberg", "architect": "Albert Speer", "year": "1934–1937", "style": "NS-Architektur", "image": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Zeppelin_Feld_%28Zeppelin_Field%29.jpg", "features": ["Machtdemonstration", "Monumentale Symmetrie"] },
+            { "name": "Feuerwache Vitra", "location": "Weil am Rhein", "architect": "Zaha Hadid", "year": "1994", "style": "Dekonstruktivismus", "image": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Baden-Württemberg_Weil_am_Rhein_Vitra_Fire_station_01.jpg", "features": ["Keine rechten Winkel", "Dynamische Sichtbetonwände"] },
+            { "name": "Unité d'Habitation", "location": "Marseille", "architect": "Le Corbusier", "year": "1947–1952", "style": "Brutalismus", "image": "https://upload.wikimedia.org/wikipedia/en/e/ec/Unité_d%27habitation_Marseille%2C_France.jpg", "features": ["Wohnmaschine", "Béton brut, Pilotis"] },
+            { "name": "Palace of Justice", "location": "Chandigarh", "architect": "Le Corbusier", "year": "1956", "style": "Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/b/be/Capitol_High_Court.jpg", "features": ["Betondach als Sonnenschutz", "Pylone"] },
+            { "name": "Villa Savoye", "location": "Poissy", "architect": "Le Corbusier", "year": "1928–1931", "style": "Klassische Moderne", "image": "https://upload.wikimedia.org/wikipedia/de/a/af/Villa_Savoye_2015.jpg", "features": ["5 Punkte der Architektur", "Dachgarten, Bandfenster"] },
+            { "name": "Bauhaus Dessau", "location": "Dessau", "architect": "Walter Gropius", "year": "1925–1926", "style": "Bauhaus", "image": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Dessau_Bauhaus-Gebäude_asv2024-06_img1.jpg", "features": ["Glasvorhangfassade", "Funktionale Trakte"] },
+            { "name": "Fagus-Werk", "location": "Alfeld", "architect": "Walter Gropius & Adolf Meyer", "year": "1911–1913", "style": "Frühe Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Fagus-Werk_zu_Alfeld_an_der_Leine%2C_UNESCO-Welterbe.jpg", "features": ["Glasecken ohne Eckstütze", "Stahlskelett"] },
+            { "name": "Barcelona-Pavillon", "location": "Barcelona", "architect": "Mies van der Rohe", "year": "1929", "style": "Klassische Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/8/85/Barcelona_mies_v_d_rohe_pavillon_weltausstellung1999_01.jpg", "features": ["Fließender Raum", "Onyx und Travertin"] },
+            { "name": "Palast der Republik", "location": "Berlin", "architect": "Heinz Graffunder", "year": "1973–1976", "style": "Ost-Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/4/48/Bundesarchiv_Bild_183-1986-0424-304%2C_Berlin%2C_Palast_der_Republik.jpg", "features": ["Volkshaus", "Bronzeverspiegelte Fenster"] },
+            { "name": "Notre-Dame du Haut", "location": "Ronchamp", "architect": "Le Corbusier", "year": "1950–1955", "style": "Plastische Architektur", "image": "https://upload.wikimedia.org/wikipedia/de/2/29/Notre_Dame_du_Haut%28ws%29.jpg", "features": ["Muschelartiges Betondach", "Organische Formen"] },
+            { "name": "Centre Pompidou", "location": "Paris", "architect": "Richard Rogers & Renzo Piano", "year": "1971–1977", "style": "High-Tech", "image": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Paris_Montmartre_Blick_aufs_Centre_Georges-Pompidou.jpg", "features": ["Haustechnik an der Fassade", "Flexibler Innenraum"] },
+            { "name": "Jüdisches Museum", "location": "Berlin", "architect": "Daniel Libeskind", "year": "1993–1999", "style": "Dekonstruktivismus", "image": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Jewish_Museum_Berlin_-_panoramio_%282%29.jpg", "features": ["Zickzack-Grundriss", "Zinkfassade"] },
+            { "name": "Seagram Building", "location": "New York", "architect": "Mies van der Rohe", "year": "1954–1958", "style": "International Style", "image": "https://upload.wikimedia.org/wikipedia/commons/9/99/Seagram_Building_%2835098307116%29.jpg", "features": ["Curtain Wall", "Bronze-I-Träger"] },
+            { "name": "Einsteinturm", "location": "Potsdam", "architect": "Erich Mendelsohn", "year": "1917–1921", "style": "Expressionismus", "image": "https://upload.wikimedia.org/wikipedia/commons/3/36/Einsteinturm_7443.jpg", "features": ["Biomorphe Form", "Sonnenobservatorium"] },
+            { "name": "Piazza d'Italia", "location": "New Orleans", "architect": "Charles Moore", "year": "1974–1978", "style": "Postmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Piazza_D%27Italia.jpg", "features": ["Ironie und Populismus", "Italien-Landkarte im Boden"] },
+            { "name": "Quartier Schützenstraße", "location": "Berlin", "architect": "Aldo Rossi", "year": "1994–1998", "style": "Postmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/2/27/Quartier_Schützenstrasse_Berlin.jpg", "features": ["Berliner Blockrand", "Palazzo Farnese Zitat"] },
+            { "name": "Salk Institute", "location": "La Jolla", "architect": "Louis I. Kahn", "year": "1965", "style": "Strukturalismus", "image": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Salk_Institute_2.jpg", "features": ["Zentrale Wasserachse", "Roher Beton"] },
+            { "name": "Stadthaus Ulm", "location": "Ulm", "architect": "Richard Meier", "year": "1986–1993", "style": "Spätmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/2/2a/View_of_Stadthaus_Ulm_from_Ulm_Minster_03.jpg", "features": ["Kontrast zum Münster", "Weiße Paneele"] },
+            { "name": "AT & T Building", "location": "New York", "architect": "Philip Johnson", "year": "1978–1982", "style": "Postmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Sony_Building_by_David_Shankbone_crop.jpg", "features": ["Chippendale-Giebel", "Naturstein"] },
+            { "name": "Chiat/Day Building", "location": "Venice (LA)", "architect": "Frank O. Gehry", "year": "1985–2001", "style": "Dekonstruktivismus", "image": "https://upload.wikimedia.org/wikipedia/commons/6/6c/052607-006-Chiat-Day.jpg", "features": ["Riesiges Fernglas als Eingang", "Pop-Art"] },
+            { "name": "Maison E.1027", "location": "Roquebrune", "architect": "Eileen Gray", "year": "1926–1929", "style": "Klassische Moderne", "image": "https://upload.wikimedia.org/wikipedia/de/d/d0/E.1027%2C_Roquebrune-Cap-Martin_%28September_2016%29.jpg", "features": ["Sinnliche Moderne", "Integrierte Möbel"] },
+            { "name": "Shell-Haus", "location": "Berlin", "architect": "Emil Fahrenkamp", "year": "1930–1932", "style": "Neue Sachlichkeit", "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/2019-02-15-Shell-Haus-Landwehrkanal-02.jpg", "features": ["Wellende Fassade", "Stahlskelett"] },
+            { "name": "Olympiastadion", "location": "Berlin", "architect": "Werner March", "year": "1934–1936", "style": "NS-Architektur", "image": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Olympiastadion_Berlin-Marathontor-msu-2020-3139.jpg", "features": ["Naturstein", "Strenger Neoklassizismus"] },
+            { "name": "Palazzo della Civiltà", "location": "Rom", "architect": "La Padula et al.", "year": "1942", "style": "Faschistische Architektur", "image": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Palazzo_della_civiltà_del_lavoro_%28EUR%2C_Rome%29_%285904657870%29.jpg", "features": ["Quadratisches Kolosseum", "Rundbögen"] },
+            { "name": "Haniel-Garage", "location": "Düsseldorf", "architect": "Paul Schneider-Esleben", "year": "1949–1950", "style": "Nachkriegsmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Düsseldorf_Hanielgarage.jpg", "features": ["Auffahrtsrampen", "Ästhetisierung des Autos"] },
+            { "name": "Bundeshaus", "location": "Bonn", "architect": "Hans Schwippert", "year": "1949", "style": "Nachkriegsmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Bonn_Bundestag.jpg", "features": ["Symbol der Demokratie", "Glasfassade"] },
+            { "name": "Lever House", "location": "New York", "architect": "Gordon Bunshaft (SOM)", "year": "1951–1952", "style": "International Style", "image": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Lever_House_390_Park_Avenue.jpg", "features": ["Curtain-Wall", "Plaza im Erdgeschoss"] },
+            { "name": "Kino International", "location": "Berlin", "architect": "Josef Kaiser", "year": "1961–1963", "style": "Ost-Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Kino_International%2C_Berlin-msu-2021-3439-.jpg", "features": ["Auskragendes Obergeschoss", "Panorama-Glasfront"] },
+            { "name": "Teepott", "location": "Warnemünde", "architect": "Ulrich Müther", "year": "1968", "style": "Ingenieurbau", "image": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Teepott.jpg", "features": ["Hyparschale", "Leichtbeton"] },
+            { "name": "SESC Pompéia", "location": "São Paulo", "architect": "Lina Bo Bardi", "year": "1977–1986", "style": "Brutalismus", "image": "https://upload.wikimedia.org/wikipedia/commons/6/63/SESCPompeia.jpg", "features": ["Rohe Betontürme mit Löchern", "Luftbrücken"] },
+            { "name": "Neue Staatsgalerie", "location": "Stuttgart", "architect": "James Stirling", "year": "1977–1984", "style": "Postmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Neue_Staatsgalerie_Stuttgart_2014_01.jpg", "features": ["Stein + grelle Industriefarben", "Öffentlicher Fußweg"] },
+            { "name": "Kirche San Giovanni Battista", "location": "Mogno", "architect": "Mario Botta", "year": "1992–1996", "style": "Postmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Mogno.jpg", "features": ["Zylinder, schräg", "Schwarz-weiß Gstein"] },
+            { "name": "Galerie des Machines", "location": "Paris", "architect": "Charles Dutert", "year": "1889", "style": "Ingenieurbau", "image": "https://upload.wikimedia.org/wikipedia/commons/0/03/Galerie_des_Machines.jpg", "features": ["Stützenfreie Spannweite", "Dreigelenkbogen"] },
+            { "name": "Kathedrale von Brasília", "location": "Brasília", "architect": "Oscar Niemeyer", "year": "1958–1970", "style": "Spätmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Catedral_Metropolitana_de_Brasilia.jpg", "features": ["Hyperboloid aus Betonsäulen", "Kronenform"] },
+            { "name": "Mercedes-Benz Museum", "location": "Stuttgart", "architect": "UN Studio", "year": "2001–2006", "style": "Parametrismus", "image": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Mercedes-Benz_Museum_201312_02_sunset.jpg", "features": ["Doppelhelix", "Fließende Rampen"] },
+            { "name": "Rolex Learning Center", "location": "Lausanne", "architect": "SANAA", "year": "2007–2010", "style": "Zeitgenössisch", "image": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Rolex_Learning_Center_07-2009.jpg", "features": ["Gewellte Betonbodenplatte", "Patios"] },
+            { "name": "Wolkenbügel", "location": "Moskau (Projekt)", "architect": "El Lissitzky", "year": "1924", "style": "Konstruktivismus", "image": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Photomontage_of_the_Wolkenbugel_by_El_Lissitzky_1925.jpg", "features": ["Horizontales Hochhaus", "Bodenflächenschonung"] },
+            { "name": "Habitat 67", "location": "Montreal", "architect": "Moshe Safdie", "year": "1967", "style": "Strukturalismus", "image": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Habitat_67_2019_dllu_01.jpg", "features": ["Gestapelte Beton-Wohnkuben", "Dachterrassen"] },
+            { "name": "Eiffel Tower", "location": "Paris", "architect": "Gustave Eiffel", "year": "1887–1889", "style": "Ingenieurbau", "image": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg", "features": ["Schmiedeeisernes Gitterwerk", "Weltausstellung"] },
+            { "name": "Crystal Palace", "location": "London", "architect": "Joseph Paxton", "year": "1851", "style": "Frühmoderne", "image": "https://cdn.britannica.com/52/12552-050-223F5FD0/Sydenham-Hill-Crystal-Palace-Joseph-Paxton-London-1936.jpg", "features": ["Gusseisen und Glas", "Vorfertigung"] },
+            { "name": "Red House", "location": "Bexheath", "architect": "Philip Webb & William Morris", "year": "1859", "style": "Arts and Crafts", "image": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Philip_Webb%27s_Red_House_in_Upton.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Backstein, Ziegel", "Einfache Handwerkskunst"] },
+            { "name": "Secession Building", "location": "Wien", "architect": "Joseph Maria Olbrich", "year": "1897–1898", "style": "Jugendstil", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtplf0NCAEREHFFg6aSma3Ls1h3N3CY0RAYl6PGOJ61Q&s=10", "features": ["Goldene Kuppel", "Ornamentik"] },
+            { "name": "Majestic Theater", "location": "Wien", "architect": "Otto Wagner", "year": "1898–1899", "style": "Jugendstil", "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/e8/58/52/majestic-theatre-san.jpg?w=1200&h=1200&s=1", "features": ["Majolikaplatten", "Flache Fassade"] },
+            { "name": "Postsparkassenamt", "location": "Wien", "architect": "Otto Wagner", "year": "1904–1906", "style": "Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Otto_Wagner_Postsparkasse_Hauptfront.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Aluminium-Nieten", "Rationalismus"] },
+            { "name": "Casa Milà", "location": "Barcelona", "architect": "Antoni Gaudí", "year": "1906–1912", "style": "Modernisme", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeeaB2V67BluDglNqFUb7G_YgjX14zGegAcoIlNe9ZcQ&s=10", "features": ["Organische Wellenform", "Skulpturale Kamine"] },
+            { "name": "Sagrada Família", "location": "Barcelona", "architect": "Antoni Gaudí", "year": "1882–", "style": "Modernisme", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/%CE%A3%CE%B1%CE%B3%CF%81%CE%AC%CE%B4%CE%B1_%CE%A6%CE%B1%CE%BC%CE%AF%CE%BB%CE%B9%CE%B1_2941.jpg/960px-%CE%A3%CE%B1%CE%B3%CF%81%CE%AC%CE%B4%CE%B1_%CE%A6%CE%B1%CE%BC%CE%AF%CE%BB%CE%B9%CE%B1_2941.jpg?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=thumbnail", "features": ["Hyperbolische Geometrie", "Naturinspiration"] },
+            { "name": "The Steinhof Church", "location": "Wien", "architect": "Otto Wagner", "year": "1904–1907", "style": "Jugendstil", "image": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Penzing_%28Wien%29_-_Kirche_am_Steinhof_%282%29.JPG?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Kupferkuppel", "Symmetrie"] },
+            { "name": "Glasgow School of Art", "location": "Glasgow", "architect": "Charles Rennie Mackintosh", "year": "1897–1909", "style": "Arts and Crafts", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Schoolofart1.jpg/1280px-Schoolofart1.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail", "features": ["Vertikale Linien", "Asymmetrie"] },
+            { "name": "Wohnhaus Cuenod", "location": "Potsdam", "architect": "Peter Behrens", "year": "1901", "style": "Reformarchitektur", "image": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Behrens_Haus_Darmstadt.jpg", "features": ["Klarheit", "Geometrische Form"] },
+            { "name": "AEG Turbinenfabrik", "location": "Berlin", "architect": "Peter Behrens", "year": "1908–1909", "style": "Industriearchitektur", "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Berlin_AEG_Turbinenfabrik.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Stahlbinder", "Gusseiserne Ecken"] },
+            { "name": "Wasserkunst Mülheim", "location": "Mülheim", "architect": "Theodor Fischer", "year": "1908", "style": "Reformstil", "image": "https://dam.destination.one/3026158/0e5dbd51f070f4d262325f69b8449dded742d92653134f532dd3a539aa57ac8b/aquarius-m-lheim-an-der-ruhr.jpg", "features": ["Traditionalismus", "Naturstein"] },
+            { "name": "Centennial Hall", "location": "Wrocław", "architect": "Max Berg", "year": "1911–1913", "style": "Expressionismus", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Wroclaw_-_Hala_Stulecia_03a.jpg/330px-Wroclaw_-_Hala_Stulecia_03a.jpg?utm_source=de.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", "features": ["Stahlbeton-Kuppel", "Monumentale Spannweite"] },
+            { "name": "Glaspaviljon", "location": "Köln", "architect": "Bruno Taut", "year": "1914", "style": "Expressionismus", "image": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Taut_Glass_Pavilion_exterior_1914.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Farbiges Glas", "Prisma-Dach"] },
+            { "name": "Grosses Schauspielhaus", "location": "Berlin", "architect": "Hans Poelzig", "year": "1919", "style": "Expressionismus", "image": "https://www.whitemad.pl/wp-content/uploads/2024/06/resize_1155pbbb.jpg", "features": ["Tropfstein-Struktur", "Höhlenartige Decke"] },
+            { "name": "Chilehaus", "location": "Hamburg", "architect": "Fritz Höger", "year": "1922–1924", "style": "Klinker-Expressionismus", "image": "https://upload.wikimedia.org/wikipedia/commons/8/82/Chilehaus_Hamburg_Oktober_2004_02.jpg", "features": ["Spitzwinklige Form", "Dunkler Klinker"] },
+            { "name": "Anzeiger-Hochhaus", "location": "Hannover", "architect": "Walter Gropius", "year": "1927–1928", "style": "Klassische Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/9/91/Gropius-Haus_%28Tiergarten%29.JPG?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Kuppelbau", "Klinkerverkleidung"] },
+            { "name": "Siedlung Törten", "location": "Dessau", "architect": "Walter Gropius", "year": "1926–1928", "style": "Neues Bauen", "image": "https://www.ak-lsa.de/wp-content/uploads/2021/05/SSP1291_web.jpg", "features": ["Serielle Fertigung", "Kleinwohnbau"] },
+            { "name": "Hufeisensiedlung", "location": "Berlin", "architect": "Bruno Taut & Martin Wagner", "year": "1925–1930", "style": "Neues Bauen", "image": "https://upload.wikimedia.org/wikipedia/commons/d/df/Luftbild_Hufeisen_in_der_Hufeisensiedlung.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Hufeisen-Grundriss", "Sozialer Wohnungsbau"] },
+            { "name": "Weissenhofsiedlung", "location": "Stuttgart", "architect": "Mies van der Rohe et al.", "year": "1927", "style": "Klassische Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Weissenhofsiedlung_Stuttgart_Mies_van_der_Rohe.jpg", "features": ["Flachdächer", "Stahlskelettbau"] },
+            { "name": "Zickzackhausen", "location": "Frankfurt", "architect": "Ernst May", "year": "1926–1930", "style": "Neues Bauen", "image": "https://dam.destination.one/3836281/88a6b8f51a95443fa22e14e6487b46950dbc5ff086c5e8fdc1a0fa8b9ec8ef20/frankfurt-zickzackhausen.jpg", "features": ["Neues Frankfurt", "Zeilenbau"] },
+            { "name": "Paimio Sanatorium", "location": "Paimio", "architect": "Alvar Aalto", "year": "1928–1933", "style": "Klassische Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Paimio_Sanatorium2.jpg?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Licht und Luft", "Funktionale Balkone"] },
+            { "name": "Villa Mairea", "location": "Noormarkku", "architect": "Alvar Aalto", "year": "1938–1939", "style": "Organische Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/d/d2/4Y1A7841_Alvar_Aalto%2C_Finland_%2826710745140%29.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Holz und Stein", "Naturverbundenheit"] },
+            { "name": "Fallingwater", "location": "Bear Run", "architect": "Frank Lloyd Wright", "year": "1935", "style": "Organische Architektur", "image": "https://fallingwater.org/wp-content/uploads/2022/03/FW_Homepage_Hero_Static_600x800_SPRING@2x.jpg", "features": ["Kragplatten über Bach", "Naturstein"] },
+            { "name": "Guggenheim Museum", "location": "New York", "architect": "Frank Lloyd Wright", "year": "1959", "style": "Organische Architektur", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcTEg00XBDlnmRxusKLINsIa4DDxGIVriJVavBISpmH29x7XUOAb6YZJOB&s=10", "features": ["Spiralrampe", "Beton-Rotunde"] },
+            { "name": "Johnson House", "location": "New Canaan", "architect": "Philip Johnson", "year": "1949", "style": "International Style", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs6ZPfxXk-zYVP9iRwR6z7LftxuHQZJ65Tx6vffPBkdu_6mxPGdfK1Gz9Q&s=10", "features": ["Vollverglaste Wände", "Stahlrahmen"] },
+            { "name": "Farnsworth House", "location": "Plano", "architect": "Mies van der Rohe", "year": "1945–1951", "style": "International Style", "image": "https://www.whitemad.pl/wp-content/uploads/2024/10/Farnsworth_House_Plano-9983.jpg", "features": ["Transparenz", "Erhöhte Plattform"] },
+            { "name": "Chapel of the Holy Cross", "location": "Sedona", "architect": "Magritte & Anshen", "year": "1956", "style": "Moderne", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThA-lHFALOAMzMXoenQs82Fw9l16Plx9GcCsvdUTU6nA&s=10", "features": ["Felsintegration", "Kreuz-Motiv"] },
+            { "name": "TWA Flight Center", "location": "New York", "architect": "Eero Saarinen", "year": "1956–1962", "style": "Expressionistische Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/6/64/Ehemaliges_TWA-Terminal_am_John_F._Kennedy_International_Airport_in_New_York.JPG?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Schalenbauweise", "Vogel-Metapher"] },
+            { "name": "Sydney Opera House", "location": "Sydney", "architect": "Jørn Utzon", "year": "1973", "style": "Expressionismus", "image": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Australia._%2821339175489%29.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Dachschalen", "Keramikfliesen"] },
+            { "name": "Habitat 88", "location": "Tokyo", "architect": "Kisho Kurokawa", "year": "1972", "style": "Metabolismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSQehJUHJE8VEqgzdkn3NvCdHtJexgpCJD7s88fG7ri0H8UmD33BGq6THh&s=10", "features": ["Kapselbauweise", "Austauschbare Module"] },
+            { "name": "Vanna Venturi House", "location": "Philadelphia", "architect": "Robert Venturi", "year": "1964", "style": "Postmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/6/62/VVenturi_House_Highsmith.jpeg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Giebeldach", "Ironischer Maßstab"] },
+            { "name": "Portland Building", "location": "Portland", "architect": "Michael Graves", "year": "1980–1982", "style": "Postmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/7/76/Portland_Building_1982.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Farbige Fassade", "Klassische Elemente"] },
+            { "name": "Walt Disney Concert Hall", "location": "Los Angeles", "architect": "Frank O. Gehry", "year": "2003", "style": "Dekonstruktivismus", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Image-Disney_Concert_Hall_by_Carol_Highsmith_edit-2.jpg/1280px-Image-Disney_Concert_Hall_by_Carol_Highsmith_edit-2.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=thumbnail", "features": ["Geschwungener Edelstahl", "Skulptural"] },
+            { "name": "Villa Tugendhat", "location": "Brno", "architect": "Mies van der Rohe", "year": "1929–1930", "style": "Klassische Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/9/9c/VT16_PD_zahrada.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Onyxwand", "Versenkbare Fenster"] },
+            { "name": "Rietveld Schröder Haus", "location": "Utrecht", "architect": "Gerrit Rietveld", "year": "1924", "style": "De Stijl", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSILQG_A8ZCG0_eU23jalZ-IoLT47sSmycf2JqHmsSAHg&s=10", "features": ["Flexible Raumaufteilung", "Primärfarben"] },
+            { "name": "Casa del Fascio", "location": "Como", "architect": "Giuseppe Terragni", "year": "1932–1936", "style": "Italienischer Rationalismus", "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Como_-_Casa_del_Fascio_-_27-09-2017.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Perfekte Proportionen", "Glas und Marmor"] },
+            { "name": "Kimbell Art Museum", "location": "Fort Worth", "architect": "Louis I. Kahn", "year": "1966–1972", "style": "Strukturalismus / Moderne", "image": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Kimbell_Art_Museum_with_Moore_sculpture.jpg", "features": ["Tonnengewölbe", "Natürliches Zenitlicht"] },
+            { "name": "National Assembly Building", "location": "Dhaka", "architect": "Louis I. Kahn", "year": "1961–1982", "style": "Brutalismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4EkeNu0-cYEcMMx3HE4TKD14uA9R6dBx-DfSgLkFonNCyZXU_PoijEfmM&s=10", "features": ["Monumentale Geometrie", "Sichtbeton mit Marmorlinien"] },
+            { "name": "Neue Nationalgalerie", "location": "Berlin", "architect": "Mies van der Rohe", "year": "1965–1968", "style": "Internationale Moderne", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRQQXiifrQQVdC7vWh-J6tf-KZqrh5OGOuhIgkCIVVaA&s=10", "features": ["Stahldach", "Freier Grundriss"] },
+            { "name": "The Gherkin (30 St Mary Axe)", "location": "London", "architect": "Norman Foster", "year": "2001–2004", "style": "High-Tech-Architektur", "image": "https://upload.wikimedia.org/wikipedia/commons/8/8e/30_St_Mary_Axe%2C_%27Gherkin%27.JPG", "features": ["Aerodynamische Form", "Diagonales Stahlskelett"] },
+            { "name": "Lloyd’s Building", "location": "London", "architect": "Richard Rogers", "year": "1978–1986", "style": "High-Tech-Architektur", "image": "https://www.whitemad.pl/wp-content/uploads/2024/07/resize_DanielMichaelPerry-f2.jpg", "features": ["Inside-Out-Konzept", "Edelstahlfassade"] },
+            { "name": "Willis Tower", "location": "Chicago", "architect": "Bruce Graham & Fazlur Khan (SOM)", "year": "1970–1973", "style": "International Style", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkfXf3z6eeTtk9RZBpzV2TdyiUnam2XNFaELDJtj9cZA&s", "features": ["Gebündelte Röhrenstruktur", "Schwarz eloxiertes Aluminium"] },
+            { "name": "John Hancock Center", "location": "Chicago", "architect": "Fazlur Khan & Bruce Graham", "year": "1965–1969", "style": "Strukturalismus / High-Tech", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Chicago_in_2022_John_Hancock_Center_%2852054925135%29.jpg/330px-Chicago_in_2022_John_Hancock_Center_%2852054925135%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", "features": ["Sichtbare X-Verstrebungen", "Konische Form"] },
+            { "name": "Burj Khalifa", "location": "Dubai", "architect": "Adrian Smith (SOM)", "year": "2004–2010", "style": "Zeitgenössisch", "image": "https://upload.wikimedia.org/wikipedia/de/thumb/9/93/Burj_Khalifa.jpg/250px-Burj_Khalifa.jpg", "features": ["Y-förmiger Grundriss", "Röhrenstruktur"] },
+            { "name": "Petronas Towers", "location": "Kuala Lumpur", "architect": "César Pelli", "year": "1993–1999", "style": "Postmoderne / High-Tech", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/The_Twins_SE_Asia_2019_%2849171985716%29_%284to3-1%29.jpg/960px-The_Twins_SE_Asia_2019_%2849171985716%29_%284to3-1%29.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=thumbnail", "features": ["Islamische Geometrie", "Skybridge"] },
+            { "name": "Bank of China Tower", "location": "Hong Kong", "architect": "I.M. Pei", "year": "1985–1990", "style": "Spätmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/2/22/HK_Bank_of_China_Tower_View.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Asymmetrische Prismen", "Räumliches Fachwerk"] },
+            { "name": "Louvre Pyramide", "location": "Paris", "architect": "I.M. Pei", "year": "1985–1989", "style": "Spätmoderne", "image": "https://upload.wikimedia.org/wikipedia/de/1/1d/Parigi-piramidi_louvre.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Glas und Stahl", "Unterirdische Erschließung"] },
+            { "name": "Casa da Música", "location": "Porto", "architect": "Rem Koolhaas (OMA)", "year": "2001–2005", "style": "Dekonstruktivismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7zx2RX49rpEqfKoWHLF0CvGnrO5GC4ZIyIp1yaCu38Q&s=10", "features": ["Polyeder-Form", "Weiße Betonfassade"] },
+            { "name": "Seattle Central Library", "location": "Seattle", "architect": "Rem Koolhaas (OMA)", "year": "2004", "style": "Dekonstruktivismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUCj7aSFia4W-Mr6XBhBVkznVwgRfMbkDmG2kRdNuIDw&s=10", "features": ["Schwebende Plattformen", "Stahl-Glas-Netz"] },
+            { "name": "CCTV Headquarters", "location": "Beijing", "architect": "Rem Koolhaas & Ole Scheeren", "year": "2004–2012", "style": "Dekonstruktivismus", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/China_Central_Television_HQ%2C_from_China_World_Trade_Centre_%28Cropped%29.jpg/250px-China_Central_Television_HQ%2C_from_China_World_Trade_Centre_%28Cropped%29.jpg?utm_source=de.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", "features": ["Geschlossene Schleife", "Diagonales Raster"] },
+            { "name": "Elbphilharmonie", "location": "Hamburg", "architect": "Herzog & de Meuron", "year": "2007–2016", "style": "Zeitgenössisch", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxQE7iKvGLm-wuR9OdFznnNqhXiFiquz24YV8lcPR37w&s=10", "features": ["Glasaufbau auf Backsteinsockel", "Zeltartiges Dach"] },
+            { "name": "Tate Modern", "location": "London", "architect": "Herzog & de Meuron", "year": "1995–2000", "style": "Umnutzung / Industriearchitektur", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Tate_Modern_-_Bankside_Power_Station.jpg/1280px-Tate_Modern_-_Bankside_Power_Station.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail", "features": ["Turbinenhalle", "Lichtbalken"] },
+            { "name": "Nationalstadion Peking (Vogelnest)", "location": "Beijing", "architect": "Herzog & de Meuron", "year": "2003–2008", "style": "Parametrismus", "image": "https://www.caparol.de/caparol_pim_import/caparol_de/objects/items/55125_large_preview.jpg", "features": ["Verworrene Stahlstruktur", "Transparente Membran"] },
+            { "name": "MAXXI", "location": "Rom", "architect": "Zaha Hadid", "year": "1998–2009", "style": "Parametrismus", "image": "https://www.caimi.com/wp-content/uploads/news/2020-new/maxxi.jpg", "features": ["Fließende Raumkontinua", "Überlappende Volumina"] },
+            { "name": "Heydar Aliyev Center", "location": "Baku", "architect": "Zaha Hadid", "year": "2007–2012", "style": "Parametrismus", "image": "https://media-prod.zha.com/zhweb-prod-media/media/nugjiy0t/01290_cp_hc_nov13_n89103.jpg?w=3840&g=0.5300582500784752x0.6560854375750038&fm=webp", "features": ["Nahtlose Hülle", "Geschwungene Formen"] },
+            { "name": "Guangzhou Opera House", "location": "Guangzhou", "architect": "Zaha Hadid", "year": "2005–2010", "style": "Parametrismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPr9EpsUemOHxAje5V9E8mQZzfRaOMfAPs4B1jHQ3cN_f_n1z2pbVT7JNc&s=10", "features": ["Kieselstein-Optik", "Topografische Architektur"] },
+            { "name": "Museo Guggenheim Bilbao", "location": "Bilbao", "architect": "Frank O. Gehry", "year": "1993–1997", "style": "Dekonstruktivismus", "image": "https://cms.guggenheim-bilbao.eus/uploads/2019/05/el-edificio-guggenheim-bilbao-1.jpg", "features": ["Titanverkleidung", "Organische Kurven"] },
+            { "name": "Tanzendes Haus", "location": "Prag", "architect": "Frank O. Gehry & Vlado Milunić", "year": "1992–1996", "style": "Dekonstruktivismus", "image": "https://upload.wikimedia.org/wikipedia/commons/9/97/Tanzendes_Haus_2023.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Dynamische Zylinder", "Destrukturierte Fassade"] },
+            { "name": "Fondation Louis Vuitton", "location": "Paris", "architect": "Frank O. Gehry", "year": "2006–2014", "style": "Dekonstruktivismus", "image": "https://paris.sehenswuerdigkeiten-online.de/sights/img/fondation-vuitton1l.jpg", "features": ["Glasschollen", "Eisberg-Metapher"] },
+            { "name": "Therme Vals", "location": "Vals", "architect": "Peter Zumthor", "year": "1993–1996", "style": "Kritischer Regionalismus", "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/Therme_Vals_facade%2C_Vals%2C_Graub%C3%BCnden%2C_Switzerland_-_20090809.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Valser Quarzit", "Höhlenartiges Raumerlebnis"] },
+            { "name": "Kunsthaus Bregenz", "location": "Bregenz", "architect": "Peter Zumthor", "year": "1990–1997", "style": "Minimalismus", "image": "https://www.kunsthaus-bregenz.at/fileadmin/_processed_/6/0/csm_01_Kunsthaus_Bregenz_2016_Foto_Markus_Tretter__c_Kunsthaus_Bregenz_Day_89c0b69d48.jpg", "features": ["Glaspaneele", "Tageslichtdecke"] },
+            { "name": "Bruder-Klaus-Feldkapelle", "location": "Mechernich", "architect": "Peter Zumthor", "year": "2005–2007", "style": "Minimalismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR28YLm27o5EdUVVdKFN8xUcTRKsBICSPlK8ZkX16dcdA&s=10", "features": ["Gestampfter Beton", "Verkohlter Innenraum"] },
+            { "name": "Kirche des Lichts", "location": "Ibaraki", "architect": "Tadao Ando", "year": "1989", "style": "Kritischer Regionalismus", "image": "https://img.zeit.de/lebensart/mode/2013-02/tadao-ando-kirche/tadao-ando-kirche-540x304.jpg/imagegroup/wide__822x462", "features": ["Beton pur", "Lichtkreuz"] },
+            { "name": "Wassertempel", "location": "Awaji", "architect": "Tadao Ando", "year": "1991", "style": "Kritischer Regionalismus", "image": "https://media.tacdn.com/media/attractions-splice-spp-674x446/0a/84/ed/49.jpg", "features": ["Unterirdischer Sakralraum", "Lotusteich auf dem Dach"] },
+            { "name": "Chichu Art Museum", "location": "Naoshima", "architect": "Tadao Ando", "year": "2004", "style": "Minimalismus", "image": "https://i0.wp.com/archeyes.com/wp-content/uploads/2025/03/Aerial-View-Chichu-Art-Museum-by-Tadao-Ando-ccam_fi.jpg?quality=90&ssl=1", "features": ["In die Erde gebaut", "Geometrische Höfe"] },
+            { "name": "Sendai Mediatheque", "location": "Sendai", "architect": "Toyo Ito", "year": "1995–2001", "style": "Zeitgenössisch", "image": "https://images.adsttc.com/media/images/68ed/5089/b67c/e901/89e7/ee50/large_jpg/ad-classics-sendai-mediatheque-toyo-ito-and-associates-architects_1.jpg?1760383130", "features": ["Netzartige Röhren", "Transparenz"] },
+            { "name": "Fuji TV Building", "location": "Tokyo", "architect": "Kenzo Tange", "year": "1993–1996", "style": "Metabolismus / Postmoderne", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE7QhXxsAGzqIapsbzZsJ5txG_9s2TDAbv4dfvncsIrg&s=10", "features": ["Titan-Kugel", "Gitterstruktur"] },
+            { "name": "Yoyogi National Gymnasium", "location": "Tokyo", "architect": "Kenzo Tange", "year": "1961–1964", "style": "Strukturalismus", "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Kokuritsu_Yoyogi_Ky%C5%8Dgij%C5%8D_1.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Hängedach", "Stahlseilnetz"] },
+            { "name": "Tokyo Metropolitan Government Building", "location": "Tokyo", "architect": "Kenzo Tange", "year": "1988–1991", "style": "Postmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/9/96/Tokyo_Metropolitan_Government_Building_2024.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Zwillings-Türme", "Computerchip-Fassade"] },
+            { "name": "Yokohama International Passenger Terminal", "location": "Yokohama", "architect": "FOA (Foreign Office Architects)", "year": "1995–2002", "style": "Parametrismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtG_kNo_8PIzYAw_VeKulnTxJhe5pO7tj1DF3aNBOtEp2Sy6NeNAlSrKb6&s=10", "features": ["Faltwerkstruktur", "Holzdeck als Landschaft"] },
+            { "name": "21st Century Museum of Contemporary Art", "location": "Kanazawa", "architect": "SANAA", "year": "1999–2004", "style": "Minimalismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBjrCgu2FxMYfa9FwsDocjjAO4sIqgaKCye4lqPfB8ng&s=10", "features": ["Kreisrunder Grundriss", "Dezentrale Glasboxen"] },
+            { "name": "New Museum", "location": "New York", "architect": "SANAA", "year": "2003–2007", "style": "Minimalismus", "image": "https://news.artnet.com/app/news-upload/2026/03/09_New-Museum_Photos-by-Jason-ORear_low-res-scaled.jpg", "features": ["Gestapelte Kuben", "Aluminium-Mesh"] },
+            { "name": "Chrysler Building", "location": "New York", "architect": "William Van Alen", "year": "1928–1930", "style": "Art Déco", "image": "https://cdn.britannica.com/84/94684-050-2652816E/Chrysler-Building-New-York-City.jpg", "features": ["Edelstahlkrone", "Wasserspeier"] },
+            { "name": "Empire State Building", "location": "New York", "architect": "Shreve, Lamb and Harmon", "year": "1930–1931", "style": "Art Déco", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Empire_State_Building_%28aerial_view%29.jpg/250px-Empire_State_Building_%28aerial_view%29.jpg", "features": ["Rücksprünge", "Kalkstein-Fassade"] },
+            { "name": "Flatiron Building", "location": "New York", "architect": "Daniel Burnham", "year": "1902", "style": "Chicagoer Schule", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Edificio_Fuller_%28Flatiron%29_en_2010_desde_el_Empire_State_crop_boxin.jpg/330px-Edificio_Fuller_%28Flatiron%29_en_2010_desde_el_Empire_State_crop_boxin.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail", "features": ["Bügeleisen-Form", "Stahlskelett"] },
+            { "name": "Woolworth Building", "location": "New York", "architect": "Cass Gilbert", "year": "1910–1913", "style": "Neugotik", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJd44pyDU8twBqo5xLY1CwUEnXtenX4a3h9Jh5z-M5ow&s=10", "features": ["Terrakotta-Fassade", "Kathedrale des Kommerzes"] },
+            { "name": "Wainwright Building", "location": "St. Louis", "architect": "Louis Sullivan", "year": "1890–1891", "style": "Chicagoer Schule", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIc_7_NA8-9kTB8qJTkPE8p_gFCxyJkG8hv7Mm-qLo1A&s=10", "features": ["Betonte Vertikale", "Ornamentaler Fries"] },
+            { "name": "Robie House", "location": "Chicago", "architect": "Frank Lloyd Wright", "year": "1908–1910", "style": "Prairie Style", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Frederick_C._Robie_House.JPG/1280px-Frederick_C._Robie_House.JPG?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=thumbnail", "features": ["Horizontale Linien", "Weit auskragendes Dach"] },
+            { "name": "Taliesin West", "location": "Scottsdale", "architect": "Frank Lloyd Wright", "year": "1937", "style": "Organische Architektur", "image": "https://upload.wikimedia.org/wikipedia/commons/d/df/Taliesin_West_Complex_DSCN2137.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Wüstensteine", "Leinwand-Dächer"] },
+            { "name": "Unity Temple", "location": "Oak Park", "architect": "Frank Lloyd Wright", "year": "1905–1908", "style": "Frühe Moderne", "image": "https://image.pbs.org/video-assets/ga1QHHH-asset-mezzanine-16x9-4yYiEvy.jpg", "features": ["Monolithischer Sichtbeton", "Kubismus"] },
+            { "name": "S.C. Johnson Administration Building", "location": "Racine", "architect": "Frank Lloyd Wright", "year": "1936–1939", "style": "Organische Architektur", "image": "https://franklloydwrighttrail.org/galleries/vertical-captioned-images/research-tower.v/full.jpg?dc-cache=20230323T212724827Z", "features": ["Pilzstützen", "Pyrex-Glasröhren"] },
+            { "name": "Bibliothek von Viipuri", "location": "Wyborg", "architect": "Alvar Aalto", "year": "1927–1935", "style": "Skandinavische Moderne", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAS6lE7NXO1t-P857IsTk40NjYzB3-yvQOn4uoHPCeeWYuJfdqIr0gcGo&s=10", "features": ["Gewellte Holzdecke", "Oberlichter"] },
+            { "name": "Finlandia-Halle", "location": "Helsinki", "architect": "Alvar Aalto", "year": "1962–1971", "style": "Spätmoderne", "image": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Finlandia_Hall-7141.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Weißer Marmor", "Asymmetrische Volumen"] },
+            { "name": "Rathaus Säynätsalo", "location": "Säynätsalo", "architect": "Alvar Aalto", "year": "1949–1952", "style": "Kritischer Regionalismus", "image": "https://thelink.berlin/wp-content/uploads/2023/09/Rathaus-Saeynaetsalo-Alvar-Aalto-1952-%C2%A9-Jan-Dimog-thelink.berlin-L1023602_web.jpg", "features": ["Roter Backstein", "Erhöhter Innenhof"] },
+            { "name": "Baker House", "location": "Cambridge (USA)", "architect": "Alvar Aalto", "year": "1947–1948", "style": "Organische Moderne", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlb6T-0I0-wZqR7ySOdvGrTpBzwfWTtv9IpeQHCrQYWev1FkJH8Pb2auxu&s=10", "features": ["Wellenform", "Klinkerbau"] },
+            { "name": "Lovell Health House", "location": "Los Angeles", "architect": "Richard Neutra", "year": "1927–1929", "style": "International Style", "image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Lovell_House%2C_Los_Angeles%2C_California.JPG?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Stahlskelett", "Vorgefertigte Elemente"] },
+            { "name": "Kaufmann Desert House", "location": "Palm Springs", "architect": "Richard Neutra", "year": "1946", "style": "International Style", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjIO4ahKtL_sXJvoNDk1ZJbw9KBKnD1fveUZaE8PM0Emd-DI_5QA2lbr0&s=10", "features": ["Wüstenpavillon", "Nahtloser Außenbezug"] },
+            { "name": "Stahl House (Case Study House #22)", "location": "Los Angeles", "architect": "Pierre Koenig", "year": "1959", "style": "Mid-Century Modern", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXeWCU4HyQtBAgZy0tt4Xn9Cjk5RWWsnMGEFHT-UgVHxIrzU8iL4cBtN8&s=10", "features": ["Überkragendes Dach", "Glasfront mit Stadtblick"] },
+            { "name": "Eames House", "location": "Los Angeles", "architect": "Charles & Ray Eames", "year": "1949", "style": "Mid-Century Modern", "image": "https://assets.ad-magazin.de/photos/69de346074173b5140b7125e/1:1/w_3086,h_3086,c_limit/CASA_EAMES_0210_Base.jpg", "features": ["Industrielle Fertigteile", "Mondrian-ähnliche Fassade"] },
+            { "name": "Schindler House", "location": "West Hollywood", "architect": "Rudolph Schindler", "year": "1922", "style": "Frühe Moderne", "image": "https://images.squarespace-cdn.com/content/v1/6059737e4b8d6e3976d3d5de/b7071192-5f78-448c-bb78-ec3ff7f19aca/sc_edit_4.jpg", "features": ["Tilt-up-Betonplatten", "Keine traditionellen Wohnräume"] },
+            { "name": "Casa Barragán", "location": "Mexiko-Stadt", "architect": "Luis Barragán", "year": "1948", "style": "Kritischer Regionalismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS246wpKH2GKyBjHWxT2e8aCE8-LAGeyDBkEbjnRLV3Dg&s=10", "features": ["Leuchtende Farben", "Magischer Realismus"] },
+            { "name": "Torres de Satélite", "location": "Mexiko-Stadt", "architect": "Luis Barragán & Mathias Goeritz", "year": "1957", "style": "Skulpturale Architektur", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_2A7Jq5o7NgAxQUwqDLxorSzycp0OU0ZxEy2On8D5-Q&s=10", "features": ["Monumentale Farbtürme", "Visuelle Leitlinien"] },
+            { "name": "Museu de Arte Contemporânea de Niterói", "location": "Niterói", "architect": "Oscar Niemeyer", "year": "1996", "style": "Spätmoderne", "image": "https://vejario.abril.com.br/wp-content/uploads/2016/11/3661_leonardo-simplicio_divulgacao.jpeg?quality=70&strip=info&w=414&h=280&crop=1", "features": ["Ufo-ähnliche Struktur", "Fließende Rampe"] },
+            { "name": "Congresso Nacional do Brasil", "location": "Brasília", "architect": "Oscar Niemeyer", "year": "1958–1960", "style": "Spätmoderne", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiaT2qyOLb3q1lrFFf48UHN9B_-b4tYfXRhvho0J6tJQ&s=10", "features": ["Kuppel und Schüssel", "Doppeltürme"] },
+            { "name": "Edifício Copan", "location": "São Paulo", "architect": "Oscar Niemeyer", "year": "1951–1966", "style": "Spätmoderne", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1WsLefMHOb800rDJTy1e6xvHKhjOLOLNytXORwNyPvg&s=10", "features": ["S-förmiger Grundriss", "Horizontale Brise-Soleils"] },
+            { "name": "Museu de Arte de São Paulo (MASP)", "location": "São Paulo", "architect": "Lina Bo Bardi", "year": "1968", "style": "Brutalismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNj2MPfStVwIb3MZgVdKguuaXAnwyBd5ALmV1etxN7bw&s=10", "features": ["Freischwebender Glaskasten", "Rote Betonbügel"] },
+            { "name": "Casa de Vidro", "location": "São Paulo", "architect": "Lina Bo Bardi", "year": "1951", "style": "Tropische Moderne", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUQGxlEJKnkdgusPqZ1SfsfWQJrW7KubRGtBlyO8v_3J7Rmr_sPiF2TQse&s=10", "features": ["Pilotis", "Verschmelzung mit dem Regenwald"] },
+            { "name": "Sainte Marie de La Tourette", "location": "Lyon", "architect": "Le Corbusier", "year": "1953–1960", "style": "Brutalismus", "image": "https://lecorbusier-worldheritage.org/wp-content/uploads/2019/07/photo-15-couvent-sainte-marie-de-la-tourette.jpg", "features": ["Strenge Klostergeometrie", "Beton brut und Lichtkanonen"] },
+            { "name": "Carpenter Center for the Visual Arts", "location": "Cambridge (USA)", "architect": "Le Corbusier", "year": "1961–1963", "style": "Moderne", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfhZLTal6j9V_2kiQnTPplSZQWgtlhwEVakLH6b0Zf8aG3NIFv-e6rpsE&s=10", "features": ["Durchdringende Rampe", "Sichtbeton-Brise-Soleil"] },
+            { "name": "Van Nelle Fabrik", "location": "Rotterdam", "architect": "Brinkman & Van der Vlugt", "year": "1925–1931", "style": "Neue Sachlichkeit", "image": "https://upload.wikimedia.org/wikipedia/commons/6/60/Rotterdam_van_nelle_fabriek.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Glasvorhangfassade", "Förderbrücken"] },
+            { "name": "Rathaus Hilversum", "location": "Hilversum", "architect": "Willem Marinus Dudok", "year": "1928–1931", "style": "Frühe Moderne / De Stijl", "image": "https://thomasmayerarchive.de/data/media_high/134FX20140415D0357.jpg", "features": ["Kubische Volumina", "Gelber Backstein"] },
+            { "name": "Beurs van Berlage", "location": "Amsterdam", "architect": "Hendrik Petrus Berlage", "year": "1896–1903", "style": "Rationalismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxXYULVOycD6jRHUmHiXnjVZH7xoaTelMJbjX86VMUMw&s=10", "features": ["Backstein-Ästhetik", "Funktionale Klarheit"] },
+            { "name": "Milano Centrale", "location": "Mailand", "architect": "Ulisse Stacchini", "year": "1912–1931", "style": "Art Déco / Neoklassizismus", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdelhoZdUSeLevgMp2uu8Zc3MT9OROBcl9aFWscqjLHQ&s=10", "features": ["Monumentalität", "Stahl-Glas-Hallen"] },
+            { "name": "Torre Velasca", "location": "Mailand", "architect": "BBPR", "year": "1956–1958", "style": "Brutalismus / Neoliberty", "image": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Torre_Velasca_01.jpg?utm_source=de.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Pilzartige Form", "Moderne Interpretation mittelalterlicher Türme"] },
+            { "name": "Pirelli-Hochhaus", "location": "Mailand", "architect": "Gio Ponti & Pier Luigi Nervi", "year": "1956–1960", "style": "International Style", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsAe40lgczB6vMH_jLNXwlMdoQMeTIGNgrTeY3o-3ha4FTpdPt28MEkW4&s=10", "features": ["Spitz zulaufende Enden", "Betonskelett"] },
+            { "name": "Royal National Theatre", "location": "London", "architect": "Denys Lasdun", "year": "1967–1976", "style": "Brutalismus", "image": "https://upload.wikimedia.org/wikipedia/commons/4/41/The_National_Theatre%2C_South_Bank%2C_London_-_geograph.org.uk_-_1861458.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Gestufte Terrassen", "Brettschalung-Sichtbeton"] },
+            { "name": "Barbican Estate", "location": "London", "architect": "Chamberlin, Powell and Bon", "year": "1965–1976", "style": "Brutalismus", "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Barbican_towers.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original", "features": ["Massive Betontürme", "Integrierte Fußgängerebenen"] },
+            { "name": "Trellick Tower", "location": "London", "architect": "Ernő Goldfinger", "year": "1968–1972", "style": "Brutalismus", "image": "https://www.whitemad.pl/wp-content/uploads/2024/06/Elkstone_Rd_Trellick_Tower_NW532_26619036544.jpg", "features": ["Separater Aufzugsturm", "Luftbrücken"] }
+        ];
+
+        let buildings = [...baseBuildings].sort(() => Math.random() - 0.5);
+
+        let epochsData = [
+            {
+                period: "1950er – 1970er",
+                title: "Brutalismus",
+                desc: "Leitet sich von französisch *béton brut* (roher Beton) ab. Charakteristisch ist die radikale Sichtbarmachung von Material, rohen Betonoberflächen, plastischer Massivität und skulpturalen Faltwerkstrukturen.",
+                arch: "Gottfried Böhm (Pilgerkirche Neviges), Le Corbusier (Unité d'Habitation, Marseille)"
+            },
+            {
+                period: "ca. 1910 – 1930er",
+                title: "Klassische Moderne / Neues Bauen",
+                desc: "Bruch mit dem Historismus. Fokus auf Funktion, Licht, Luft, Stahlbeton und Stahlskelettbau. Le Corbusiers „5 Punkte der Architektur“ (Pilotis, Dachgarten, Bandfenster) prägten diesen Stil.",
+                arch: "Le Corbusier (Villa Savoye), Walter Gropius (Bauhaus Dessau), Mies van der Rohe (Barcelona-Pavillon)"
+            },
+            {
+                period: "1970er – 1990er",
+                title: "Postmoderne",
+                desc: "Gegenbewegung zum strengen Funktionalismus. Wiederbelebung von Farbe, Ironie, historischen Zitaten, Ornamenten und klassischen Elementen (Säulen, Giebel) in neuer Form.",
+                arch: "Charles Moore (Piazza d'Italia), James Stirling (Neue Staatsgalerie Stuttgart), Philip Johnson (AT&T Building)"
+            },
+            {
+                period: "ab den 1980er",
+                title: "Dekonstruktivismus",
+                desc: "Vermeidung rechter Winkel, instabile, scheinbar stürzende Linien, Fragmentierung und Aufbrechen geometrischer Ordnungen. Architektur als dynamische Skulptur.",
+                arch: "Zaha Hadid (Feuerwache Vitra), Frank O. Gehry (Guggenheim Bilbao), Daniel Libeskind (Jüdisches Museum Berlin)"
+            },
+            {
+                period: "1960er – 1970er",
+                title: "Strukturalismus",
+                desc: "Fokus auf Grundstrukturen, Netze und modulare Systeme, die durchwachsen und flexibel erweiterbar sind. Trennung von „dienenden“ und „bedienten“ Räumen.",
+                arch: "Louis I. Kahn (Salk Institute), Moshe Safdie (Habitat 67)"
+            },
+            {
+                period: "1970er – heutzutage",
+                title: "High-Tech-Architektur",
+                desc: "Sichtbarmachung von technischer Infrastruktur, Stahl, Glas, Aufzügen und Rohrleitungen meist an der Außenfassade, um im Inneren maximale Flexibilität zu schaffen.",
+                arch: "Renzo Piano & Richard Rogers (Centre Pompidou Paris)"
+            }
+        ];
+
+        let theoryItems = [
+            { q: "1. Welche gesellschaftlichen Entwicklungen waren laut Skript die Treiber der 'Modernisierung'?", a: "Die Vorlesung identifiziert mehrere Schlüsselfaktoren: <i>Industrialisierung, die Entstehung von Nationalstaaten, das Bürgertum und Armut</i>. Ebenso spielten <i>Kriege und Konflikte, der rasante wissenschaftliche Fortschritt, Identitätssuche und territoriale Expansion</i> eine entscheidende Rolle für den Weg in die Moderne." },
+            { q: "2. Wie grenzen die Vorlesungsskripte die 'Klassische Moderne' begrifflich ein?", a: "Die 'Klassische Moderne' (bzw. der Modernismus) beschreibt eine <i>Bewegung ab etwa 1900 in Kunst und Architektur, die einen bewussten <b>Bruch mit dem akademischen Formenvokabular</b></i> propagierte. Sie wird umgangssprachlich oft fälschlicherweise auf 'Bauhaus-Architektur' reduziert, ist jedoch eine viel breitere, internationale Bewegung ('Modern Movement')." },
+            { q: "3. Gibt es in der Architektur einen echten 'Bauhaus-Stil'?", a: "Nein, die Dozentin betont explizit, dass es <i>nicht die EINE Moderne</i> und <i>KEINEN einheitlichen 'Bauhaus-Stil'</i> gibt. Die Architektur der Moderne setzt sich aus vielen verschiedenen Gesichtern und Strömungen zusammen." },
+            { q: "4. Welche zentralen Aspekte abseits der Form kennzeichnen die Architektur der Moderne?", a: "Dazu gehören die radikale <i>Optimierung von Bauprozessen, die Entwicklung <b>neuer Bautechniken, Materialien und Bauaufgaben</b></i> sowie eine völlig veränderte Raumwahrnehmung. Zudem kam es in dieser Epoche zu einer starken <i>Institutionalisierung der Architekturausbildung</i>." },
+            { q: "5. Wie veränderte sich das Berufsbild im Zuge der Moderne?", a: "Es kam zu einer <i>klaren inhaltlichen Unterscheidung und Trennung zwischen dem Architekten und dem Ingenieur</i>." },
+            { q: "6. Wie ordnete das Bauhaus Grundfarben und Grundformen systematisch einander zu?", a: "Nach einer Festlegung von Oskar Schlemmer und Wassily Kandinsky wurde definiert: <i>Gelb steht für das Dreieck, Blau für den Kreis und Rot für das Quadrat</i>." },
+            { q: "7. Wie war der Lehrplan am Bauhaus strukturiert?", a: "Der Lehrplan war grafisch als <i>Kreismodell</i> aufgebaut. Die Studenten durchliefen von außen nach innen zunächst die <i>Vorlehre</i> (Elementare Formlehre, Materialstudien), gingen dann über in die <i>Werkzeuglehre (Ton, Stein, Holz, Metall)</i> und endeten im innersten Zentrum beim eigentlichen <i>'Bau' (Versuchsplatz und Entwurf)</i>." },
+            { q: "8. Was verdeutlicht Oskar Schlemmers 'Triadisches Ballett' (1922) im architektonischen Kontext?", a: "Es zeigt die abstrakte Formsuche der Avantgarde, bei der <i>menschliche Körper in strenge geometrische, mechanisierte Grundformen (Kugeln, Zylinder) übersetzt</i> und im Raum inszeniert wurden." },
+            { q: "9. Was zeichnet das städtebauliche Konzept der Gartenstadt Hellerau (ab 1909) aus?", a: "Hellerau (initiiert von Karl Schmidt) war ein früher Versuch des gemeinschaftlichen, gesunden Wohnens am Stadtrand und wurde von prominenten Architekten wie <i>Richard Riemerschmid, Heinrich Tessenow und Hermann Muthesius</i> entworfen." },
+            { q: "10. Welche räumlichen Qualitäten weist die Siedlung Margarethenhöhe auf?", a: "Die von <i>Georg Metzendorf ab 1908 geplante Siedlung</i> in Essen zeichnet sich durch <i>organisch geschwungene Straßenführungen</i> und die Integration von Gärten aus, die primär der Selbstversorgung der Arbeiter dienten." },
+            { q: "11. Welche extremen architektonischen Maßstäbe verfolgte Albert Speer im Nationalsozialismus?", a: "Ein bezeichnendes Beispiel ist sein Versuchsbau für das <i>'Deutsche Stadion' in Nürnberg, ein gigantischer, hufeisenförmiger Entwurf, der <b>für 400.000 Menschen</b></i> konzipiert war und alle menschlichen Maßstäbe sprengen sollte." },
+            { q: "12. Was ist in der Architekturgeschichte mit 'Totalitärer Überformung' gemeint?", a: "Dies beschreibt den <i>nachträglichen politischen Eingriff in historische Bausubstanz, wie beispielhaft beim Holzbalkon zu sehen, der <b>1938 eigens für Hitlers Rede zum 'Anschluss' brutal in die Fassade des Wiener Rathauses gebrochen</b></i> wurde." },
+            { q: "13. Welche Rolle spielte die Reichsautobahn im nationalsozialistischen Staat?", a: "Sie war nicht nur pure Infrastruktur, sondern ein <i>Propaganda-Bauwerk zur gezielten, filmischen Inszenierung der deutschen Landschaft</i> ('Mensch und Wort')." },
+            { q: "14. Welche Bauaufgaben dominierten in der westdeutschen Architektur bis 1949?", a: "Aufgrund der massiven Kriegsschäden gab es bis 1949 fast ausschließlich <i>Wiederaufbaumaßnahmen</i> sowie <i>Bauten für die Besatzungsmächte</i>." },
+            { q: "15. Welche Metapher prägte das westdeutsche demokratische Bauen der Nachkriegszeit stark?", a: "Das Prinzip <i>'Glas = Transparenz = Demokratie'</i>. Offene Architektur (wie am Plenarsaal des Bundeshauses in Bonn) sollte das gewandelte Selbstverständnis der BRD spiegeln." },
+            { q: "16. Welche städtebaulichen Leitbilder prägten die Stadtplanung im Westen nach 1945?", a: "Zentrale Prinzipien waren die <i>'aufgelockerte Stadt'</i> (große Abstandsflächen, Abkehr von der Blockrandbebauung, Grünzonen nach dem Ideal 'Licht, Luft und Sonne') sowie die <i>'autogerechte Stadt'</i>." },
+            { q: "17. Was sind die formalen Merkmale des reinen Funktionalismus in der westdeutschen Nachkriegsmoderne?", a: "Typisch für diese Bauten sind bewusste <i>Asymmetrie, der Einsatz von leichten <b>Vorhangfassaden (Curtain Wall)</b></i> und flachen <i>Flugdächern</i>." },
+            { q: "18. Wie unterschied sich die 'Organische Architektur' von der strengen Raster-Moderne?", a: "Sie war <i>stark plastisch</i> geformt und wirkte, als sei sie fließend <i>'aus der Bewegung heraus'</i> entworfen worden, wie es besonders bei den asymmetrischen Bauten von Hans Scharoun (Geschwister-Scholl-Schule, Staatsbibliothek) sichtbar ist." },
+            { q: "19. Wie spiegelte sich der Ruf nach 'Unabhängigkeit und Wachstum' in der DDR-Architektur wider?", a: "In der konsequenten Standardisierung und Vorfertigung, die in <i>Plattenbauten (wie dem Wohnblock WBS 70)</i> und in der Entstehung riesiger, monotoner Trabantenstädte wie <i>Berlin-Marzahn</i> mündete." },
+            { q: "20. Welche Rolle spielte 'Kunst am Bau' an repräsentativen DDR-Gebäuden?", a: "Kunst wurde gezielt als <i>politisches und ideologisches Ausdrucksmittel</i> eingesetzt, wie das gewaltige Wandmosaik <i>'Unser Leben' von Walter Womacka</i> am Haus des Lehrers (1961-1964) in Ost-Berlin demonstriert." },
+            { q: "21. Welche experimentellen Leichtbaustrukturen setzten einen Kontrapunkt in der Ost-Moderne?", a: "Der Ingenieur <i>Ulrich Müther</i> schuf hochinnovative, expressive <i>Hyparschalen aus Leichtbeton</i>, wie beispielsweise bei der geschwungenen Dachkonstruktion der Gaststätte 'Teepott' in Warnemünde." },
+            { q: "22. Was visualisiert der 'Evolutionary Tree of Twentieth-Century Architecture' von Charles Jencks?", a: "Dieses Diagramm zeigt die <i>Entwicklung, Verzweigung und Überlappung der vielfältigen architektonischen Strömungen</i> (z.B. Logical, Idealist, Intuitive, Activist) von 1900 bis ins Jahr 2000 als extrem komplexes, verwobenes Stammbaum-Modell." },
+            { q: "23. Wie kritisierte die radikale Gruppe 'Superstudio' die Architektur der Spätmoderne?", a: "Sie entwarfen 1969 das theoretische Manifest <i>'The Continuous Monument'</i>, ein gewaltiges, endloses Raster, das sich als dystopische Utopie gleichmachend über den gesamten Planeten (und ganze Städte wie New York) legte." },
+            { q: "24. Welche Idee verbirgt sich hinter der 'Oase Nr. 7' von Haus-Rucker-Co?", a: "Dieses aufblasbare Projekt der documenta in den 1970er Jahren bestand aus einer aus der Fassade ragenden, transparenten <i>'Überlebensblase'</i>. Es war eine provokante utopische Raum-Erweiterung und ein Kommentar zur Umweltverschmutzung." },
+            { q: "25. Worauf basierten die extrem leichten Dach-Konstruktionen von Frei Otto?", a: "Er erforschte komplexe morphologische Prinzipien aus der Natur, insbesondere durch <i>Seifenblasenmodelle und Spinnennetz-Studien</i>, um mit minimalem Materialeinsatz und natürlichen Zugkräften riesige Flächen zu überspannen." },
+            { q: "26. Welche bekannten Großprojekte resultierten aus Frei Ottos naturwissenschaftlichen Studien?", a: "Die zeltartigen Netzstrukturen wurden eindrucksvoll beim <i>Deutschen Pavillon der Expo '67 in Montreal</i> (mit Rolf Gutbrod) und bei den ikonischen <i>Zeltdächern des Olympia-Geländes 1972 in München</i> (mit Günther Behnisch) realisiert." },
+            { q: "27. Wie integrierte Lina Bo Bardi beim SESC Pompéia den industriellen Bestand?", a: "Sie nutzte eine <i>alte Backsteinfabrik</i> als Basis und ergänzte diese brutalistisch durch rohe, wehrhafte <i>Betontürme mit organischen 'Löchern' als Fenster</i>, die durch freistehende Sichtbeton-Luftbrücken spektakulär miteinander verbunden wurden." },
+            { q: "28. Welche Architektursprache vertritt die deutsche Architektin Verena Dietrich?", a: "Sie steht in der Vorlesung beispielhaft für die <i>High-Tech-Architektur; bei ihrer Zuschauertribüne im Sportpark Köln-Höhenberg machte sie die <b>komplette stählerne Zug- und Tragekonstruktion massiv nach außen hin sichtbar</b></i>." },
+            { q: "29. Welche formale Sprache nutzt die Architektin Odile Decq in der Spät- und Postmoderne?", a: "Ihre expressiven Bauten (wie das Maison Bernard oder das Phantom Restaurant in der Opera Garnier) brechen radikal mit der Kastenform und zeichnen sich durch <i>rote Signalfarben, geschwungene Skulpturalität und die absolute Vermeidung rechter Winkel</i> aus." },
+            { q: "30. Wie dokumentierte László Moholy-Nagy die Formensprache am Bauhaus?", a: "Neben der Arbeit mit klassischen Materialien nutzte er primär die <i>Fotografie, um abstrakte Geometrien, harte Linien sowie starke <b>Licht- und Schattenspiele</b></i> architektonisch zu untersuchen." },
+            { q: "31. Palast der Republik: Städtebauliche Situation vor und nach der Errichtung?", a: "Vorher stand an diesem Ort das Berliner Stadtschloss (1950 von der DDR gesprengt). Später wurde der Palast als 'Volkshaus' errichtet. Höhendominanz wurde auf den nahen Fernsehturm verlagert. Heute steht dort das Humboldt Forum (Wiederaufbau des Stadtschlosses)." },
+            { q: "32. Wie verbinden sich politische Intention und Architektur beim Palast der Republik?", a: "Die Architektur und Funktion als 'Volkshaus' drückten politische 'Offenheit und Bürgernähe' aus." },
+            { q: "33. Neue Staatsgalerie Stuttgart: Architekt, Zeitraum und Stil?", a: "Entworfen von James Stirling, Michael Wilford & Associates (1977–1984). Stil: Postmoderne." },
+            { q: "34. Was sind die inhaltlichen Merkmale der Postmoderne an der Neuen Staatsgalerie?", a: "Kritik am reinen Funktionalismus der Moderne. Historische Zitate (z.B. antikisierende Rotunde) werden mit modernen Materialien, grellen Industriefarben und technischen Elementen spielerisch kombiniert." },
+            { q: "35. Architekturvergleich: Elbphilharmonie vs. Berliner Philharmonie", a: "Beide sind ikonische Kulturgebäude mit plastischer Silhouette. Berliner Philharmonie (Hans Scharoun, 1957–1963): organisch-asymmetrischer Neubau ('Musik im Zentrum'). Elbphilharmonie (Herzog & de Meuron, 2007–2016): Kombination aus historischem Backsteinsockel und gläserner Aufstockung." },
+            { q: "36. Das Neue Frankfurt (1925–1930): Leitideen und Protagonisten", a: "Initiator war Ernst May. Ziel war rationeller Massenwohnungsbau nach dem Prinzip 'Licht, Luft & Sonne' (Zeilenbau). Bekannte Siedlungen: Praunheim, Römerstadt, Westhausen. Wichtiges Element: Die Frankfurter Küche (Margarete Schütte-Lihotzky)." }
+        ];
+
+        let theoryQuestions = [...theoryItems].map(item => ({
+            q: item.q.replace(/^\d+\.\s*/, ''),
+            a: item.a
+        })).sort(() => Math.random() - 0.5);
+
+        let trainerData = JSON.parse(localStorage.getItem('bau_trainer_data_zeynep_v8')) || {};
+        let currentFilter = 'box1';
+        let activeQueue = [];
+        let currentTrainerItem = null;
+        let simQueue = [];
+        let simCurrentIndex = 0;
+
+        let zeynepSpecialQuestions = [
+            {
+                title: "Zeynep'in Venedik'te en sevdiği dondurmacı hangisidir?",
+                correct: "SuSo Eis",
+                options: ["SuSo Eis", "Gelateria di Santa Fosca", "Alaska Gelato", "Nico", "Rialto"],
+                image: "https://quadro.burda-forward.de/ctf/971287e9-bb36-4498-b1cf-61c926b12d8e.6b1f0779-0bd1-4915-a470-724ffc58943f.jpg?im=RegionOfInterestCrop=(2121,1414),regionOfInterest=(995,690)&hash=26e18c3515eb9c23d88ee2e7f16ea44faaeedc1a69f64733eec1299168f3eb75",
+                style: "Venedig Spezial",
+                features: ["Handgemachtes Eis", "Kult-Dondurmacı in Venedig"]
+            },
+            {
+                title: "Zeynep'in en sevdiği renk hangisidir?",
+                correct: "Toprak Tonları",
+                options: ["Toprak Tonları", "Yeşil", "Kırmızı", "Mor", "Pembe"],
+                image: "https://neilpatel.com/wp-content/uploads/2017/08/colors.jpg",
+                style: "Persönliche Präferenz",
+                features: ["Elegant", "Sollte man sich unbedingt merken!"]
+            },
+            {
+                title: "Zeynep düşünceli bir şekilde dalıp gittiğinde veya bir şeye odaklandığında istemsizce yaptığı o en tatlı detay nedir?",
+                correct: "Hımmmm",
+                options: ["Hımmmm", "Sürekli ekrana dokunmak", "Hızlıca ayağa kalkıp yürümek", "Kalemi elinde çevirmek", "Sürekli saatine bakmak"],
+                image: "https://static.vecteezy.com/ti/gratis-vektor/p1/44849355-frau-denken-karikatur-illustration-madchen-karikatur-charakter-minimalistisch-stil-kostenlos-vektor.jpg",
+                style: "Besondere Aufmerksamkeit",
+                features: ["Aufmerksame Beobachtung", "Typische kleine Geste"]
+            }
+        ];
+
+        let currentTheoryPage = 1;
+        const theoryItemsPerPage = 25;
+        let shuffledTheoryArray = [];
+
+        window.onload = function() {
+            initSimQueue();
+            initTrainer();
+            loadCard(0);
+            loadTheoryQuestion(0);
+            renderRandomSummary();
+            buildExamIndex();
+            switchTab('summary');
+        };
+
+        function renderRandomSummary() {
+            let shuffledEpochs = [...epochsData].sort(() => Math.random() - 0.5);
+            let epochsContainer = document.getElementById('random-epochs-grid');
+            epochsContainer.innerHTML = '';
+            shuffledEpochs.forEach(ep => {
+                let div = document.createElement('div');
+                div.className = "bg-[#f5f2eb] p-5 rounded-2xl border border-[#e8e2d5] space-y-2";
+                div.innerHTML = `
+                    <span class="text-[10px] font-semibold bg-[#e8e2d5] text-[#595042] px-2.5 py-0.5 rounded uppercase tracking-wider inline-block">${ep.period}</span>
+                    <h3 class="text-sm font-bold text-[#24211a]">${ep.title}</h3>
+                    <p class="text-xs text-[#736856] leading-relaxed">${ep.desc}</p>
+                    <p class="text-xs pt-2 border-t border-[#e8e2d5] text-[#595042]"><strong>Wichtigste Architekten & Bauten:</strong> ${ep.arch}</p>
+                `;
+                epochsContainer.appendChild(div);
+            });
+
+            shuffledTheoryArray = [...theoryItems].sort(() => Math.random() - 0.5);
+            currentTheoryPage = 1;
+            renderTheoryPage(currentTheoryPage);
+        }
+
+        function renderTheoryPage(page) {
+            let container = document.getElementById('theory-list');
+            container.innerHTML = '';
+            
+            let totalPages = Math.ceil(shuffledTheoryArray.length / theoryItemsPerPage);
+            if (totalPages === 0) totalPages = 1;
+            
+            let startIndex = (page - 1) * theoryItemsPerPage;
+            let endIndex = Math.min(startIndex + theoryItemsPerPage, shuffledTheoryArray.length);
+            
+            let pageItems = shuffledTheoryArray.slice(startIndex, endIndex);
+            
+            pageItems.forEach((item, idx) => {
+                let globalIdx = startIndex + idx; 
+                let cleanQ = item.q.replace(/^\d+\.\s*/, '');
+                let div = document.createElement('div');
+                div.className = "bg-white border border-slate-200 rounded-lg overflow-hidden";
+                div.innerHTML = `
+                    <button onclick="document.getElementById('th-rand-${globalIdx}').classList.toggle('hidden')" class="w-full text-left p-4 font-semibold text-slate-800 hover:bg-slate-50 flex justify-between items-center gap-3">
+                        <span>${cleanQ}</span><i class="fa-solid fa-chevron-down text-slate-400 flex-none"></i>
+                    </button>
+                    <div id="th-rand-${globalIdx}" class="hidden p-4 pt-0 text-sm text-slate-700 leading-relaxed border-t">${item.a}</div>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('theory-page-info').innerText = `Seite ${page} von ${totalPages}`;
+            document.getElementById('theory-prev-btn').disabled = (page === 1);
+            document.getElementById('theory-next-btn').disabled = (page === totalPages);
+        }
+
+        function prevTheoryPage() {
+            if (currentTheoryPage > 1) {
+                currentTheoryPage--;
+                renderTheoryPage(currentTheoryPage);
+                document.getElementById('theory-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function nextTheoryPage() {
+            let totalPages = Math.ceil(shuffledTheoryArray.length / theoryItemsPerPage);
+            if (currentTheoryPage < totalPages) {
+                currentTheoryPage++;
+                renderTheoryPage(currentTheoryPage);
+                document.getElementById('theory-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function initSimQueue() {
+            simQueue = [...buildings].sort(() => Math.random() - 0.5);
+            simCurrentIndex = 0;
+            loadSimBuilding(simCurrentIndex);
+        }
+
+        function loadSimBuilding(idx) {
+            if (idx >= simQueue.length) simCurrentIndex = 0;
+            let b = simQueue[simCurrentIndex];
+            document.getElementById('sim-progress').innerText = `${simCurrentIndex + 1} / ${simQueue.length}`;
+            document.getElementById('sim-img').src = b.image || '';
+            ['in-name', 'in-arch', 'in-year', 'in-style', 'in-features'].forEach(id => document.getElementById(id).value = '');
+            document.getElementById('sim-solution').classList.add('hidden');
+        }
+
+        function nextSimBuilding() {
+            simCurrentIndex = (simCurrentIndex + 1) % simQueue.length;
+            loadSimBuilding(simCurrentIndex);
+        }
+
+        function checkSimAnswer() {
+            let b = simQueue[simCurrentIndex];
+            document.getElementById('sol-name').innerText = b.name + " (" + b.location + ")";
+            document.getElementById('sol-arch').innerText = b.architect;
+            document.getElementById('sol-year').innerText = b.year;
+            document.getElementById('sol-style').innerText = b.style;
+            let ul = document.getElementById('sol-features');
+            ul.innerHTML = '';
+            b.features.forEach(f => { let li = document.createElement('li'); li.innerText = f; ul.appendChild(li); });
+            document.getElementById('sim-solution').classList.remove('hidden');
+        }
+
+        // --- PROBEKLAUSUR (EVAEXAM) LOGIC ---
+        let currentExamIdx = 0;
+
+        function buildExamIndex() {
+            let indexContainer = document.getElementById('exam-index');
+            if(!indexContainer) return;
+            indexContainer.innerHTML = '';
+            buildings.slice(0, 20).forEach((b, idx) => {
+                let btn = document.createElement('button');
+                btn.onclick = () => openExamById(idx + 1);
+                btn.className = "w-full text-left px-3 py-2 hover:bg-[#f5f2eb] flex items-center gap-2 text-xs text-[#3d372c] transition rounded-lg";
+                btn.innerHTML = `<span class="font-bold text-[#736856] w-6 flex-none">#${idx + 1}</span><span class="flex-1 min-w-0 truncate">${b.name} (${b.style})</span>`;
+                indexContainer.appendChild(btn);
+            });
+        }
+
+        function startExam() {
+            document.getElementById('exam-start').classList.add('hidden');
+            document.getElementById('exam-active').classList.remove('hidden');
+            currentExamIdx = Math.floor(Math.random() * buildings.length);
+            loadExamQuestionData(currentExamIdx);
+        }
+
+        function openExamById(id) {
+            let num = id || parseInt(document.getElementById('exam-goto').value);
+            if (!num || num < 1 || num > buildings.length) return;
+            document.getElementById('exam-start').classList.add('hidden');
+            document.getElementById('exam-active').classList.remove('hidden');
+            currentExamIdx = num - 1;
+            loadExamQuestionData(currentExamIdx);
+        }
+
+        function loadExamQuestionData(idx) {
+            let b = buildings[idx];
+            document.getElementById('exam-prog-text').innerText = `Aufgabe #${idx + 1}`;
+            document.getElementById('exam-img').src = b.image || '';
+            
+            // Alt soru başlıklarını güncelle
+            document.getElementById('q1-title').innerText = `8.1 Welches Ensemble / Bauwerk (${b.location}) ist zu sehen, von wem und wann?`;
+            document.getElementById('q2-title').innerText = `8.2 Beschreiben Sie den Stil (${b.style}) und das zugrunde liegende Leitbild.`;
+            document.getElementById('q3-title').innerText = `8.3 Nennen Sie die Hauptmerkmale: ${b.features[0] || 'Merkmal'} & ${b.features[1] || 'Merkmal'}.`;
+
+            // Textboxları temizle
+            document.querySelectorAll('#exam-active textarea').forEach(ta => ta.value = '');
+            document.getElementById('exam-sol-box').classList.add('hidden');
+
+            // Musterlösung içeriğini hazırla
+            document.getElementById('exam-sol-content').innerHTML = `
+                <p><strong>8.1 Bauwerk & Ort:</strong> ${b.name} (${b.location}) | <strong>Architekt:</strong> ${b.architect} | <strong>Zeitraum:</strong> ${b.year}</p>
+                <p><strong>8.2 Stil & Leitbild:</strong> ${b.style}</p>
+                <p><strong>8.3 Wesentliche Merkmale:</strong> ${b.features.join(', ')}</p>
+            `;
+        }
+
+        function toggleExamSolution() {
+            document.getElementById('exam-sol-box').classList.toggle('hidden');
+        }
+
+        function nextExamQuestion() {
+            currentExamIdx = (currentExamIdx + 1) % buildings.length;
+            loadExamQuestionData(currentExamIdx);
+        }
+
+        function endExamEarly() {
+            document.getElementById('exam-active').classList.add('hidden');
+            document.getElementById('exam-start').classList.remove('hidden');
+            let res = document.getElementById('exam-lastresult');
+            res.classList.remove('hidden');
+            res.innerHTML = `Letzte Probeklausur erfolgreich beendet!`;
+        }
+        // ----------------------------------
+
+        function initTrainer() {
+            let specialMapped = zeynepSpecialQuestions.map((sq, i) => ({
+                index: i,
+                isCustom: true,
+                title: sq.title,
+                correct: sq.correct,
+                options: sq.options,
+                image: sq.image,
+                style: sq.style,
+                features: sq.features
+            }));
+
+            let buildingMapped = buildings.map((b, i) => ({
+                index: i + 3,
+                isCustom: false,
+                data: b
+            }));
+
+            let allTrainerItems = [...specialMapped, ...buildingMapped];
+
+            allTrainerItems.forEach((item) => {
+                if (!trainerData[item.index]) {
+                    trainerData[item.index] = { box: 1 };
+                }
+            });
+            saveTrainerData();
+            updateTrainerStats();
+            loadTrainerQueue();
+        }
+
+        function saveTrainerData() {
+            localStorage.setItem('bau_trainer_data_zeynep_v8', JSON.stringify(trainerData));
+        }
+
+        function updateTrainerStats() {
+            let b1 = 0, b2 = 0, b3 = 0;
+            Object.keys(trainerData).forEach(k => {
+                if (trainerData[k].box === 1) b1++;
+                else if (trainerData[k].box === 2) b2++;
+                else if (trainerData[k].box === 3) b3++;
+            });
+            document.getElementById('stat-box1').innerText = b1;
+            document.getElementById('stat-box2').innerText = b2;
+            document.getElementById('stat-box3').innerText = b3;
+        }
+
+        function setTrainerFilter(boxName) {
+            currentFilter = boxName;
+            let badge = document.getElementById('trainer-category-badge');
+            if(boxName === 'box1') {
+                badge.className = "px-3 py-1 rounded-full font-semibold uppercase tracking-wider bg-red-100 text-red-800";
+                badge.innerText = "In Wiederholung";
+            } else if(boxName === 'box2') {
+                badge.className = "px-3 py-1 rounded-full font-semibold uppercase tracking-wider bg-amber-100 text-amber-800";
+                badge.innerText = "Verstanden";
+            } else {
+                badge.className = "px-3 py-1 rounded-full font-semibold uppercase tracking-wider bg-emerald-100 text-emerald-800";
+                badge.innerText = "Beherrscht";
+            }
+            loadTrainerQueue();
+        }
+
+        function loadTrainerQueue() {
+            activeQueue = [];
+            let targetBox = currentFilter === 'box1' ? 1 : currentFilter === 'box2' ? 2 : 3;
+
+            let specialMapped = zeynepSpecialQuestions.map((sq, i) => ({
+                index: i,
+                isCustom: true,
+                title: sq.title,
+                correct: sq.correct,
+                options: sq.options,
+                image: sq.image,
+                style: sq.style,
+                features: sq.features
+            }));
+
+            let buildingMapped = buildings.map((b, i) => ({
+                index: i + 3,
+                isCustom: false,
+                data: b
+            }));
+
+            let allItems = [...specialMapped, ...buildingMapped];
+
+            if (targetBox === 1) {
+                let others = allItems.filter(x => !x.isCustom && trainerData[x.index] && trainerData[x.index].box === 1).sort(() => Math.random() - 0.5);
+                let customs = specialMapped.filter(x => trainerData[x.index] && trainerData[x.index].box === 1);
+
+                activeQueue = [...others];
+
+                let targetPositions = [5, 14, 29];
+                customs.forEach((c, idx) => {
+                    let pos = targetPositions[idx];
+                    if (pos !== undefined) {
+                        if (activeQueue.length >= pos) {
+                            activeQueue.splice(pos, 0, c);
+                        } else {
+                            activeQueue.push(c);
+                        }
+                    }
+                });
+            } else {
+                allItems.forEach(item => {
+                    let k = item.index;
+                    if (trainerData[k] && trainerData[k].box === targetBox) {
+                        activeQueue.push(item);
+                    }
+                });
+                activeQueue.sort(() => Math.random() - 0.5);
+            }
+
+            nextTrainerCardItem();
+        }
+
+        function nextTrainerCardItem() {
+            document.getElementById('trainer-solution').classList.add('hidden');
+            document.getElementById('trainer-hint-box').classList.add('hidden');
+
+            if (activeQueue.length === 0) {
+                document.getElementById('trainer-active-area').classList.add('hidden');
+                document.getElementById('trainer-empty').classList.remove('hidden');
+                return;
+            }
+
+            document.getElementById('trainer-active-area').classList.remove('hidden');
+            document.getElementById('trainer-empty').classList.add('hidden');
+
+            let currentItem = activeQueue[0];
+            currentTrainerItem = currentItem;
+
+            document.getElementById('trainer-progress').innerText = `Noch ${activeQueue.length}`;
+            
+            let imgSource = currentItem.isCustom ? currentItem.image : (currentItem.data ? currentItem.data.image : '');
+            document.getElementById('trainer-img').src = imgSource || '';
+
+            let questionTitle = "";
+            let correctAnswer = "";
+            let options = [];
+
+            if (currentItem.isCustom) {
+                questionTitle = currentItem.title;
+                correctAnswer = currentItem.correct;
+                options = [...currentItem.options].sort(() => Math.random() - 0.5);
+            } else {
+                let b = currentItem.data;
+                let qType = Math.floor(Math.random() * 3);
+                if (qType === 0) {
+                    questionTitle = "Welches Bauwerk (mit Ort) ist auf dem Bild zu sehen?";
+                    correctAnswer = `${b.name} (${b.location})`;
+                } else if (qType === 1) {
+                    questionTitle = `Wer ist der Architekt des Bauwerks "${b.name}"?`;
+                    correctAnswer = b.architect;
+                } else {
+                    questionTitle = `In welchem Zeitraum wurde das Bauwerk "${b.name}" errichtet?`;
+                    correctAnswer = b.year;
+                }
+
+                options = [correctAnswer];
+                while (options.length < 5) {
+                    let randomB = buildings[Math.floor(Math.random() * buildings.length)];
+                    let wrongVal = qType === 0 ? `${randomB.name} (${randomB.location})` : qType === 1 ? randomB.architect : randomB.year;
+                    if (!options.includes(wrongVal)) options.push(wrongVal);
+                }
+                options.sort(() => Math.random() - 0.5);
+            }
+
+            document.getElementById('trainer-question-title').innerText = questionTitle;
+
+            let optContainer = document.getElementById('trainer-options');
+            optContainer.innerHTML = '';
+            options.forEach((opt, idx) => {
+                let btn = document.createElement('button');
+                btn.className = "w-full text-left p-3 rounded-xl border border-[#e8e2d5] bg-[#f5f2eb]/40 hover:bg-[#f5f2eb] font-medium text-xs transition flex items-center space-x-3";
+                btn.innerHTML = `<span class="w-5 h-5 rounded-md bg-[#e8e2d5] text-[#595042] flex items-center justify-center text-[10px] font-bold">${String.fromCharCode(65 + idx)}</span> <span class="text-[#24211a]">${opt}</span>`;
+                btn.onclick = () => checkTrainerAnswer(opt === correctAnswer, correctAnswer);
+                optContainer.appendChild(btn);
+            });
+        }
+
+        function showHint() {
+            if (!currentTrainerItem) return;
+            let hintBox = document.getElementById('trainer-hint-box');
+            let hintText = document.getElementById('trainer-hint-text');
+            if(currentTrainerItem.isCustom) {
+                hintText.innerHTML = `<strong>Tipp:</strong> Besondere Frage!`;
+            } else {
+                let b = currentTrainerItem.data;
+                hintText.innerHTML = `<strong>Tipp:</strong> Stil: <em>${b.style}</em>`;
+            }
+            hintBox.classList.remove('hidden');
+        }
+
+        function checkTrainerAnswer(isCorrect, correctAnswer) {
+            let bIdx = currentTrainerItem.index;
+            let solBox = document.getElementById('trainer-solution');
+            let resTitle = document.getElementById('trainer-result-title');
+            let resDetail = document.getElementById('trainer-result-detail');
+
+            solBox.classList.remove('hidden');
+            let buttons = document.querySelectorAll('#trainer-options button');
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (isCorrect) {
+                solBox.className = "mt-4 p-4 rounded-2xl border-l-2 border-emerald-600 bg-emerald-50 text-emerald-900";
+                resTitle.innerHTML = `Richtig!`;
+                resDetail.innerHTML = `Antwort: <strong>${correctAnswer}</strong>`;
+                if (trainerData[bIdx].box < 3) trainerData[bIdx].box += 1;
+            } else {
+                solBox.className = "mt-4 p-4 rounded-2xl border-l-2 border-red-600 bg-red-50 text-red-900";
+                resTitle.innerHTML = `Falsch!`;
+                resDetail.innerHTML = `Richtig wäre: <strong>${correctAnswer}</strong> (Zurück in In Wiederholung)`;
+                trainerData[bIdx].box = 1;
+            }
+            saveTrainerData();
+            updateTrainerStats();
+        }
+
+        function nextTrainerCard() {
+            activeQueue.shift();
+            nextTrainerCardItem();
+        }
+
+        function switchTab(tab) {
+            ['summary', 'cards', 'trainer', 'sim', 'exam', 'theory'].forEach(t => {
+                let sec = document.getElementById('sec-' + t);
+                let tabEl = document.getElementById('tab-' + t);
+                if (sec) sec.classList.add('hidden');
+                if (tabEl) tabEl.className = "flex-grow md:flex-grow-0 px-3 py-1.5 rounded-xl md:rounded-full text-xs font-medium transition text-[#736856] hover:text-[#24211a] whitespace-nowrap text-center";
+            });
+            let targetSec = document.getElementById('sec-' + tab);
+            let targetTab = document.getElementById('tab-' + tab);
+            if (targetSec) targetSec.classList.remove('hidden');
+            if (targetTab) targetTab.className = "flex-grow md:flex-grow-0 px-3 py-1.5 rounded-xl md:rounded-full text-xs font-medium transition bg-white text-[#24211a] shadow-sm whitespace-nowrap text-center";
+        }
+
+        let cardIndex = 0, theoryIndex = 0;
+        function loadCard(idx) {
+            let b = buildings[idx];
+            document.getElementById('card-counter').innerText = `${idx + 1} / ${buildings.length}`;
+            document.getElementById('card-img').src = b.image || '';
+            document.getElementById('card-title').innerText = b.name + " (" + b.location + ")";
+            document.getElementById('card-arch').innerText = b.architect;
+            document.getElementById('card-year').innerText = b.year;
+            document.getElementById('card-style').innerText = b.style;
+            let ul = document.getElementById('card-features');
+            ul.innerHTML = '';
+            b.features.forEach(f => { let li = document.createElement('li'); li.innerText = f; ul.appendChild(li); });
+            document.getElementById('card-inner-elem').classList.remove('card-flipped');
+        }
+        function flipCard() { document.getElementById('card-inner-elem').classList.toggle('card-flipped'); }
+        function nextCard() { cardIndex = (cardIndex + 1) % buildings.length; loadCard(cardIndex); }
+        function prevCard() { cardIndex = (cardIndex - 1 + buildings.length) % buildings.length; loadCard(cardIndex); }
+
+        function loadTheoryQuestion(idx) {
+            let t = theoryQuestions[idx];
+            document.getElementById('theory-progress').innerText = `${idx + 1} / ${theoryQuestions.length}`;
+            document.getElementById('theory-q-text').innerText = t.q;
+            document.getElementById('theory-a-text').innerHTML = t.a;
+            document.getElementById('theory-user-answer').value = '';
+            document.getElementById('theory-solution').classList.add('hidden');
+        }
+        function revealTheoryAnswer() { document.getElementById('theory-solution').classList.remove('hidden'); }
+        function nextTheoryQuestion() { theoryIndex = (theoryIndex + 1) % theoryQuestions.length; loadTheoryQuestion(theoryIndex); }
+    </script>
+</body>
+</html>
