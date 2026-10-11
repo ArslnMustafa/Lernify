@@ -5,6 +5,11 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  build: {
+    // The server serves the built client from here in production.
+    outDir: '../server/public',
+    emptyOutDir: true,
+  },
   server: {
     proxy: {
       '/api': 'http://localhost:4000',
