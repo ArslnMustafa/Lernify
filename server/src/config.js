@@ -1,12 +1,25 @@
-const JWT_SECRET = process.env.JWT_SECRET || "lernify-dev-secret-change-me";
+const fs = require("fs");
+const path = require("path");
+const crypto = require("crypto");
 
-if (!process.env.JWT_SECRET) {
-  console.warn(
-    "[Lernify] JWT_SECRET env var is not set, using an insecure dev default. Set JWT_SECRET in production."
-  );
+const SECRET_FILE = path.join(__dirname, "..", ".jwt-secret");
+
+// Generated once per install and kept out of git, so no secret has to be set by hand.
+function loadJwtSecret() {
+  if (process.env.JWT_SECRET) return process.env.JWT_SECRET;
+
+  if (fs.existsSync(SECRET_FILE)) {
+    const stored = fs.readFileSync(SECRET_FILE, "utf8").trim();
+    if (stored) return stored;
+  }
+
+  const secret = crypto.randomBytes(32).toString("hex");
+  fs.writeFileSync(SECRET_FILE, secret, { mode: 0o600 });
+  console.log(`[Lernify] Yeni JWT anahtarı üretildi: ${SECRET_FILE}`);
+  return secret;
 }
 
 module.exports = {
-  JWT_SECRET,
+  JWT_SECRET: loadJwtSecret(),
   PORT: process.env.PORT || 4000,
 };
