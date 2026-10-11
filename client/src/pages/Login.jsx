@@ -7,27 +7,23 @@ export default function Login() {
   const { login } = useAuth()
   const navigate = useNavigate()
   const [users, setUsers] = useState([])
-  const [selected, setSelected] = useState(null)
-  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+  const [pin, setPin] = useState('')
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const passwordRef = useRef(null)
+  const pinRef = useRef(null)
 
   useEffect(() => {
     api
       .listUsers()
       .then((data) => setUsers(data.users))
-      .catch((err) => setError(err.message))
+      .catch(() => setUsers([]))
   }, [])
 
-  useEffect(() => {
-    if (selected) passwordRef.current?.focus()
-  }, [selected])
-
-  function chooseUser(user) {
-    setSelected(user)
-    setPassword('')
+  function chooseName(value) {
+    setName(value)
     setError('')
+    pinRef.current?.focus()
   }
 
   async function handleSubmit(e) {
@@ -35,7 +31,7 @@ export default function Login() {
     setError('')
     setSubmitting(true)
     try {
-      await login(selected.username, password)
+      await login(name.trim(), pin)
       navigate('/')
     } catch (err) {
       setError(err.message)
@@ -45,77 +41,80 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f2eee9] px-4">
-      <div className="w-full max-w-sm bg-white border border-[#e8e2d5] rounded-2xl shadow-sm p-8">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-full bg-[#3d372c] text-[#f2eee9] flex items-center justify-center font-bold text-sm">
-            L
-          </div>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#f2eee9] px-4 py-10">
+      <h1 className="text-base font-semibold text-[#736856] mb-4">Anmelden</h1>
+
+      <div className="w-full max-w-md bg-white border border-[#e8e2d5] rounded-2xl shadow-sm p-7">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div>
-            <h1 className="text-lg font-bold text-[#24211a]">Lernify</h1>
-            <p className="text-xs text-[#736856]">
-              {selected ? `Angemeldet als ${selected.name}` : 'Wer lernt heute?'}
-            </p>
-          </div>
-        </div>
-
-        {!selected ? (
-          <div className="flex flex-col gap-2">
-            {users.map((user) => (
-              <button
-                key={user.username}
-                onClick={() => chooseUser(user)}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl border border-[#e8e2d5] bg-[#f5f2eb]/50 hover:border-[#b8ab97] transition text-left"
-              >
-                <span className="w-9 h-9 rounded-full bg-[#e8e2d5] text-[#595042] flex items-center justify-center font-semibold text-sm">
-                  {user.name.charAt(0)}
-                </span>
-                <span className="text-sm font-medium text-[#24211a]">{user.name}</span>
-              </button>
-            ))}
-
-            {users.length === 0 && !error && (
-              <p className="text-xs text-[#948773]">Wird geladen...</p>
-            )}
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div>
-              <label className="block text-xs font-medium text-[#736856] mb-1">
-                Passwort
-              </label>
-              <input
-                ref={passwordRef}
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
-                required
-                className="w-full px-3.5 py-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-sm outline-none text-[#24211a] focus:ring-1 focus:ring-[#3d372c] transition"
-              />
+            <p className="text-xs font-medium text-[#736856] mb-2">Wer bist du?</p>
+            <div className="flex flex-wrap gap-2">
+              {users.map((user) => (
+                <button
+                  key={user.username}
+                  type="button"
+                  onClick={() => chooseName(user.name)}
+                  className={`px-4 py-1.5 rounded-lg text-sm font-semibold border transition ${
+                    name.toLowerCase() === user.name.toLowerCase()
+                      ? 'bg-[#3d372c] text-[#f2eee9] border-[#3d372c]'
+                      : 'bg-[#f5f2eb] text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
+                  }`}
+                >
+                  {user.name}
+                </button>
+              ))}
             </div>
+          </div>
 
-            {error && <p className="text-xs text-red-600">{error}</p>}
+          <div>
+            <label htmlFor="name" className="block text-xs font-medium text-[#736856] mb-1">
+              Name
+            </label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Name"
+              autoComplete="username"
+              required
+              className="w-full px-3.5 py-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-sm outline-none text-[#24211a] placeholder:text-[#b8ab97] focus:ring-1 focus:ring-[#3d372c] transition"
+            />
+          </div>
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full py-2.5 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-medium hover:bg-[#24211a] transition disabled:opacity-60"
-            >
-              {submitting ? 'Anmeldung läuft...' : 'Anmelden'}
-            </button>
+          <div>
+            <label htmlFor="pin" className="block text-xs font-medium text-[#736856] mb-1">
+              PIN
+            </label>
+            <input
+              id="pin"
+              ref={pinRef}
+              type="password"
+              inputMode="numeric"
+              value={pin}
+              onChange={(e) => setPin(e.target.value)}
+              placeholder="PIN"
+              autoComplete="current-password"
+              required
+              className="w-full px-3.5 py-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-sm outline-none text-[#24211a] placeholder:text-[#b8ab97] focus:ring-1 focus:ring-[#3d372c] transition"
+            />
+          </div>
 
-            <button
-              type="button"
-              onClick={() => chooseUser(null)}
-              className="text-xs text-[#736856] hover:text-[#24211a] transition"
-            >
-              ← Anderes Konto wählen
-            </button>
-          </form>
-        )}
+          {error && <p className="text-xs text-red-600">{error}</p>}
 
-        {!selected && error && <p className="text-xs text-red-600 mt-3">{error}</p>}
+          <button
+            type="submit"
+            disabled={submitting}
+            className="w-full py-3 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-bold hover:bg-[#24211a] transition disabled:opacity-60"
+          >
+            {submitting ? 'Anmeldung läuft...' : 'Anmelden'}
+          </button>
+
+          <p className="text-[11px] text-[#948773]">
+            Wähle deinen Namen und gib deine PIN ein. Wenn du deine PIN nicht kennst,
+            frag Mustafa.
+          </p>
+        </form>
       </div>
     </div>
   )

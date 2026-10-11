@@ -100,8 +100,8 @@ function buildingQuestion(building, allArchitects) {
   };
 }
 
-const zeynepId = getOrCreateUser("zeynep", "Zeynep", "zeynep123");
-const mustafaId = getOrCreateUser("mustafa", "Mustafa", "mustafa123");
+const zeynepId = getOrCreateUser("zeynep", "Zeynep", "5858");
+const mustafaId = getOrCreateUser("mustafa", "Mustafa", "5858");
 
 // 1) Theory catalogue: open questions, self-assessed against the reference answer.
 createExam(

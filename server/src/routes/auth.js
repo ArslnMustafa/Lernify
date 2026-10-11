@@ -42,21 +42,26 @@ router.post("/login", (req, res) => {
   const { username, password } = req.body || {};
 
   if (!username || !password) {
-    return res.status(400).json({ error: "Benutzername und Passwort sind erforderlich." });
+    return res.status(400).json({ error: "Name und PIN sind erforderlich." });
   }
 
-  const key = `${req.ip}:${username}`;
+  const key = `${req.ip}:${username.toLowerCase()}`;
   if (tooManyAttempts(key)) {
     return res
       .status(429)
       .json({ error: "Zu viele Versuche. Bitte warte einige Minuten." });
   }
 
-  const user = db.prepare("SELECT * FROM users WHERE username = ?").get(username);
+  // The login screen shows display names, so accept either spelling.
+  const user = db
+    .prepare(
+      "SELECT * FROM users WHERE lower(username) = lower(?) OR lower(name) = lower(?)"
+    )
+    .get(username, username);
 
   if (!user || !verifyPassword(password, user.password_hash, user.password_salt)) {
     recordFailure(key);
-    return res.status(401).json({ error: "Benutzername oder Passwort ist falsch." });
+    return res.status(401).json({ error: "Name oder PIN ist falsch." });
   }
 
   failures.delete(key);
