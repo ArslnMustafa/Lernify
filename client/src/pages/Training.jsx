@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { api } from '../api'
 import Nav from '../components/Nav.jsx'
+import StudyImage from '../components/StudyImage.jsx'
 
 const BOXES = [
   { box: 1, label: 'Noch nicht gelernt' },
@@ -96,16 +97,7 @@ export default function Training() {
           <div className="bg-white border border-[#e8e2d5] rounded-2xl p-6">
             <h3 className="text-sm font-bold text-[#24211a] mb-5">{question.text}</h3>
 
-            {question.image && (
-              <img
-                src={question.image}
-                alt=""
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none'
-                }}
-                className="w-full rounded-xl mb-5 object-cover max-h-64"
-              />
-            )}
+            <StudyImage src={question.image} />
 
             <div className="flex flex-col gap-2">
               {question.options.map((option) => {

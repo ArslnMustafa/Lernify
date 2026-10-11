@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api'
 import Nav from '../components/Nav.jsx'
+import StudyImage from '../components/StudyImage.jsx'
 
 export default function Karteikarten() {
   const [buildings, setBuildings] = useState([])
@@ -45,16 +46,11 @@ export default function Karteikarten() {
               onClick={() => setFlipped((f) => !f)}
               className="w-full text-left bg-white border border-[#e8e2d5] rounded-2xl overflow-hidden hover:shadow-sm transition"
             >
-              <img
-                src={card.image}
-                alt=""
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none'
-                }}
-                className="w-full h-64 object-cover bg-[#f5f2eb]"
-              />
+              <div className="p-6 pb-0">
+                <StudyImage src={card.image} />
+              </div>
 
-              <div className="p-6">
+              <div className="px-6 pb-6">
                 {!flipped ? (
                   <p className="text-sm text-[#948773]">
                     Welches Bauwerk ist das? Tippe auf die Karte für die Lösung.

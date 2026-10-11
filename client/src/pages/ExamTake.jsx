@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { api } from '../api'
+import StudyImage from '../components/StudyImage.jsx'
 
 export default function ExamTake() {
   const { id } = useParams()
@@ -93,17 +94,7 @@ export default function ExamTake() {
         <div className="bg-white border border-[#e8e2d5] rounded-2xl p-6">
           <h2 className="text-sm font-bold text-[#24211a] mb-5">{question.text}</h2>
 
-          {question.image_url && (
-            <img
-              src={question.image_url}
-              alt=""
-              // Images are hotlinked from Wikimedia; hide the gap if one is unavailable.
-              onError={(e) => {
-                e.currentTarget.style.display = 'none'
-              }}
-              className="w-full rounded-xl mb-5 object-cover max-h-64"
-            />
-          )}
+          <StudyImage src={question.image_url} />
 
           {question.type === 'open' ? (
             <OpenQuestion
