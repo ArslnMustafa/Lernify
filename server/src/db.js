@@ -64,4 +64,10 @@ db.exec(`
   );
 `);
 
+// Added after the table shipped, so existing installs need it filled in.
+const trainerColumns = db.prepare("PRAGMA table_info(trainer_progress)").all();
+if (!trainerColumns.some((column) => column.name === "kind")) {
+  db.exec("ALTER TABLE trainer_progress ADD COLUMN kind TEXT");
+}
+
 module.exports = db;

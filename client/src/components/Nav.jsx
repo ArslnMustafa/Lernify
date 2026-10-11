@@ -12,14 +12,14 @@ export default function Nav() {
   const { user, logout } = useAuth()
 
   return (
-    <header className="bg-white border-b border-[#e8e2d5] sticky top-0 z-10">
+    <header className="bg-[#fdfaf4] border-b border-[#d9ccb6] sticky top-0 z-10">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
         <div className="flex items-center gap-3">
-          <span className="w-8 h-8 rounded-full bg-[#3d372c] text-[#f2eee9] flex items-center justify-center font-bold text-xs">
+          <span className="w-8 h-8 rounded-full bg-[#3d372c] text-[#e9e0d2] flex items-center justify-center font-bold text-xs">
             L
           </span>
           <span className="font-bold text-[#24211a]">Lernify</span>
-          <span className="px-2.5 py-1 rounded-full bg-[#f5f2eb] border border-[#e8e2d5] text-[11px] font-medium text-[#595042]">
+          <span className="px-2.5 py-1 rounded-full bg-[#f1e9dc] border border-[#d9ccb6] text-[11px] font-medium text-[#595042]">
             {user.name}
           </span>
         </div>
@@ -33,8 +33,8 @@ export default function Nav() {
               className={({ isActive }) =>
                 `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
                   isActive
-                    ? 'bg-[#3d372c] text-[#f2eee9]'
-                    : 'text-[#595042] hover:bg-[#f5f2eb]'
+                    ? 'bg-[#3d372c] text-[#e9e0d2]'
+                    : 'text-[#595042] hover:bg-[#f1e9dc]'
                 }`
               }
             >

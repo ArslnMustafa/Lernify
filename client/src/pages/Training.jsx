@@ -54,7 +54,7 @@ export default function Training() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f2eee9]">
+    <div className="min-h-screen bg-[#e9e0d2]">
       <Nav />
 
       <main className="max-w-2xl mx-auto px-4 sm:px-6 py-8">
@@ -67,8 +67,8 @@ export default function Training() {
               onClick={() => setBox(item.box)}
               className={`px-3 py-3 rounded-xl border text-left transition ${
                 box === item.box
-                  ? 'bg-[#3d372c] text-[#f2eee9] border-[#3d372c]'
-                  : 'bg-white text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
+                  ? 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
+                  : 'bg-[#fdfaf4] text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
               }`}
             >
               <span className="block text-lg font-bold">{counts[item.box]}</span>
@@ -83,10 +83,10 @@ export default function Training() {
           ))}
         </div>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-[#8c4b3f]">{error}</p>}
 
         {!error && !question && (
-          <div className="bg-white border border-[#e8e2d5] rounded-2xl p-8 text-center">
+          <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-8 text-center">
             <p className="text-sm text-[#736856]">
               In diesem Stapel ist gerade nichts zu üben.
             </p>
@@ -94,7 +94,7 @@ export default function Training() {
         )}
 
         {question && (
-          <div className="bg-white border border-[#e8e2d5] rounded-2xl p-6">
+          <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-6">
             <h3 className="text-sm font-bold text-[#24211a] mb-5">{question.text}</h3>
 
             <StudyImage src={question.image} />
@@ -104,9 +104,9 @@ export default function Training() {
                 const isAnswer = result && option === result.correctAnswer
                 const isWrongPick = result && option === picked && !result.correct
 
-                let tone = 'bg-[#f5f2eb]/50 text-[#24211a] border-[#e8e2d5]'
-                if (isAnswer) tone = 'bg-emerald-700 text-white border-emerald-700'
-                else if (isWrongPick) tone = 'bg-[#8c4b3f] text-white border-[#8c4b3f]'
+                let tone = 'bg-[#f1e9dc]/50 text-[#24211a] border-[#d9ccb6]'
+                if (isAnswer) tone = 'bg-[#6b7250] text-[#f7f4ef] border-[#6b7250]'
+                else if (isWrongPick) tone = 'bg-[#8c4b3f] text-[#f7f4ef] border-[#8c4b3f]'
                 else if (!result) tone += ' hover:border-[#b8ab97]'
 
                 return (
@@ -138,7 +138,7 @@ export default function Training() {
                 </p>
                 <button
                   onClick={() => loadQuestion(box)}
-                  className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-medium hover:bg-[#24211a] transition whitespace-nowrap"
+                  className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#e9e0d2] text-sm font-medium hover:bg-[#24211a] transition whitespace-nowrap"
                 >
                   Nächste Frage
                 </button>

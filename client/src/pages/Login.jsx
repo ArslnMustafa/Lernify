@@ -41,10 +41,10 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#f2eee9] px-4 py-10">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#e9e0d2] px-4 py-10">
       <h1 className="text-base font-semibold text-[#736856] mb-4">Anmelden</h1>
 
-      <div className="w-full max-w-md bg-white border border-[#e8e2d5] rounded-2xl shadow-sm p-7">
+      <div className="w-full max-w-md bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl shadow-sm p-7">
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div>
             <p className="text-xs font-medium text-[#736856] mb-2">Wer bist du?</p>
@@ -56,8 +56,8 @@ export default function Login() {
                   onClick={() => chooseName(user.name)}
                   className={`px-4 py-1.5 rounded-lg text-sm font-semibold border transition ${
                     name.toLowerCase() === user.name.toLowerCase()
-                      ? 'bg-[#3d372c] text-[#f2eee9] border-[#3d372c]'
-                      : 'bg-[#f5f2eb] text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
+                      ? 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
+                      : 'bg-[#f1e9dc] text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
                   }`}
                 >
                   {user.name}
@@ -78,7 +78,7 @@ export default function Login() {
               placeholder="Name"
               autoComplete="username"
               required
-              className="w-full px-3.5 py-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-sm outline-none text-[#24211a] placeholder:text-[#b8ab97] focus:ring-1 focus:ring-[#3d372c] transition"
+              className="w-full px-3.5 py-2.5 bg-[#f1e9dc]/50 border border-[#d9ccb6] rounded-xl text-sm outline-none text-[#24211a] placeholder:text-[#b8ab97] focus:ring-1 focus:ring-[#3d372c] transition"
             />
           </div>
 
@@ -96,16 +96,16 @@ export default function Login() {
               placeholder="PIN"
               autoComplete="current-password"
               required
-              className="w-full px-3.5 py-2.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-sm outline-none text-[#24211a] placeholder:text-[#b8ab97] focus:ring-1 focus:ring-[#3d372c] transition"
+              className="w-full px-3.5 py-2.5 bg-[#f1e9dc]/50 border border-[#d9ccb6] rounded-xl text-sm outline-none text-[#24211a] placeholder:text-[#b8ab97] focus:ring-1 focus:ring-[#3d372c] transition"
             />
           </div>
 
-          {error && <p className="text-xs text-red-600">{error}</p>}
+          {error && <p className="text-xs text-[#8c4b3f]">{error}</p>}
 
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-3 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-bold hover:bg-[#24211a] transition disabled:opacity-60"
+            className="w-full py-3 rounded-xl bg-[#3d372c] text-[#e9e0d2] text-sm font-bold hover:bg-[#24211a] transition disabled:opacity-60"
           >
             {submitting ? 'Anmeldung läuft...' : 'Anmelden'}
           </button>

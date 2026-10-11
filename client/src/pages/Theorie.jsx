@@ -25,7 +25,7 @@ export default function Theorie() {
     : theory
 
   return (
-    <div className="min-h-screen bg-[#f2eee9]">
+    <div className="min-h-screen bg-[#e9e0d2]">
       <Nav />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
@@ -38,11 +38,11 @@ export default function Theorie() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Suchen..."
-            className="px-3.5 py-2 bg-white border border-[#e8e2d5] rounded-xl text-sm outline-none text-[#24211a] placeholder:text-[#b8ab97] focus:ring-1 focus:ring-[#3d372c] transition sm:w-56"
+            className="px-3.5 py-2 bg-[#fdfaf4] border border-[#d9ccb6] rounded-xl text-sm outline-none text-[#24211a] placeholder:text-[#b8ab97] focus:ring-1 focus:ring-[#3d372c] transition sm:w-56"
           />
         </div>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-[#8c4b3f]">{error}</p>}
         {!error && theory.length === 0 && (
           <p className="text-sm text-[#736856]">Wird geladen...</p>
         )}
@@ -54,11 +54,11 @@ export default function Theorie() {
           {visible.map((item, i) => (
             <div
               key={item.id}
-              className="bg-white border border-[#e8e2d5] rounded-xl overflow-hidden"
+              className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-xl overflow-hidden"
             >
               <button
                 onClick={() => setOpen((prev) => ({ ...prev, [item.id]: !prev[item.id] }))}
-                className="w-full text-left px-5 py-4 flex items-start gap-3 hover:bg-[#f5f2eb]/60 transition"
+                className="w-full text-left px-5 py-4 flex items-start gap-3 hover:bg-[#f1e9dc]/60 transition"
               >
                 <span className="text-xs font-semibold text-[#b8ab97] mt-0.5">
                   {i + 1}
@@ -73,7 +73,7 @@ export default function Theorie() {
 
               {open[item.id] && (
                 <div
-                  className="px-5 pb-5 pt-1 text-sm text-[#3d372c] leading-relaxed border-t border-[#f0ebe1] [&_b]:font-semibold [&_i]:italic"
+                  className="px-5 pb-5 pt-1 text-sm text-[#3d372c] leading-relaxed border-t border-[#e4d9c6] [&_b]:font-semibold [&_i]:italic"
                   dangerouslySetInnerHTML={{ __html: item.answer }}
                 />
               )}

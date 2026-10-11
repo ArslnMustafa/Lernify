@@ -55,8 +55,8 @@ export default function ExamTake() {
 
   if (result) {
     return (
-      <div className="min-h-screen bg-[#f2eee9] flex items-center justify-center px-4">
-        <div className="w-full max-w-md bg-white border border-[#e8e2d5] rounded-2xl p-8 text-center">
+      <div className="min-h-screen bg-[#e9e0d2] flex items-center justify-center px-4">
+        <div className="w-full max-w-md bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-8 text-center">
           <h1 className="text-sm font-bold text-[#736856] mb-2">{exam.title}</h1>
           <p className="text-4xl font-bold text-[#24211a] mb-1">
             {result.score}/{result.total}
@@ -66,7 +66,7 @@ export default function ExamTake() {
           </p>
           <Link
             to="/"
-            className="inline-block w-full py-2.5 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-medium hover:bg-[#24211a] transition"
+            className="inline-block w-full py-2.5 rounded-xl bg-[#3d372c] text-[#e9e0d2] text-sm font-medium hover:bg-[#24211a] transition"
           >
             Zurück zu meinen Prüfungen
           </Link>
@@ -80,7 +80,7 @@ export default function ExamTake() {
   const allAnswered = answers.every((a) => a !== null)
 
   return (
-    <div className="min-h-screen bg-[#f2eee9] px-4 py-8">
+    <div className="min-h-screen bg-[#e9e0d2] px-4 py-8">
       <div className="max-w-xl mx-auto">
         <div className="flex items-center justify-between mb-4">
           <Link to="/" className="text-xs text-[#736856] hover:text-[#24211a]">
@@ -91,7 +91,7 @@ export default function ExamTake() {
           </span>
         </div>
 
-        <div className="bg-white border border-[#e8e2d5] rounded-2xl p-6">
+        <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-6">
           <h2 className="text-sm font-bold text-[#24211a] mb-5">{question.text}</h2>
 
           <StudyImage src={question.image_url} />
@@ -116,8 +116,8 @@ export default function ExamTake() {
                   onClick={() => selectAnswer(i)}
                   className={`text-left px-4 py-3 rounded-xl text-sm border transition ${
                     answers[current] === i
-                      ? 'bg-[#3d372c] text-[#f2eee9] border-[#3d372c]'
-                      : 'bg-[#f5f2eb]/50 text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
+                      ? 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
+                      : 'bg-[#f1e9dc]/50 text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
                   }`}
                 >
                   {option}
@@ -127,7 +127,7 @@ export default function ExamTake() {
           )}
         </div>
 
-        {error && <p className="text-xs text-red-600 mt-3">{error}</p>}
+        {error && <p className="text-xs text-[#8c4b3f] mt-3">{error}</p>}
 
         <div className="flex justify-between mt-5">
           <button
@@ -142,7 +142,7 @@ export default function ExamTake() {
             <button
               onClick={handleSubmit}
               disabled={!allAnswered || submitting}
-              className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-medium hover:bg-[#24211a] transition disabled:opacity-40"
+              className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#e9e0d2] text-sm font-medium hover:bg-[#24211a] transition disabled:opacity-40"
             >
               {submitting ? 'Wird gesendet...' : 'Prüfung beenden'}
             </button>
@@ -150,7 +150,7 @@ export default function ExamTake() {
             <button
               onClick={() => setCurrent((c) => Math.min(questions.length - 1, c + 1))}
               disabled={answers[current] === null}
-              className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-medium hover:bg-[#24211a] transition disabled:opacity-40"
+              className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#e9e0d2] text-sm font-medium hover:bg-[#24211a] transition disabled:opacity-40"
             >
               Weiter
             </button>
@@ -177,19 +177,19 @@ function OpenQuestion({
         value={draft}
         onChange={(e) => onDraftChange(e.target.value)}
         placeholder="Schreib deine Antwort hier..."
-        className="w-full p-3.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-sm outline-none text-[#24211a] focus:ring-1 focus:ring-[#3d372c] transition resize-none"
+        className="w-full p-3.5 bg-[#f1e9dc]/50 border border-[#d9ccb6] rounded-xl text-sm outline-none text-[#24211a] focus:ring-1 focus:ring-[#3d372c] transition resize-none"
       />
 
       {!revealed ? (
         <button
           onClick={onReveal}
-          className="self-start px-4 py-2 rounded-xl bg-[#f5f2eb] border border-[#e8e2d5] text-xs font-medium text-[#595042] hover:border-[#b8ab97] transition"
+          className="self-start px-4 py-2 rounded-xl bg-[#f1e9dc] border border-[#d9ccb6] text-xs font-medium text-[#595042] hover:border-[#b8ab97] transition"
         >
           Musterlösung anzeigen
         </button>
       ) : (
         <>
-          <div className="p-4 bg-[#f5f2eb] border border-[#e8e2d5] rounded-xl">
+          <div className="p-4 bg-[#f1e9dc] border border-[#d9ccb6] rounded-xl">
             <p className="text-[11px] font-semibold text-[#948773] uppercase tracking-wider mb-2">
               Musterlösung
             </p>
@@ -207,8 +207,8 @@ function OpenQuestion({
                 onClick={() => onSelfRate(true)}
                 className={`px-4 py-2 rounded-xl text-sm border transition ${
                   selfRating === true
-                    ? 'bg-emerald-700 text-white border-emerald-700'
-                    : 'bg-[#f5f2eb]/50 text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
+                    ? 'bg-[#6b7250] text-[#f7f4ef] border-[#6b7250]'
+                    : 'bg-[#f1e9dc]/50 text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
                 }`}
               >
                 Gewusst
@@ -217,8 +217,8 @@ function OpenQuestion({
                 onClick={() => onSelfRate(false)}
                 className={`px-4 py-2 rounded-xl text-sm border transition ${
                   selfRating === false
-                    ? 'bg-[#8c4b3f] text-white border-[#8c4b3f]'
-                    : 'bg-[#f5f2eb]/50 text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
+                    ? 'bg-[#8c4b3f] text-[#f7f4ef] border-[#8c4b3f]'
+                    : 'bg-[#f1e9dc]/50 text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
                 }`}
               >
                 Nicht gewusst
@@ -233,7 +233,7 @@ function OpenQuestion({
 
 function Centered({ children }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f2eee9] text-sm text-[#736856]">
+    <div className="min-h-screen flex items-center justify-center bg-[#e9e0d2] text-sm text-[#736856]">
       {children}
     </div>
   )

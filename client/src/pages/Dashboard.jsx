@@ -17,14 +17,14 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#f2eee9]">
+    <div className="min-h-screen bg-[#e9e0d2]">
       <Nav />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
         <h2 className="text-base font-bold text-[#24211a] mb-4">Probeklausur</h2>
 
         {loading && <p className="text-sm text-[#736856]">Wird geladen...</p>}
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-[#8c4b3f]">{error}</p>}
         {!loading && exams.length === 0 && (
           <p className="text-sm text-[#736856]">Dir wurde noch keine Prüfung zugewiesen.</p>
         )}
@@ -34,7 +34,7 @@ export default function Dashboard() {
             <Link
               key={exam.id}
               to={`/exams/${exam.id}`}
-              className="bg-white border border-[#e8e2d5] rounded-2xl p-5 hover:shadow-sm transition"
+              className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-5 hover:shadow-sm transition"
             >
               <h3 className="text-sm font-bold text-[#24211a] mb-1">{exam.title}</h3>
               {exam.description && (

@@ -24,7 +24,7 @@ export default function Karteikarten() {
   const card = buildings[index]
 
   return (
-    <div className="min-h-screen bg-[#f2eee9]">
+    <div className="min-h-screen bg-[#e9e0d2]">
       <Nav />
 
       <main className="max-w-2xl mx-auto px-4 sm:px-6 py-8">
@@ -37,14 +37,14 @@ export default function Karteikarten() {
           )}
         </div>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-[#8c4b3f]">{error}</p>}
         {!error && !card && <p className="text-sm text-[#736856]">Wird geladen...</p>}
 
         {card && (
           <>
             <button
               onClick={() => setFlipped((f) => !f)}
-              className="w-full text-left bg-white border border-[#e8e2d5] rounded-2xl overflow-hidden hover:shadow-sm transition"
+              className="w-full text-left bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl overflow-hidden hover:shadow-sm transition"
             >
               <div className="p-6 pb-0">
                 <StudyImage src={card.image} />
@@ -90,7 +90,7 @@ export default function Karteikarten() {
               </button>
               <button
                 onClick={() => go(1)}
-                className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-medium hover:bg-[#24211a] transition"
+                className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#e9e0d2] text-sm font-medium hover:bg-[#24211a] transition"
               >
                 Nächste
               </button>
