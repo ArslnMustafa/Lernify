@@ -7,33 +7,79 @@ const { requireAuth } = require("../middleware/auth");
 const router = express.Router();
 router.use(requireAuth);
 
-const { baseBuildings } = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "..", "..", "data", "baugeschichte.json"), "utf8")
-);
+const dataFile = (name) =>
+  JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "data", name), "utf8"));
 
+const { baseBuildings } = dataFile("baugeschichte.json");
+const rueckblicke = dataFile("rueckblicke.json");
+
+const normalise = (value) => value.toLowerCase().replace(/[^a-zäöüß0-9]/g, "");
+
+// The catalogue carries the images; the handout adds exam descriptions to the
+// ones it shares and 66 further buildings of its own.
 const buildings = baseBuildings.map((b, i) => ({ ...b, key: String(i) }));
+const byName = new Map(buildings.map((b) => [normalise(b.name), b]));
+
+for (const card of rueckblicke) {
+  const existing = byName.get(normalise(card.name));
+  if (existing) {
+    existing.bildmerkmale = card.bildmerkmale;
+    continue;
+  }
+
+  const added = {
+    key: `rb${card.name}`,
+    name: card.name,
+    location: card.location,
+    architect: card.architect,
+    year: card.year,
+    style: card.thema,
+    image: null,
+    bildmerkmale: card.bildmerkmale,
+  };
+  buildings.push(added);
+  byName.set(normalise(card.name), added);
+}
+
 const byKey = new Map(buildings.map((b) => [b.key, b]));
 
 // Leitner boxes: a correct answer promotes one box, a wrong answer sends it back to the start.
 const FIRST_BOX = 1;
 const LAST_BOX = 3;
 
+const label = (b) => (b.location ? `${b.name} (${b.location})` : b.name);
+
 const KINDS = {
   architect: {
-    question: (b) => `Wer ist der Architekt des Bauwerks "${b.name}" (${b.location})?`,
+    question: (b) => `Wer ist der Architekt des Bauwerks "${label(b)}"?`,
     answer: (b) => b.architect,
   },
   name: {
     question: () => "Welches Bauwerk ist auf dem Bild zu sehen?",
-    answer: (b) => `${b.name} (${b.location})`,
+    answer: label,
+    needsImage: true,
   },
   year: {
     question: (b) => `In welchem Zeitraum wurde "${b.name}" errichtet?`,
     answer: (b) => b.year,
   },
+  description: {
+    question: (b) => `Welches Bauwerk wird so beschrieben: „${b.bildmerkmale}"?`,
+    answer: label,
+  },
 };
 
 const KIND_NAMES = Object.keys(KINDS);
+
+// A card can only be asked about what the sources actually record.
+function kindsFor(building) {
+  return KIND_NAMES.filter((name) => {
+    const kind = KINDS[name];
+    if (kind.needsImage && !building.image) return false;
+    if (name === "description" && !building.bildmerkmale) return false;
+    return Boolean(kind.answer(building));
+  });
+}
 
 function startYear(value) {
   const match = String(value).match(/\d{4}/);
@@ -48,7 +94,9 @@ function pick(list) {
 // the century alone gives it away.
 function yearDistractors(correct) {
   const target = startYear(correct);
-  const others = [...new Set(buildings.map((b) => b.year))].filter((y) => y !== correct);
+  const others = [...new Set(buildings.map((b) => b.year).filter(Boolean))].filter(
+    (y) => y !== correct
+  );
 
   if (target === null) return others.slice(0, 3);
 
@@ -69,7 +117,9 @@ function distractorsFor(kindName, correct) {
   if (kindName === "year") return yearDistractors(correct);
 
   const answer = KINDS[kindName].answer;
-  const others = [...new Set(buildings.map(answer))].filter((value) => value !== correct);
+  const others = [...new Set(buildings.map(answer).filter(Boolean))].filter(
+    (value) => value !== correct
+  );
 
   const chosen = [];
   while (chosen.length < 3 && others.length > 0) {
@@ -102,10 +152,12 @@ router.get("/next", (req, res) => {
   }
 
   const building = pick(pool);
+  const available = kindsFor(building);
 
   // A promoted card keeps the question it was learned with; new ones are random.
   const stored = progress.get(building.key)?.kind;
-  const kindName = box === FIRST_BOX || !KINDS[stored] ? pick(KIND_NAMES) : stored;
+  const kindName =
+    box !== FIRST_BOX && available.includes(stored) ? stored : pick(available);
 
   const correct = KINDS[kindName].answer(building);
   const options = [correct, ...distractorsFor(kindName, correct)].sort(
