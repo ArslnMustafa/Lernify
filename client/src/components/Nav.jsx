@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext.jsx'
 
 const TABS = [
+  { to: '/training', label: 'Training', icon: CapIcon },
   { to: '/karteikarten', label: 'Karteikarten', icon: CardsIcon },
   { to: '/', label: 'Probeklausur', icon: ExamIcon, end: true },
   { to: '/theorie', label: 'Theorie', icon: BookIcon },
@@ -51,6 +52,15 @@ export default function Nav() {
         </nav>
       </div>
     </header>
+  )
+}
+
+function CapIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M22 9 12 5 2 9l10 4z" />
+      <path d="M6 11v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5" />
+    </svg>
   )
 }
 

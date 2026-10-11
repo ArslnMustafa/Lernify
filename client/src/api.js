@@ -40,4 +40,8 @@ export const api = {
     request(`/exams/${id}/submit`, { method: 'POST', body: JSON.stringify({ answers }) }),
   listBuildings: () => request('/catalog/buildings'),
   listTheory: () => request('/catalog/theory'),
+  trainerStats: () => request('/trainer/stats'),
+  trainerNext: (box) => request(`/trainer/next?box=${box}`),
+  trainerAnswer: (payload) =>
+    request('/trainer/answer', { method: 'POST', body: JSON.stringify(payload) }),
 }

@@ -42,6 +42,17 @@ db.exec(`
     UNIQUE(exam_id, user_id)
   );
 
+  CREATE TABLE IF NOT EXISTS trainer_progress (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    item_key TEXT NOT NULL,
+    box INTEGER NOT NULL DEFAULT 1,
+    correct_count INTEGER NOT NULL DEFAULT 0,
+    wrong_count INTEGER NOT NULL DEFAULT 0,
+    updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+    UNIQUE(user_id, item_key)
+  );
+
   CREATE TABLE IF NOT EXISTS attempts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     exam_id INTEGER NOT NULL REFERENCES exams(id) ON DELETE CASCADE,

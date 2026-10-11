@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard.jsx'
 import ExamTake from './pages/ExamTake.jsx'
 import Karteikarten from './pages/Karteikarten.jsx'
 import Theorie from './pages/Theorie.jsx'
+import Training from './pages/Training.jsx'
 import ProtectedRoute from './auth/ProtectedRoute.jsx'
 
 const PROTECTED = [
@@ -11,6 +12,7 @@ const PROTECTED = [
   { path: '/exams/:id', element: <ExamTake /> },
   { path: '/karteikarten', element: <Karteikarten /> },
   { path: '/theorie', element: <Theorie /> },
+  { path: '/training', element: <Training /> },
 ]
 
 export default function App() {
