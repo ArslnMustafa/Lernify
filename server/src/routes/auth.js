@@ -4,6 +4,7 @@ const db = require("../db");
 const { verifyPassword } = require("../password");
 const { JWT_SECRET } = require("../config");
 const { requireAuth } = require("../middleware/auth");
+const { sendLoginAlert } = require("../notify");
 
 const router = express.Router();
 
@@ -65,6 +66,13 @@ router.post("/login", (req, res) => {
   }
 
   failures.delete(key);
+
+  sendLoginAlert({
+    name: user.name,
+    username: user.username,
+    ip: req.ip,
+    userAgent: req.get("user-agent"),
+  });
 
   const token = jwt.sign(
     { sub: user.id, username: user.username, name: user.name },

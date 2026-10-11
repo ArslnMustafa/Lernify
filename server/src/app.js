@@ -9,6 +9,10 @@ const trainerRoutes = require("./routes/trainer");
 
 const app = express();
 
+// OpenLiteSpeed proxies from localhost, so without this every request looks
+// like it comes from 127.0.0.1 and the login throttle cannot tell callers apart.
+app.set("trust proxy", "loopback");
+
 app.use(cors());
 app.use(express.json());
 
