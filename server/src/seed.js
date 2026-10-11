@@ -3,9 +3,12 @@ const path = require("path");
 const db = require("./db");
 const { hashPassword } = require("./password");
 
-const { baseBuildings, theoryItems, zeynepSpecialQuestions } = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "..", "data", "baugeschichte.json"), "utf8")
-);
+const dataFile = (name) =>
+  JSON.parse(fs.readFileSync(path.join(__dirname, "..", "data", name), "utf8"));
+
+const { baseBuildings, theoryItems, zeynepSpecialQuestions } = dataFile("baugeschichte.json");
+const rueckblicke = dataFile("rueckblicke.json");
+const epochen = dataFile("epochen.json");
 
 // Exam content is rebuilt from scratch; accounts and their passwords are kept.
 db.exec(`
@@ -145,7 +148,68 @@ for (let c = 0; c < chunkCount; c++) {
   );
 }
 
-// 3) Placeholder exam for Mustafa until his own content arrives.
+// 3) Rückblick cards from the lecture handout: describe a building in the exam's
+//    own format. The source line stays verbatim because it is not always
+//    architect | place | year.
+function rueckblickQuestion(card) {
+  return {
+    type: "open",
+    text: `„${card.name}" (${card.meta}) — beschreibe das Bauwerk mit mindestens vier Aussagen: Baukörper/Form, Material/Konstruktion, Fassade/Raum/Städtebau, Einordnung/Bedeutung.`,
+    answerText:
+      `<b>Bildmerkmale:</b> ${card.bildmerkmale}<br>` +
+      `<b>Form / Raum:</b> ${card.form}<br>` +
+      `<b>Konstruktion / Wirkung:</b> ${card.konstruktion}<br>` +
+      `<b>Einordnung:</b> ${card.einordnung}`,
+  };
+}
+
+for (const thema of [...new Set(rueckblicke.map((c) => c.thema))]) {
+  const cards = rueckblicke.filter((c) => c.thema === thema);
+  createExam(
+    `Rückblick ${thema.replace(/^II-/, "II-")}`,
+    `${cards.length} Rückblick-Karten aus der Vorlesung. Schreib deine Beschreibung und vergleiche sie mit der Musterlösung.`,
+    [zeynepId],
+    cards.map(rueckblickQuestion)
+  );
+}
+
+const altklausur = rueckblicke.filter((c) => c.altklausur);
+createExam(
+  "Rückblick — Altklausur-Themen",
+  `${altklausur.length} Karten, die im Handout zusätzlich als Altklausurthema markiert sind. Diese solltest du besonders sicher beschreiben können.`,
+  [zeynepId],
+  altklausur.map(rueckblickQuestion)
+);
+
+// 4) Placing the epochs in time, which the exam notes call out explicitly.
+const epochRange = (e) => (e.bis === null ? `ab ${e.von}` : `${e.von}–${e.bis}`);
+
+createExam(
+  "Epochen zeitlich einordnen",
+  `${epochen.length} Epochen der Baugeschichte II: Ordne jede Epoche ihrem Zeitraum zu.`,
+  [zeynepId],
+  epochen.map((epoch) => {
+    const correct = epochRange(epoch);
+    const options = [correct];
+    for (const other of epochen) {
+      const range = epochRange(other);
+      if (!options.includes(range)) options.push(range);
+      if (options.length === 4) break;
+    }
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    return {
+      type: "single",
+      text: `In welchen Zeitraum fällt die Epoche „${epoch.epoche}"?`,
+      options,
+      correctIndex: options.indexOf(correct),
+    };
+  })
+);
+
+// 5) Placeholder exam for Mustafa until his own content arrives.
 createExam(
   "Genel Kültür Sınavı",
   "Karışık konularda temel genel kültür soruları.",

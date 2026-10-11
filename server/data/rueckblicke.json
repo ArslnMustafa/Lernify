@@ -1,0 +1,892 @@
+[
+ {
+  "altklausur": false,
+  "thema": "II-3 - Industrialisierung",
+  "name": "Bicton Park Palmenhaus",
+  "meta": "W. & D. Bailey | South Devon | ca. 1825",
+  "bildmerkmale": "frühe Eisen-Glas-Konstruktion.",
+  "form": "Die filigrane Tragstruktur erlaubt große transparente Wand- und Dachflächen.",
+  "konstruktion": "Der Gewächshausbau zeigt, wie Eisen und Glas neue leichte Raumhüllen ermöglichen.",
+  "einordnung": "neue Materialien und große verglaste Räume."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-3 - Industrialisierung",
+  "name": "Crystal Palace",
+  "meta": "Joseph Paxton | London | 1851",
+  "bildmerkmale": "Glas-Metall-Raster, serielle Bauteile.",
+  "form": "Das regelmäßige Raster entsteht aus wiederholten, standardisierten Bauteilen.",
+  "konstruktion": "Der riesige Ausstellungsraum wirkt leicht und transparent statt massiv und gemauert.",
+  "einordnung": "Industrialisierung und Vorfertigung."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-3 - Industrialisierung",
+  "name": "Bahnhof Frankfurt",
+  "meta": "H. Eggert + J. W. Schwedler | 1883-1888",
+  "bildmerkmale": "große Eisen-Glas-Hallen.",
+  "form": "Die Hallenkonstruktion überspannt große Gleisbereiche mit Eisen und Glas.",
+  "konstruktion": "Technischer Hallenbau und repräsentative Außenwirkung stehen bewusst nebeneinander.",
+  "einordnung": "moderne Konstruktion + repräsentative Bahnhofsbauaufgabe."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-3 - Industrialisierung",
+  "name": "Galerie des Machines",
+  "meta": "Charles Dutert + V. Contamin | Paris | 1889",
+  "bildmerkmale": "weit gespannte sichtbare Eisenbögen.",
+  "form": "Die riesige Spannweite erzeugt einen weitgehend stützenfreien Innenraum.",
+  "konstruktion": "Die tragenden Eisenbögen bleiben sichtbar und bestimmen direkt die Raumwirkung.",
+  "einordnung": "Konstruktion prägt den Raum."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-3 - Industrialisierung",
+  "name": "Bibliothèque nationale",
+  "meta": "Henri Labrouste | Paris | 1862-1868",
+  "bildmerkmale": "leichte Eisenstützen und Gewölbekuppeln.",
+  "form": "Schlanke Eisenstützen tragen eine Folge leichter Kuppeln im Lesesaal.",
+  "konstruktion": "Die Konstruktion ermöglicht einen hellen, offenen öffentlichen Innenraum.",
+  "einordnung": "Eisenkonstruktion im öffentlichen Innenraum."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-3 - Industrialisierung",
+  "name": "Coalbrookdale Bridge",
+  "meta": "Pritchard / Wilkinson / Darby III | 1777-1779",
+  "bildmerkmale": "eiserner Bogen über dem Fluss.",
+  "form": "Der Bogen besteht aus gegossenen Eisenteilen und zeigt das Tragprinzip offen.",
+  "konstruktion": "Die Brücke markiert den Übergang vom traditionellen Massivbau zum industriellen Ingenieurbau.",
+  "einordnung": "früher Schlüsselbau des Eisenbaus."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-3 - Industrialisierung",
+  "name": "Clifton Bridge",
+  "meta": "Isambard Kingdom Brunel | Bristol | 1836-1864",
+  "bildmerkmale": "Hängebrücke mit hohen Pylonen.",
+  "form": "Hohe Pylone und die schlanke Fahrbahn betonen die große Spannweite.",
+  "konstruktion": "Der technische Bau reagiert zugleich auf die dramatische Topografie der Schlucht.",
+  "einordnung": "große Spannweiten durch neue Ingenieurtechnik."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-3 - Industrialisierung",
+  "name": "Menai Suspension Bridge",
+  "meta": "Thomas Telford | Wales | 1818-1826",
+  "bildmerkmale": "Hängebrücke mit Ketten und massiven Pylonen.",
+  "form": "Massive Steinpylone tragen eine leichte, an Ketten aufgehängte Fahrbahn.",
+  "konstruktion": "Das Hängeprinzip erlaubt deutlich größere Spannweiten als traditionelle Brückenformen.",
+  "einordnung": "früher moderner Brückenbau."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-4 - Kunst, Handwerk und Technik",
+  "name": "Robie House",
+  "meta": "Frank Lloyd Wright | Chicago | 1906-1910",
+  "bildmerkmale": "starke Horizontalen, auskragende Dächer.",
+  "form": "Lange Fensterbänder und Terrassen verstärken die horizontale Wirkung.",
+  "konstruktion": "Innen- und Außenräume greifen ineinander; geschlossene Zimmerboxen werden aufgelöst.",
+  "einordnung": "Prairie House / \"Destruction of the box\"."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-4 - Kunst, Handwerk und Technik",
+  "name": "Glasgow School of Art",
+  "meta": "Charles Rennie Mackintosh | Glasgow | 1896",
+  "bildmerkmale": "strenge Fassade, große Fenster, reduzierte Details.",
+  "form": "Große Fensterflächen reagieren sichtbar auf die Nutzung als Kunstschule.",
+  "konstruktion": "Die Fassade verbindet strenge Geometrie mit gezielt eingesetzten dekorativen Details.",
+  "einordnung": "frühe Moderne zwischen Jugendstil und Funktion."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-4 - Kunst, Handwerk und Technik",
+  "name": "Postsparkassenamt",
+  "meta": "Otto Wagner | Wien | 1904-06 / 1910-12",
+  "bildmerkmale": "helle Halle, Metall und Glas, sachliche Ordnung.",
+  "form": "Metall, Glas und sichtbare Befestigungen werden gestalterisch nicht versteckt.",
+  "konstruktion": "Der Innenraum wirkt hell, funktional und sachlich statt historistisch dekoriert.",
+  "einordnung": "Material- und funktionsgerechte Moderne."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-4 - Kunst, Handwerk und Technik",
+  "name": "Ernst-Ludwig-Haus",
+  "meta": "Joseph Maria Olbrich | Darmstadt | 1901",
+  "bildmerkmale": "repräsentativer Eingang, Jugendstil.",
+  "form": "Der zentrale Eingang wird durch plastische Formen und Dekor stark hervorgehoben.",
+  "konstruktion": "Architektur, Kunst und Ausstattung werden als zusammengehöriges Gesamtkunstwerk gedacht.",
+  "einordnung": "Künstlerkolonie Mathildenhöhe / Gesamtkunstwerk."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-4 - Kunst, Handwerk und Technik",
+  "name": "Fagus-Werk",
+  "meta": "Walter Gropius + Adolf Meyer | Alfeld | 1910-1914",
+  "bildmerkmale": "leichte Glasfassade und offene Ecken.",
+  "form": "Die verglasten Gebäudeecken lösen den Eindruck einer schweren tragenden Wand auf.",
+  "konstruktion": "Große Fensterflächen und klare Gliederung geben dem Industriebau eine leichte Wirkung.",
+  "einordnung": "Schlüsselwerk auf dem Weg zur klassischen Moderne."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-4 - Kunst, Handwerk und Technik",
+  "name": "Rue de Franklin",
+  "meta": "Auguste Perret | Paris | 1902-1903",
+  "bildmerkmale": "sichtbares Fassadenraster.",
+  "form": "Das tragende Skelett ermöglicht eine Fassade, die nicht mehr als massive Wand gedacht ist.",
+  "konstruktion": "Das konstruktive Raster ordnet Öffnungen und Füllungen sichtbar.",
+  "einordnung": "frühe Stahlbeton-Skelettarchitektur."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-4 - Kunst, Handwerk und Technik",
+  "name": "Jahrhunderthalle",
+  "meta": "Max Berg | Breslau | 1911-1913",
+  "bildmerkmale": "monumentaler Zentralbau mit großer Kuppel.",
+  "form": "Der große Zentralraum wird durch eine weit gespannte moderne Tragkonstruktion ermöglicht.",
+  "konstruktion": "Monumentalität entsteht aus Konstruktion und Raumgröße statt aus aufgesetztem historischem Dekor.",
+  "einordnung": "moderner Großbau und neue Tragkonstruktion."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-5 - Wohnen für das Existenzminimum",
+  "name": "Garden City Concept",
+  "meta": "Ebenezer Howard | 1902",
+  "bildmerkmale": "Diagramm aus Zentrum und Satelliten.",
+  "form": "Das Diagramm ordnet eine Kernstadt und kleinere Satelliten in ein grünes Gesamtsystem.",
+  "konstruktion": "Wohnen, Arbeiten und Versorgung sollen mit den Vorteilen von Stadt und Land verbunden werden.",
+  "einordnung": "Verbindung von Stadt und Land."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-5 - Wohnen für das Existenzminimum",
+  "name": "Margaretenhöhe",
+  "meta": "Georg Metzendorf | Essen | ab 1908",
+  "bildmerkmale": "kleinteilige Häuser, Grün, malerische Siedlung.",
+  "form": "Kleine Häuser, Gärten und abwechslungsreiche Straßenräume erzeugen einen menschlichen Maßstab.",
+  "konstruktion": "Die Siedlung verbindet soziale Wohnreform mit dem Leitbild der Gartenstadt.",
+  "einordnung": "Reformwohnungsbau / Gartenstadtprinzip."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-5 - Wohnen für das Existenzminimum",
+  "name": "Gartenstadt Hellerau",
+  "meta": "Dresden | ab 1909",
+  "bildmerkmale": "niedrige Siedlung im Grünen.",
+  "form": "Niedrige Bebauung und viel Grün unterscheiden die Anlage von der dichten Mietskaserne.",
+  "konstruktion": "Wohnen, Arbeit, Kultur und Gemeinschaft werden als zusammenhängende Reformaufgabe verstanden.",
+  "einordnung": "Reform von Wohnen, Arbeit und Gemeinschaft."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-5 - Wohnen für das Existenzminimum",
+  "name": "Siedlung Berlin-Britz",
+  "meta": "Bruno Taut + Martin Wagner | 1925-1927",
+  "bildmerkmale": "Hufeisenform und große Wohnsiedlung.",
+  "form": "Die Hufeisenform fasst einen großen gemeinschaftlichen Grünraum.",
+  "konstruktion": "Serielle Wohnungsplanung wird mit Licht, Luft und Grün für breite Bevölkerungsschichten verbunden.",
+  "einordnung": "sozialer Wohnungsbau: Licht, Luft, Grün."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-5 - Wohnen für das Existenzminimum",
+  "name": "Das Neue Frankfurt",
+  "meta": "Ernst May | 1925-1930",
+  "bildmerkmale": "Siedlungen systematisch über Frankfurt verteilt.",
+  "form": "Siedlungen werden systematisch geplant und mit standardisierten Typen rationell gebaut.",
+  "konstruktion": "Das Programm umfasst nicht nur Häuser, sondern auch Grundrisse, Ausstattung und Alltagsorganisation.",
+  "einordnung": "Rationalisierung und Standardisierung."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-5 - Wohnen für das Existenzminimum",
+  "name": "CIAM - Existenzminimum",
+  "meta": "2. CIAM Frankfurt | 1929",
+  "bildmerkmale": "Kongress-/Publikationsbezug.",
+  "form": "Grundrisse werden auf geringe Fläche, klare Funktionen und wirtschaftliche Abläufe optimiert.",
+  "konstruktion": "Das Thema verbindet sozialen Wohnungsbau mit Standardisierung, Hygiene, Licht und Belüftung.",
+  "einordnung": "Wohnung für das Existenzminimum als zentrales Modernethema."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-6 - Suche nach der neuen Form",
+  "name": "Monument III. Internationale",
+  "meta": "Vladimir Tatlin | Entwurf | 1913",
+  "bildmerkmale": "spiralförmige technische Turmstruktur.",
+  "form": "Die dynamische Spiralform bricht bewusst mit traditionellen Monumentformen.",
+  "konstruktion": "Technik und Maschinenästhetik werden zum Symbol einer neuen gesellschaftlichen Ordnung.",
+  "einordnung": "russischer Konstruktivismus / Maschinenästhetik."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-6 - Suche nach der neuen Form",
+  "name": "Hutfabrik Luckenwalde",
+  "meta": "Erich Mendelsohn | 1921-1923",
+  "bildmerkmale": "markantes hochgezogenes Dach.",
+  "form": "Die markante Dachform macht die industrielle Funktion bereits von außen ablesbar.",
+  "konstruktion": "Der Bau wirkt expressiv und dynamisch statt als neutraler Zweckbau.",
+  "einordnung": "expressionistische Industriearchitektur."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-6 - Suche nach der neuen Form",
+  "name": "Haus Ozenfant",
+  "meta": "Le Corbusier + Pierre Jeanneret | Paris | 1923",
+  "bildmerkmale": "kubischer Atelierbau mit großen Fenstern.",
+  "form": "Kubischer Baukörper und große Atelierfenster bestimmen die reduzierte Erscheinung.",
+  "konstruktion": "Die klare Geometrie und der Verzicht auf historisches Ornament stehen für den Purismus.",
+  "einordnung": "Purismus / frühe Le-Corbusier-Moderne."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-6 - Suche nach der neuen Form",
+  "name": "Bauhaus Dessau",
+  "meta": "Walter Gropius + Adolf Meyer | 1925-1926",
+  "bildmerkmale": "Glasvorhang, Kuben, asymmetrische Komposition.",
+  "form": "Unterschiedliche Funktionsbereiche erscheinen als eigenständige, miteinander verbundene Kuben.",
+  "konstruktion": "Die Glasvorhangfassade erzeugt Transparenz und macht eine industrielle Ästhetik sichtbar.",
+  "einordnung": "Neues Bauen: Funktion + Transparenz."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-6 - Suche nach der neuen Form",
+  "name": "Weißenhofsiedlung",
+  "meta": "Leitung Mies van der Rohe | Stuttgart | 1927",
+  "bildmerkmale": "weiße Kuben, Flachdächer, unterschiedliche Haustypen.",
+  "form": "Mehrere Architekten zeigen unterschiedliche Haustypen innerhalb einer gemeinsamen modernen Haltung.",
+  "konstruktion": "Flachdächer, helle Fassaden und reduzierte Formen demonstrieren das Neue Bauen als Wohnmodell.",
+  "einordnung": "Werkbund-Musterschau des Neuen Bauens."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-6 - Suche nach der neuen Form",
+  "name": "Doppelhaus Weißenhof",
+  "meta": "Le Corbusier + Pierre Jeanneret | 1927",
+  "bildmerkmale": "weißer Bau auf Stützen, Fensterbänder.",
+  "form": "Pilotis, Fensterbänder und Flachdach/Dachterrasse machen moderne Wohnprinzipien sichtbar.",
+  "konstruktion": "Die Fassade wird als freie Hülle verstanden und nicht als traditionelle tragende Lochwand.",
+  "einordnung": "Le Corbusiers moderne Wohnprinzipien."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-6 - Suche nach der neuen Form",
+  "name": "Haus Tugendhat",
+  "meta": "Ludwig Mies van der Rohe | Brno | 1928-1930",
+  "bildmerkmale": "flacher weißer Bau, große Glasflächen.",
+  "form": "Freistehende Stützen ermöglichen einen offenen, fließenden Wohnraum.",
+  "konstruktion": "Große Glasflächen verbinden Innenraum, Terrasse und Landschaft besonders stark.",
+  "einordnung": "offener Grundriss und Innen-Außen-Bezug."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-7 - Architektur im totalitären System",
+  "name": "Völkerbundpalast Genf",
+  "meta": "Nennet / Broggi / Vágó u.a. | 1929-1937",
+  "bildmerkmale": "monumentale Kolonnaden und große Hofanlage.",
+  "form": "Große Höfe, lange Fronten und Kolonnaden erzeugen eine repräsentative staatliche Ordnung.",
+  "konstruktion": "Der Bau verbindet moderne Organisation mit klassisch-monumentaler Wirkung.",
+  "einordnung": "internationale Repräsentationsarchitektur."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-7 - Architektur im totalitären System",
+  "name": "I.G. Farben",
+  "meta": "Hans Poelzig | Frankfurt | 1928-1931",
+  "bildmerkmale": "lange gegliederte Verwaltungsflügel.",
+  "form": "Die lange Baumasse wird durch gestaffelte Flügel rhythmisch gegliedert.",
+  "konstruktion": "Trotz sachlicher Fassadenordnung bleibt der Gesamtbau großmaßstäblich und repräsentativ.",
+  "einordnung": "sachlich-monumentaler Großbau."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-7 - Architektur im totalitären System",
+  "name": "Stadtbibliothek Stockholm",
+  "meta": "Erik Gunnar Asplund | 1924-1928",
+  "bildmerkmale": "zylindrischer Lesesaal über strengem Sockel.",
+  "form": "Ein großer zylindrischer Lesesaal sitzt über einem streng geordneten Sockelbau.",
+  "konstruktion": "Einfache geometrische Körper erzeugen Monumentalität ohne üppigen Fassadendekor.",
+  "einordnung": "nordischer Klassizismus."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-7 - Architektur im totalitären System",
+  "name": "Casa del Fascio",
+  "meta": "Giuseppe Terragni | Como | 1932-1936",
+  "bildmerkmale": "weißer Kubus, Raster, tiefe Loggien.",
+  "form": "Das Fassadenraster wechselt zwischen offenen Loggien und geschlossenen Flächen.",
+  "konstruktion": "Der strenge Kubus zeigt, dass rationalistische Moderne auch im faschistischen Italien eingesetzt wurde.",
+  "einordnung": "rationalistische Moderne im faschistischen Italien."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-7 - Architektur im totalitären System",
+  "name": "Deutscher Pavillon Paris",
+  "meta": "Albert Speer | Weltausstellung 1937",
+  "bildmerkmale": "blockhafter hoher Turm, strenge Achse.",
+  "form": "Der blockhafte Turm und die klare Achse erzeugen eine dominante, schwer wirkende Silhouette.",
+  "konstruktion": "Maßstab und Strenge dienen der politischen Repräsentation und Machtdemonstration.",
+  "einordnung": "NS-Repräsentationsarchitektur."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-7 - Architektur im totalitären System",
+  "name": "Parlamentsgebäude Helsinki",
+  "meta": "Johan Sigfrid Sirén | 1926-1931",
+  "bildmerkmale": "monumentale Treppe und Säulenfront.",
+  "form": "Die breite Freitreppe führt auf eine streng rhythmische Säulenfront zu.",
+  "konstruktion": "Symmetrie und klassische Ordnung vermitteln Dauer, Staatlichkeit und Autorität.",
+  "einordnung": "klassizistische Repräsentation."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-7 - Architektur im totalitären System",
+  "name": "Neue Reichskanzlei",
+  "meta": "Albert Speer | Berlin | 1935-1943",
+  "bildmerkmale": "lange monumentale Fassaden und Achsen.",
+  "form": "Sehr lange Fassaden, Höfe und Raumfolgen steigern den Eindruck von Größe und Distanz.",
+  "konstruktion": "Der Besucher wird durch Maßstab, Material und axiale Sequenzen gezielt beeindruckt.",
+  "einordnung": "Machtinszenierung durch Maßstab und Sequenz."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-7 - Architektur im totalitären System",
+  "name": "Zeppelinfeld",
+  "meta": "Albert Speer | Nürnberg | 1935-1937",
+  "bildmerkmale": "riesige Tribüne, Kolonnaden, Symmetrie.",
+  "form": "Die lange Tribüne bildet eine strenge, symmetrische Bühne für große Menschenmassen.",
+  "konstruktion": "Architektur, Aufmarsch und Blickachsen werden zu einer gemeinsamen politischen Inszenierung.",
+  "einordnung": "Architektur als politische Masseninszenierung."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-7 - Architektur im totalitären System",
+  "name": "Große Halle",
+  "meta": "Albert Speer | Modell | 1939",
+  "bildmerkmale": "gigantischer Kuppelbau im Modell.",
+  "form": "Der Kuppelbau ist bewusst in extrem übersteigerter Größe konzipiert.",
+  "konstruktion": "Als nicht realisierte Germania-Planung zeigt er Architektur als totalitäres Herrschaftssymbol.",
+  "einordnung": "nicht realisierte Germania-Planung."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-8 - Vielfalt 1930er bis 1950er",
+  "name": "Magnitogorsk",
+  "meta": "Brigade Ernst May | 1930-1934",
+  "bildmerkmale": "rational geordnete Siedlungsbänder.",
+  "form": "Die Siedlungsplanung folgt einer rationalen, funktional geordneten Struktur für die Industriestadt.",
+  "konstruktion": "Prinzipien des Neuen Bauens werden auf eine großmaßstäbliche sozialistische Stadtplanung übertragen.",
+  "einordnung": "Neues Bauen im Exil / Industriestadt."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-8 - Vielfalt 1930er bis 1950er",
+  "name": "Lake Shore Drive Apartments",
+  "meta": "Mies van der Rohe | Chicago | 1948-1951",
+  "bildmerkmale": "zwei schlanke dunkle Rastertürme.",
+  "form": "Zwei schlanke rechteckige Hochhäuser stehen als klare geometrische Scheiben nebeneinander.",
+  "konstruktion": "Das regelmäßige Stahl-Glas-Raster und der Ornamentverzicht entsprechen dem International Style.",
+  "einordnung": "International Style in Stahl und Glas."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-8 - Vielfalt 1930er bis 1950er",
+  "name": "Kaufmann House",
+  "meta": "Richard Neutra | Palm Springs | 1946-1947",
+  "bildmerkmale": "flacher horizontaler Bau in Wüstenlandschaft.",
+  "form": "Flache horizontale Baukörper und weit ausgreifende Terrassen öffnen sich zur Wüstenlandschaft.",
+  "konstruktion": "Große Glasflächen lassen Innen- und Außenraum optisch ineinander übergehen.",
+  "einordnung": "kalifornische Moderne / Innen-Außen-Bezug."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-8 - Vielfalt 1930er bis 1950er",
+  "name": "Fallingwater",
+  "meta": "Frank Lloyd Wright | Bear Run | 1935-1939",
+  "bildmerkmale": "auskragende Terrassen über Wasserfall.",
+  "form": "Mehrere horizontale Kragplatten schieben sich direkt über Felsen und Wasserfall.",
+  "konstruktion": "Materialien, Topografie und Raumkomposition machen die Landschaft zum Teil des Gebäudes.",
+  "einordnung": "organische Architektur."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-8 - Vielfalt 1930er bis 1950er",
+  "name": "Lever House",
+  "meta": "SOM | New York | 1951-1952",
+  "bildmerkmale": "Glas-Hochhausscheibe auf niedrigem Sockel.",
+  "form": "Eine schlanke Hochhausscheibe steht über einem niedrigeren, offenen Sockelbereich.",
+  "konstruktion": "Die Curtain-Wall-Fassade ersetzt die traditionelle massive Straßenwand durch eine leichte Glashaut.",
+  "einordnung": "International Style im Bürohochhaus."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-8 - Vielfalt 1930er bis 1950er",
+  "name": "Unité d'habitation",
+  "meta": "Le Corbusier | Marseille | 1947-1952",
+  "bildmerkmale": "großer Wohnblock auf Pilotis, modulare Fassade.",
+  "form": "Der große Wohnblock steht auf Pilotis und zeigt eine stark plastische, modulare Fassade.",
+  "konstruktion": "Wohnen, Erschließung und gemeinschaftliche Funktionen werden als vertikale Stadt zusammengefasst.",
+  "einordnung": "vertikale Stadt / kollektives Wohnen."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-8 - Vielfalt 1930er bis 1950er",
+  "name": "Notre Dame du Haut",
+  "meta": "Le Corbusier | Ronchamp | 1950-1955",
+  "bildmerkmale": "massive weiße Wände, geschwungenes dunkles Dach.",
+  "form": "Geschwungene massive Wände und das schwere dunkle Dach wirken stark skulptural.",
+  "konstruktion": "Unregelmäßige Öffnungen und gezielte Lichtführung erzeugen eine emotionale sakrale Raumwirkung.",
+  "einordnung": "plastisch-organische Nachkriegsmoderne."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-8 - Vielfalt 1930er bis 1950er",
+  "name": "TWA Terminal",
+  "meta": "Eero Saarinen | New York | 1956-1962",
+  "bildmerkmale": "flügelartig geschwungene Betonschalen.",
+  "form": "Die Dachschalen formen eine flügelartige, stark bewegte Silhouette.",
+  "konstruktion": "Fließende Innenräume und Kurven übersetzen Geschwindigkeit und Flugbewegung in Architektur.",
+  "einordnung": "dynamische plastische Form."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-8 - Vielfalt 1930er bis 1950er",
+  "name": "Guggenheim Museum",
+  "meta": "Frank Lloyd Wright | New York | 1956-1959",
+  "bildmerkmale": "weiße Spiralrotunde.",
+  "form": "Die weiße Spiralform hebt sich deutlich vom rechteckigen Stadtraster Manhattans ab.",
+  "konstruktion": "Eine kontinuierliche Rampe verbindet Ausstellung und Bewegung zu einem zusammenhängenden Raumkonzept.",
+  "einordnung": "kontinuierliche Rampenbewegung."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-9 - Nachkriegsarchitektur West",
+  "name": "Wiederaufbau Prinzipalmarkt",
+  "meta": "Münster | 1944-1949",
+  "bildmerkmale": "historisch vertraute Giebelfronten.",
+  "form": "Giebel, Arkaden und die historische Straßenraumwirkung werden bewusst wieder aufgenommen.",
+  "konstruktion": "Der Wiederaufbau sucht städtische Kontinuität, ohne jedes Detail zwingend exakt zu kopieren.",
+  "einordnung": "Wiederaufbau zwischen Kontinuität und Vereinfachung."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-9 - Nachkriegsarchitektur West",
+  "name": "Ost-West-Straße",
+  "meta": "Hamburg | 1964",
+  "bildmerkmale": "breite Verkehrsschneise durch die Stadt.",
+  "form": "Die breite Verkehrsachse schneidet durch den historischen Stadtgrundriss.",
+  "konstruktion": "Der Wiederaufbau orientiert sich stark am Leitbild der autogerechten Stadt.",
+  "einordnung": "autogerechter Wiederaufbau."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-9 - Nachkriegsarchitektur West",
+  "name": "Grindel-Hochhäuser",
+  "meta": "Hamburg | 1949-1956",
+  "bildmerkmale": "lange freistehende Hochhausscheiben.",
+  "form": "Freistehende Hochhausscheiben ersetzen den geschlossenen Blockrand.",
+  "konstruktion": "Abstand, Grünflächen, Licht und Luft prägen das westliche Nachkriegs-Stadtmodell.",
+  "einordnung": "moderne aufgelockerte Wohnstadt."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-9 - Nachkriegsarchitektur West",
+  "name": "US-Generalkonsulat Frankfurt",
+  "meta": "SOM + Otto Apel | 1954-1956",
+  "bildmerkmale": "leichter moderner Verwaltungsbau.",
+  "form": "Raster, große Fenster und leichte Fassaden vermitteln eine internationale moderne Ästhetik.",
+  "konstruktion": "Der Bau zeigt den starken amerikanischen Einfluss auf die westdeutsche Nachkriegsarchitektur.",
+  "einordnung": "US-amerikanischer Einfluss auf Nachkriegsmoderne."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-9 - Nachkriegsarchitektur West",
+  "name": "Thyssen-Hochhaus",
+  "meta": "Hentrich + Petschnigg | Düsseldorf | 1955-1960",
+  "bildmerkmale": "hohe schmale Scheibe im Raster.",
+  "form": "Die schlanke Hochhausscheibe wird durch ein regelmäßiges Fassadenraster geordnet.",
+  "konstruktion": "Glas, Metall und Wiederholung vermitteln moderne Corporate Architecture ohne historischen Schmuck.",
+  "einordnung": "westdeutsche Bürohochhausmoderne."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-9 - Nachkriegsarchitektur West",
+  "name": "Hansaviertel / Interbau",
+  "meta": "Berlin | 1957",
+  "bildmerkmale": "freistehende Bauten unterschiedlicher Höhe im Grün.",
+  "form": "Einzelbauten unterschiedlicher Höhe und Typologie stehen frei in einer grünen Parklandschaft.",
+  "konstruktion": "Die offene, vielfältige Struktur ist ein bewusster Gegenentwurf zur geschlossenen Monumentalachse der Stalinallee.",
+  "einordnung": "westliches Leitbild der aufgelockerten Stadt."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-9 - Nachkriegsarchitektur West",
+  "name": "BRD-Pavillons Brüssel",
+  "meta": "Egon Eiermann + Sep Ruf | Expo 1958",
+  "bildmerkmale": "leichte transparente Pavillons.",
+  "form": "Mehrere leichte, transparente Pavillons bilden eine offene, kleinteilige Gesamtanlage.",
+  "konstruktion": "Filigrane Konstruktion und Transparenz vermitteln politisch bewusst Offenheit statt Monumentalität.",
+  "einordnung": "bewusster Gegenentwurf zu Monumentalität."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-9 - Nachkriegsarchitektur West",
+  "name": "Kanzlerbungalow",
+  "meta": "Sep Ruf | Bonn | 1963-1966",
+  "bildmerkmale": "leichte flache Pavillons im Grün.",
+  "form": "Flache pavillonartige Baukörper und große Glasflächen erzeugen eine zurückhaltende Erscheinung.",
+  "konstruktion": "Staatliche Repräsentation erfolgt bewusst durch Transparenz und Maßstäblichkeit statt durch Monumentalität.",
+  "einordnung": "informelle transparente Staatsrepräsentation."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-9 - Nachkriegsarchitektur West",
+  "name": "Berliner Philharmonie",
+  "meta": "Hans Scharoun | Berlin | 1957-1963",
+  "bildmerkmale": "goldenes zeltartig gefaltetes Dach.",
+  "form": "Die asymmetrische Dachlandschaft und der unregelmäßige Baukörper folgen keiner klassischen Achse.",
+  "konstruktion": "Der Konzertsaal organisiert das Publikum um die Musik; die Form entwickelt sich aus der Nutzung.",
+  "einordnung": "Musik im Zentrum / organischer Raum."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-9 - Nachkriegsarchitektur West",
+  "name": "Geschwister-Scholl-Schule",
+  "meta": "Hans Scharoun | Lünen | 1956-1962",
+  "bildmerkmale": "gegliederte pavillonartige Schulanlage.",
+  "form": "Die Anlage besteht aus differenzierten Raumgruppen statt aus einem starren symmetrischen Schulblock.",
+  "konstruktion": "Pädagogische Nutzung, Gemeinschaft und individuelle Räume bestimmen die organische Komposition.",
+  "einordnung": "organische Architektur aus Nutzung und Gemeinschaft."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-10 - Nachkriegsarchitektur Ost",
+  "name": "Palast der Sowjets",
+  "meta": "Boris Iofan | 1935-1941, Bau abgebrochen",
+  "bildmerkmale": "gigantischer gestufter Turm mit Figur.",
+  "form": "Der Entwurf steigert sich zu einem gigantischen, gestuften Turm mit monumentaler Bekrönung.",
+  "konstruktion": "Der unrealisiert gebliebene Bau sollte politische Macht und ideologische Größe unmittelbar sichtbar machen.",
+  "einordnung": "Sozialistischer Realismus / Monumentalität."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-10 - Nachkriegsarchitektur Ost",
+  "name": "Lomonossow-Universität",
+  "meta": "Lew Rudnew | Moskau | 1947-1953",
+  "bildmerkmale": "hoch aufragender Stalinistischer Turm.",
+  "form": "Ein hoher zentraler Turm wird streng symmetrisch von niedrigeren Seitenflügeln begleitet.",
+  "konstruktion": "Historisierende Details und enorme Größe verbinden Hochhausbau mit stalinistischer Monumentalität.",
+  "einordnung": "sowjetische Monumentalarchitektur."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-10 - Nachkriegsarchitektur Ost",
+  "name": "Palast Kultur und Wissenschaft",
+  "meta": "Lew Rudnew | Warschau | 1952-1955",
+  "bildmerkmale": "Stalinscher Hochhausturm mit Spitze.",
+  "form": "Der hohe Turm mit Spitze dominiert die Stadtsilhouette und wirkt bewusst monumental.",
+  "konstruktion": "Der Bau überträgt sowjetische Repräsentationsarchitektur auf den Wiederaufbau Warschaus.",
+  "einordnung": "Export sowjetischer Repräsentationsarchitektur."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-10 - Nachkriegsarchitektur Ost",
+  "name": "Kulturhaus Maxhütte",
+  "meta": "Hanns Hopp + Josef Kaiser | 1952-1955",
+  "bildmerkmale": "klassizistisch wirkendes Kulturhaus.",
+  "form": "Der Kultur- und Gemeinschaftsbau erhält eine feierliche, repräsentative architektonische Fassung.",
+  "konstruktion": "Kulturelle Nutzung wird im Sozialismus als öffentliche und gesellschaftliche Aufgabe inszeniert.",
+  "einordnung": "Kulturhaus als sozialistisches Gemeinschaftszentrum."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-10 - Nachkriegsarchitektur Ost",
+  "name": "Strausberger Platz",
+  "meta": "Hermann Henselmann | Berlin | 1952-1954",
+  "bildmerkmale": "monumentale Platzfassung, historisierende Details.",
+  "form": "Der Platz wird durch symmetrische, einheitlich gestaltete Randbebauung stark gefasst.",
+  "konstruktion": "Städtebau und historisierende Fassadensprache erzeugen eine repräsentative sozialistische Stadtmitte.",
+  "einordnung": "Sozialistischer Realismus."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-10 - Nachkriegsarchitektur Ost",
+  "name": "Frankfurter Tor / Stalinallee",
+  "meta": "Hermann Henselmann | Berlin | 1953-1956",
+  "bildmerkmale": "symmetrische Turmbauten an breiter Straße.",
+  "form": "Turmbauten, breite Straße und geschlossene Fronten formen eine monumentale Achse.",
+  "konstruktion": "Symmetrie und historisierende Details machen die Architektur zum Ausdruck staatlicher Repräsentation.",
+  "einordnung": "Sozialistischer Realismus / Staatsrepräsentation."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-10 - Nachkriegsarchitektur Ost",
+  "name": "Haus des Lehrers + Kongresshalle",
+  "meta": "Henselmann / Geyer / Streitparth | 1961-1964",
+  "bildmerkmale": "moderner Hochhauskubus mit Bildfries.",
+  "form": "Klare moderne Baukörper, Raster und Glas ersetzen die historisierende Formensprache der frühen Stalinallee.",
+  "konstruktion": "Der Komplex zeigt den Übergang der DDR zu einer stärker internationalen, industrialisierten Moderne.",
+  "einordnung": "Wende zur internationalen Moderne in der DDR."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-10 - Nachkriegsarchitektur Ost",
+  "name": "Kongresspalast des Kremls",
+  "meta": "Michail Posochin | Moskau | 1959-1961",
+  "bildmerkmale": "moderner horizontaler Glas-/Steinbau.",
+  "form": "Der horizontale Bau nutzt große Glasflächen und eine reduzierte moderne Formensprache.",
+  "konstruktion": "Er steht für die Abkehr von der stark historisierenden Architektur der Stalinzeit.",
+  "einordnung": "Entstalinisierung und modernere Repräsentation."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-10 - Nachkriegsarchitektur Ost",
+  "name": "Palast der Republik",
+  "meta": "Heinz Graffunder / VEB Berlin-Projekt | 1973-1976",
+  "bildmerkmale": "breiter Großbau mit Glas-Metall-Fassade.",
+  "form": "Der breite horizontale Bau wird von Glas- und Metallfassaden geprägt.",
+  "konstruktion": "Staats-, Kultur- und Veranstaltungsfunktionen werden in einem modernen repräsentativen Großbau zusammengeführt.",
+  "einordnung": "DDR-Staats- und Kulturzentrum."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-10 - Nachkriegsarchitektur Ost",
+  "name": "Wohnblock WBS 70",
+  "meta": "DDR-Plattenbau | ab 1970er",
+  "bildmerkmale": "serielle Plattenbauzeilen.",
+  "form": "Serielle Plattenelemente erzeugen wiederholbare Fassaden und typisierte Grundrisse.",
+  "konstruktion": "Die industrialisierte Bauweise soll große Wohnungsmengen schnell und wirtschaftlich bereitstellen.",
+  "einordnung": "Industrialisierter Massenwohnungsbau."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-11 - Unabhängigkeit, Wachstum, Utopien",
+  "name": "Palace of Assembly",
+  "meta": "Le Corbusier | Chandigarh | 1961",
+  "bildmerkmale": "monumentaler Sichtbeton und plastisches Dach.",
+  "form": "Große Sichtbetonflächen und ein plastischer Dachkörper verleihen dem Bau eine monumentale Silhouette.",
+  "konstruktion": "Als Teil Chandigarhs verbindet er moderne Architektur mit der Repräsentation des unabhängigen Indien.",
+  "einordnung": "neue Hauptstadt als Symbol des unabhängigen Indien."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-11 - Unabhängigkeit, Wachstum, Utopien",
+  "name": "Brasília - Masterplan",
+  "meta": "Lúcio Costa + Oscar Niemeyer | ab 1956",
+  "bildmerkmale": "großmaßstäblicher Hauptstadtplan.",
+  "form": "Die neue Hauptstadt wird durch große Achsen und klar getrennte Funktionsbereiche organisiert.",
+  "konstruktion": "Stadtplanung und skulpturale Regierungsbauten dienen als Symbol eines modernen nationalen Zukunftsprojekts.",
+  "einordnung": "moderne Hauptstadt als nationales Zukunftsprojekt."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-11 - Unabhängigkeit, Wachstum, Utopien",
+  "name": "Habitat 67",
+  "meta": "Moshe Safdie | Montreal | Expo 1967",
+  "bildmerkmale": "gestapelte kubische Wohnmodule.",
+  "form": "Kubische Wohneinheiten werden gestapelt, versetzt und zu einer komplexen Großform kombiniert.",
+  "konstruktion": "Das System versucht hohe Dichte mit privaten Terrassen und Qualitäten des Einfamilienhauses zu verbinden.",
+  "einordnung": "modulares Wohnen und neue Dichte."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-11 - Unabhängigkeit, Wachstum, Utopien",
+  "name": "Nakagin Capsule Tower",
+  "meta": "Kisho Kurokawa | Tokio | 1970",
+  "bildmerkmale": "Kapseln mit runden Fenstern an Kernen.",
+  "form": "Einzelne vorgefertigte Kapseln mit runden Fenstern sind an feste Erschließungskerne angedockt.",
+  "konstruktion": "Der Metabolismus versteht Architektur als veränderbares System mit austauschbaren Teilen.",
+  "einordnung": "Metabolismus / austauschbare Module."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-11 - Unabhängigkeit, Wachstum, Utopien",
+  "name": "Cluster in the Air",
+  "meta": "Arata Isozaki | 1962",
+  "bildmerkmale": "baumartig verzweigte Clusterstruktur.",
+  "form": "Baumartig verzweigte Trägerstrukturen tragen einzelne Einheiten über dem Boden.",
+  "konstruktion": "Die Stadt wird als wachsendes, veränderbares System statt als dauerhaft fertige Form gedacht.",
+  "einordnung": "metabolistische Wachstumsvision."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-11 - Unabhängigkeit, Wachstum, Utopien",
+  "name": "Walking City",
+  "meta": "Ron Herron / Archigram | 1964",
+  "bildmerkmale": "riesige mobile Maschinen-Städte auf Beinen.",
+  "form": "Gigantische technische Stadtorganismen stehen auf beweglichen Beinen und wirken wie Maschinen.",
+  "konstruktion": "Die gesamte Stadt wird mobil gedacht; damit wird die traditionelle ortsfeste Architektur radikal infrage gestellt.",
+  "einordnung": "Utopie: mobile Stadt."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-11 - Unabhängigkeit, Wachstum, Utopien",
+  "name": "Superstudio - Reise A nach B",
+  "meta": "1969",
+  "bildmerkmale": "endloses Raster über Landschaft.",
+  "form": "Ein endloses geometrisches Raster überzieht Landschaft und bestehende Umwelt.",
+  "konstruktion": "Die Darstellung ist keine realistische Bauanweisung, sondern eine radikale Kritik an Konsum, Stadt und Architekturproduktion.",
+  "einordnung": "radikale Utopie / Kritik bestehender Stadtstrukturen."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-12 - Postmoderne und High-Tech",
+  "name": "Museo Castelvecchio",
+  "meta": "Carlo Scarpa | Verona | Umbau 1956-1964",
+  "bildmerkmale": "präzise neue Einbauten im historischen Bestand.",
+  "form": "Neue Bauteile werden bewusst als moderne Eingriffe in den historischen Bestand lesbar gelassen.",
+  "konstruktion": "Materialwechsel, Fugen und präzise Details inszenieren den Dialog zwischen Alt und Neu.",
+  "einordnung": "Genius Loci / Alt und Neu."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-12 - Postmoderne und High-Tech",
+  "name": "Vanna Venturi House",
+  "meta": "Robert Venturi | Chestnut Hill | 1962-1964",
+  "bildmerkmale": "überzeichneter Giebel und gebrochene Symmetrie.",
+  "form": "Der vertraute Hausgiebel wird überzeichnet und durch widersprüchliche Details gebrochen.",
+  "konstruktion": "Historische Zeichen werden bewusst zitiert; Komplexität ersetzt die Reinheit der klassischen Moderne.",
+  "einordnung": "Postmoderne: Komplexität und Widerspruch."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-12 - Postmoderne und High-Tech",
+  "name": "Duck vs. Decorated Shed",
+  "meta": "Venturi / Scott Brown | Konzept",
+  "bildmerkmale": "Gebäude als Formzeichen vs. beschriftete einfache Hülle.",
+  "form": "Das Diagramm unterscheidet Gebäudeform als direktes Symbol vom neutralen Bau mit aufgesetzter Zeichenebene.",
+  "konstruktion": "Es dient als Schlüsselbegriff für Venturi/Scott Browns Kritik an einer rein formalen Moderne.",
+  "einordnung": "Architektur als Zeichen und Kommunikation."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-12 - Postmoderne und High-Tech",
+  "name": "Piazza d'Italia",
+  "meta": "Charles Moore | New Orleans | 1974-1978",
+  "bildmerkmale": "bunte klassische Zitate und Kulissen.",
+  "form": "Säulen, Bögen und klassische Motive werden farbig und spielerisch verfremdet.",
+  "konstruktion": "Geschichte erscheint als bewusstes Zitat und Zeichen - nicht als ernsthafte historische Rekonstruktion.",
+  "einordnung": "spielerische postmoderne Historienzitate."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-12 - Postmoderne und High-Tech",
+  "name": "Neue Staatsgalerie",
+  "meta": "James Stirling + Michael Wilford | Stuttgart | 1977-1984",
+  "bildmerkmale": "Rotunde, historische Zitate, Farbe.",
+  "form": "Die zentrale Rotunde greift den klassischen Museumstyp auf, wird aber mit Rampen, Farbe und Technik kombiniert.",
+  "konstruktion": "Historische Zitate und moderne Elemente stehen bewusst nebeneinander und erzeugen postmoderne Mehrdeutigkeit.",
+  "einordnung": "Postmoderne: Geschichte + moderne Technik."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-12 - Postmoderne und High-Tech",
+  "name": "Centre Georges Pompidou",
+  "meta": "Renzo Piano + Richard Rogers | Paris | 1971-1977",
+  "bildmerkmale": "Konstruktion und Haustechnik außen.",
+  "form": "Tragwerk, Erschließung und Haustechnik werden demonstrativ an die Außenseite gelegt.",
+  "konstruktion": "Der Innenraum bleibt dadurch flexibel; technische Systeme selbst werden zum architektonischen Ausdruck.",
+  "einordnung": "High-Tech: technische Systeme als Ausdruck."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-13 - Architektur seit den 1980ern",
+  "name": "Stadthaus Ulm",
+  "meta": "Richard Meier | 1986-1993",
+  "bildmerkmale": "weiße geometrische Baukörper.",
+  "form": "Weiße geometrische Baukörper und klar geschnittene Flächen erinnern an die abstrakte Formensprache der Moderne.",
+  "konstruktion": "Die Komposition bleibt rational und präzise, wird aber als eigenständiger spätmoderner Stadtbaustein eingesetzt.",
+  "einordnung": "Spätmoderne / abstrakte Moderne."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-13 - Architektur seit den 1980ern",
+  "name": "Bundeskanzleramt",
+  "meta": "Schultes Frank Architekten | Berlin | 1997-2001",
+  "bildmerkmale": "großer weißer Regierungsbau mit zentralem Kubus.",
+  "form": "Große geometrische Volumen und markante Öffnungen erzeugen eine starke staatliche Präsenz.",
+  "konstruktion": "Der Bau verbindet moderne Abstraktion mit der Aufgabe politischer Repräsentation im neuen Regierungsviertel.",
+  "einordnung": "Spätmoderne staatliche Repräsentation."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-13 - Architektur seit den 1980ern",
+  "name": "Vitra Konferenzzentrum",
+  "meta": "Tadao Ando | Weil am Rhein | 1989-1993",
+  "bildmerkmale": "ruhiger Sichtbetonbau, klare Geometrie.",
+  "form": "Glatter Sichtbeton, einfache Geometrien und kontrollierte Blick- und Wegbeziehungen bestimmen die Wirkung.",
+  "konstruktion": "Reduktion von Material und Form richtet die Aufmerksamkeit auf Raum, Licht und Bewegung.",
+  "einordnung": "Minimalismus."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-13 - Architektur seit den 1980ern",
+  "name": "VitraHaus",
+  "meta": "Herzog & de Meuron | Weil am Rhein | 2010",
+  "bildmerkmale": "gestapelte archetypische Hauskörper.",
+  "form": "Archetypische Hausformen werden mehrfach gestapelt, gedreht und ineinander verschränkt.",
+  "konstruktion": "Das vertraute Bild des Hauses wird zu einer komplexen räumlichen und skulpturalen Komposition.",
+  "einordnung": "zeitgenössisches Spiel mit Hausform."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-13 - Architektur seit den 1980ern",
+  "name": "Vitra Design Museum",
+  "meta": "Frank O. Gehry | Weil am Rhein | 1987-1989",
+  "bildmerkmale": "zersplitterte weiße Volumen.",
+  "form": "Weiße Baukörper werden gegeneinander verschoben und zu einer fragmentierten Silhouette kombiniert.",
+  "konstruktion": "Die Komposition löst die klare orthogonale Ordnung auf und erzeugt Bewegung und Spannung.",
+  "einordnung": "Dekonstruktivismus."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-13 - Architektur seit den 1980ern",
+  "name": "Feuerwache Vitra",
+  "meta": "Zaha Hadid | Weil am Rhein | 1994",
+  "bildmerkmale": "scharfe schräge Betonflächen.",
+  "form": "Scharfe, schräge Betonflächen schneiden durch den Raum und erzeugen starke Richtungen.",
+  "konstruktion": "Die Architektur wirkt wie eingefrorene Bewegung und ist typisch für dekonstruktivistische Formexperimente.",
+  "einordnung": "Dekonstruktivismus / dynamische Raumrichtung."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-13 - Architektur seit den 1980ern",
+  "name": "Niederländischer Pavillon Expo 2000",
+  "meta": "MVRDV | Hannover | 1997-2000",
+  "bildmerkmale": "gestapelte Landschaftsebenen.",
+  "form": "Unterschiedliche Nutzungs- und Landschaftsschichten werden vertikal übereinandergestapelt.",
+  "konstruktion": "Das Gebäude interpretiert knappen Boden als künstliche mehrgeschossige Landschaft.",
+  "einordnung": "struktureller Ausdruck / künstliche Landschaft."
+ },
+ {
+  "altklausur": true,
+  "thema": "II-13 - Architektur seit den 1980ern",
+  "name": "Elbphilharmonie",
+  "meta": "Herzog & de Meuron | Hamburg | 2007-2016",
+  "bildmerkmale": "Backsteinsockel + gläserne Welle.",
+  "form": "Der massive historische Backsteinspeicher bildet einen klaren Sockel für den gläsernen Neubau.",
+  "konstruktion": "Die wellenförmige Dachlinie und die transparente Fassade machen den neuen Konzertbau als eigene Zeitschicht sichtbar.",
+  "einordnung": "Altbestand + ikonischer Neubau."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-13 - Architektur seit den 1980ern",
+  "name": "Mercedes-Benz Museum",
+  "meta": "UNStudio | Stuttgart | 2001-2006",
+  "bildmerkmale": "runder dynamischer Baukörper.",
+  "form": "Der runde Baukörper organisiert den Besuch über kontinuierliche, sich verschränkende Wege und Rampen.",
+  "konstruktion": "Bewegung, Tragstruktur und Ausstellungskonzept werden zu einer komplexen räumlichen Gesamtform verbunden.",
+  "einordnung": "komplexe räumliche Organisation."
+ },
+ {
+  "altklausur": false,
+  "thema": "II-13 - Architektur seit den 1980ern",
+  "name": "Humboldtforum / Berliner Schloss",
+  "meta": "Franco Stella | Berlin | 2013-2021",
+  "bildmerkmale": "rekonstruierte Schlossfassaden.",
+  "form": "Historische Schlossfassaden werden rekonstruiert, während andere Teile als heutige Architektur erkennbar bleiben.",
+  "konstruktion": "Das Projekt steht für die Debatte um Rekonstruktion, Erinnerung und historische Identität im Stadtraum.",
+  "einordnung": "Rekonstruktion / Neuer Historismus."
+ }
+]
