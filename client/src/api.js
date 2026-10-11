@@ -23,13 +23,14 @@ async function request(path, options = {}) {
   const data = await res.json().catch(() => ({}))
 
   if (!res.ok) {
-    throw new Error(data.error || 'Bir hata oluştu.')
+    throw new Error(data.error || 'Ein Fehler ist aufgetreten.')
   }
 
   return data
 }
 
 export const api = {
+  listUsers: () => request('/auth/users'),
   login: (username, password) =>
     request('/auth/login', { method: 'POST', body: JSON.stringify({ username, password }) }),
   me: () => request('/auth/me'),

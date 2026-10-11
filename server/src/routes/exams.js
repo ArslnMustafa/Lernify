@@ -33,7 +33,7 @@ router.get("/:id", (req, res) => {
   const examId = Number(req.params.id);
 
   if (!assertAssigned(examId, req.user.id)) {
-    return res.status(404).json({ error: "Sınav bulunamadı." });
+    return res.status(404).json({ error: "Prüfung nicht gefunden." });
   }
 
   const exam = db.prepare("SELECT id, title, description FROM exams WHERE id = ?").get(examId);
@@ -51,12 +51,12 @@ router.post("/:id/submit", (req, res) => {
   const examId = Number(req.params.id);
 
   if (!assertAssigned(examId, req.user.id)) {
-    return res.status(404).json({ error: "Sınav bulunamadı." });
+    return res.status(404).json({ error: "Prüfung nicht gefunden." });
   }
 
   const { answers } = req.body || {};
   if (!Array.isArray(answers)) {
-    return res.status(400).json({ error: "Cevaplar geçersiz." });
+    return res.status(400).json({ error: "Ungültige Antworten." });
   }
 
   const questions = db

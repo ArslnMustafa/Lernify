@@ -45,7 +45,7 @@ export default function ExamTake() {
   }
 
   if (loading) {
-    return <Centered>Yükleniyor...</Centered>
+    return <Centered>Wird geladen...</Centered>
   }
 
   if (error && !exam) {
@@ -61,13 +61,13 @@ export default function ExamTake() {
             {result.score}/{result.total}
           </p>
           <p className="text-xs text-[#948773] mb-6">
-            {Math.round((result.score / result.total) * 100)}% doğru
+            {Math.round((result.score / result.total) * 100)}% richtig
           </p>
           <Link
             to="/"
             className="inline-block w-full py-2.5 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-medium hover:bg-[#24211a] transition"
           >
-            Sınavlarıma dön
+            Zurück zu meinen Prüfungen
           </Link>
         </div>
       </div>
@@ -83,10 +83,10 @@ export default function ExamTake() {
       <div className="max-w-xl mx-auto">
         <div className="flex items-center justify-between mb-4">
           <Link to="/" className="text-xs text-[#736856] hover:text-[#24211a]">
-            ← Geri
+            ← Übersicht
           </Link>
           <span className="text-xs text-[#948773]">
-            Soru {current + 1} / {questions.length}
+            Frage {current + 1} / {questions.length}
           </span>
         </div>
 
@@ -144,7 +144,7 @@ export default function ExamTake() {
             disabled={current === 0}
             className="px-4 py-2 rounded-xl text-xs font-medium text-[#736856] disabled:opacity-40"
           >
-            Önceki
+            Vorherige
           </button>
 
           {isLast ? (
@@ -153,7 +153,7 @@ export default function ExamTake() {
               disabled={!allAnswered || submitting}
               className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-medium hover:bg-[#24211a] transition disabled:opacity-40"
             >
-              {submitting ? 'Gönderiliyor...' : 'Sınavı bitir'}
+              {submitting ? 'Wird gesendet...' : 'Prüfung beenden'}
             </button>
           ) : (
             <button
@@ -161,7 +161,7 @@ export default function ExamTake() {
               disabled={answers[current] === null}
               className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#f2eee9] text-sm font-medium hover:bg-[#24211a] transition disabled:opacity-40"
             >
-              Sonraki
+              Weiter
             </button>
           )}
         </div>
@@ -185,7 +185,7 @@ function OpenQuestion({
         rows={4}
         value={draft}
         onChange={(e) => onDraftChange(e.target.value)}
-        placeholder="Cevabını buraya yazabilirsin..."
+        placeholder="Schreib deine Antwort hier..."
         className="w-full p-3.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-sm outline-none text-[#24211a] focus:ring-1 focus:ring-[#3d372c] transition resize-none"
       />
 
@@ -194,13 +194,13 @@ function OpenQuestion({
           onClick={onReveal}
           className="self-start px-4 py-2 rounded-xl bg-[#f5f2eb] border border-[#e8e2d5] text-xs font-medium text-[#595042] hover:border-[#b8ab97] transition"
         >
-          Model cevabı göster
+          Musterlösung anzeigen
         </button>
       ) : (
         <>
           <div className="p-4 bg-[#f5f2eb] border border-[#e8e2d5] rounded-xl">
             <p className="text-[11px] font-semibold text-[#948773] uppercase tracking-wider mb-2">
-              Model cevap
+              Musterlösung
             </p>
             {/* Seeded course material, authored in the reference catalogue with inline <i>/<b> markup. */}
             <div
@@ -210,7 +210,7 @@ function OpenQuestion({
           </div>
 
           <div>
-            <p className="text-xs text-[#736856] mb-2">Kendini değerlendir:</p>
+            <p className="text-xs text-[#736856] mb-2">Bewerte dich selbst:</p>
             <div className="flex gap-2">
               <button
                 onClick={() => onSelfRate(true)}
@@ -220,7 +220,7 @@ function OpenQuestion({
                     : 'bg-[#f5f2eb]/50 text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
                 }`}
               >
-                Doğru bildim
+                Gewusst
               </button>
               <button
                 onClick={() => onSelfRate(false)}
@@ -230,7 +230,7 @@ function OpenQuestion({
                     : 'bg-[#f5f2eb]/50 text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
                 }`}
               >
-                Bilemedim
+                Nicht gewusst
               </button>
             </div>
           </div>

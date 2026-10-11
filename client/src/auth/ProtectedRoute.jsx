@@ -7,7 +7,7 @@ export default function ProtectedRoute({ children }) {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f2eee9] text-[#736856] text-sm">
-        Yükleniyor...
+        Wird geladen...
       </div>
     )
   }

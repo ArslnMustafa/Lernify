@@ -27,25 +27,25 @@ export default function Dashboard() {
             </div>
             <div>
               <h1 className="text-sm font-bold text-[#24211a]">Lernify</h1>
-              <p className="text-[11px] text-[#736856]">Merhaba, {user.name}</p>
+              <p className="text-[11px] text-[#736856]">Hallo, {user.name}</p>
             </div>
           </div>
           <button
             onClick={logout}
             className="text-xs font-medium text-[#736856] hover:text-[#24211a] transition"
           >
-            Çıkış yap
+            Abmelden
           </button>
         </div>
       </header>
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
-        <h2 className="text-base font-bold text-[#24211a] mb-4">Sınavlarım</h2>
+        <h2 className="text-base font-bold text-[#24211a] mb-4">Meine Prüfungen</h2>
 
-        {loading && <p className="text-sm text-[#736856]">Yükleniyor...</p>}
+        {loading && <p className="text-sm text-[#736856]">Wird geladen...</p>}
         {error && <p className="text-sm text-red-600">{error}</p>}
         {!loading && exams.length === 0 && (
-          <p className="text-sm text-[#736856]">Henüz sana atanmış bir sınav yok.</p>
+          <p className="text-sm text-[#736856]">Dir wurde noch keine Prüfung zugewiesen.</p>
         )}
 
         <div className="grid gap-3 sm:grid-cols-2">
@@ -60,9 +60,9 @@ export default function Dashboard() {
                 <p className="text-xs text-[#736856] mb-3">{exam.description}</p>
               )}
               <div className="flex items-center justify-between text-[11px] text-[#948773]">
-                <span>{exam.question_count} soru</span>
+                <span>{exam.question_count} Fragen</span>
                 {exam.best_score !== null && (
-                  <span>En iyi: {exam.best_score}/{exam.question_count}</span>
+                  <span>Bestes Ergebnis: {exam.best_score}/{exam.question_count}</span>
                 )}
               </div>
             </Link>

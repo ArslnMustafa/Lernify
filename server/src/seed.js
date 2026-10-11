@@ -7,16 +7,19 @@ const { baseBuildings, theoryItems, zeynepSpecialQuestions } = JSON.parse(
   fs.readFileSync(path.join(__dirname, "..", "data", "baugeschichte.json"), "utf8")
 );
 
+// Exam content is rebuilt from scratch; accounts and their passwords are kept.
 db.exec(`
   DELETE FROM attempts;
   DELETE FROM exam_assignments;
   DELETE FROM questions;
   DELETE FROM exams;
-  DELETE FROM users;
 `);
 
-function createUser(username, name, password) {
-  const { hash, salt } = hashPassword(password);
+function getOrCreateUser(username, name, defaultPassword) {
+  const existing = db.prepare("SELECT id FROM users WHERE username = ?").get(username);
+  if (existing) return existing.id;
+
+  const { hash, salt } = hashPassword(defaultPassword);
   return db
     .prepare(
       "INSERT INTO users (username, name, password_hash, password_salt) VALUES (?, ?, ?, ?)"
@@ -90,20 +93,20 @@ function buildingQuestion(building, allArchitects) {
 
   return {
     type: "single",
-    text: `"${building.name}" (${building.location}, ${building.year}) — bu yapının mimarı kimdir?`,
+    text: `Wer ist der Architekt des Bauwerks "${building.name}" (${building.location}, ${building.year})?`,
     imageUrl: building.image,
     options,
     correctIndex: options.indexOf(building.architect),
   };
 }
 
-const zeynepId = createUser("zeynep", "Zeynep", "zeynep123");
-const mustafaId = createUser("mustafa", "Mustafa", "mustafa123");
+const zeynepId = getOrCreateUser("zeynep", "Zeynep", "zeynep123");
+const mustafaId = getOrCreateUser("mustafa", "Mustafa", "mustafa123");
 
 // 1) Theory catalogue: open questions, self-assessed against the reference answer.
 createExam(
-  "Baugeschichte II — Teori Soruları",
-  `Ders notlarından ${theoryItems.length} soruluk ayrıntılı soru-cevap kataloğu. Cevabını yazıp model cevapla karşılaştır.`,
+  "Baugeschichte II — Theoriefragen",
+  `Ausführlicher Fragen- und Antwortenkatalog aus dem Skript: ${theoryItems.length} Fragen. Schreib deine Antwort und vergleiche sie mit der Musterlösung.`,
   [zeynepId],
   theoryItems.map((item) => ({
     type: "open",
@@ -135,8 +138,8 @@ for (let c = 0; c < chunkCount; c++) {
   }
 
   createExam(
-    `Baugeschichte II — Yapı Tanıma ${c + 1}/${chunkCount}`,
-    `${chunk.length} yapı: görselden mimarı bilme alıştırması.`,
+    `Baugeschichte II — Bauwerke erkennen ${c + 1}/${chunkCount}`,
+    `${chunk.length} Bauwerke: Erkenne den Architekten am Bild.`,
     [zeynepId],
     questions
   );
