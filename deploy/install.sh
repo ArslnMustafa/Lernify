@@ -4,7 +4,7 @@
 set -euo pipefail
 
 REPO_URL="https://github.com/ArslnMustafa/Lernify.git"
-BRANCH="claude/eager-hawking-l8jrdo"
+BRANCH="${LERNIFY_BRANCH:-main}"
 BASE_DIR="${LERNIFY_BASE_DIR:-/home/mustafaarslan.com}"
 APP_DIR="$BASE_DIR/Lernify"
 PM2_NAME="lernify"
