@@ -39,10 +39,10 @@ router.get("/:id", (req, res) => {
   const exam = db.prepare("SELECT id, title, description FROM exams WHERE id = ?").get(examId);
   const questions = db
     .prepare(
-      "SELECT id, order_index, text, image_url, options FROM questions WHERE exam_id = ? ORDER BY order_index"
+      "SELECT id, order_index, type, text, image_url, options, answer_text FROM questions WHERE exam_id = ? ORDER BY order_index"
     )
     .all(examId)
-    .map((q) => ({ ...q, options: JSON.parse(q.options) }));
+    .map((q) => ({ ...q, options: q.options ? JSON.parse(q.options) : null }));
 
   res.json({ exam, questions });
 });
@@ -61,16 +61,22 @@ router.post("/:id/submit", (req, res) => {
 
   const questions = db
     .prepare(
-      "SELECT id, order_index, correct_index FROM questions WHERE exam_id = ? ORDER BY order_index"
+      "SELECT id, order_index, type, correct_index FROM questions WHERE exam_id = ? ORDER BY order_index"
     )
     .all(examId);
 
   let score = 0;
   const results = questions.map((q, i) => {
-    const givenIndex = answers[i] ?? null;
-    const isCorrect = givenIndex === q.correct_index;
+    const given = answers[i] ?? null;
+    // Open questions are self-assessed by the learner, so the client sends a boolean.
+    const isCorrect = q.type === "open" ? given === true : given === q.correct_index;
     if (isCorrect) score += 1;
-    return { questionId: q.id, givenIndex, correctIndex: q.correct_index, isCorrect };
+    return {
+      questionId: q.id,
+      given,
+      correctIndex: q.type === "open" ? null : q.correct_index,
+      isCorrect,
+    };
   });
 
   db.prepare(

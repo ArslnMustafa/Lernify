@@ -8,6 +8,8 @@ export default function ExamTake() {
   const [questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState([])
   const [current, setCurrent] = useState(0)
+  const [revealed, setRevealed] = useState({})
+  const [drafts, setDrafts] = useState({})
   const [result, setResult] = useState(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
@@ -25,8 +27,8 @@ export default function ExamTake() {
       .finally(() => setLoading(false))
   }, [id])
 
-  function selectAnswer(index) {
-    setAnswers((prev) => prev.map((a, i) => (i === current ? index : a)))
+  function selectAnswer(value) {
+    setAnswers((prev) => prev.map((a, i) => (i === current ? value : a)))
   }
 
   async function handleSubmit() {
@@ -95,25 +97,43 @@ export default function ExamTake() {
             <img
               src={question.image_url}
               alt=""
+              // Images are hotlinked from Wikimedia; hide the gap if one is unavailable.
+              onError={(e) => {
+                e.currentTarget.style.display = 'none'
+              }}
               className="w-full rounded-xl mb-5 object-cover max-h-64"
             />
           )}
 
-          <div className="flex flex-col gap-2">
-            {question.options.map((option, i) => (
-              <button
-                key={i}
-                onClick={() => selectAnswer(i)}
-                className={`text-left px-4 py-3 rounded-xl text-sm border transition ${
-                  answers[current] === i
-                    ? 'bg-[#3d372c] text-[#f2eee9] border-[#3d372c]'
-                    : 'bg-[#f5f2eb]/50 text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
-                }`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
+          {question.type === 'open' ? (
+            <OpenQuestion
+              question={question}
+              draft={drafts[current] || ''}
+              onDraftChange={(value) =>
+                setDrafts((prev) => ({ ...prev, [current]: value }))
+              }
+              revealed={!!revealed[current]}
+              onReveal={() => setRevealed((prev) => ({ ...prev, [current]: true }))}
+              selfRating={answers[current]}
+              onSelfRate={selectAnswer}
+            />
+          ) : (
+            <div className="flex flex-col gap-2">
+              {question.options.map((option, i) => (
+                <button
+                  key={i}
+                  onClick={() => selectAnswer(i)}
+                  className={`text-left px-4 py-3 rounded-xl text-sm border transition ${
+                    answers[current] === i
+                      ? 'bg-[#3d372c] text-[#f2eee9] border-[#3d372c]'
+                      : 'bg-[#f5f2eb]/50 text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
+                  }`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {error && <p className="text-xs text-red-600 mt-3">{error}</p>}
@@ -146,6 +166,76 @@ export default function ExamTake() {
           )}
         </div>
       </div>
+    </div>
+  )
+}
+
+function OpenQuestion({
+  question,
+  draft,
+  onDraftChange,
+  revealed,
+  onReveal,
+  selfRating,
+  onSelfRate,
+}) {
+  return (
+    <div className="flex flex-col gap-4">
+      <textarea
+        rows={4}
+        value={draft}
+        onChange={(e) => onDraftChange(e.target.value)}
+        placeholder="Cevabını buraya yazabilirsin..."
+        className="w-full p-3.5 bg-[#f5f2eb]/50 border border-[#e8e2d5] rounded-xl text-sm outline-none text-[#24211a] focus:ring-1 focus:ring-[#3d372c] transition resize-none"
+      />
+
+      {!revealed ? (
+        <button
+          onClick={onReveal}
+          className="self-start px-4 py-2 rounded-xl bg-[#f5f2eb] border border-[#e8e2d5] text-xs font-medium text-[#595042] hover:border-[#b8ab97] transition"
+        >
+          Model cevabı göster
+        </button>
+      ) : (
+        <>
+          <div className="p-4 bg-[#f5f2eb] border border-[#e8e2d5] rounded-xl">
+            <p className="text-[11px] font-semibold text-[#948773] uppercase tracking-wider mb-2">
+              Model cevap
+            </p>
+            {/* Seeded course material, authored in the reference catalogue with inline <i>/<b> markup. */}
+            <div
+              className="text-sm text-[#3d372c] leading-relaxed [&_b]:font-semibold [&_i]:italic"
+              dangerouslySetInnerHTML={{ __html: question.answer_text }}
+            />
+          </div>
+
+          <div>
+            <p className="text-xs text-[#736856] mb-2">Kendini değerlendir:</p>
+            <div className="flex gap-2">
+              <button
+                onClick={() => onSelfRate(true)}
+                className={`px-4 py-2 rounded-xl text-sm border transition ${
+                  selfRating === true
+                    ? 'bg-emerald-700 text-white border-emerald-700'
+                    : 'bg-[#f5f2eb]/50 text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
+                }`}
+              >
+                Doğru bildim
+              </button>
+              <button
+                onClick={() => onSelfRate(false)}
+                className={`px-4 py-2 rounded-xl text-sm border transition ${
+                  selfRating === false
+                    ? 'bg-[#8c4b3f] text-white border-[#8c4b3f]'
+                    : 'bg-[#f5f2eb]/50 text-[#24211a] border-[#e8e2d5] hover:border-[#b8ab97]'
+                }`}
+              >
+                Bilemedim
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }

@@ -27,10 +27,12 @@ db.exec(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     exam_id INTEGER NOT NULL REFERENCES exams(id) ON DELETE CASCADE,
     order_index INTEGER NOT NULL,
+    type TEXT NOT NULL DEFAULT 'single',
     text TEXT NOT NULL,
     image_url TEXT,
-    options TEXT NOT NULL,
-    correct_index INTEGER NOT NULL
+    options TEXT,
+    correct_index INTEGER,
+    answer_text TEXT
   );
 
   CREATE TABLE IF NOT EXISTS exam_assignments (

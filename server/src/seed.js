@@ -1,5 +1,11 @@
+const fs = require("fs");
+const path = require("path");
 const db = require("./db");
 const { hashPassword } = require("./password");
+
+const { baseBuildings, theoryItems, zeynepSpecialQuestions } = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "..", "data", "baugeschichte.json"), "utf8")
+);
 
 db.exec(`
   DELETE FROM attempts;
@@ -11,102 +17,163 @@ db.exec(`
 
 function createUser(username, name, password) {
   const { hash, salt } = hashPassword(password);
-  const info = db
+  return db
     .prepare(
       "INSERT INTO users (username, name, password_hash, password_salt) VALUES (?, ?, ?, ?)"
     )
-    .run(username, name, hash, salt);
-  return info.lastInsertRowid;
+    .run(username, name, hash, salt).lastInsertRowid;
 }
 
 function createExam(title, description, userIds, questions) {
-  const examInfo = db
+  const examId = db
     .prepare("INSERT INTO exams (title, description) VALUES (?, ?)")
-    .run(title, description);
-  const examId = examInfo.lastInsertRowid;
+    .run(title, description).lastInsertRowid;
 
   for (const userId of userIds) {
-    db.prepare(
-      "INSERT INTO exam_assignments (exam_id, user_id) VALUES (?, ?)"
-    ).run(examId, userId);
+    db.prepare("INSERT INTO exam_assignments (exam_id, user_id) VALUES (?, ?)").run(
+      examId,
+      userId
+    );
   }
 
+  const insert = db.prepare(
+    `INSERT INTO questions (exam_id, order_index, type, text, image_url, options, correct_index, answer_text)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+  );
+
   questions.forEach((q, i) => {
-    db.prepare(
-      "INSERT INTO questions (exam_id, order_index, text, image_url, options, correct_index) VALUES (?, ?, ?, ?, ?, ?)"
-    ).run(examId, i, q.text, q.imageUrl || null, JSON.stringify(q.options), q.correctIndex);
+    insert.run(
+      examId,
+      i,
+      q.type,
+      q.text,
+      q.imageUrl || null,
+      q.options ? JSON.stringify(q.options) : null,
+      q.correctIndex ?? null,
+      q.answerText || null
+    );
   });
 
   return examId;
 }
 
+// Deterministic PRNG so re-seeding produces the same distractors and order.
+function makeRandom(seed) {
+  let state = seed;
+  return () => {
+    state = (state * 1103515245 + 12345) % 2147483648;
+    return state / 2147483648;
+  };
+}
+
+const random = makeRandom(20251011);
+
+function pickDistractors(correct, pool, count) {
+  const candidates = [...new Set(pool)].filter((v) => v !== correct);
+  const picked = [];
+  while (picked.length < count && candidates.length > 0) {
+    const idx = Math.floor(random() * candidates.length);
+    picked.push(candidates.splice(idx, 1)[0]);
+  }
+  return picked;
+}
+
+function buildingQuestion(building, allArchitects) {
+  const distractors = pickDistractors(building.architect, allArchitects, 3);
+  const options = [building.architect, ...distractors];
+
+  // Shuffle so the correct answer is not always first.
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+
+  return {
+    type: "single",
+    text: `"${building.name}" (${building.location}, ${building.year}) — bu yapının mimarı kimdir?`,
+    imageUrl: building.image,
+    options,
+    correctIndex: options.indexOf(building.architect),
+  };
+}
+
 const zeynepId = createUser("zeynep", "Zeynep", "zeynep123");
 const mustafaId = createUser("mustafa", "Mustafa", "mustafa123");
 
+// 1) Theory catalogue: open questions, self-assessed against the reference answer.
 createExam(
-  "Mimarlık Tarihi II",
-  "Modern ve postmodern mimarlık üzerine temel bilgi sınavı.",
+  "Baugeschichte II — Teori Soruları",
+  `Ders notlarından ${theoryItems.length} soruluk ayrıntılı soru-cevap kataloğu. Cevabını yazıp model cevapla karşılaştır.`,
   [zeynepId],
-  [
-    {
-      text: 'Villa Savoye\'nin mimarı kimdir?',
-      options: ["Walter Gropius", "Le Corbusier", "Mies van der Rohe", "Zaha Hadid"],
-      correctIndex: 1,
-    },
-    {
-      text: "Bauhaus Dessau binası hangi yıllar arasında inşa edilmiştir?",
-      options: ["1911–1913", "1925–1926", "1954–1958", "1993–1999"],
-      correctIndex: 1,
-    },
-    {
-      text: "Centre Pompidou'nun mimarları kimlerdir?",
-      options: [
-        "Richard Rogers & Renzo Piano",
-        "Daniel Libeskind",
-        "Charles Moore",
-        "Louis I. Kahn",
-      ],
-      correctIndex: 0,
-    },
-    {
-      text: "Hangi yapı Brutalizm akımının örneklerindendir?",
-      options: ["Barcelona-Pavillon", "Unité d'Habitation", "Seagram Building", "Piazza d'Italia"],
-      correctIndex: 1,
-    },
-    {
-      text: "Jüdisches Museum (Berlin) hangi mimari akıma aittir?",
-      options: ["Postmoderne", "Dekonstruktivismus", "Bauhaus", "International Style"],
-      correctIndex: 1,
-    },
-  ]
+  theoryItems.map((item) => ({
+    type: "open",
+    text: item.q.replace(/^\d+\.\s*/, ""),
+    answerText: item.a,
+  }))
 );
 
+// 2) Building recognition: the 150-building catalogue, split into sittings of 50.
+const allArchitects = baseBuildings.map((b) => b.architect);
+const CHUNK_SIZE = 50;
+const chunkCount = Math.ceil(baseBuildings.length / CHUNK_SIZE);
+
+for (let c = 0; c < chunkCount; c++) {
+  const chunk = baseBuildings.slice(c * CHUNK_SIZE, (c + 1) * CHUNK_SIZE);
+  const questions = chunk.map((b) => buildingQuestion(b, allArchitects));
+
+  // Zeynep's personal questions close out the final sitting.
+  if (c === chunkCount - 1) {
+    questions.push(
+      ...zeynepSpecialQuestions.map((q) => ({
+        type: "single",
+        text: q.title,
+        imageUrl: q.image,
+        options: q.options,
+        correctIndex: q.options.indexOf(q.correct),
+      }))
+    );
+  }
+
+  createExam(
+    `Baugeschichte II — Yapı Tanıma ${c + 1}/${chunkCount}`,
+    `${chunk.length} yapı: görselden mimarı bilme alıştırması.`,
+    [zeynepId],
+    questions
+  );
+}
+
+// 3) Placeholder exam for Mustafa until his own content arrives.
 createExam(
   "Genel Kültür Sınavı",
   "Karışık konularda temel genel kültür soruları.",
   [mustafaId],
   [
     {
+      type: "single",
       text: "Türkiye'nin başkenti neresidir?",
       options: ["İstanbul", "İzmir", "Ankara", "Bursa"],
       correctIndex: 2,
     },
     {
+      type: "single",
       text: "Güneş sisteminde Dünya'ya en yakın gezegen hangisidir?",
       options: ["Mars", "Venüs", "Jüpiter", "Merkür"],
       correctIndex: 1,
     },
     {
+      type: "single",
       text: "İnsan vücudundaki en büyük organ hangisidir?",
       options: ["Karaciğer", "Deri", "Akciğer", "Beyin"],
       correctIndex: 1,
     },
     {
+      type: "single",
       text: "Hangisi bir programlama dili değildir?",
       options: ["Python", "JavaScript", "HTML", "Java"],
       correctIndex: 2,
     },
     {
+      type: "single",
       text: "Dünyanın en uzun nehri hangisidir?",
       options: ["Amazon", "Nil", "Mississippi", "Yangtze"],
       correctIndex: 1,
@@ -114,6 +181,13 @@ createExam(
   ]
 );
 
+const counts = db
+  .prepare(
+    `SELECT e.title, COUNT(q.id) AS n
+     FROM exams e LEFT JOIN questions q ON q.exam_id = e.id
+     GROUP BY e.id ORDER BY e.id`
+  )
+  .all();
+
 console.log("Seed tamamlandı:");
-console.log("  zeynep / zeynep123 -> Mimarlık Tarihi II");
-console.log("  mustafa / mustafa123 -> Genel Kültür Sınavı");
+for (const row of counts) console.log(`  ${row.title} — ${row.n} soru`);
