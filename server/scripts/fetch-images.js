@@ -15,7 +15,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { keys, load, save, reader, FILE } = require("../src/bilder");
+const { keys, load, save, reader, istSchwacheQuelle, FILE } = require("../src/bilder");
 
 const DATA_DIR = path.join(__dirname, "..", "data");
 
@@ -34,25 +34,23 @@ const USER_AGENT = "Lernify/1.0 (Lernhilfe Baugeschichte; https://github.com/Ars
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// Google thumbnails are tiny and expire; other random hosts may block hotlinking.
-const isWeakSource = (url) => Boolean(url) && !/upload\.wikimedia\.org/.test(url);
-
 const normalise = (value) => value.toLowerCase().replace(/[^a-zäöüß0-9]/g, "");
 
 // Why the last attempt came back empty — printed so a throttled run is visible.
 let lastReason = null;
 
-// If request after request is refused there is no point in working through the
-// whole list for twenty minutes; the run stops and says so.
-const GIVE_UP_AFTER = 20;
-let failedInARow = 0;
+// A refused or unanswered request is about the connection, not about the
+// building: once a few in a row go unanswered there is no point in asking the
+// remaining strategies, and once whole entries fail that way there is no point
+// in working through the rest of the list.
+const REFUSED_PER_ENTRY = 3;
+const GIVE_UP_AFTER_ENTRIES = 4;
 
-class Blocked extends Error {}
+let refused = 0; // unanswered requests for the entry being looked up
 
-function giveUp(reason) {
+function unanswered(reason) {
   lastReason = reason;
-  failedInARow += 1;
-  if (failedInARow >= GIVE_UP_AFTER) throw new Blocked(reason);
+  refused += 1;
   return null;
 }
 
@@ -65,13 +63,13 @@ async function ask(url) {
       });
 
       if (response.ok) {
-        failedInARow = 0;
+        refused = 0;
         return await response.json();
       }
 
       // Throttling and server trouble are worth waiting out; a 403 is not.
       if (response.status !== 429 && response.status < 500) {
-        return giveUp(`HTTP ${response.status}`);
+        return unanswered(`HTTP ${response.status}`);
       }
       lastReason = `HTTP ${response.status}`;
 
@@ -79,11 +77,14 @@ async function ask(url) {
       await sleep(Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : attempt * 3000);
     } catch (error) {
       lastReason = error.name === "TimeoutError" ? "Zeitüberschreitung" : error.message;
-      await sleep(attempt * 1000);
+      // A name that does not resolve or a port that stays silent will not
+      // answer on the third try either.
+      if (attempt >= 2) break;
+      await sleep(1000);
     }
   }
 
-  return giveUp(lastReason || "unbekannt");
+  return unanswered(lastReason || "unbekannt");
 }
 
 // --- the four ways a picture can be found, from safest to loosest -----------
@@ -155,13 +156,15 @@ const STRATEGIES = [
 
 async function findImage(queries) {
   lastReason = null;
+  refused = 0;
 
   for (const strategy of STRATEGIES) {
     for (const wiki of WIKIS) {
       for (const query of queries) {
         const hit = await strategy.run(wiki, query);
-        await sleep(PAUSE_MS);
         if (hit) return { ...hit, exact: strategy.exact, strategy: strategy.name };
+        if (refused >= REFUSED_PER_ENTRY) return null; // nobody is answering
+        await sleep(PAUSE_MS);
       }
     }
   }
@@ -219,7 +222,7 @@ async function diagnose() {
     const wanted = queries.filter(Boolean);
     const image = bild(key, current);
     if (wanted.length === 0) return;
-    if (!image || (replaceWeakSources && isWeakSource(image))) {
+    if (!image || (replaceWeakSources && istSchwacheQuelle(image))) {
       targets.push({ key, label, queries: wanted });
     }
   };
@@ -259,29 +262,28 @@ async function diagnose() {
   console.log(`Bild gesucht für ${targets.length} Einträge\n`);
 
   let found = 0;
+  let stumm = 0; // entries in a row whose requests went unanswered
   const guessed = [];
   const missing = [];
 
   for (const [index, target] of targets.entries()) {
     process.stdout.write(`${index + 1}/${targets.length} ${target.label} ... `);
 
-    let hit = null;
-    try {
-      hit = await findImage(target.queries);
-    } catch (error) {
-      if (!(error instanceof Blocked)) throw error;
-      console.log(`kein Bild — ${error.message}`);
-      console.log(
-        `\nAbgebrochen: ${GIVE_UP_AFTER} Anfragen hintereinander ohne Antwort (${error.message}).` +
-          "\nWas los ist, zeigt:  node scripts/fetch-images.js pruefen" +
-          "\nDas Gefundene ist gespeichert, ein neuer Start macht da weiter."
-      );
-      break;
-    }
+    const hit = await findImage(target.queries);
 
     if (!hit) {
       missing.push(`${target.label}  (${lastReason || "unbekannt"})`);
       console.log(`kein Bild — ${lastReason || "unbekannt"}`);
+
+      stumm = refused >= REFUSED_PER_ENTRY ? stumm + 1 : 0;
+      if (stumm >= GIVE_UP_AFTER_ENTRIES) {
+        console.log(
+          `\nAbgebrochen: ${stumm} Einträge hintereinander ohne Antwort (${lastReason}).` +
+            "\nWas los ist, zeigt:  node scripts/fetch-images.js pruefen" +
+            "\nDas Gefundene ist gespeichert, ein neuer Start macht da weiter."
+        );
+        break;
+      }
       continue;
     }
 
@@ -292,6 +294,7 @@ async function diagnose() {
     };
     save(overlay); // after every hit, so an interrupted run keeps what it found
     found += 1;
+    stumm = 0;
 
     console.log(`ok  (${hit.wiki}: ${hit.title}${hit.exact ? "" : ` — ${hit.strategy}`})`);
     if (!hit.exact) guessed.push(`${target.label}  ->  ${hit.wiki}: ${hit.title}`);

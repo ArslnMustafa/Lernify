@@ -3,6 +3,12 @@ const path = require("path");
 const db = require("./db");
 const { hashPassword } = require("./password");
 const { keys, reader } = require("./bilder");
+const {
+  architektenFrage,
+  theorieFrage,
+  rueckblickFrage,
+  epochenFrage,
+} = require("./fragetexte");
 
 const dataFile = (name) =>
   JSON.parse(fs.readFileSync(path.join(__dirname, "..", "data", name), "utf8"));
@@ -116,7 +122,7 @@ function buildingQuestion(building, allArchitects) {
 
   return {
     type: "single",
-    text: `Wer ist der Architekt des Bauwerks "${building.name}" (${building.location}, ${building.year})?`,
+    text: architektenFrage(building),
     sourceKey: keys.bauwerk(building.name),
     imageUrl: buildingImage(building),
     options,
@@ -134,7 +140,7 @@ createExam(
   [zeynepId],
   theoryItems.map((item, index) => ({
     type: "open",
-    text: item.q.replace(/^\d+\.\s*/, ""),
+    text: theorieFrage(item),
     sourceKey: keys.theorie(index),
     imageUrl: bild(keys.theorie(index), item.image),
     answerText: item.a,
@@ -153,10 +159,11 @@ for (let c = 0; c < chunkCount; c++) {
   // Zeynep's personal questions close out the final sitting.
   if (c === chunkCount - 1) {
     questions.push(
-      ...zeynepSpecialQuestions.map((q) => ({
+      ...zeynepSpecialQuestions.map((q, index) => ({
         type: "single",
         text: q.title,
-        imageUrl: q.image,
+        sourceKey: keys.sonder(index),
+        imageUrl: bild(keys.sonder(index), q.image),
         options: q.options,
         correctIndex: q.options.indexOf(q.correct),
       }))
@@ -177,7 +184,7 @@ for (let c = 0; c < chunkCount; c++) {
 function rueckblickQuestion(card) {
   return {
     type: "open",
-    text: `„${card.name}" (${card.meta}) — beschreibe das Bauwerk mit mindestens vier Aussagen: Baukörper/Form, Material/Konstruktion, Fassade/Raum/Städtebau, Einordnung/Bedeutung.`,
+    text: rueckblickFrage(card),
     sourceKey: keys.karte(card.name),
     imageUrl: cardImage(card),
     answerText:
@@ -227,7 +234,7 @@ createExam(
     }
     return {
       type: "single",
-      text: `In welchen Zeitraum fällt die Epoche „${epoch.epoche}"?`,
+      text: epochenFrage(epoch),
       sourceKey: keys.epoche(epoch.epoche),
       imageUrl: epochImage(epoch),
       options,

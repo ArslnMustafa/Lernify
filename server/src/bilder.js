@@ -14,6 +14,7 @@ const keys = {
   karte: (name) => `karte:${name}`,
   theorie: (index) => `theorie:${index + 1}`,
   epoche: (name) => `epoche:${name}`,
+  sonder: (index) => `sonder:${index + 1}`,
 };
 
 function load() {
@@ -36,4 +37,9 @@ function reader(overlay = load()) {
   return (key, fallback = null) => overlay[key]?.image || fallback || null;
 }
 
-module.exports = { FILE, keys, load, save, reader };
+// Wikimedia serves its pictures from upload. and thumb.; anything else is a
+// Google thumbnail or a random host — small, and gone sooner or later.
+const istSchwacheQuelle = (url) =>
+  Boolean(url) && !/\.wikimedia\.org\//.test(url);
+
+module.exports = { FILE, keys, load, save, reader, istSchwacheQuelle };

@@ -6,13 +6,12 @@
 const fs = require("fs");
 const path = require("path");
 
-const { keys, reader } = require("../src/bilder");
+const { keys, reader, istSchwacheQuelle } = require("../src/bilder");
 
 const DATA_DIR = path.join(__dirname, "..", "data");
 const read = (file) => JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), "utf8"));
 
 const normalise = (value) => value.toLowerCase().replace(/[^a-zäöüß0-9]/g, "");
-const isWeakSource = (url) => Boolean(url) && !/upload\.wikimedia\.org/.test(url);
 
 const catalogue = read("baugeschichte.json");
 const cards = read("rueckblicke.json");
@@ -47,7 +46,10 @@ const groups = [
   ],
   [
     "Zeyneps Fragen",
-    catalogue.zeynepSpecialQuestions.map((q) => [q.title.slice(0, 50), q.image]),
+    catalogue.zeynepSpecialQuestions.map((q, i) => [
+      q.title.slice(0, 50),
+      bild(keys.sonder(i), q.image),
+    ]),
   ],
 ];
 
@@ -57,7 +59,7 @@ let weakTotal = 0;
 console.log("Datendateien");
 for (const [name, entries] of groups) {
   const missing = entries.filter(([, image]) => !image);
-  const weak = entries.filter(([, image]) => isWeakSource(image));
+  const weak = entries.filter(([, image]) => istSchwacheQuelle(image));
   missingTotal += missing.length;
   weakTotal += weak.length;
 

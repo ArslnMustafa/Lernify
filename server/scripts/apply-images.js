@@ -11,6 +11,12 @@ const fs = require("fs");
 const path = require("path");
 const db = require("../src/db");
 const { keys, reader } = require("../src/bilder");
+const {
+  architektenFrage,
+  theorieFrage,
+  rueckblickFrage,
+  epochenFrage,
+} = require("../src/fragetexte");
 
 const DATA_DIR = path.join(__dirname, "..", "data");
 const read = (file) => JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), "utf8"));
@@ -50,6 +56,34 @@ for (const epoch of epochen) {
     bild(keys.epoche(epoch.epoche), epoch.image) || catalogueByName.get(epoch.bildVon) || null
   );
 }
+
+// Questions seeded before they carried their origin have no source_key. They
+// are recognised by their wording, which is generated from the same data.
+const texts = new Map();
+for (const building of catalogue.baseBuildings) {
+  texts.set(architektenFrage(building), keys.bauwerk(building.name));
+}
+catalogue.theoryItems.forEach((item, index) => {
+  texts.set(theorieFrage(item), keys.theorie(index));
+});
+for (const card of cards) {
+  texts.set(rueckblickFrage(card), keys.karte(card.name));
+}
+for (const epoch of epochen) {
+  texts.set(epochenFrage(epoch), keys.epoche(epoch.epoche));
+}
+
+catalogue.zeynepSpecialQuestions.forEach((q, index) => {
+  images.set(keys.sonder(index), bild(keys.sonder(index), q.image));
+  texts.set(q.title, keys.sonder(index));
+});
+
+const setKey = db.prepare("UPDATE questions SET source_key = ? WHERE source_key IS NULL AND text = ?");
+let backfilled = 0;
+for (const [text, key] of texts) {
+  backfilled += Number(setKey.run(key, text).changes || 0);
+}
+if (backfilled > 0) console.log(`Herkunft nachgetragen: ${backfilled} Fragen`);
 
 const rows = db
   .prepare("SELECT id, source_key, image_url FROM questions WHERE source_key IS NOT NULL")
