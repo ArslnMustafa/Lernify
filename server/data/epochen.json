@@ -1,11 +1,56 @@
 [
-  { "epoche": "Klassizismus", "von": 1780, "bis": 1850 },
-  { "epoche": "Historismus", "von": 1850, "bis": 1900 },
-  { "epoche": "Industriearchitektur", "von": 1870, "bis": 1918 },
-  { "epoche": "Jugendstil", "von": 1890, "bis": 1910 },
-  { "epoche": "Expressionismus", "von": 1918, "bis": 1933 },
-  { "epoche": "Architektur in den Diktaturen", "von": 1933, "bis": 1945 },
-  { "epoche": "Moderne nach dem 2. Weltkrieg", "von": 1945, "bis": 1980 },
-  { "epoche": "Postmoderne", "von": 1960, "bis": 1990 },
-  { "epoche": "Moderne", "von": 1990, "bis": null }
+  {
+    "epoche": "Klassizismus",
+    "von": 1780,
+    "bis": 1850,
+    "bildSuche": "Brandenburger Tor"
+  },
+  {
+    "epoche": "Historismus",
+    "von": 1850,
+    "bis": 1900,
+    "bildSuche": "Schloss Neuschwanstein"
+  },
+  {
+    "epoche": "Industriearchitektur",
+    "von": 1870,
+    "bis": 1918,
+    "bildVon": "AEG Turbinenfabrik"
+  },
+  {
+    "epoche": "Jugendstil",
+    "von": 1890,
+    "bis": 1910,
+    "bildVon": "Secession Building"
+  },
+  {
+    "epoche": "Expressionismus",
+    "von": 1918,
+    "bis": 1933,
+    "bildVon": "Einsteinturm"
+  },
+  {
+    "epoche": "Architektur in den Diktaturen",
+    "von": 1933,
+    "bis": 1945,
+    "bildVon": "Zeppelinfeld"
+  },
+  {
+    "epoche": "Moderne nach dem 2. Weltkrieg",
+    "von": 1945,
+    "bis": 1980,
+    "bildVon": "Bundeshaus"
+  },
+  {
+    "epoche": "Postmoderne",
+    "von": 1960,
+    "bis": 1990,
+    "bildVon": "Neue Staatsgalerie"
+  },
+  {
+    "epoche": "Moderne",
+    "von": 1990,
+    "bis": null,
+    "bildVon": "Elbphilharmonie"
+  }
 ]

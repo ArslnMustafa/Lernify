@@ -32,7 +32,8 @@ db.exec(`
     image_url TEXT,
     options TEXT,
     correct_index INTEGER,
-    answer_text TEXT
+    answer_text TEXT,
+    source_key TEXT
   );
 
   CREATE TABLE IF NOT EXISTS exam_assignments (
@@ -68,6 +69,13 @@ db.exec(`
 const trainerColumns = db.prepare("PRAGMA table_info(trainer_progress)").all();
 if (!trainerColumns.some((column) => column.name === "kind")) {
   db.exec("ALTER TABLE trainer_progress ADD COLUMN kind TEXT");
+}
+
+// Says which building, card, epoch or theory question a question came from, so
+// scripts/apply-images.js can give it a picture without rebuilding the exams.
+const questionColumns = db.prepare("PRAGMA table_info(questions)").all();
+if (!questionColumns.some((column) => column.name === "source_key")) {
+  db.exec("ALTER TABLE questions ADD COLUMN source_key TEXT");
 }
 
 module.exports = db;

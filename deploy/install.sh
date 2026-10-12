@@ -61,9 +61,21 @@ say "Bagimliliklar kuruluyor"
 cd "$APP_DIR/server"
 npm install --omit=dev --no-audit --no-fund
 
+# Resimler Wikipedia'dan cekilir ve data/bilder.json dosyasinda durur. Dosya
+# git'e girmez, bu yuzden guncelleme sirasinda cakisma olmaz.
+if [ -f "data/bilder.json" ]; then
+  say "Resimler zaten indirilmis"
+  echo "Eksikleri aramak icin:  node scripts/fetch-images.js"
+else
+  say "Soru resimleri araniyor (birkac dakika surer)"
+  node scripts/fetch-images.js || echo "Resim indirme tamamlanmadi, sonra tekrar deneyebilirsin."
+fi
+
 if [ -f "lernify.db" ]; then
   say "Veritabani zaten var, dokunulmuyor"
   echo "Sifirdan kurmak istersen once lernify.db dosyasini sil."
+  say "Resimler mevcut sorulara isleniyor"
+  node scripts/apply-images.js
 else
   say "Veritabani olusturuluyor"
   node src/seed.js

@@ -3,6 +3,7 @@ const path = require("path");
 const express = require("express");
 const db = require("../db");
 const { requireAuth } = require("../middleware/auth");
+const { keys, reader } = require("../bilder");
 
 const router = express.Router();
 router.use(requireAuth);
@@ -17,7 +18,12 @@ const normalise = (value) => value.toLowerCase().replace(/[^a-zäöüß0-9]/g, "
 
 // The catalogue carries the images; the handout adds exam descriptions to the
 // ones it shares and 66 further buildings of its own.
-const buildings = baseBuildings.map((b, i) => ({ ...b, key: String(i) }));
+const bild = reader();
+const buildings = baseBuildings.map((b, i) => ({
+  ...b,
+  key: String(i),
+  image: bild(keys.bauwerk(b.name), b.image),
+}));
 const byName = new Map(buildings.map((b) => [normalise(b.name), b]));
 
 for (const card of rueckblicke) {
@@ -34,7 +40,7 @@ for (const card of rueckblicke) {
     architect: card.architect,
     year: card.year,
     style: card.thema,
-    image: null,
+    image: bild(keys.karte(card.name), card.image),
     bildmerkmale: card.bildmerkmale,
   };
   buildings.push(added);

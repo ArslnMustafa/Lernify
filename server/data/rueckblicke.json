@@ -10,7 +10,8 @@
   "einordnung": "neue Materialien und große verglaste Räume.",
   "architect": "W. & D. Bailey",
   "location": "South Devon",
-  "year": "ca. 1825"
+  "year": "ca. 1825",
+  "bildSuche": "Bicton Park Botanical Gardens palm house"
  },
  {
   "altklausur": true,
@@ -36,7 +37,8 @@
   "einordnung": "moderne Konstruktion + repräsentative Bahnhofsbauaufgabe.",
   "architect": "H. Eggert + J. W. Schwedler",
   "location": null,
-  "year": "1883–1888"
+  "year": "1883–1888",
+  "bildSuche": "Frankfurt (Main) Hauptbahnhof"
  },
  {
   "altklausur": true,
@@ -62,7 +64,8 @@
   "einordnung": "Eisenkonstruktion im öffentlichen Innenraum.",
   "architect": "Henri Labrouste",
   "location": "Paris",
-  "year": "1862–1868"
+  "year": "1862–1868",
+  "bildSuche": "Bibliothèque nationale de France Richelieu Labrouste"
  },
  {
   "altklausur": false,
@@ -75,7 +78,8 @@
   "einordnung": "früher Schlüsselbau des Eisenbaus.",
   "architect": "Pritchard / Wilkinson / Darby III",
   "location": null,
-  "year": "1777–1779"
+  "year": "1777–1779",
+  "bildSuche": "Iron Bridge Coalbrookdale"
  },
  {
   "altklausur": false,
@@ -88,7 +92,8 @@
   "einordnung": "große Spannweiten durch neue Ingenieurtechnik.",
   "architect": "Isambard Kingdom Brunel",
   "location": "Bristol",
-  "year": "1836–1864"
+  "year": "1836–1864",
+  "bildSuche": "Clifton Suspension Bridge"
  },
  {
   "altklausur": false,
@@ -101,7 +106,8 @@
   "einordnung": "früher moderner Brückenbau.",
   "architect": "Thomas Telford",
   "location": "Wales",
-  "year": "1818–1826"
+  "year": "1818–1826",
+  "bildSuche": "Menai Suspension Bridge"
  },
  {
   "altklausur": false,
@@ -153,7 +159,8 @@
   "einordnung": "Künstlerkolonie Mathildenhöhe / Gesamtkunstwerk.",
   "architect": "Joseph Maria Olbrich",
   "location": "Darmstadt",
-  "year": "1901"
+  "year": "1901",
+  "bildSuche": "Ernst-Ludwig-Haus Mathildenhöhe Darmstadt"
  },
  {
   "altklausur": false,
@@ -179,7 +186,8 @@
   "einordnung": "frühe Stahlbeton-Skelettarchitektur.",
   "architect": "Auguste Perret",
   "location": "Paris",
-  "year": "1902–1903"
+  "year": "1902–1903",
+  "bildSuche": "25 bis rue Franklin Auguste Perret"
  },
  {
   "altklausur": true,
@@ -192,7 +200,8 @@
   "einordnung": "moderner Großbau und neue Tragkonstruktion.",
   "architect": "Max Berg",
   "location": "Breslau",
-  "year": "1911–1913"
+  "year": "1911–1913",
+  "bildSuche": "Jahrhunderthalle Breslau"
  },
  {
   "altklausur": false,
@@ -205,7 +214,8 @@
   "einordnung": "Verbindung von Stadt und Land.",
   "architect": "Ebenezer Howard",
   "location": null,
-  "year": "1902"
+  "year": "1902",
+  "bildSuche": "Gartenstadt Ebenezer Howard"
  },
  {
   "altklausur": false,
@@ -218,7 +228,8 @@
   "einordnung": "Reformwohnungsbau / Gartenstadtprinzip.",
   "architect": "Georg Metzendorf",
   "location": "Essen",
-  "year": "ab 1908"
+  "year": "ab 1908",
+  "bildSuche": "Margarethenhöhe Essen"
  },
  {
   "altklausur": false,
@@ -231,7 +242,8 @@
   "einordnung": "Reform von Wohnen, Arbeit und Gemeinschaft.",
   "architect": null,
   "location": "Dresden",
-  "year": "ab 1909"
+  "year": "ab 1909",
+  "bildSuche": "Hellerau Gartenstadt"
  },
  {
   "altklausur": false,
@@ -244,7 +256,8 @@
   "einordnung": "sozialer Wohnungsbau: Licht, Luft, Grün.",
   "architect": "Bruno Taut + Martin Wagner",
   "location": null,
-  "year": "1925–1927"
+  "year": "1925–1927",
+  "bildSuche": "Hufeisensiedlung Britz"
  },
  {
   "altklausur": true,
@@ -257,7 +270,8 @@
   "einordnung": "Rationalisierung und Standardisierung.",
   "architect": "Ernst May",
   "location": null,
-  "year": "1925–1930"
+  "year": "1925–1930",
+  "bildSuche": "Neues Frankfurt"
  },
  {
   "altklausur": false,
@@ -270,7 +284,8 @@
   "einordnung": "Wohnung für das Existenzminimum als zentrales Modernethema.",
   "architect": null,
   "location": null,
-  "year": "1929"
+  "year": "1929",
+  "bildSuche": "Congrès International d’Architecture Moderne"
  },
  {
   "altklausur": false,
@@ -283,7 +298,8 @@
   "einordnung": "russischer Konstruktivismus / Maschinenästhetik.",
   "architect": "Vladimir Tatlin",
   "location": "Entwurf",
-  "year": "1913"
+  "year": "1913",
+  "bildSuche": "Tatlin-Turm"
  },
  {
   "altklausur": false,
@@ -296,7 +312,8 @@
   "einordnung": "expressionistische Industriearchitektur.",
   "architect": "Erich Mendelsohn",
   "location": null,
-  "year": "1921–1923"
+  "year": "1921–1923",
+  "bildSuche": "Hutfabrik Luckenwalde"
  },
  {
   "altklausur": false,
@@ -309,7 +326,8 @@
   "einordnung": "Purismus / frühe Le-Corbusier-Moderne.",
   "architect": "Le Corbusier + Pierre Jeanneret",
   "location": "Paris",
-  "year": "1923"
+  "year": "1923",
+  "bildSuche": "Atelier Ozenfant Le Corbusier"
  },
  {
   "altklausur": false,
@@ -335,7 +353,8 @@
   "einordnung": "Werkbund-Musterschau des Neuen Bauens.",
   "architect": "Leitung Mies van der Rohe",
   "location": "Stuttgart",
-  "year": "1927"
+  "year": "1927",
+  "bildSuche": "Weißenhofsiedlung Stuttgart"
  },
  {
   "altklausur": false,
@@ -348,7 +367,8 @@
   "einordnung": "Le Corbusiers moderne Wohnprinzipien.",
   "architect": "Le Corbusier + Pierre Jeanneret",
   "location": null,
-  "year": "1927"
+  "year": "1927",
+  "bildSuche": "Haus Le Corbusier Weißenhofsiedlung"
  },
  {
   "altklausur": false,
@@ -361,7 +381,8 @@
   "einordnung": "offener Grundriss und Innen-Außen-Bezug.",
   "architect": "Ludwig Mies van der Rohe",
   "location": "Brno",
-  "year": "1928–1930"
+  "year": "1928–1930",
+  "bildSuche": "Villa Tugendhat"
  },
  {
   "altklausur": false,
@@ -374,7 +395,8 @@
   "einordnung": "internationale Repräsentationsarchitektur.",
   "architect": "Nennet / Broggi / Vágó u.a.",
   "location": null,
-  "year": "1929–1937"
+  "year": "1929–1937",
+  "bildSuche": "Palais des Nations Genf"
  },
  {
   "altklausur": false,
@@ -387,7 +409,8 @@
   "einordnung": "sachlich-monumentaler Großbau.",
   "architect": "Hans Poelzig",
   "location": "Frankfurt",
-  "year": "1928–1931"
+  "year": "1928–1931",
+  "bildSuche": "IG-Farben-Haus"
  },
  {
   "altklausur": false,
@@ -400,7 +423,8 @@
   "einordnung": "nordischer Klassizismus.",
   "architect": "Erik Gunnar Asplund",
   "location": null,
-  "year": "1924–1928"
+  "year": "1924–1928",
+  "bildSuche": "Stockholms stadsbibliotek Asplund"
  },
  {
   "altklausur": false,
@@ -426,7 +450,8 @@
   "einordnung": "NS-Repräsentationsarchitektur.",
   "architect": "Albert Speer",
   "location": null,
-  "year": "1937"
+  "year": "1937",
+  "bildSuche": "Deutscher Pavillon Weltausstellung Paris 1937"
  },
  {
   "altklausur": false,
@@ -439,7 +464,8 @@
   "einordnung": "klassizistische Repräsentation.",
   "architect": "Johan Sigfrid Sirén",
   "location": null,
-  "year": "1926–1931"
+  "year": "1926–1931",
+  "bildSuche": "Parlamentsgebäude Helsinki"
  },
  {
   "altklausur": false,
@@ -452,7 +478,8 @@
   "einordnung": "Machtinszenierung durch Maßstab und Sequenz.",
   "architect": "Albert Speer",
   "location": "Berlin",
-  "year": "1935–1943"
+  "year": "1935–1943",
+  "bildSuche": "Neue Reichskanzlei"
  },
  {
   "altklausur": false,
@@ -478,7 +505,8 @@
   "einordnung": "nicht realisierte Germania-Planung.",
   "architect": "Albert Speer",
   "location": "Modell",
-  "year": "1939"
+  "year": "1939",
+  "bildSuche": "Große Halle Welthauptstadt Germania"
  },
  {
   "altklausur": false,
@@ -491,7 +519,8 @@
   "einordnung": "Neues Bauen im Exil / Industriestadt.",
   "architect": "Brigade Ernst May",
   "location": null,
-  "year": "1930–1934"
+  "year": "1930–1934",
+  "bildSuche": "Magnitogorsk"
  },
  {
   "altklausur": false,
@@ -504,7 +533,8 @@
   "einordnung": "International Style in Stahl und Glas.",
   "architect": "Mies van der Rohe",
   "location": "Chicago",
-  "year": "1948–1951"
+  "year": "1948–1951",
+  "bildSuche": "860–880 Lake Shore Drive Apartments"
  },
  {
   "altklausur": false,
@@ -517,7 +547,8 @@
   "einordnung": "kalifornische Moderne / Innen-Außen-Bezug.",
   "architect": "Richard Neutra",
   "location": "Palm Springs",
-  "year": "1946–1947"
+  "year": "1946–1947",
+  "bildSuche": "Kaufmann Desert House Richard Neutra"
  },
  {
   "altklausur": false,
@@ -582,7 +613,8 @@
   "einordnung": "dynamische plastische Form.",
   "architect": "Eero Saarinen",
   "location": "New York",
-  "year": "1956–1962"
+  "year": "1956–1962",
+  "bildSuche": "TWA Flight Center"
  },
  {
   "altklausur": false,
@@ -608,7 +640,8 @@
   "einordnung": "Wiederaufbau zwischen Kontinuität und Vereinfachung.",
   "architect": null,
   "location": "Münster",
-  "year": "1944–1949"
+  "year": "1944–1949",
+  "bildSuche": "Prinzipalmarkt Münster"
  },
  {
   "altklausur": false,
@@ -621,7 +654,8 @@
   "einordnung": "autogerechter Wiederaufbau.",
   "architect": null,
   "location": "Hamburg",
-  "year": "1964"
+  "year": "1964",
+  "bildSuche": "Ost-West-Straße Hamburg"
  },
  {
   "altklausur": false,
@@ -634,7 +668,8 @@
   "einordnung": "moderne aufgelockerte Wohnstadt.",
   "architect": null,
   "location": "Hamburg",
-  "year": "1949–1956"
+  "year": "1949–1956",
+  "bildSuche": "Grindelhochhäuser Hamburg"
  },
  {
   "altklausur": false,
@@ -647,7 +682,8 @@
   "einordnung": "US-amerikanischer Einfluss auf Nachkriegsmoderne.",
   "architect": "SOM + Otto Apel",
   "location": null,
-  "year": "1954–1956"
+  "year": "1954–1956",
+  "bildSuche": "Amerikanisches Generalkonsulat Frankfurt am Main"
  },
  {
   "altklausur": false,
@@ -660,7 +696,8 @@
   "einordnung": "westdeutsche Bürohochhausmoderne.",
   "architect": "Hentrich + Petschnigg",
   "location": "Düsseldorf",
-  "year": "1955–1960"
+  "year": "1955–1960",
+  "bildSuche": "Dreischeibenhaus Düsseldorf"
  },
  {
   "altklausur": true,
@@ -673,7 +710,8 @@
   "einordnung": "westliches Leitbild der aufgelockerten Stadt.",
   "architect": null,
   "location": "Berlin",
-  "year": "1957"
+  "year": "1957",
+  "bildSuche": "Hansaviertel Berlin Interbau"
  },
  {
   "altklausur": false,
@@ -686,7 +724,8 @@
   "einordnung": "bewusster Gegenentwurf zu Monumentalität.",
   "architect": "Egon Eiermann + Sep Ruf",
   "location": null,
-  "year": "1958"
+  "year": "1958",
+  "bildSuche": "Deutscher Pavillon Expo 58 Brüssel"
  },
  {
   "altklausur": false,
@@ -699,7 +738,8 @@
   "einordnung": "informelle transparente Staatsrepräsentation.",
   "architect": "Sep Ruf",
   "location": "Bonn",
-  "year": "1963–1966"
+  "year": "1963–1966",
+  "bildSuche": "Kanzlerbungalow Bonn"
  },
  {
   "altklausur": true,
@@ -712,7 +752,8 @@
   "einordnung": "Musik im Zentrum / organischer Raum.",
   "architect": "Hans Scharoun",
   "location": "Berlin",
-  "year": "1957–1963"
+  "year": "1957–1963",
+  "bildSuche": "Berliner Philharmonie"
  },
  {
   "altklausur": false,
@@ -725,7 +766,8 @@
   "einordnung": "organische Architektur aus Nutzung und Gemeinschaft.",
   "architect": "Hans Scharoun",
   "location": "Lünen",
-  "year": "1956–1962"
+  "year": "1956–1962",
+  "bildSuche": "Geschwister-Scholl-Schule Lünen Hans Scharoun"
  },
  {
   "altklausur": false,
@@ -738,7 +780,8 @@
   "einordnung": "Sozialistischer Realismus / Monumentalität.",
   "architect": "Boris Iofan",
   "location": null,
-  "year": "1935–1941"
+  "year": "1935–1941",
+  "bildSuche": "Palast der Sowjets"
  },
  {
   "altklausur": false,
@@ -751,7 +794,8 @@
   "einordnung": "sowjetische Monumentalarchitektur.",
   "architect": "Lew Rudnew",
   "location": "Moskau",
-  "year": "1947–1953"
+  "year": "1947–1953",
+  "bildSuche": "Lomonossow-Universität Moskau"
  },
  {
   "altklausur": false,
@@ -764,7 +808,8 @@
   "einordnung": "Export sowjetischer Repräsentationsarchitektur.",
   "architect": "Lew Rudnew",
   "location": "Warschau",
-  "year": "1952–1955"
+  "year": "1952–1955",
+  "bildSuche": "Kulturpalast Warschau"
  },
  {
   "altklausur": false,
@@ -777,7 +822,8 @@
   "einordnung": "Kulturhaus als sozialistisches Gemeinschaftszentrum.",
   "architect": "Hanns Hopp + Josef Kaiser",
   "location": null,
-  "year": "1952–1955"
+  "year": "1952–1955",
+  "bildSuche": "Maxhütte Unterwellenborn"
  },
  {
   "altklausur": true,
@@ -790,7 +836,8 @@
   "einordnung": "Sozialistischer Realismus.",
   "architect": "Hermann Henselmann",
   "location": "Berlin",
-  "year": "1952–1954"
+  "year": "1952–1954",
+  "bildSuche": "Strausberger Platz Berlin"
  },
  {
   "altklausur": true,
@@ -803,7 +850,8 @@
   "einordnung": "Sozialistischer Realismus / Staatsrepräsentation.",
   "architect": "Hermann Henselmann",
   "location": "Berlin",
-  "year": "1953–1956"
+  "year": "1953–1956",
+  "bildSuche": "Frankfurter Tor Karl-Marx-Allee"
  },
  {
   "altklausur": false,
@@ -816,7 +864,8 @@
   "einordnung": "Wende zur internationalen Moderne in der DDR.",
   "architect": "Henselmann / Geyer / Streitparth",
   "location": null,
-  "year": "1961–1964"
+  "year": "1961–1964",
+  "bildSuche": "Haus des Lehrers Berlin"
  },
  {
   "altklausur": false,
@@ -829,7 +878,8 @@
   "einordnung": "Entstalinisierung und modernere Repräsentation.",
   "architect": "Michail Posochin",
   "location": "Moskau",
-  "year": "1959–1961"
+  "year": "1959–1961",
+  "bildSuche": "Staatlicher Kreml-Palast"
  },
  {
   "altklausur": false,
@@ -855,7 +905,8 @@
   "einordnung": "Industrialisierter Massenwohnungsbau.",
   "architect": null,
   "location": null,
-  "year": "ab 1970"
+  "year": "ab 1970",
+  "bildSuche": "WBS 70 Plattenbau"
  },
  {
   "altklausur": false,
@@ -868,7 +919,8 @@
   "einordnung": "neue Hauptstadt als Symbol des unabhängigen Indien.",
   "architect": "Le Corbusier",
   "location": "Chandigarh",
-  "year": "1961"
+  "year": "1961",
+  "bildSuche": "Palace of Assembly Chandigarh"
  },
  {
   "altklausur": false,
@@ -881,7 +933,8 @@
   "einordnung": "moderne Hauptstadt als nationales Zukunftsprojekt.",
   "architect": "Lúcio Costa + Oscar Niemeyer",
   "location": null,
-  "year": "ab 1956"
+  "year": "ab 1956",
+  "bildSuche": "Brasília Plano Piloto"
  },
  {
   "altklausur": false,
@@ -907,7 +960,8 @@
   "einordnung": "Metabolismus / austauschbare Module.",
   "architect": "Kisho Kurokawa",
   "location": "Tokio",
-  "year": "1970"
+  "year": "1970",
+  "bildSuche": "Nakagin Capsule Tower"
  },
  {
   "altklausur": false,
@@ -920,7 +974,8 @@
   "einordnung": "metabolistische Wachstumsvision.",
   "architect": "Arata Isozaki",
   "location": null,
-  "year": "1962"
+  "year": "1962",
+  "bildSuche": "Arata Isozaki"
  },
  {
   "altklausur": true,
@@ -933,7 +988,8 @@
   "einordnung": "Utopie: mobile Stadt.",
   "architect": "Ron Herron / Archigram",
   "location": null,
-  "year": "1964"
+  "year": "1964",
+  "bildSuche": "Archigram Walking City"
  },
  {
   "altklausur": false,
@@ -946,7 +1002,8 @@
   "einordnung": "radikale Utopie / Kritik bestehender Stadtstrukturen.",
   "architect": null,
   "location": null,
-  "year": "1969"
+  "year": "1969",
+  "bildSuche": "Superstudio Architekturgruppe"
  },
  {
   "altklausur": false,
@@ -959,7 +1016,8 @@
   "einordnung": "Genius Loci / Alt und Neu.",
   "architect": "Carlo Scarpa",
   "location": "Verona",
-  "year": "1956–1964"
+  "year": "1956–1964",
+  "bildSuche": "Castelvecchio Verona Carlo Scarpa"
  },
  {
   "altklausur": false,
@@ -985,7 +1043,8 @@
   "einordnung": "Architektur als Zeichen und Kommunikation.",
   "architect": "Venturi / Scott Brown",
   "location": null,
-  "year": null
+  "year": null,
+  "bildSuche": "Learning from Las Vegas"
  },
  {
   "altklausur": false,
@@ -1024,7 +1083,8 @@
   "einordnung": "High-Tech: technische Systeme als Ausdruck.",
   "architect": "Renzo Piano + Richard Rogers",
   "location": "Paris",
-  "year": "1971–1977"
+  "year": "1971–1977",
+  "bildSuche": "Centre Pompidou Paris"
  },
  {
   "altklausur": false,
@@ -1050,7 +1110,8 @@
   "einordnung": "Spätmoderne staatliche Repräsentation.",
   "architect": "Schultes Frank Architekten",
   "location": "Berlin",
-  "year": "1997–2001"
+  "year": "1997–2001",
+  "bildSuche": "Bundeskanzleramt Berlin"
  },
  {
   "altklausur": false,
@@ -1063,7 +1124,8 @@
   "einordnung": "Minimalismus.",
   "architect": "Tadao Ando",
   "location": "Weil am Rhein",
-  "year": "1989–1993"
+  "year": "1989–1993",
+  "bildSuche": "Vitra Campus Konferenzpavillon Tadao Ando"
  },
  {
   "altklausur": false,
@@ -1076,7 +1138,8 @@
   "einordnung": "zeitgenössisches Spiel mit Hausform.",
   "architect": "Herzog & de Meuron",
   "location": "Weil am Rhein",
-  "year": "2010"
+  "year": "2010",
+  "bildSuche": "VitraHaus Weil am Rhein"
  },
  {
   "altklausur": false,
@@ -1089,7 +1152,8 @@
   "einordnung": "Dekonstruktivismus.",
   "architect": "Frank O. Gehry",
   "location": "Weil am Rhein",
-  "year": "1987–1989"
+  "year": "1987–1989",
+  "bildSuche": "Vitra Design Museum"
  },
  {
   "altklausur": false,
@@ -1115,7 +1179,8 @@
   "einordnung": "struktureller Ausdruck / künstliche Landschaft.",
   "architect": "MVRDV",
   "location": "Hannover",
-  "year": "1997–2000"
+  "year": "1997–2000",
+  "bildSuche": "Niederländischer Pavillon Expo 2000 MVRDV"
  },
  {
   "altklausur": true,
@@ -1154,6 +1219,7 @@
   "einordnung": "Rekonstruktion / Neuer Historismus.",
   "architect": "Franco Stella",
   "location": "Berlin",
-  "year": "2013–2021"
+  "year": "2013–2021",
+  "bildSuche": "Humboldt Forum Berliner Schloss"
  }
 ]

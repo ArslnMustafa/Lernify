@@ -1804,147 +1804,183 @@
   "theoryItems": [
     {
       "q": "1. Welche gesellschaftlichen Entwicklungen waren laut Skript die Treiber der 'Modernisierung'?",
-      "a": "Die Vorlesung identifiziert mehrere Schlüsselfaktoren: <i>Industrialisierung, die Entstehung von Nationalstaaten, das Bürgertum und Armut</i>. Ebenso spielten <i>Kriege und Konflikte, der rasante wissenschaftliche Fortschritt, Identitätssuche und territoriale Expansion</i> eine entscheidende Rolle für den Weg in die Moderne."
+      "a": "Die Vorlesung identifiziert mehrere Schlüsselfaktoren: <i>Industrialisierung, die Entstehung von Nationalstaaten, das Bürgertum und Armut</i>. Ebenso spielten <i>Kriege und Konflikte, der rasante wissenschaftliche Fortschritt, Identitätssuche und territoriale Expansion</i> eine entscheidende Rolle für den Weg in die Moderne.",
+      "bildSuche": "Industrialisierung"
     },
     {
       "q": "2. Wie grenzen die Vorlesungsskripte die 'Klassische Moderne' begrifflich ein?",
-      "a": "Die 'Klassische Moderne' (bzw. der Modernismus) beschreibt eine <i>Bewegung ab etwa 1900 in Kunst und Architektur, die einen bewussten <b>Bruch mit dem akademischen Formenvokabular</b></i> propagierte. Sie wird umgangssprachlich oft fälschlicherweise auf 'Bauhaus-Architektur' reduziert, ist jedoch eine viel breitere, internationale Bewegung ('Modern Movement')."
+      "a": "Die 'Klassische Moderne' (bzw. der Modernismus) beschreibt eine <i>Bewegung ab etwa 1900 in Kunst und Architektur, die einen bewussten <b>Bruch mit dem akademischen Formenvokabular</b></i> propagierte. Sie wird umgangssprachlich oft fälschlicherweise auf 'Bauhaus-Architektur' reduziert, ist jedoch eine viel breitere, internationale Bewegung ('Modern Movement').",
+      "bildSuche": "Klassische Moderne Architektur"
     },
     {
       "q": "3. Gibt es in der Architektur einen echten 'Bauhaus-Stil'?",
-      "a": "Nein, die Dozentin betont explizit, dass es <i>nicht die EINE Moderne</i> und <i>KEINEN einheitlichen 'Bauhaus-Stil'</i> gibt. Die Architektur der Moderne setzt sich aus vielen verschiedenen Gesichtern und Strömungen zusammen."
+      "a": "Nein, die Dozentin betont explizit, dass es <i>nicht die EINE Moderne</i> und <i>KEINEN einheitlichen 'Bauhaus-Stil'</i> gibt. Die Architektur der Moderne setzt sich aus vielen verschiedenen Gesichtern und Strömungen zusammen.",
+      "bildSuche": "Bauhausgebäude Dessau"
     },
     {
       "q": "4. Welche zentralen Aspekte abseits der Form kennzeichnen die Architektur der Moderne?",
-      "a": "Dazu gehören die radikale <i>Optimierung von Bauprozessen, die Entwicklung <b>neuer Bautechniken, Materialien und Bauaufgaben</b></i> sowie eine völlig veränderte Raumwahrnehmung. Zudem kam es in dieser Epoche zu einer starken <i>Institutionalisierung der Architekturausbildung</i>."
+      "a": "Dazu gehören die radikale <i>Optimierung von Bauprozessen, die Entwicklung <b>neuer Bautechniken, Materialien und Bauaufgaben</b></i> sowie eine völlig veränderte Raumwahrnehmung. Zudem kam es in dieser Epoche zu einer starken <i>Institutionalisierung der Architekturausbildung</i>.",
+      "bildSuche": "Neues Bauen"
     },
     {
       "q": "5. Wie veränderte sich das Berufsbild im Zuge der Moderne?",
-      "a": "Es kam zu einer <i>klaren inhaltlichen Unterscheidung und Trennung zwischen dem Architekten und dem Ingenieur</i>."
+      "a": "Es kam zu einer <i>klaren inhaltlichen Unterscheidung und Trennung zwischen dem Architekten und dem Ingenieur</i>.",
+      "bildSuche": "Architekt Berufsbild"
     },
     {
       "q": "6. Wie ordnete das Bauhaus Grundfarben und Grundformen systematisch einander zu?",
-      "a": "Nach einer Festlegung von Oskar Schlemmer und Wassily Kandinsky wurde definiert: <i>Gelb steht für das Dreieck, Blau für den Kreis und Rot für das Quadrat</i>."
+      "a": "Nach einer Festlegung von Oskar Schlemmer und Wassily Kandinsky wurde definiert: <i>Gelb steht für das Dreieck, Blau für den Kreis und Rot für das Quadrat</i>.",
+      "bildSuche": "Bauhaus"
     },
     {
       "q": "7. Wie war der Lehrplan am Bauhaus strukturiert?",
-      "a": "Der Lehrplan war grafisch als <i>Kreismodell</i> aufgebaut. Die Studenten durchliefen von außen nach innen zunächst die <i>Vorlehre</i> (Elementare Formlehre, Materialstudien), gingen dann über in die <i>Werkzeuglehre (Ton, Stein, Holz, Metall)</i> und endeten im innersten Zentrum beim eigentlichen <i>'Bau' (Versuchsplatz und Entwurf)</i>."
+      "a": "Der Lehrplan war grafisch als <i>Kreismodell</i> aufgebaut. Die Studenten durchliefen von außen nach innen zunächst die <i>Vorlehre</i> (Elementare Formlehre, Materialstudien), gingen dann über in die <i>Werkzeuglehre (Ton, Stein, Holz, Metall)</i> und endeten im innersten Zentrum beim eigentlichen <i>'Bau' (Versuchsplatz und Entwurf)</i>.",
+      "bildSuche": "Bauhaus Vorkurs Lehrplan"
     },
     {
       "q": "8. Was verdeutlicht Oskar Schlemmers 'Triadisches Ballett' (1922) im architektonischen Kontext?",
-      "a": "Es zeigt die abstrakte Formsuche der Avantgarde, bei der <i>menschliche Körper in strenge geometrische, mechanisierte Grundformen (Kugeln, Zylinder) übersetzt</i> und im Raum inszeniert wurden."
+      "a": "Es zeigt die abstrakte Formsuche der Avantgarde, bei der <i>menschliche Körper in strenge geometrische, mechanisierte Grundformen (Kugeln, Zylinder) übersetzt</i> und im Raum inszeniert wurden.",
+      "bildSuche": "Triadisches Ballett"
     },
     {
       "q": "9. Was zeichnet das städtebauliche Konzept der Gartenstadt Hellerau (ab 1909) aus?",
-      "a": "Hellerau (initiiert von Karl Schmidt) war ein früher Versuch des gemeinschaftlichen, gesunden Wohnens am Stadtrand und wurde von prominenten Architekten wie <i>Richard Riemerschmid, Heinrich Tessenow und Hermann Muthesius</i> entworfen."
+      "a": "Hellerau (initiiert von Karl Schmidt) war ein früher Versuch des gemeinschaftlichen, gesunden Wohnens am Stadtrand und wurde von prominenten Architekten wie <i>Richard Riemerschmid, Heinrich Tessenow und Hermann Muthesius</i> entworfen.",
+      "bildSuche": "Hellerau Gartenstadt"
     },
     {
       "q": "10. Welche räumlichen Qualitäten weist die Siedlung Margarethenhöhe auf?",
-      "a": "Die von <i>Georg Metzendorf ab 1908 geplante Siedlung</i> in Essen zeichnet sich durch <i>organisch geschwungene Straßenführungen</i> und die Integration von Gärten aus, die primär der Selbstversorgung der Arbeiter dienten."
+      "a": "Die von <i>Georg Metzendorf ab 1908 geplante Siedlung</i> in Essen zeichnet sich durch <i>organisch geschwungene Straßenführungen</i> und die Integration von Gärten aus, die primär der Selbstversorgung der Arbeiter dienten.",
+      "bildSuche": "Margarethenhöhe Essen"
     },
     {
       "q": "11. Welche extremen architektonischen Maßstäbe verfolgte Albert Speer im Nationalsozialismus?",
-      "a": "Ein bezeichnendes Beispiel ist sein Versuchsbau für das <i>'Deutsche Stadion' in Nürnberg, ein gigantischer, hufeisenförmiger Entwurf, der <b>für 400.000 Menschen</b></i> konzipiert war und alle menschlichen Maßstäbe sprengen sollte."
+      "a": "Ein bezeichnendes Beispiel ist sein Versuchsbau für das <i>'Deutsche Stadion' in Nürnberg, ein gigantischer, hufeisenförmiger Entwurf, der <b>für 400.000 Menschen</b></i> konzipiert war und alle menschlichen Maßstäbe sprengen sollte.",
+      "bildSuche": "Welthauptstadt Germania"
     },
     {
       "q": "12. Was ist in der Architekturgeschichte mit 'Totalitärer Überformung' gemeint?",
-      "a": "Dies beschreibt den <i>nachträglichen politischen Eingriff in historische Bausubstanz, wie beispielhaft beim Holzbalkon zu sehen, der <b>1938 eigens für Hitlers Rede zum 'Anschluss' brutal in die Fassade des Wiener Rathauses gebrochen</b></i> wurde."
+      "a": "Dies beschreibt den <i>nachträglichen politischen Eingriff in historische Bausubstanz, wie beispielhaft beim Holzbalkon zu sehen, der <b>1938 eigens für Hitlers Rede zum 'Anschluss' brutal in die Fassade des Wiener Rathauses gebrochen</b></i> wurde.",
+      "bildSuche": "Nationalsozialistische Architektur"
     },
     {
       "q": "13. Welche Rolle spielte die Reichsautobahn im nationalsozialistischen Staat?",
-      "a": "Sie war nicht nur pure Infrastruktur, sondern ein <i>Propaganda-Bauwerk zur gezielten, filmischen Inszenierung der deutschen Landschaft</i> ('Mensch und Wort')."
+      "a": "Sie war nicht nur pure Infrastruktur, sondern ein <i>Propaganda-Bauwerk zur gezielten, filmischen Inszenierung der deutschen Landschaft</i> ('Mensch und Wort').",
+      "bildSuche": "Reichsautobahn"
     },
     {
       "q": "14. Welche Bauaufgaben dominierten in der westdeutschen Architektur bis 1949?",
-      "a": "Aufgrund der massiven Kriegsschäden gab es bis 1949 fast ausschließlich <i>Wiederaufbaumaßnahmen</i> sowie <i>Bauten für die Besatzungsmächte</i>."
+      "a": "Aufgrund der massiven Kriegsschäden gab es bis 1949 fast ausschließlich <i>Wiederaufbaumaßnahmen</i> sowie <i>Bauten für die Besatzungsmächte</i>.",
+      "bildSuche": "Notkirche Otto Bartning"
     },
     {
       "q": "15. Welche Metapher prägte das westdeutsche demokratische Bauen der Nachkriegszeit stark?",
-      "a": "Das Prinzip <i>'Glas = Transparenz = Demokratie'</i>. Offene Architektur (wie am Plenarsaal des Bundeshauses in Bonn) sollte das gewandelte Selbstverständnis der BRD spiegeln."
+      "a": "Das Prinzip <i>'Glas = Transparenz = Demokratie'</i>. Offene Architektur (wie am Plenarsaal des Bundeshauses in Bonn) sollte das gewandelte Selbstverständnis der BRD spiegeln.",
+      "bildSuche": "Bundeshaus Bonn"
     },
     {
       "q": "16. Welche städtebaulichen Leitbilder prägten die Stadtplanung im Westen nach 1945?",
-      "a": "Zentrale Prinzipien waren die <i>'aufgelockerte Stadt'</i> (große Abstandsflächen, Abkehr von der Blockrandbebauung, Grünzonen nach dem Ideal 'Licht, Luft und Sonne') sowie die <i>'autogerechte Stadt'</i>."
+      "a": "Zentrale Prinzipien waren die <i>'aufgelockerte Stadt'</i> (große Abstandsflächen, Abkehr von der Blockrandbebauung, Grünzonen nach dem Ideal 'Licht, Luft und Sonne') sowie die <i>'autogerechte Stadt'</i>.",
+      "bildSuche": "Gegliederte und aufgelockerte Stadt"
     },
     {
       "q": "17. Was sind die formalen Merkmale des reinen Funktionalismus in der westdeutschen Nachkriegsmoderne?",
-      "a": "Typisch für diese Bauten sind bewusste <i>Asymmetrie, der Einsatz von leichten <b>Vorhangfassaden (Curtain Wall)</b></i> und flachen <i>Flugdächern</i>."
+      "a": "Typisch für diese Bauten sind bewusste <i>Asymmetrie, der Einsatz von leichten <b>Vorhangfassaden (Curtain Wall)</b></i> und flachen <i>Flugdächern</i>.",
+      "bildSuche": "Funktionalismus Architektur"
     },
     {
       "q": "18. Wie unterschied sich die 'Organische Architektur' von der strengen Raster-Moderne?",
-      "a": "Sie war <i>stark plastisch</i> geformt und wirkte, als sei sie fließend <i>'aus der Bewegung heraus'</i> entworfen worden, wie es besonders bei den asymmetrischen Bauten von Hans Scharoun (Geschwister-Scholl-Schule, Staatsbibliothek) sichtbar ist."
+      "a": "Sie war <i>stark plastisch</i> geformt und wirkte, als sei sie fließend <i>'aus der Bewegung heraus'</i> entworfen worden, wie es besonders bei den asymmetrischen Bauten von Hans Scharoun (Geschwister-Scholl-Schule, Staatsbibliothek) sichtbar ist.",
+      "bildSuche": "Organische Architektur"
     },
     {
       "q": "19. Wie spiegelte sich der Ruf nach 'Unabhängigkeit und Wachstum' in der DDR-Architektur wider?",
-      "a": "In der konsequenten Standardisierung und Vorfertigung, die in <i>Plattenbauten (wie dem Wohnblock WBS 70)</i> und in der Entstehung riesiger, monotoner Trabantenstädte wie <i>Berlin-Marzahn</i> mündete."
+      "a": "In der konsequenten Standardisierung und Vorfertigung, die in <i>Plattenbauten (wie dem Wohnblock WBS 70)</i> und in der Entstehung riesiger, monotoner Trabantenstädte wie <i>Berlin-Marzahn</i> mündete.",
+      "bildSuche": "Stalinallee"
     },
     {
       "q": "20. Welche Rolle spielte 'Kunst am Bau' an repräsentativen DDR-Gebäuden?",
-      "a": "Kunst wurde gezielt als <i>politisches und ideologisches Ausdrucksmittel</i> eingesetzt, wie das gewaltige Wandmosaik <i>'Unser Leben' von Walter Womacka</i> am Haus des Lehrers (1961-1964) in Ost-Berlin demonstriert."
+      "a": "Kunst wurde gezielt als <i>politisches und ideologisches Ausdrucksmittel</i> eingesetzt, wie das gewaltige Wandmosaik <i>'Unser Leben' von Walter Womacka</i> am Haus des Lehrers (1961-1964) in Ost-Berlin demonstriert.",
+      "bildSuche": "Kunst am Bau"
     },
     {
       "q": "21. Welche experimentellen Leichtbaustrukturen setzten einen Kontrapunkt in der Ost-Moderne?",
-      "a": "Der Ingenieur <i>Ulrich Müther</i> schuf hochinnovative, expressive <i>Hyparschalen aus Leichtbeton</i>, wie beispielsweise bei der geschwungenen Dachkonstruktion der Gaststätte 'Teepott' in Warnemünde."
+      "a": "Der Ingenieur <i>Ulrich Müther</i> schuf hochinnovative, expressive <i>Hyparschalen aus Leichtbeton</i>, wie beispielsweise bei der geschwungenen Dachkonstruktion der Gaststätte 'Teepott' in Warnemünde.",
+      "bildSuche": "Ulrich Müther Hyparschale"
     },
     {
       "q": "22. Was visualisiert der 'Evolutionary Tree of Twentieth-Century Architecture' von Charles Jencks?",
-      "a": "Dieses Diagramm zeigt die <i>Entwicklung, Verzweigung und Überlappung der vielfältigen architektonischen Strömungen</i> (z.B. Logical, Idealist, Intuitive, Activist) von 1900 bis ins Jahr 2000 als extrem komplexes, verwobenes Stammbaum-Modell."
+      "a": "Dieses Diagramm zeigt die <i>Entwicklung, Verzweigung und Überlappung der vielfältigen architektonischen Strömungen</i> (z.B. Logical, Idealist, Intuitive, Activist) von 1900 bis ins Jahr 2000 als extrem komplexes, verwobenes Stammbaum-Modell.",
+      "bildSuche": "Charles Jencks"
     },
     {
       "q": "23. Wie kritisierte die radikale Gruppe 'Superstudio' die Architektur der Spätmoderne?",
-      "a": "Sie entwarfen 1969 das theoretische Manifest <i>'The Continuous Monument'</i>, ein gewaltiges, endloses Raster, das sich als dystopische Utopie gleichmachend über den gesamten Planeten (und ganze Städte wie New York) legte."
+      "a": "Sie entwarfen 1969 das theoretische Manifest <i>'The Continuous Monument'</i>, ein gewaltiges, endloses Raster, das sich als dystopische Utopie gleichmachend über den gesamten Planeten (und ganze Städte wie New York) legte.",
+      "bildSuche": "Superstudio Architekturgruppe"
     },
     {
       "q": "24. Welche Idee verbirgt sich hinter der 'Oase Nr. 7' von Haus-Rucker-Co?",
-      "a": "Dieses aufblasbare Projekt der documenta in den 1970er Jahren bestand aus einer aus der Fassade ragenden, transparenten <i>'Überlebensblase'</i>. Es war eine provokante utopische Raum-Erweiterung und ein Kommentar zur Umweltverschmutzung."
+      "a": "Dieses aufblasbare Projekt der documenta in den 1970er Jahren bestand aus einer aus der Fassade ragenden, transparenten <i>'Überlebensblase'</i>. Es war eine provokante utopische Raum-Erweiterung und ein Kommentar zur Umweltverschmutzung.",
+      "bildSuche": "Haus-Rucker-Co"
     },
     {
       "q": "25. Worauf basierten die extrem leichten Dach-Konstruktionen von Frei Otto?",
-      "a": "Er erforschte komplexe morphologische Prinzipien aus der Natur, insbesondere durch <i>Seifenblasenmodelle und Spinnennetz-Studien</i>, um mit minimalem Materialeinsatz und natürlichen Zugkräften riesige Flächen zu überspannen."
+      "a": "Er erforschte komplexe morphologische Prinzipien aus der Natur, insbesondere durch <i>Seifenblasenmodelle und Spinnennetz-Studien</i>, um mit minimalem Materialeinsatz und natürlichen Zugkräften riesige Flächen zu überspannen.",
+      "bildSuche": "Frei Otto"
     },
     {
       "q": "26. Welche bekannten Großprojekte resultierten aus Frei Ottos naturwissenschaftlichen Studien?",
-      "a": "Die zeltartigen Netzstrukturen wurden eindrucksvoll beim <i>Deutschen Pavillon der Expo '67 in Montreal</i> (mit Rolf Gutbrod) und bei den ikonischen <i>Zeltdächern des Olympia-Geländes 1972 in München</i> (mit Günther Behnisch) realisiert."
+      "a": "Die zeltartigen Netzstrukturen wurden eindrucksvoll beim <i>Deutschen Pavillon der Expo '67 in Montreal</i> (mit Rolf Gutbrod) und bei den ikonischen <i>Zeltdächern des Olympia-Geländes 1972 in München</i> (mit Günther Behnisch) realisiert.",
+      "bildSuche": "Olympiastadion München Zeltdach"
     },
     {
       "q": "27. Wie integrierte Lina Bo Bardi beim SESC Pompéia den industriellen Bestand?",
-      "a": "Sie nutzte eine <i>alte Backsteinfabrik</i> als Basis und ergänzte diese brutalistisch durch rohe, wehrhafte <i>Betontürme mit organischen 'Löchern' als Fenster</i>, die durch freistehende Sichtbeton-Luftbrücken spektakulär miteinander verbunden wurden."
+      "a": "Sie nutzte eine <i>alte Backsteinfabrik</i> als Basis und ergänzte diese brutalistisch durch rohe, wehrhafte <i>Betontürme mit organischen 'Löchern' als Fenster</i>, die durch freistehende Sichtbeton-Luftbrücken spektakulär miteinander verbunden wurden.",
+      "bildSuche": "SESC Pompéia"
     },
     {
       "q": "28. Welche Architektursprache vertritt die deutsche Architektin Verena Dietrich?",
-      "a": "Sie steht in der Vorlesung beispielhaft für die <i>High-Tech-Architektur; bei ihrer Zuschauertribüne im Sportpark Köln-Höhenberg machte sie die <b>komplette stählerne Zug- und Tragekonstruktion massiv nach außen hin sichtbar</b></i>."
+      "a": "Sie steht in der Vorlesung beispielhaft für die <i>High-Tech-Architektur; bei ihrer Zuschauertribüne im Sportpark Köln-Höhenberg machte sie die <b>komplette stählerne Zug- und Tragekonstruktion massiv nach außen hin sichtbar</b></i>.",
+      "bildSuche": "Verena Dietrich"
     },
     {
       "q": "29. Welche formale Sprache nutzt die Architektin Odile Decq in der Spät- und Postmoderne?",
-      "a": "Ihre expressiven Bauten (wie das Maison Bernard oder das Phantom Restaurant in der Opera Garnier) brechen radikal mit der Kastenform und zeichnen sich durch <i>rote Signalfarben, geschwungene Skulpturalität und die absolute Vermeidung rechter Winkel</i> aus."
+      "a": "Ihre expressiven Bauten (wie das Maison Bernard oder das Phantom Restaurant in der Opera Garnier) brechen radikal mit der Kastenform und zeichnen sich durch <i>rote Signalfarben, geschwungene Skulpturalität und die absolute Vermeidung rechter Winkel</i> aus.",
+      "bildSuche": "Odile Decq"
     },
     {
       "q": "30. Wie dokumentierte László Moholy-Nagy die Formensprache am Bauhaus?",
-      "a": "Neben der Arbeit mit klassischen Materialien nutzte er primär die <i>Fotografie, um abstrakte Geometrien, harte Linien sowie starke <b>Licht- und Schattenspiele</b></i> architektonisch zu untersuchen."
+      "a": "Neben der Arbeit mit klassischen Materialien nutzte er primär die <i>Fotografie, um abstrakte Geometrien, harte Linien sowie starke <b>Licht- und Schattenspiele</b></i> architektonisch zu untersuchen.",
+      "bildSuche": "László Moholy-Nagy"
     },
     {
       "q": "31. Palast der Republik: Städtebauliche Situation vor und nach der Errichtung?",
-      "a": "Vorher stand an diesem Ort das Berliner Stadtschloss (1950 von der DDR gesprengt). Später wurde der Palast als 'Volkshaus' errichtet. Höhendominanz wurde auf den nahen Fernsehturm verlagert. Heute steht dort das Humboldt Forum (Wiederaufbau des Stadtschlosses)."
+      "a": "Vorher stand an diesem Ort das Berliner Stadtschloss (1950 von der DDR gesprengt). Später wurde der Palast als 'Volkshaus' errichtet. Höhendominanz wurde auf den nahen Fernsehturm verlagert. Heute steht dort das Humboldt Forum (Wiederaufbau des Stadtschlosses).",
+      "bildSuche": "Palast der Republik"
     },
     {
       "q": "32. Wie verbinden sich politische Intention und Architektur beim Palast der Republik?",
-      "a": "Die Architektur und Funktion als 'Volkshaus' drückten politische 'Offenheit und Bürgernähe' aus."
+      "a": "Die Architektur und Funktion als 'Volkshaus' drückten politische 'Offenheit und Bürgernähe' aus.",
+      "bildSuche": "Palast der Republik"
     },
     {
       "q": "33. Neue Staatsgalerie Stuttgart: Architekt, Zeitraum und Stil?",
-      "a": "Entworfen von James Stirling, Michael Wilford & Associates (1977–1984). Stil: Postmoderne."
+      "a": "Entworfen von James Stirling, Michael Wilford & Associates (1977–1984). Stil: Postmoderne.",
+      "bildSuche": "Neue Staatsgalerie Stuttgart"
     },
     {
       "q": "34. Was sind die inhaltlichen Merkmale der Postmoderne an der Neuen Staatsgalerie?",
-      "a": "Kritik am reinen Funktionalismus der Moderne. Historische Zitate (z.B. antikisierende Rotunde) werden mit modernen Materialien, grellen Industriefarben und technischen Elementen spielerisch kombiniert."
+      "a": "Kritik am reinen Funktionalismus der Moderne. Historische Zitate (z.B. antikisierende Rotunde) werden mit modernen Materialien, grellen Industriefarben und technischen Elementen spielerisch kombiniert.",
+      "bildSuche": "Neue Staatsgalerie Stuttgart"
     },
     {
       "q": "35. Architekturvergleich: Elbphilharmonie vs. Berliner Philharmonie",
-      "a": "Beide sind ikonische Kulturgebäude mit plastischer Silhouette. Berliner Philharmonie (Hans Scharoun, 1957–1963): organisch-asymmetrischer Neubau ('Musik im Zentrum'). Elbphilharmonie (Herzog & de Meuron, 2007–2016): Kombination aus historischem Backsteinsockel und gläserner Aufstockung."
+      "a": "Beide sind ikonische Kulturgebäude mit plastischer Silhouette. Berliner Philharmonie (Hans Scharoun, 1957–1963): organisch-asymmetrischer Neubau ('Musik im Zentrum'). Elbphilharmonie (Herzog & de Meuron, 2007–2016): Kombination aus historischem Backsteinsockel und gläserner Aufstockung.",
+      "bildSuche": "Elbphilharmonie"
     },
     {
       "q": "36. Das Neue Frankfurt (1925–1930): Leitideen und Protagonisten",
-      "a": "Initiator war Ernst May. Ziel war rationeller Massenwohnungsbau nach dem Prinzip 'Licht, Luft & Sonne' (Zeilenbau). Bekannte Siedlungen: Praunheim, Römerstadt, Westhausen. Wichtiges Element: Die Frankfurter Küche (Margarete Schütte-Lihotzky)."
+      "a": "Initiator war Ernst May. Ziel war rationeller Massenwohnungsbau nach dem Prinzip 'Licht, Luft & Sonne' (Zeilenbau). Bekannte Siedlungen: Praunheim, Römerstadt, Westhausen. Wichtiges Element: Die Frankfurter Küche (Margarete Schütte-Lihotzky).",
+      "bildSuche": "Neues Frankfurt"
     }
   ],
   "zeynepSpecialQuestions": [

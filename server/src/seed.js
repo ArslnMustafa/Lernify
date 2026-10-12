@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const db = require("./db");
 const { hashPassword } = require("./password");
+const { keys, reader } = require("./bilder");
 
 const dataFile = (name) =>
   JSON.parse(fs.readFileSync(path.join(__dirname, "..", "data", name), "utf8"));
@@ -9,6 +10,24 @@ const dataFile = (name) =>
 const { baseBuildings, theoryItems, zeynepSpecialQuestions } = dataFile("baugeschichte.json");
 const rueckblicke = dataFile("rueckblicke.json");
 const epochen = dataFile("epochen.json");
+
+const normalise = (value) => value.toLowerCase().replace(/[^a-zäöüß0-9]/g, "");
+
+// Pictures looked up by scripts/fetch-images.js win over the ones in the
+// question files; the catalogue supplies the rest. A Rückblick card of the same
+// name shows the catalogue photo, an epoch the building named in "bildVon".
+const bild = reader();
+
+const buildingImage = (building) => bild(keys.bauwerk(building.name), building.image);
+const catalogueImages = new Map(
+  baseBuildings.map((b) => [normalise(b.name), buildingImage(b)])
+);
+const catalogueByName = new Map(baseBuildings.map((b) => [b.name, buildingImage(b)]));
+
+const cardImage = (card) =>
+  bild(keys.karte(card.name), card.image) || catalogueImages.get(normalise(card.name)) || null;
+const epochImage = (epoch) =>
+  bild(keys.epoche(epoch.epoche), epoch.image) || catalogueByName.get(epoch.bildVon) || null;
 
 // Exam content is rebuilt from scratch; accounts and their passwords are kept.
 db.exec(`
@@ -43,8 +62,8 @@ function createExam(title, description, userIds, questions) {
   }
 
   const insert = db.prepare(
-    `INSERT INTO questions (exam_id, order_index, type, text, image_url, options, correct_index, answer_text)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+    `INSERT INTO questions (exam_id, order_index, type, text, image_url, options, correct_index, answer_text, source_key)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
   );
 
   questions.forEach((q, i) => {
@@ -56,7 +75,8 @@ function createExam(title, description, userIds, questions) {
       q.imageUrl || null,
       q.options ? JSON.stringify(q.options) : null,
       q.correctIndex ?? null,
-      q.answerText || null
+      q.answerText || null,
+      q.sourceKey || null
     );
   });
 
@@ -97,7 +117,8 @@ function buildingQuestion(building, allArchitects) {
   return {
     type: "single",
     text: `Wer ist der Architekt des Bauwerks "${building.name}" (${building.location}, ${building.year})?`,
-    imageUrl: building.image,
+    sourceKey: keys.bauwerk(building.name),
+    imageUrl: buildingImage(building),
     options,
     correctIndex: options.indexOf(building.architect),
   };
@@ -111,9 +132,11 @@ createExam(
   "Baugeschichte II — Theoriefragen",
   `Ausführlicher Fragen- und Antwortenkatalog aus dem Skript: ${theoryItems.length} Fragen. Schreib deine Antwort und vergleiche sie mit der Musterlösung.`,
   [zeynepId],
-  theoryItems.map((item) => ({
+  theoryItems.map((item, index) => ({
     type: "open",
     text: item.q.replace(/^\d+\.\s*/, ""),
+    sourceKey: keys.theorie(index),
+    imageUrl: bild(keys.theorie(index), item.image),
     answerText: item.a,
   }))
 );
@@ -155,6 +178,8 @@ function rueckblickQuestion(card) {
   return {
     type: "open",
     text: `„${card.name}" (${card.meta}) — beschreibe das Bauwerk mit mindestens vier Aussagen: Baukörper/Form, Material/Konstruktion, Fassade/Raum/Städtebau, Einordnung/Bedeutung.`,
+    sourceKey: keys.karte(card.name),
+    imageUrl: cardImage(card),
     answerText:
       `<b>Bildmerkmale:</b> ${card.bildmerkmale}<br>` +
       `<b>Form / Raum:</b> ${card.form}<br>` +
@@ -203,6 +228,8 @@ createExam(
     return {
       type: "single",
       text: `In welchen Zeitraum fällt die Epoche „${epoch.epoche}"?`,
+      sourceKey: keys.epoche(epoch.epoche),
+      imageUrl: epochImage(epoch),
       options,
       correctIndex: options.indexOf(correct),
     };
