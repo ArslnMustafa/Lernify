@@ -49,6 +49,7 @@ git'e girmez, böylece sunucuda `git pull` ile çakışmaz.
 ```bash
 cd server
 node scripts/fetch-images.js            # eksik resimleri arar (internet gerekir)
+node scripts/fetch-images.js pruefen    # arama çalışıyor mu, birkaç test sorgusu
 node scripts/fetch-images.js ersetzen   # Wikimedia dışı zayıf kaynakları da yeniler
 node scripts/apply-images.js            # mevcut veritabanındaki sorulara işler
 node scripts/check-images.js            # hangi soru resimsiz kaldı
@@ -56,5 +57,8 @@ node scripts/check-images.js            # hangi soru resimsiz kaldı
 
 `fetch-images.js` her bulduğu resmin hangi Wikipedia maddesinden geldiğini
 yazar; tam başlık eşleşmesi yerine aramadan gelen sonuçları sonunda ayrıca
-listeler, yanlış eşleşmeler orada görülür. `apply-images.js` sınavları yeniden
+listeler, yanlış eşleşmeler orada görülür. Resim bulunamazsa nedenini de yazar
+(HTTP 403/429, zaman aşımı, "maddede resim yok"); üst üste 20 istek cevapsız
+kalırsa çalışmayı durdurup `pruefen` komutunu önerir. Bulunanlar her seferinde
+kaydedildiği için script'i tekrar çalıştırmak sadece eksikleri dener. `apply-images.js` sınavları yeniden
 kurmadan sadece resimleri güncellediği için sonuçlar silinmez.

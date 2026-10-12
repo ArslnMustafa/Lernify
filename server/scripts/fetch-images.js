@@ -1,14 +1,17 @@
 // Gives every question a picture: looks the missing ones up on Wikipedia and
-// stores them in data/bilder.json. Needs internet access, so it runs on the
-// server:
+// Wikimedia Commons and stores them in data/bilder.json. Needs internet
+// access, so it runs on the server:
 //
 //   node scripts/fetch-images.js
 //   node scripts/fetch-images.js ersetzen   (also replaces non-Wikimedia pictures)
+//   node scripts/fetch-images.js pruefen    (asks a few test queries and shows what comes back)
 //
 // Pictures that were already found are kept, so the script can be run again as
-// often as needed. Every hit prints the article it came from, and hits that
-// came from a search instead of an exact article title are listed again at the
-// end, because those are the ones that can be wrong.
+// often as needed — a second run only retries what is still missing. Every hit
+// prints the article it came from; hits that came from a search instead of an
+// exact article title are listed again at the end, because those are the ones
+// that can be wrong. When nothing is found, the reason is printed, so a blocked
+// or throttled request never looks like "this building has no photo".
 
 const fs = require("fs");
 const path = require("path");
@@ -16,11 +19,18 @@ const { keys, load, save, reader, FILE } = require("../src/bilder");
 
 const DATA_DIR = path.join(__dirname, "..", "data");
 
-const replaceWeakSources = process.argv.includes("ersetzen");
+const mode = process.argv[2] || "";
+const replaceWeakSources = mode === "ersetzen";
+const diagnoseOnly = mode === "pruefen";
 
 const WIKIS = ["de", "en"];
 const THUMB_SIZE = 1600;
 const PAUSE_MS = 250;
+const TRIES = 3;
+
+// Wikimedia asks for a user agent that says who is calling and where to
+// complain; requests without one get throttled or refused.
+const USER_AGENT = "Lernify/1.0 (Lernhilfe Baugeschichte; https://github.com/ArslnMustafa/Lernify)";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -29,42 +39,129 @@ const isWeakSource = (url) => Boolean(url) && !/upload\.wikimedia\.org/.test(url
 
 const normalise = (value) => value.toLowerCase().replace(/[^a-zäöüß0-9]/g, "");
 
-async function askWiki(wiki, params) {
-  const url =
-    `https://${wiki}.wikipedia.org/w/api.php?action=query&format=json&formatversion=2` +
-    `&prop=pageimages&piprop=thumbnail&pithumbsize=${THUMB_SIZE}&${params}`;
+// Why the last attempt came back empty — printed so a throttled run is visible.
+let lastReason = null;
 
-  const response = await fetch(url, {
-    headers: { "User-Agent": "Lernify/1.0 (Lernhilfe Baugeschichte)" },
-    signal: AbortSignal.timeout(15000),
-  });
-  if (!response.ok) return null;
+// If request after request is refused there is no point in working through the
+// whole list for twenty minutes; the run stops and says so.
+const GIVE_UP_AFTER = 20;
+let failedInARow = 0;
 
-  const data = await response.json();
+class Blocked extends Error {}
+
+function giveUp(reason) {
+  lastReason = reason;
+  failedInARow += 1;
+  if (failedInARow >= GIVE_UP_AFTER) throw new Blocked(reason);
+  return null;
+}
+
+async function ask(url) {
+  for (let attempt = 1; attempt <= TRIES; attempt++) {
+    try {
+      const response = await fetch(url, {
+        headers: { "User-Agent": USER_AGENT, Accept: "application/json" },
+        signal: AbortSignal.timeout(20000),
+      });
+
+      if (response.ok) {
+        failedInARow = 0;
+        return await response.json();
+      }
+
+      // Throttling and server trouble are worth waiting out; a 403 is not.
+      if (response.status !== 429 && response.status < 500) {
+        return giveUp(`HTTP ${response.status}`);
+      }
+      lastReason = `HTTP ${response.status}`;
+
+      const retryAfter = Number(response.headers.get("retry-after"));
+      await sleep(Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : attempt * 3000);
+    } catch (error) {
+      lastReason = error.name === "TimeoutError" ? "Zeitüberschreitung" : error.message;
+      await sleep(attempt * 1000);
+    }
+  }
+
+  return giveUp(lastReason || "unbekannt");
+}
+
+// --- the four ways a picture can be found, from safest to loosest -----------
+
+const wikiUrl = (wiki, params) =>
+  `https://${wiki}.wikipedia.org/w/api.php?action=query&format=json&formatversion=2` +
+  `&prop=pageimages&piprop=thumbnail&pithumbsize=${THUMB_SIZE}&${params}`;
+
+function fromWikiPages(data, wiki) {
   const page = data?.query?.pages?.[0];
-  if (!page || page.missing || !page.thumbnail?.source) return null;
-
+  if (!page) {
+    lastReason = lastReason || "keine Seite gefunden";
+    return null;
+  }
+  if (page.missing) {
+    lastReason = "Artikel existiert nicht";
+    return null;
+  }
+  if (!page.thumbnail?.source) {
+    lastReason = `Artikel "${page.title}" hat kein Bild`;
+    return null;
+  }
   return { title: page.title, image: page.thumbnail.source, wiki };
 }
 
 // An article of exactly that name is a safe hit, a search hit only a guess.
-const byTitle = (wiki, query) =>
-  askWiki(wiki, `titles=${encodeURIComponent(query)}&redirects=1`);
+async function byTitle(wiki, query) {
+  const data = await ask(wikiUrl(wiki, `titles=${encodeURIComponent(query)}&redirects=1`));
+  return data && fromWikiPages(data, wiki);
+}
 
-const bySearch = (wiki, query) =>
-  askWiki(wiki, `generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1`);
+async function bySearch(wiki, query) {
+  const data = await ask(
+    wikiUrl(wiki, `generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1`)
+  );
+  return data && fromWikiPages(data, wiki);
+}
+
+// Many lecture topics have no article of their own but plenty of photographs on
+// Commons, so the file archive is the last resort.
+async function onCommons(wiki, query) {
+  if (wiki !== "de") return null; // Commons is one archive, asking twice is pointless
+
+  const data = await ask(
+    "https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2" +
+      `&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=1` +
+      `&prop=imageinfo&iiprop=url&iiurlwidth=${THUMB_SIZE}`
+  );
+
+  const file = data?.query?.pages?.[0];
+  const info = file?.imageinfo?.[0];
+  if (!info?.thumburl && !info?.url) {
+    lastReason = lastReason || "nichts auf Commons";
+    return null;
+  }
+
+  return {
+    title: file.title,
+    image: info.thumburl || info.url,
+    wiki: "commons",
+  };
+}
+
+const STRATEGIES = [
+  { name: "Titel", run: byTitle, exact: true },
+  { name: "Suche", run: bySearch, exact: false },
+  { name: "Commons", run: onCommons, exact: false },
+];
 
 async function findImage(queries) {
-  for (const lookup of [byTitle, bySearch]) {
+  lastReason = null;
+
+  for (const strategy of STRATEGIES) {
     for (const wiki of WIKIS) {
       for (const query of queries) {
-        try {
-          const hit = await lookup(wiki, query);
-          await sleep(PAUSE_MS);
-          if (hit) return { ...hit, exact: lookup === byTitle };
-        } catch (error) {
-          console.error(`   ! ${wiki} "${query}": ${error.message}`);
-        }
+        const hit = await strategy.run(wiki, query);
+        await sleep(PAUSE_MS);
+        if (hit) return { ...hit, exact: strategy.exact, strategy: strategy.name };
       }
     }
   }
@@ -73,7 +170,40 @@ async function findImage(queries) {
 
 const read = (file) => JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), "utf8"));
 
+// --- "pruefen": one request per strategy, with everything on show -----------
+
+async function diagnose() {
+  console.log(`User-Agent: ${USER_AGENT}\n`);
+
+  const probes = [
+    ["Titel de", () => byTitle("de", "Kölner Dom")],
+    ["Titel en", () => byTitle("en", "Iron Bridge")],
+    ["Suche de", () => bySearch("de", "Gartenstadt Ebenezer Howard")],
+    ["Suche en", () => bySearch("en", "Walking City Archigram")],
+    ["Commons", () => onCommons("de", "Weißenhofsiedlung")],
+  ];
+
+  for (const [label, run] of probes) {
+    lastReason = null;
+    const hit = await run();
+    if (hit) {
+      console.log(`${label.padEnd(10)} ok     ${hit.wiki}: ${hit.title}`);
+      console.log(`${"".padEnd(10)}        ${hit.image}`);
+    } else {
+      console.log(`${label.padEnd(10)} LEER   ${lastReason || "unbekannt"}`);
+    }
+    await sleep(PAUSE_MS);
+  }
+
+  console.log(
+    "\nAlle Zeilen LEER mit HTTP 403/429: Wikipedia blockt die Anfragen." +
+      "\nAlle LEER mit Zeitüberschreitung: der Server kommt nicht raus (Firewall/DNS)."
+  );
+}
+
 (async () => {
+  if (diagnoseOnly) return diagnose();
+
   const catalogue = read("baugeschichte.json");
   const cards = read("rueckblicke.json");
   const epochen = read("epochen.json");
@@ -135,22 +265,35 @@ const read = (file) => JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), "ut
   for (const [index, target] of targets.entries()) {
     process.stdout.write(`${index + 1}/${targets.length} ${target.label} ... `);
 
-    const hit = await findImage(target.queries);
+    let hit = null;
+    try {
+      hit = await findImage(target.queries);
+    } catch (error) {
+      if (!(error instanceof Blocked)) throw error;
+      console.log(`kein Bild — ${error.message}`);
+      console.log(
+        `\nAbgebrochen: ${GIVE_UP_AFTER} Anfragen hintereinander ohne Antwort (${error.message}).` +
+          "\nWas los ist, zeigt:  node scripts/fetch-images.js pruefen" +
+          "\nDas Gefundene ist gespeichert, ein neuer Start macht da weiter."
+      );
+      break;
+    }
+
     if (!hit) {
-      missing.push(target.label);
-      console.log("kein Bild");
+      missing.push(`${target.label}  (${lastReason || "unbekannt"})`);
+      console.log(`kein Bild — ${lastReason || "unbekannt"}`);
       continue;
     }
 
     overlay[target.key] = {
       image: hit.image,
-      quelle: `${hit.wiki}.wikipedia.org/wiki/${hit.title.replace(/ /g, "_")}`,
-      treffer: hit.exact ? "titel" : "suche",
+      quelle: `${hit.wiki}.wikimedia/wikipedia: ${hit.title}`,
+      treffer: hit.strategy,
     };
     save(overlay); // after every hit, so an interrupted run keeps what it found
     found += 1;
 
-    console.log(`ok  (${hit.wiki}: ${hit.title}${hit.exact ? "" : " — Suchtreffer"})`);
+    console.log(`ok  (${hit.wiki}: ${hit.title}${hit.exact ? "" : ` — ${hit.strategy}`})`);
     if (!hit.exact) guessed.push(`${target.label}  ->  ${hit.wiki}: ${hit.title}`);
   }
 
@@ -162,6 +305,7 @@ const read = (file) => JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), "ut
   }
   if (missing.length > 0) {
     console.log(`\nOhne Bild geblieben:\n  ${missing.join("\n  ")}`);
+    console.log("\nNoch einmal starten holt nur die fehlenden nach.");
   }
-  console.log("\nDanach: node scripts/check-images.js  und  node src/seed.js");
+  console.log("\nDanach: node scripts/apply-images.js  und  node scripts/check-images.js");
 })();
