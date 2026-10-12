@@ -15,11 +15,13 @@ export default function Training() {
   const [question, setQuestion] = useState(null)
   const [picked, setPicked] = useState(null)
   const [result, setResult] = useState(null)
+  const [hintShown, setHintShown] = useState(false)
   const [error, setError] = useState('')
 
   const loadQuestion = useCallback(async (targetBox) => {
     setPicked(null)
     setResult(null)
+    setHintShown(false)
     setError('')
     try {
       const [{ question }, { counts }] = await Promise.all([
@@ -98,6 +100,31 @@ export default function Training() {
             <h3 className="text-sm font-bold text-[#24211a] mb-5">{question.text}</h3>
 
             <StudyImage src={question.image} />
+
+            {question.hint?.length > 0 && (
+              <div className="mb-4">
+                {hintShown ? (
+                  <div className="bg-[#f1e9dc]/60 border border-[#d9ccb6] rounded-xl px-4 py-3">
+                    <p className="text-[11px] uppercase tracking-wide text-[#948773] mb-1">
+                      Tipp
+                    </p>
+                    <ul className="text-xs text-[#4a4336] flex flex-col gap-1">
+                      {question.hint.map((line) => (
+                        <li key={line}>{line}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setHintShown(true)}
+                    className="text-xs text-[#736856] border border-[#d9ccb6] rounded-xl px-3 py-2 hover:border-[#b8ab97]"
+                  >
+                    Tipp anzeigen
+                  </button>
+                )}
+              </div>
+            )}
 
             <div className="flex flex-col gap-2">
               {question.options.map((option) => {

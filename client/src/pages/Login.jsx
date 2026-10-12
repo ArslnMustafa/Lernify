@@ -32,7 +32,8 @@ export default function Login() {
     setSubmitting(true)
     try {
       await login(name.trim(), pin)
-      navigate('/')
+      // Training is where the learning happens, so that is where you land.
+      navigate('/training')
     } catch (err) {
       setError(err.message)
     } finally {

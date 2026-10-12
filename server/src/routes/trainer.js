@@ -134,6 +134,48 @@ function distractorsFor(kindName, correct) {
   return chosen;
 }
 
+// A hint says something about the building that is not the answer: it should
+// narrow the field, not give the answer away.
+const FACTS = [
+  ["architect", (b) => b.architect && `Architekt: ${b.architect}`],
+  ["year", (b) => b.year && `Zeitraum: ${b.year}`],
+  ["location", (b) => b.location && `Ort: ${b.location}`],
+  // Handout cards carry their lecture chapter where a catalogue building
+  // carries its style, and "II-5 - Wohnen für das Existenzminimum" is a topic.
+  [
+    "style",
+    (b) =>
+      b.style &&
+      (/^II-\d+\s*-\s*/.test(b.style)
+        ? `Thema: ${b.style.replace(/^II-\d+\s*-\s*/, "")}`
+        : `Stil: ${b.style}`),
+  ],
+  ["merkmal", (b) => b.bildmerkmale && `Merkmal: ${b.bildmerkmale}`],
+];
+
+// What each question already asks for, or already says.
+const GIVES_AWAY = {
+  architect: ["architect"],
+  year: ["year"],
+  name: ["location"], // the answer is "Name (Ort)"
+  description: ["location", "merkmal"],
+};
+
+function hintsFor(building, kindName, correct) {
+  const forbidden = new Set(GIVES_AWAY[kindName] || []);
+
+  const secrets = [String(correct).toLowerCase()];
+  if (kindName === "name" || kindName === "description") {
+    secrets.push(building.name.toLowerCase());
+  }
+
+  return FACTS.filter(([id]) => !forbidden.has(id))
+    .map(([, fact]) => fact(building))
+    .filter(Boolean)
+    .filter((text) => !secrets.some((secret) => text.toLowerCase().includes(secret)))
+    .slice(0, 3);
+}
+
 function progressFor(userId) {
   const rows = db
     .prepare("SELECT item_key, box, kind FROM trainer_progress WHERE user_id = ?")
@@ -176,6 +218,7 @@ router.get("/next", (req, res) => {
       kind: kindName,
       text: KINDS[kindName].question(building),
       image: building.image,
+      hint: hintsFor(building, kindName, correct),
       options,
     },
     remaining: pool.length,
