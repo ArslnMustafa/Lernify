@@ -1,4 +1,5 @@
 const { RESEND_API_KEY, LOGIN_ALERT_TO, LOGIN_ALERT_FROM } = require("./config");
+const { describeDevice, lookupLocation } = require("./clientinfo");
 
 const RESEND_URL = "https://api.resend.com/emails";
 
@@ -29,12 +30,14 @@ function berlinTime(date) {
 async function sendLoginAlert({ name, username, ip, userAgent }) {
   if (!enabled) return;
 
-  const when = berlinTime(new Date());
+  const location = await lookupLocation(ip);
+
   const rows = [
     ["Wer", `${name} (${username})`],
-    ["Wann", when],
+    ["Wann", berlinTime(new Date())],
+    ["Ort", location || "unbekannt"],
+    ["Gerät", describeDevice(userAgent) || "unbekannt"],
     ["IP", ip],
-    ["Gerät", userAgent],
   ];
 
   const html = `
