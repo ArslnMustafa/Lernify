@@ -1,39 +1,57 @@
 // Turns the two things a request tells us about its sender into something
 // readable in a mail: the user agent and the address it came from.
 
-const OPERATING_SYSTEMS = [
-  [/iPhone/, "iPhone"],
-  [/iPad/, "iPad"],
-  [/Android/, "Android"],
-  [/Windows NT/, "Windows"],
-  [/Mac OS X|Macintosh/, "Mac"],
-  [/CrOS/, "ChromeOS"],
-  [/Linux/, "Linux"],
-];
-
 // Order matters: Edge and Opera also claim to be Chrome, Chrome also claims Safari.
 const BROWSERS = [
-  [/Edg\//, "Edge"],
-  [/OPR\/|Opera/, "Opera"],
-  [/SamsungBrowser/, "Samsung Internet"],
-  [/Firefox\//, "Firefox"],
-  [/Chrome\//, "Chrome"],
-  [/Safari\//, "Safari"],
+  [/Edg\/(\d+)/, "Edge"],
+  [/OPR\/(\d+)/, "Opera"],
+  [/SamsungBrowser\/(\d+)/, "Samsung Internet"],
+  [/Firefox\/(\d+)/, "Firefox"],
+  [/Chrome\/(\d+)/, "Chrome"],
+  [/Version\/(\d+)[\d.]*\s+(?:Mobile\/\S+\s+)?Safari/, "Safari"],
+  [/Safari\/(\d+)/, "Safari"],
 ];
 
-function match(list, value) {
-  const found = list.find(([pattern]) => pattern.test(value));
-  return found ? found[1] : null;
+function describeSystem(userAgent) {
+  const iOS = userAgent.match(/(iPhone|iPad); CPU (?:iPhone )?OS (\d+)[_.](\d+)/);
+  if (iOS) return `${iOS[1]} (iOS ${iOS[2]}.${iOS[3]})`;
+  if (/iPhone|iPad/.test(userAgent)) return userAgent.includes("iPad") ? "iPad" : "iPhone";
+
+  const android = userAgent.match(/Android (\d+(?:\.\d+)?)[^)]*?;\s*([^;)]+?)(?:\s+Build|\))/);
+  if (android) {
+    const model = android[2].trim();
+    return model && model !== "wv" ? `Android ${android[1]}, ${model}` : `Android ${android[1]}`;
+  }
+  if (/Android/.test(userAgent)) return "Android";
+
+  if (/Windows NT 10/.test(userAgent)) return "Windows 10/11";
+  if (/Windows/.test(userAgent)) return "Windows";
+
+  const mac = userAgent.match(/Mac OS X (\d+)[_.](\d+)/);
+  if (mac) return `Mac (macOS ${mac[1]}.${mac[2]})`;
+  if (/Macintosh/.test(userAgent)) return "Mac";
+
+  if (/CrOS/.test(userAgent)) return "ChromeOS";
+  if (/Linux/.test(userAgent)) return "Linux";
+  return null;
+}
+
+function describeBrowser(userAgent) {
+  for (const [pattern, name] of BROWSERS) {
+    const found = userAgent.match(pattern);
+    if (found) return found[1] ? `${name} ${found[1]}` : name;
+  }
+  return null;
 }
 
 function describeDevice(userAgent) {
   if (!userAgent) return null;
 
-  const os = match(OPERATING_SYSTEMS, userAgent);
-  const browser = match(BROWSERS, userAgent);
+  const system = describeSystem(userAgent);
+  const browser = describeBrowser(userAgent);
 
-  if (os && browser) return `${os} · ${browser}`;
-  return os || browser || userAgent;
+  if (system && browser) return `${system} · ${browser}`;
+  return system || browser || userAgent;
 }
 
 function isPrivateAddress(ip) {
@@ -62,8 +80,8 @@ async function lookupLocation(ip) {
     const data = await response.json();
     if (data.error) return null;
 
-    const parts = [data.city, data.region, data.country_name].filter(Boolean);
-    return parts.length > 0 ? parts.join(", ") : null;
+    const place = [data.city, data.region, data.country_name].filter(Boolean).join(", ");
+    return place || null;
   } catch {
     return null;
   }

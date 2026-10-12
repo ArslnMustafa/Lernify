@@ -53,6 +53,7 @@ async function sendLoginAlert({ name, username, ip, userAgent }) {
           )
           .join("")}
       </table>
+      <p style="margin:16px 0 0;font-size:11px;color:#b8ab97">${escape(userAgent)}</p>
     </div>`;
 
   try {
