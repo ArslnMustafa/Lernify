@@ -9,7 +9,7 @@ export default function StudyImage({ src }) {
   if (!src || failed) return null
 
   return (
-    <div className="w-full h-[30svh] sm:h-80 md:h-[26rem] mb-3 sm:mb-5 rounded-xl bg-[#f1e9dc] border border-[#d9ccb6] overflow-hidden flex items-center justify-center">
+    <div className="w-full h-[30svh] sm:h-80 md:h-[26rem] mb-3 sm:mb-5 rounded-xl bg-[var(--feld)] border border-[var(--rand)] overflow-hidden flex items-center justify-center">
       <img
         src={src}
         alt=""

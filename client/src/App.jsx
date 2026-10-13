@@ -5,6 +5,7 @@ import Theorie from './pages/Theorie.jsx'
 import Training from './pages/Training.jsx'
 import Vergleich from './pages/Vergleich.jsx'
 import Simulation from './pages/Simulation.jsx'
+import Verwalten from './pages/Verwalten.jsx'
 import ProtectedRoute from './auth/ProtectedRoute.jsx'
 
 // Probeklausur und Schreiben sind herausgenommen. Ihre Seiten
@@ -18,6 +19,7 @@ const PROTECTED = [
   { path: '/training', element: <Training /> },
   { path: '/vergleich', element: <Vergleich /> },
   { path: '/simulation', element: <Simulation /> },
+  { path: '/verwalten', element: <Verwalten /> },
   // An address that no longer exists — a bookmark to the old exam list, say —
   // leads to the trainer instead of an empty page.
   { path: '*', element: <Navigate to="/training" replace /> },

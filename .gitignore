@@ -5,3 +5,4 @@ dist/
 .env.local
 .jwt-secret
 server/data/bilder.json
+server/data/aenderungen.json

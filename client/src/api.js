@@ -86,4 +86,15 @@ export const api = {
   schreibBewerten: (key, treffer) =>
     request('/schreiben/bewerten', { method: 'POST', body: JSON.stringify({ key, treffer }) }),
   schreibStatistik: () => request('/schreiben/statistik'),
+  verwaltenBauwerke: (suche) => request(`/verwalten/bauwerke?suche=${encodeURIComponent(suche || '')}`),
+  verwaltenBauwerkSpeichern: (payload) =>
+    request('/verwalten/bauwerk', { method: 'POST', body: JSON.stringify(payload) }),
+  verwaltenFortschritt: () => request('/verwalten/fortschritt'),
+  verwaltenZuruecksetzen: (bereich) =>
+    request('/verwalten/fortschritt/zuruecksetzen', {
+      method: 'POST',
+      body: JSON.stringify({ bereich }),
+    }),
+  pinAendern: (alt, neu) =>
+    request('/verwalten/pin', { method: 'POST', body: JSON.stringify({ alt, neu }) }),
 }

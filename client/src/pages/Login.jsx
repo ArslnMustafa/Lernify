@@ -42,13 +42,13 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#e9e0d2] px-4 py-10">
-      <h1 className="text-base font-semibold text-[#736856] mb-4">Anmelden</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--flaeche)] px-4 py-10">
+      <h1 className="text-base font-semibold text-[var(--text-leise)] mb-4">Anmelden</h1>
 
-      <div className="w-full max-w-md bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl shadow-sm p-7">
+      <div className="w-full max-w-md bg-[var(--karte)] border border-[var(--rand)] rounded-2xl shadow-sm p-7">
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div>
-            <p className="text-xs font-medium text-[#736856] mb-2">Wer bist du?</p>
+            <p className="text-xs font-medium text-[var(--text-leise)] mb-2">Wer bist du?</p>
             <div className="flex flex-wrap gap-2">
               {users.map((user) => (
                 <button
@@ -57,8 +57,8 @@ export default function Login() {
                   onClick={() => chooseName(user.name)}
                   className={`px-4 py-1.5 rounded-lg text-sm font-semibold border transition ${
                     name.toLowerCase() === user.name.toLowerCase()
-                      ? 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
-                      : 'bg-[#f1e9dc] text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
+                      ? 'bg-[var(--knopf)] text-[var(--auf-knopf)] border-[var(--knopf)]'
+                      : 'bg-[var(--feld)] text-[var(--text)] border-[var(--rand)] hover:border-[var(--rand-stark)]'
                   }`}
                 >
                   {user.name}
@@ -68,7 +68,7 @@ export default function Login() {
           </div>
 
           <div>
-            <label htmlFor="name" className="block text-xs font-medium text-[#736856] mb-1">
+            <label htmlFor="name" className="block text-xs font-medium text-[var(--text-leise)] mb-1">
               Name
             </label>
             <input
@@ -79,12 +79,12 @@ export default function Login() {
               placeholder="Name"
               autoComplete="username"
               required
-              className="w-full px-3.5 py-2.5 bg-[#f1e9dc]/50 border border-[#d9ccb6] rounded-xl text-sm outline-none text-[#24211a] placeholder:text-[#b8ab97] focus:ring-1 focus:ring-[#3d372c] transition"
+              className="w-full px-3.5 py-2.5 bg-[var(--feld)]/50 border border-[var(--rand)] rounded-xl text-sm outline-none text-[var(--text)] placeholder:text-[var(--rand-stark)] focus:ring-1 focus:ring-[var(--knopf)] transition"
             />
           </div>
 
           <div>
-            <label htmlFor="pin" className="block text-xs font-medium text-[#736856] mb-1">
+            <label htmlFor="pin" className="block text-xs font-medium text-[var(--text-leise)] mb-1">
               PIN
             </label>
             <input
@@ -97,21 +97,21 @@ export default function Login() {
               placeholder="PIN"
               autoComplete="current-password"
               required
-              className="w-full px-3.5 py-2.5 bg-[#f1e9dc]/50 border border-[#d9ccb6] rounded-xl text-sm outline-none text-[#24211a] placeholder:text-[#b8ab97] focus:ring-1 focus:ring-[#3d372c] transition"
+              className="w-full px-3.5 py-2.5 bg-[var(--feld)]/50 border border-[var(--rand)] rounded-xl text-sm outline-none text-[var(--text)] placeholder:text-[var(--rand-stark)] focus:ring-1 focus:ring-[var(--knopf)] transition"
             />
           </div>
 
-          {error && <p className="text-xs text-[#8c4b3f]">{error}</p>}
+          {error && <p className="text-xs text-[var(--rot)]">{error}</p>}
 
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-3 rounded-xl bg-[#3d372c] text-[#e9e0d2] text-sm font-bold hover:bg-[#24211a] transition disabled:opacity-60"
+            className="w-full py-3 rounded-xl bg-[var(--knopf)] text-[var(--auf-knopf)] text-sm font-bold hover:bg-[var(--knopf-tief)] transition disabled:opacity-60"
           >
             {submitting ? 'Anmeldung läuft...' : 'Anmelden'}
           </button>
 
-          <p className="text-[11px] text-[#948773]">
+          <p className="text-[11px] text-[var(--text-schwach)]">
             Wähle deinen Namen und gib deine PIN ein. Wenn du deine PIN nicht kennst,
             frag Mustafa.
           </p>

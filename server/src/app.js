@@ -9,6 +9,7 @@ const trainerRoutes = require("./routes/trainer");
 const vergleichRoutes = require("./routes/vergleich");
 const simulationRoutes = require("./routes/simulation");
 const schreibenRoutes = require("./routes/schreiben");
+const verwaltenRoutes = require("./routes/verwalten");
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api/trainer", trainerRoutes);
 app.use("/api/vergleich", vergleichRoutes);
 app.use("/api/simulation", simulationRoutes);
 app.use("/api/schreiben", schreibenRoutes);
+app.use("/api/verwalten", verwaltenRoutes);
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 

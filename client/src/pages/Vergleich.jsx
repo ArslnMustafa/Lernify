@@ -15,16 +15,16 @@ export default function Vergleich() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#e9e0d2]">
+    <div className="min-h-screen bg-[var(--flaeche)]">
       <Nav />
 
       <main className="max-w-3xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
-        <h2 className="text-base sm:text-lg font-bold text-[#24211a] mb-1">Vergleich</h2>
-        <p className="text-xs text-[#736856] mb-6">
+        <h2 className="text-base sm:text-lg font-bold text-[var(--text)] mb-1">Vergleich</h2>
+        <p className="text-xs text-[var(--text-leise)] mb-6">
           Zwei Bauwerke nebeneinander: Erkenne, auf welches von beiden eine Aussage zutrifft.
         </p>
 
-        {error && <p className="text-sm text-[#8c4b3f] mb-4">{error}</p>}
+        {error && <p className="text-sm text-[var(--rot)] mb-4">{error}</p>}
 
         {chosen ? (
           <Runde id={chosen} onBack={() => setChosen(null)} />
@@ -34,24 +34,24 @@ export default function Vergleich() {
               <button
                 key={pair.id}
                 onClick={() => setChosen(pair.id)}
-                className="text-left bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-4 hover:border-[#b8ab97] transition"
+                className="text-left bg-[var(--karte)] border border-[var(--rand)] rounded-2xl p-4 hover:border-[var(--rand-stark)] transition"
               >
-                <p className="text-sm font-bold text-[#24211a]">{pair.thema}</p>
-                <p className="text-xs text-[#736856] mt-1 mb-3">{pair.frage}</p>
+                <p className="text-sm font-bold text-[var(--text)]">{pair.thema}</p>
+                <p className="text-xs text-[var(--text-leise)] mt-1 mb-3">{pair.frage}</p>
 
                 <div className="grid grid-cols-2 gap-3">
                   {[pair.a, pair.b].map((seite) => (
                     <div key={seite.name}>
                       <Bild src={seite.image} className="h-24" />
-                      <p className="text-xs font-semibold text-[#24211a] mt-1.5">{seite.name}</p>
-                      <p className="text-[11px] text-[#948773]">
+                      <p className="text-xs font-semibold text-[var(--text)] mt-1.5">{seite.name}</p>
+                      <p className="text-[11px] text-[var(--text-schwach)]">
                         {[seite.ort, seite.jahr].filter(Boolean).join(' · ')}
                       </p>
                     </div>
                   ))}
                 </div>
 
-                <p className="text-[11px] text-[#948773] mt-3">{pair.fragen} Aussagen</p>
+                <p className="text-[11px] text-[var(--text-schwach)] mt-3">{pair.fragen} Aussagen</p>
               </button>
             ))}
           </div>
@@ -109,27 +109,27 @@ function Runde({ id, onBack }) {
     }
   }
 
-  if (!pair) return <p className="text-sm text-[#736856]">{error || 'Wird geladen...'}</p>
+  if (!pair) return <p className="text-sm text-[var(--text-leise)]">{error || 'Wird geladen...'}</p>
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3">
-        <button onClick={onBack} className="text-xs text-[#736856] hover:text-[#24211a]">
+        <button onClick={onBack} className="text-xs text-[var(--text-leise)] hover:text-[var(--text)]">
           ← Andere Paarung
         </button>
-        <span className="text-xs text-[#948773]">
+        <span className="text-xs text-[var(--text-schwach)]">
           {score.richtig} / {score.gesamt} richtig
         </span>
       </div>
 
-      <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-4">
+      <div className="bg-[var(--karte)] border border-[var(--rand)] rounded-2xl p-4">
         <div className="grid grid-cols-2 gap-4">
           {[pair.a, pair.b].map((seite) => (
             <div key={seite.name}>
               <Bild src={seite.image} className="h-28 sm:h-40" />
-              <p className="text-sm font-bold text-[#24211a] mt-2">{seite.name}</p>
-              <p className="text-[11px] text-[#736856]">{seite.architekt || '—'}</p>
-              <p className="text-[11px] text-[#948773]">
+              <p className="text-sm font-bold text-[var(--text)] mt-2">{seite.name}</p>
+              <p className="text-[11px] text-[var(--text-leise)]">{seite.architekt || '—'}</p>
+              <p className="text-[11px] text-[var(--text-schwach)]">
                 {[seite.ort, seite.jahr].filter(Boolean).join(' · ')}
               </p>
             </div>
@@ -137,24 +137,24 @@ function Runde({ id, onBack }) {
         </div>
       </div>
 
-      {error && <p className="text-sm text-[#8c4b3f]">{error}</p>}
+      {error && <p className="text-sm text-[var(--rot)]">{error}</p>}
 
       {frage ? (
-        <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-4 sm:p-6">
-          <p className="text-[11px] uppercase tracking-wide text-[#948773] mb-2">
+        <div className="bg-[var(--karte)] border border-[var(--rand)] rounded-2xl p-4 sm:p-6">
+          <p className="text-[11px] uppercase tracking-wide text-[var(--text-schwach)] mb-2">
             {frage.aspekt}
           </p>
-          <h3 className="text-[15px] sm:text-sm font-bold text-[#24211a] mb-3 sm:mb-5">{frage.text}</h3>
+          <h3 className="text-[15px] sm:text-sm font-bold text-[var(--text)] mb-3 sm:mb-5">{frage.text}</h3>
 
           <div className="flex flex-col gap-1.5 sm:gap-2">
             {frage.optionen.map((option) => {
               const isAnswer = result && option.wert === result.gilt
               const isWrongPick = result && option.wert === picked && !result.correct
 
-              let tone = 'bg-[#f1e9dc]/50 text-[#24211a] border-[#d9ccb6]'
-              if (isAnswer) tone = 'bg-[#6b7250] text-[#f7f4ef] border-[#6b7250]'
-              else if (isWrongPick) tone = 'bg-[#8c4b3f] text-[#f7f4ef] border-[#8c4b3f]'
-              else if (!result) tone += ' hover:border-[#b8ab97]'
+              let tone = 'bg-[var(--feld)]/50 text-[var(--text)] border-[var(--rand)]'
+              if (isAnswer) tone = 'bg-[var(--gruen)] text-[var(--auf-farbe)] border-[var(--gruen)]'
+              else if (isWrongPick) tone = 'bg-[var(--rot)] text-[var(--auf-farbe)] border-[var(--rot)]'
+              else if (!result) tone += ' hover:border-[var(--rand-stark)]'
 
               return (
                 <button
@@ -171,22 +171,22 @@ function Runde({ id, onBack }) {
 
           {result && (
             <div className="mt-5 flex flex-col gap-3">
-              <p className="text-[13px] sm:text-xs text-[#736856]">
+              <p className="text-[13px] sm:text-xs text-[var(--text-leise)]">
                 {result.correct ? 'Richtig.' : `Leider falsch — richtig ist ${result.richtig}.`}
               </p>
 
               {result.gegenstueck && (
-                <div className="bg-[#f1e9dc]/60 border border-[#d9ccb6] rounded-xl px-4 py-3">
-                  <p className="text-[11px] uppercase tracking-wide text-[#948773] mb-1">
+                <div className="bg-[var(--feld)]/60 border border-[var(--rand)] rounded-xl px-4 py-3">
+                  <p className="text-[11px] uppercase tracking-wide text-[var(--text-schwach)] mb-1">
                     Dagegen {result.gegenstueckLabel}
                   </p>
-                  <p className="text-xs text-[#4a4336]">{result.gegenstueck}</p>
+                  <p className="text-xs text-[var(--text-weich)]">{result.gegenstueck}</p>
                 </div>
               )}
 
               <button
                 onClick={() => naechste([...gestellt, frage.index])}
-                className="self-start bg-[#3d372c] text-[#e9e0d2] text-xs font-semibold px-4 py-2 rounded-xl hover:bg-[#24211a] transition"
+                className="self-start bg-[var(--knopf)] text-[var(--auf-knopf)] text-xs font-semibold px-4 py-2 rounded-xl hover:bg-[var(--knopf-tief)] transition"
               >
                 Nächste Aussage
               </button>
@@ -194,9 +194,9 @@ function Runde({ id, onBack }) {
           )}
         </div>
       ) : (
-        <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-8 text-center">
-          <p className="text-sm text-[#24211a] font-semibold mb-1">Paarung durchgearbeitet.</p>
-          <p className="text-xs text-[#736856] mb-4">
+        <div className="bg-[var(--karte)] border border-[var(--rand)] rounded-2xl p-8 text-center">
+          <p className="text-sm text-[var(--text)] font-semibold mb-1">Paarung durchgearbeitet.</p>
+          <p className="text-xs text-[var(--text-leise)] mb-4">
             {score.richtig} von {score.gesamt} Aussagen richtig zugeordnet.
           </p>
           <button
@@ -205,17 +205,17 @@ function Runde({ id, onBack }) {
               setScore({ richtig: 0, gesamt: 0 })
               naechste([])
             }}
-            className="bg-[#3d372c] text-[#e9e0d2] text-xs font-semibold px-4 py-2 rounded-xl hover:bg-[#24211a] transition"
+            className="bg-[var(--knopf)] text-[var(--auf-knopf)] text-xs font-semibold px-4 py-2 rounded-xl hover:bg-[var(--knopf-tief)] transition"
           >
             Noch einmal
           </button>
         </div>
       )}
 
-      <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-4">
+      <div className="bg-[var(--karte)] border border-[var(--rand)] rounded-2xl p-4">
         <button
           onClick={() => setTabelle((value) => !value)}
-          className="text-xs font-semibold text-[#595042] hover:text-[#24211a]"
+          className="text-xs font-semibold text-[var(--text-mittel)] hover:text-[var(--text)]"
         >
           {tabelle ? 'Vergleichstabelle ausblenden' : 'Vergleichstabelle anzeigen'}
         </button>
@@ -224,16 +224,16 @@ function Runde({ id, onBack }) {
           <div className="mt-4 flex flex-col gap-4">
             {pair.aspekte.map((aspekt) => (
               <div key={aspekt.aspekt}>
-                <p className="text-[11px] uppercase tracking-wide text-[#948773] mb-1.5">
+                <p className="text-[11px] uppercase tracking-wide text-[var(--text-schwach)] mb-1.5">
                   {aspekt.aspekt}
                 </p>
                 <div className="grid sm:grid-cols-2 gap-2">
-                  <p className="text-xs text-[#4a4336] bg-[#f1e9dc]/60 border border-[#d9ccb6] rounded-xl px-3 py-2">
-                    <strong className="block text-[#24211a] mb-0.5">{pair.a.name}</strong>
+                  <p className="text-xs text-[var(--text-weich)] bg-[var(--feld)]/60 border border-[var(--rand)] rounded-xl px-3 py-2">
+                    <strong className="block text-[var(--text)] mb-0.5">{pair.a.name}</strong>
                     {aspekt.a}
                   </p>
-                  <p className="text-xs text-[#4a4336] bg-[#f1e9dc]/60 border border-[#d9ccb6] rounded-xl px-3 py-2">
-                    <strong className="block text-[#24211a] mb-0.5">{pair.b.name}</strong>
+                  <p className="text-xs text-[var(--text-weich)] bg-[var(--feld)]/60 border border-[var(--rand)] rounded-xl px-3 py-2">
+                    <strong className="block text-[var(--text)] mb-0.5">{pair.b.name}</strong>
                     {aspekt.b}
                   </p>
                 </div>
@@ -241,14 +241,14 @@ function Runde({ id, onBack }) {
             ))}
 
             <div>
-              <p className="text-[11px] uppercase tracking-wide text-[#948773] mb-1.5">
+              <p className="text-[11px] uppercase tracking-wide text-[var(--text-schwach)] mb-1.5">
                 Gemeinsamkeiten
               </p>
               <ul className="flex flex-col gap-1.5">
                 {pair.gemeinsam.map((satz) => (
                   <li
                     key={satz}
-                    className="text-xs text-[#4a4336] bg-[#f1e9dc]/60 border border-[#d9ccb6] rounded-xl px-3 py-2"
+                    className="text-xs text-[var(--text-weich)] bg-[var(--feld)]/60 border border-[var(--rand)] rounded-xl px-3 py-2"
                   >
                     {satz}
                   </li>
@@ -266,11 +266,11 @@ function Runde({ id, onBack }) {
 function Bild({ src, className }) {
   if (!src) {
     return (
-      <div className={`${className} w-full rounded-xl bg-[#f1e9dc] border border-[#d9ccb6]`} />
+      <div className={`${className} w-full rounded-xl bg-[var(--feld)] border border-[var(--rand)]`} />
     )
   }
   return (
-    <div className={`${className} w-full rounded-xl bg-[#f1e9dc] border border-[#d9ccb6] overflow-hidden`}>
+    <div className={`${className} w-full rounded-xl bg-[var(--feld)] border border-[var(--rand)] overflow-hidden`}>
       <img
         src={src}
         alt=""

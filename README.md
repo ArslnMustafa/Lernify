@@ -48,11 +48,25 @@ Bu PIN'ler herkese açık demo değerleridir; kurulumdan sonra değiştirin.
 - **Vergleich** — iki eseri karşılaştırma; her satır aynı zamanda "hangisi?" sorusu.
 - **Karteikarten**, **Theorie** — eser kartları ve teori katalogu.
 - **Simulation** — 20/30/40 karışık soruluk süreli deneme, sonunda değerlendirme ve geçmiş.
+- **Karteikarten** ayrıca sözlük gibi çalışır: isim, yer, mimar veya stil ile arama.
+- **Verwalten** — bauwerk düzeltme (resim adresi dahil), ilerleme sıfırlama, PIN değiştirme.
 
 
 Probeklausur ve Schreiben bölümleri arayüzden kaldırıldı; sayfaları
 (`client/src/pages/Dashboard.jsx`, `ExamTake.jsx`, `Schreiben.jsx`), verileri ve uç noktaları
 (`/api/exams`, `/api/schreiben`) duruyor, geri eklemek birkaç satır.
+
+Arayüz açık/koyu temayı destekler (üst bardaki düğme; seçim yapılmazsa telefonun ayarı
+geçerli).
+
+Günlük hatırlatma maili için sunucuda cron:
+
+```
+0 8 * * *  cd /home/mustafaarslan.com/Lernify/server && /usr/bin/node scripts/erinnerung.js >> /tmp/lernify-erinnerung.log 2>&1
+```
+
+Verwalten'deki düzeltmeler `server/data/aenderungen.json` dosyasına yazılır; bilder.json gibi
+git'e girmez, `git pull` ile çakışmaz.
 
 Uygulama telefona kurulabilir (PWA): ana ekrana eklenince tam ekran açılır, arayüz ve
 görülen resimler önbellekte tutulur.

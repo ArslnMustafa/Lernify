@@ -1,12 +1,111 @@
 @import "tailwindcss";
 
+/* One palette, two readings. The names say what a colour is for, so the dark
+   version is a second set of values rather than a second set of rules. */
+:root {
+  --flaeche: #e9e0d2;      /* page */
+  --karte: #fdfaf4;        /* card */
+  --feld: #f1e9dc;         /* input, subtle fill */
+  --rand: #d9ccb6;
+  --rand-stark: #b8ab97;
+
+  --text: #24211a;
+  --text-mittel: #595042;
+  --text-weich: #4a4336;
+  --text-leise: #736856;
+  --text-schwach: #948773;
+
+  --knopf: #3d372c;        /* the primary button */
+  --knopf-tief: #24211a;   /* its hover */
+  --auf-knopf: #e9e0d2;
+  --auf-knopf-leise: #d9cfbe;
+
+  --gruen: #6b7250;
+  --gruen-tief: #5a6143;
+  --gruen-leise: #dfe2d2;
+  --rot: #8c4b3f;
+  --rot-rand: #e0c4bd;
+  --rot-flaeche: #f6ece9;
+  --mittel: #b08968;
+  --auf-farbe: #f7f4ef;
+
+  color-scheme: light;
+}
+
+:root[data-theme="dunkel"] {
+  --flaeche: #1a1713;
+  --karte: #241f19;
+  --feld: #2c2620;
+  --rand: #3a3229;
+  --rand-stark: #4f4538;
+
+  --text: #f0e8db;
+  --text-mittel: #cfc3ae;
+  --text-weich: #ddd3c0;
+  --text-leise: #b3a690;
+  --text-schwach: #8e836f;
+
+  --knopf: #e2d6c0;
+  --knopf-tief: #f0e8db;
+  --auf-knopf: #241f19;
+  --auf-knopf-leise: #6b6354;
+
+  --gruen: #7f8a5c;
+  --gruen-tief: #6c7550;
+  --gruen-leise: #e3e7d6;
+  --rot: #a55a4b;
+  --rot-rand: #5a3a33;
+  --rot-flaeche: #2e211e;
+  --mittel: #bb9570;
+  --auf-farbe: #fbf8f3;
+
+  color-scheme: dark;
+}
+
+/* No choice made: follow what the phone is set to. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="hell"]) {
+  --flaeche: #1a1713;
+  --karte: #241f19;
+  --feld: #2c2620;
+  --rand: #3a3229;
+  --rand-stark: #4f4538;
+
+  --text: #f0e8db;
+  --text-mittel: #cfc3ae;
+  --text-weich: #ddd3c0;
+  --text-leise: #b3a690;
+  --text-schwach: #8e836f;
+
+  --knopf: #e2d6c0;
+  --knopf-tief: #f0e8db;
+  --auf-knopf: #241f19;
+  --auf-knopf-leise: #6b6354;
+
+  --gruen: #7f8a5c;
+  --gruen-tief: #6c7550;
+  --gruen-leise: #e3e7d6;
+  --rot: #a55a4b;
+  --rot-rand: #5a3a33;
+  --rot-flaeche: #2e211e;
+  --mittel: #bb9570;
+  --auf-farbe: #fbf8f3;
+
+  color-scheme: dark;
+  }
+}
+
 html, body, #root {
   height: 100%;
 }
 
 body {
   margin: 0;
-  background: #e9e0d2;
-  color: #3d372c;
+  background: var(--flaeche);
+  color: var(--text-weich);
   font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+::placeholder {
+  color: var(--text-schwach);
 }

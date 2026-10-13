@@ -70,11 +70,11 @@ export default function Training() {
   }
 
   return (
-    <div className="min-h-screen bg-[#e9e0d2]">
+    <div className="min-h-screen bg-[var(--flaeche)]">
       <Nav />
 
       <main className="max-w-2xl mx-auto px-3 sm:px-6 py-3 sm:py-8">
-        <h2 className="hidden sm:block text-sm sm:text-base font-bold text-[#24211a] mb-2 sm:mb-4">
+        <h2 className="hidden sm:block text-sm sm:text-base font-bold text-[var(--text)] mb-2 sm:mb-4">
           Führerschein-Modus
         </h2>
 
@@ -85,8 +85,8 @@ export default function Training() {
               onClick={() => setStapel(item.box)}
               className={`px-2.5 py-1.5 sm:px-3 sm:py-3 rounded-xl border text-left transition ${
                 stapel === item.box
-                  ? 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
-                  : 'bg-[#fdfaf4] text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
+                  ? 'bg-[var(--knopf)] text-[var(--auf-knopf)] border-[var(--knopf)]'
+                  : 'bg-[var(--karte)] text-[var(--text)] border-[var(--rand)] hover:border-[var(--rand-stark)]'
               }`}
             >
               <span className="block text-[15px] sm:text-lg font-bold leading-snug">
@@ -94,7 +94,7 @@ export default function Training() {
               </span>
               <span
                 className={`block text-[10px] sm:text-[11px] leading-tight ${
-                  stapel === item.box ? 'text-[#d9cfbe]' : 'text-[#948773]'
+                  stapel === item.box ? 'text-[var(--auf-knopf-leise)]' : 'text-[var(--text-schwach)]'
                 }`}
               >
                 {item.label}
@@ -116,14 +116,14 @@ export default function Training() {
               disabled={item.wert === 0}
               className={`px-3 py-1.5 rounded-xl border text-left transition disabled:opacity-45 ${
                 stapel === item.id
-                  ? 'bg-[#6b7250] text-[#f7f4ef] border-[#6b7250]'
-                  : 'bg-[#fdfaf4] text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
+                  ? 'bg-[var(--gruen)] text-[var(--auf-farbe)] border-[var(--gruen)]'
+                  : 'bg-[var(--karte)] text-[var(--text)] border-[var(--rand)] hover:border-[var(--rand-stark)]'
               }`}
             >
               <span className="text-[13px] sm:text-sm font-bold">{item.wert}</span>
               <span
                 className={`ml-2 text-[11px] ${
-                  stapel === item.id ? 'text-[#dfe2d2]' : 'text-[#948773]'
+                  stapel === item.id ? 'text-[var(--gruen-leise)]' : 'text-[var(--text-schwach)]'
                 }`}
               >
                 {item.label}
@@ -132,11 +132,11 @@ export default function Training() {
           ))}
         </div>
 
-        {error && <p className="text-sm text-[#8c4b3f]">{error}</p>}
+        {error && <p className="text-sm text-[var(--rot)]">{error}</p>}
 
         {!error && !question && (
-          <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-6 sm:p-8 text-center">
-            <p className="text-sm text-[#736856]">
+          <div className="bg-[var(--karte)] border border-[var(--rand)] rounded-2xl p-6 sm:p-8 text-center">
+            <p className="text-sm text-[var(--text-leise)]">
               {stapel === 'faellig'
                 ? 'Heute ist nichts fällig. Du kannst trotzdem in einem Kasten weiterüben.'
                 : stapel === 'fehler'
@@ -147,19 +147,19 @@ export default function Training() {
         )}
 
         {question && (
-          <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-3.5 sm:p-6">
-            <h3 className="text-[15px] sm:text-sm font-bold text-[#24211a] mb-3 sm:mb-5">{question.text}</h3>
+          <div className="bg-[var(--karte)] border border-[var(--rand)] rounded-2xl p-3.5 sm:p-6">
+            <h3 className="text-[15px] sm:text-sm font-bold text-[var(--text)] mb-3 sm:mb-5">{question.text}</h3>
 
             <StudyImage src={question.image} />
 
             {question.hint?.length > 0 && (
               <div className="mb-3 sm:mb-4">
                 {hintShown ? (
-                  <div className="bg-[#f1e9dc]/60 border border-[#d9ccb6] rounded-xl px-3 py-2 sm:px-4 sm:py-3">
-                    <p className="text-[10px] uppercase tracking-wide text-[#948773] mb-0.5 sm:mb-1">
+                  <div className="bg-[var(--feld)]/60 border border-[var(--rand)] rounded-xl px-3 py-2 sm:px-4 sm:py-3">
+                    <p className="text-[10px] uppercase tracking-wide text-[var(--text-schwach)] mb-0.5 sm:mb-1">
                       Tipp
                     </p>
-                    <ul className="text-[13px] sm:text-xs text-[#4a4336] flex flex-col gap-0.5 sm:gap-1">
+                    <ul className="text-[13px] sm:text-xs text-[var(--text-weich)] flex flex-col gap-0.5 sm:gap-1">
                       {question.hint.map((line) => (
                         <li key={line}>{line}</li>
                       ))}
@@ -169,7 +169,7 @@ export default function Training() {
                   <button
                     type="button"
                     onClick={() => setHintShown(true)}
-                    className="text-[13px] sm:text-xs text-[#736856] border border-[#d9ccb6] rounded-lg px-3 py-1.5 hover:border-[#b8ab97]"
+                    className="text-[13px] sm:text-xs text-[var(--text-leise)] border border-[var(--rand)] rounded-lg px-3 py-1.5 hover:border-[var(--rand-stark)]"
                   >
                     Tipp anzeigen
                   </button>
@@ -182,10 +182,10 @@ export default function Training() {
                 const isAnswer = result && option === result.correctAnswer
                 const isWrongPick = result && option === picked && !result.correct
 
-                let tone = 'bg-[#f1e9dc]/50 text-[#24211a] border-[#d9ccb6]'
-                if (isAnswer) tone = 'bg-[#6b7250] text-[#f7f4ef] border-[#6b7250]'
-                else if (isWrongPick) tone = 'bg-[#8c4b3f] text-[#f7f4ef] border-[#8c4b3f]'
-                else if (!result) tone += ' hover:border-[#b8ab97]'
+                let tone = 'bg-[var(--feld)]/50 text-[var(--text)] border-[var(--rand)]'
+                if (isAnswer) tone = 'bg-[var(--gruen)] text-[var(--auf-farbe)] border-[var(--gruen)]'
+                else if (isWrongPick) tone = 'bg-[var(--rot)] text-[var(--auf-farbe)] border-[var(--rot)]'
+                else if (!result) tone += ' hover:border-[var(--rand-stark)]'
 
                 return (
                   <button
@@ -202,19 +202,19 @@ export default function Training() {
 
             {result && (
               <div className="mt-3 sm:mt-5 flex items-center justify-between gap-3">
-                <p className="text-[13px] sm:text-xs text-[#736856]">
+                <p className="text-[13px] sm:text-xs text-[var(--text-leise)]">
                   {result.correct ? 'Richtig.' : 'Leider falsch.'}{' '}
                   {result.toBox !== result.fromBox && (
                     <>
                       Verschoben nach{' '}
-                      <strong className="text-[#24211a]">{boxLabel(result.toBox)}</strong>,{' '}
+                      <strong className="text-[var(--text)]">{boxLabel(result.toBox)}</strong>,{' '}
                     </>
                   )}
                   {wiederText(result.wiederIn)}.
                 </p>
                 <button
                   onClick={() => loadQuestion(stapel)}
-                  className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#e9e0d2] text-sm font-medium hover:bg-[#24211a] transition whitespace-nowrap"
+                  className="px-5 py-2.5 rounded-xl bg-[var(--knopf)] text-[var(--auf-knopf)] text-sm font-medium hover:bg-[var(--knopf-tief)] transition whitespace-nowrap"
                 >
                   Nächste Frage
                 </button>
@@ -236,10 +236,10 @@ function Fortschritt({ stats }) {
   if (stats.themen.length === 0) return null
 
   return (
-    <div className="mt-3 sm:mt-5 bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-4">
+    <div className="mt-3 sm:mt-5 bg-[var(--karte)] border border-[var(--rand)] rounded-2xl p-4">
       <button
         onClick={() => setOffen((value) => !value)}
-        className="text-[13px] sm:text-xs font-semibold text-[#595042] hover:text-[#24211a]"
+        className="text-[13px] sm:text-xs font-semibold text-[var(--text-mittel)] hover:text-[var(--text)]"
       >
         {offen ? 'Fortschritt ausblenden' : 'Fortschritt nach Thema'}
       </button>
@@ -251,19 +251,19 @@ function Fortschritt({ stats }) {
             return (
               <div key={thema.thema}>
                 <div className="flex items-baseline justify-between gap-3">
-                  <span className="text-[13px] sm:text-xs text-[#4a4336]">{thema.thema}</span>
-                  <span className="text-[11px] text-[#948773] whitespace-nowrap">
+                  <span className="text-[13px] sm:text-xs text-[var(--text-weich)]">{thema.thema}</span>
+                  <span className="text-[11px] text-[var(--text-schwach)] whitespace-nowrap">
                     {prozent}% · {thema.richtig + thema.falsch} Antworten
                   </span>
                 </div>
-                <div className="mt-1 h-1.5 rounded bg-[#e9e0d2] overflow-hidden">
+                <div className="mt-1 h-1.5 rounded bg-[var(--flaeche)] overflow-hidden">
                   <div
                     className={`h-full rounded ${
                       prozent >= 80
-                        ? 'bg-[#6b7250]'
+                        ? 'bg-[var(--gruen)]'
                         : prozent >= 50
-                          ? 'bg-[#b08968]'
-                          : 'bg-[#8c4b3f]'
+                          ? 'bg-[var(--mittel)]'
+                          : 'bg-[var(--rot)]'
                     }`}
                     style={{ width: `${Math.max(prozent, 3)}%` }}
                   />
@@ -271,7 +271,7 @@ function Fortschritt({ stats }) {
               </div>
             )
           })}
-          <p className="text-[11px] text-[#948773] mt-1">
+          <p className="text-[11px] text-[var(--text-schwach)] mt-1">
             Schwächste Themen zuerst, ab drei Antworten.
           </p>
         </div>
