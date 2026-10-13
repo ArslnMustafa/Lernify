@@ -7,6 +7,7 @@ import Theorie from './pages/Theorie.jsx'
 import Training from './pages/Training.jsx'
 import Vergleich from './pages/Vergleich.jsx'
 import Simulation from './pages/Simulation.jsx'
+import Schreiben from './pages/Schreiben.jsx'
 import ProtectedRoute from './auth/ProtectedRoute.jsx'
 
 const PROTECTED = [
@@ -18,6 +19,7 @@ const PROTECTED = [
   { path: '/training', element: <Training /> },
   { path: '/vergleich', element: <Vergleich /> },
   { path: '/simulation', element: <Simulation /> },
+  { path: '/schreiben', element: <Schreiben /> },
 ]
 
 export default function App() {

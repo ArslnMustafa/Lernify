@@ -8,6 +8,7 @@ const catalogRoutes = require("./routes/catalog");
 const trainerRoutes = require("./routes/trainer");
 const vergleichRoutes = require("./routes/vergleich");
 const simulationRoutes = require("./routes/simulation");
+const schreibenRoutes = require("./routes/schreiben");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/api/catalog", catalogRoutes);
 app.use("/api/trainer", trainerRoutes);
 app.use("/api/vergleich", vergleichRoutes);
 app.use("/api/simulation", simulationRoutes);
+app.use("/api/schreiben", schreibenRoutes);
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 

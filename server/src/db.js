@@ -55,6 +55,16 @@ db.exec(`
     UNIQUE(user_id, item_key)
   );
 
+  CREATE TABLE IF NOT EXISTS schreib_antworten (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    item_key TEXT NOT NULL,
+    treffer TEXT NOT NULL,
+    punkte INTEGER NOT NULL,
+    von INTEGER NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+
   CREATE TABLE IF NOT EXISTS simulation_runs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,

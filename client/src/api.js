@@ -81,4 +81,9 @@ export const api = {
       body: JSON.stringify({ antworten }),
     }),
   simulationVerlauf: () => request('/simulation/verlauf'),
+  schreibNaechste: () => request('/schreiben/naechste'),
+  schreibLoesung: (key) => request(`/schreiben/${encodeURIComponent(key)}/loesung`),
+  schreibBewerten: (key, treffer) =>
+    request('/schreiben/bewerten', { method: 'POST', body: JSON.stringify({ key, treffer }) }),
+  schreibStatistik: () => request('/schreiben/statistik'),
 }
