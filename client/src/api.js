@@ -41,7 +41,12 @@ export const api = {
   listBuildings: () => request('/catalog/buildings'),
   listTheory: () => request('/catalog/theory'),
   trainerStats: () => request('/trainer/stats'),
-  trainerNext: (box) => request(`/trainer/next?box=${box}`),
+  trainerNext: (stapel) =>
+    request(
+      typeof stapel === 'number'
+        ? `/trainer/next?box=${stapel}`
+        : `/trainer/next?modus=${stapel}`
+    ),
   trainerAnswer: (payload) =>
     request('/trainer/answer', { method: 'POST', body: JSON.stringify(payload) }),
   listVergleiche: () => request('/vergleich'),

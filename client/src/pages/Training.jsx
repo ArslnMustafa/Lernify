@@ -9,35 +9,49 @@ const BOXES = [
   { box: 3, label: 'Gelernt' },
 ]
 
+const boxLabel = (box) => BOXES.find((item) => item.box === box)?.label
+
+// What a card's new box means for when it comes back.
+function wiederText(tage) {
+  if (!tage) return 'kommt gleich wieder'
+  return tage === 1 ? 'wieder morgen' : `wieder in ${tage} Tagen`
+}
+
 export default function Training() {
-  const [box, setBox] = useState(1)
-  const [counts, setCounts] = useState({ 1: 0, 2: 0, 3: 0 })
+  const [stapel, setStapel] = useState(1)
+  const [stats, setStats] = useState({
+    counts: { 1: 0, 2: 0, 3: 0 },
+    faellig: 0,
+    fehler: 0,
+    themen: [],
+  })
+  const counts = stats.counts
   const [question, setQuestion] = useState(null)
   const [picked, setPicked] = useState(null)
   const [result, setResult] = useState(null)
   const [hintShown, setHintShown] = useState(false)
   const [error, setError] = useState('')
 
-  const loadQuestion = useCallback(async (targetBox) => {
+  const loadQuestion = useCallback(async (ziel) => {
     setPicked(null)
     setResult(null)
     setHintShown(false)
     setError('')
     try {
-      const [{ question }, { counts }] = await Promise.all([
-        api.trainerNext(targetBox),
+      const [{ question }, neueStats] = await Promise.all([
+        api.trainerNext(ziel),
         api.trainerStats(),
       ])
       setQuestion(question)
-      setCounts(counts)
+      setStats(neueStats)
     } catch (err) {
       setError(err.message)
     }
   }, [])
 
   useEffect(() => {
-    loadQuestion(box)
-  }, [box, loadQuestion])
+    loadQuestion(stapel)
+  }, [stapel, loadQuestion])
 
   async function answer(option) {
     if (result) return
@@ -49,7 +63,7 @@ export default function Training() {
         answer: option,
       })
       setResult(data)
-      setCounts((await api.trainerStats()).counts)
+      setStats(await api.trainerStats())
     } catch (err) {
       setError(err.message)
     }
@@ -64,13 +78,13 @@ export default function Training() {
           Führerschein-Modus
         </h2>
 
-        <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-2 sm:mb-6">
+        <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-1.5 sm:mb-3">
           {BOXES.map((item) => (
             <button
               key={item.box}
-              onClick={() => setBox(item.box)}
+              onClick={() => setStapel(item.box)}
               className={`px-2.5 py-1.5 sm:px-3 sm:py-3 rounded-xl border text-left transition ${
-                box === item.box
+                stapel === item.box
                   ? 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
                   : 'bg-[#fdfaf4] text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
               }`}
@@ -80,7 +94,36 @@ export default function Training() {
               </span>
               <span
                 className={`block text-[10px] sm:text-[11px] leading-tight ${
-                  box === item.box ? 'text-[#d9cfbe]' : 'text-[#948773]'
+                  stapel === item.box ? 'text-[#d9cfbe]' : 'text-[#948773]'
+                }`}
+              >
+                {item.label}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* Two stacks that cut across the boxes: what is due, and what keeps
+            going wrong. */}
+        <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mb-2 sm:mb-6">
+          {[
+            { id: 'faellig', label: 'Heute fällig', wert: stats.faellig },
+            { id: 'fehler', label: 'Meine Fehler', wert: stats.fehler },
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setStapel(item.id)}
+              disabled={item.wert === 0}
+              className={`px-3 py-1.5 rounded-xl border text-left transition disabled:opacity-45 ${
+                stapel === item.id
+                  ? 'bg-[#6b7250] text-[#f7f4ef] border-[#6b7250]'
+                  : 'bg-[#fdfaf4] text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
+              }`}
+            >
+              <span className="text-[13px] sm:text-sm font-bold">{item.wert}</span>
+              <span
+                className={`ml-2 text-[11px] ${
+                  stapel === item.id ? 'text-[#dfe2d2]' : 'text-[#948773]'
                 }`}
               >
                 {item.label}
@@ -92,9 +135,13 @@ export default function Training() {
         {error && <p className="text-sm text-[#8c4b3f]">{error}</p>}
 
         {!error && !question && (
-          <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-8 text-center">
+          <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-6 sm:p-8 text-center">
             <p className="text-sm text-[#736856]">
-              In diesem Stapel ist gerade nichts zu üben.
+              {stapel === 'faellig'
+                ? 'Heute ist nichts fällig. Du kannst trotzdem in einem Kasten weiterüben.'
+                : stapel === 'fehler'
+                  ? 'Keine Karte, die schon einmal falsch war.'
+                  : 'In diesem Stapel ist gerade nichts zu üben.'}
             </p>
           </div>
         )}
@@ -160,15 +207,13 @@ export default function Training() {
                   {result.toBox !== result.fromBox && (
                     <>
                       Verschoben nach{' '}
-                      <strong className="text-[#24211a]">
-                        {BOXES.find((b) => b.box === result.toBox).label}
-                      </strong>
-                      .
+                      <strong className="text-[#24211a]">{boxLabel(result.toBox)}</strong>,{' '}
                     </>
                   )}
+                  {wiederText(result.wiederIn)}.
                 </p>
                 <button
-                  onClick={() => loadQuestion(box)}
+                  onClick={() => loadQuestion(stapel)}
                   className="px-5 py-2.5 rounded-xl bg-[#3d372c] text-[#e9e0d2] text-sm font-medium hover:bg-[#24211a] transition whitespace-nowrap"
                 >
                   Nächste Frage
@@ -177,7 +222,60 @@ export default function Training() {
             )}
           </div>
         )}
+        <Fortschritt stats={stats} />
       </main>
+    </div>
+  )
+}
+
+// Where the gaps are: the topics with the worst ratio come first, which is the
+// answer to "what should I study next".
+function Fortschritt({ stats }) {
+  const [offen, setOffen] = useState(false)
+
+  if (stats.themen.length === 0) return null
+
+  return (
+    <div className="mt-3 sm:mt-5 bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-4">
+      <button
+        onClick={() => setOffen((value) => !value)}
+        className="text-[13px] sm:text-xs font-semibold text-[#595042] hover:text-[#24211a]"
+      >
+        {offen ? 'Fortschritt ausblenden' : 'Fortschritt nach Thema'}
+      </button>
+
+      {offen && (
+        <div className="mt-3 flex flex-col gap-2">
+          {stats.themen.map((thema) => {
+            const prozent = Math.round(thema.quote * 100)
+            return (
+              <div key={thema.thema}>
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="text-[13px] sm:text-xs text-[#4a4336]">{thema.thema}</span>
+                  <span className="text-[11px] text-[#948773] whitespace-nowrap">
+                    {prozent}% · {thema.richtig + thema.falsch} Antworten
+                  </span>
+                </div>
+                <div className="mt-1 h-1.5 rounded bg-[#e9e0d2] overflow-hidden">
+                  <div
+                    className={`h-full rounded ${
+                      prozent >= 80
+                        ? 'bg-[#6b7250]'
+                        : prozent >= 50
+                          ? 'bg-[#b08968]'
+                          : 'bg-[#8c4b3f]'
+                    }`}
+                    style={{ width: `${Math.max(prozent, 3)}%` }}
+                  />
+                </div>
+              </div>
+            )
+          })}
+          <p className="text-[11px] text-[#948773] mt-1">
+            Schwächste Themen zuerst, ab drei Antworten.
+          </p>
+        </div>
+      )}
     </div>
   )
 }

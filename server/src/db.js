@@ -50,6 +50,7 @@ db.exec(`
     box INTEGER NOT NULL DEFAULT 1,
     correct_count INTEGER NOT NULL DEFAULT 0,
     wrong_count INTEGER NOT NULL DEFAULT 0,
+    due_at TEXT,
     updated_at TEXT NOT NULL DEFAULT (datetime('now')),
     UNIQUE(user_id, item_key)
   );
@@ -69,6 +70,12 @@ db.exec(`
 const trainerColumns = db.prepare("PRAGMA table_info(trainer_progress)").all();
 if (!trainerColumns.some((column) => column.name === "kind")) {
   db.exec("ALTER TABLE trainer_progress ADD COLUMN kind TEXT");
+}
+
+// When a card is due again. Added later, so cards learned before this are due
+// right away, which is the safe direction.
+if (!trainerColumns.some((column) => column.name === "due_at")) {
+  db.exec("ALTER TABLE trainer_progress ADD COLUMN due_at TEXT");
 }
 
 // Says which building, card, epoch or theory question a question came from, so
