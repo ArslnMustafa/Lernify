@@ -92,7 +92,7 @@ export default function ExamTake() {
         </div>
 
         <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-4 sm:p-6">
-          <h2 className="text-sm font-bold text-[#24211a] mb-3 sm:mb-5">{question.text}</h2>
+          <h2 className="text-[15px] sm:text-sm font-bold text-[#24211a] mb-3 sm:mb-5">{question.text}</h2>
 
           <StudyImage src={question.image_url} />
 
@@ -114,7 +114,7 @@ export default function ExamTake() {
                 <button
                   key={i}
                   onClick={() => selectAnswer(i)}
-                  className={`text-left px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-[13px] sm:text-sm border transition ${
+                  className={`text-left px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl text-[15px] sm:text-sm border transition ${
                     answers[current] === i
                       ? 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
                       : 'bg-[#f1e9dc]/50 text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'

@@ -1,68 +1,87 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext.jsx'
 
 const TABS = [
   { to: '/training', label: 'Training', icon: CapIcon },
-  { to: '/karteikarten', label: 'Karteikarten', icon: CardsIcon },
   { to: '/vergleich', label: 'Vergleich', icon: CompareIcon },
+  { to: '/karteikarten', label: 'Karteikarten', icon: CardsIcon },
   { to: '/', label: 'Probeklausur', icon: ExamIcon, end: true },
   { to: '/theorie', label: 'Theorie', icon: BookIcon },
 ]
 
 export default function Nav() {
   const { user, logout } = useAuth()
+  const [open, setOpen] = useState(false)
 
   return (
-    <header className="bg-[#fdfaf4] border-b border-[#d9ccb6] sticky top-0 z-10">
-      <div className="max-w-5xl mx-auto px-3 sm:px-6 py-2 sm:py-3 flex flex-col md:flex-row md:items-center gap-1.5 md:gap-6">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <span className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#3d372c] text-[#e9e0d2] flex items-center justify-center font-bold text-[10px] sm:text-xs">
-            L
-          </span>
-          <span className="font-bold text-sm sm:text-base text-[#24211a]">Lernify</span>
-          <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-[#f1e9dc] border border-[#d9ccb6] text-[10px] sm:text-[11px] font-medium text-[#595042]">
-            {user.name}
-          </span>
+    <header className="bg-[#fdfaf4] border-b border-[#d9ccb6] sticky top-0 z-20">
+      <div className="max-w-5xl mx-auto px-3 sm:px-6 py-2 sm:py-3 flex items-center gap-2 sm:gap-3">
+        <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#3d372c] text-[#e9e0d2] flex items-center justify-center font-bold text-[11px] sm:text-xs">
+          L
+        </span>
+        <span className="font-bold text-[15px] sm:text-base text-[#24211a]">Lernify</span>
+        <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-[#f1e9dc] border border-[#d9ccb6] text-[11px] font-medium text-[#595042]">
+          {user.name}
+        </span>
 
-          {/* On the phone the sign-out sits in the first row, so the tabs get one of their own. */}
-          <button
-            onClick={logout}
-            className="md:hidden ml-auto text-[11px] font-medium text-[#948773] hover:text-[#24211a] transition"
-          >
-            Abmelden
-          </button>
-        </div>
-
-        <nav className="flex items-center gap-0.5 sm:gap-1 md:ml-auto">
-          {TABS.map(({ to, label, icon: Icon, end }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={end}
-              className={({ isActive }) =>
-                `flex-1 md:flex-none flex items-center justify-center gap-2 px-2 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold whitespace-nowrap transition ${
-                  isActive
-                    ? 'bg-[#3d372c] text-[#e9e0d2]'
-                    : 'text-[#595042] hover:bg-[#f1e9dc]'
-                }`
-              }
-            >
-              <span className="hidden md:inline">
-                <Icon />
-              </span>
-              {label}
-            </NavLink>
+        {/* Wide screens show the sections as tabs, the phone keeps one button. */}
+        <nav className="hidden md:flex items-center gap-1 ml-auto">
+          {TABS.map((tab) => (
+            <Tab key={tab.to} tab={tab} />
           ))}
-
           <button
             onClick={logout}
-            className="hidden md:inline ml-2 text-xs font-medium text-[#948773] hover:text-[#24211a] transition"
+            className="ml-2 text-xs font-medium text-[#948773] hover:text-[#24211a] transition"
           >
             Abmelden
           </button>
         </nav>
+
+        <button
+          onClick={() => setOpen((value) => !value)}
+          aria-label="Menü"
+          aria-expanded={open}
+          className="md:hidden ml-auto w-9 h-9 -mr-1 flex flex-col items-center justify-center gap-[5px] rounded-lg hover:bg-[#f1e9dc] transition"
+        >
+          <span className="block w-5 h-[2px] rounded bg-[#3d372c]" />
+          <span className="block w-5 h-[2px] rounded bg-[#3d372c]" />
+          <span className="block w-5 h-[2px] rounded bg-[#3d372c]" />
+        </button>
       </div>
+
+      {open && (
+        <div className="md:hidden border-t border-[#d9ccb6] bg-[#fdfaf4] px-3 pb-3 pt-2 flex flex-col gap-1">
+          {TABS.map((tab) => (
+            <Tab key={tab.to} tab={tab} onPick={() => setOpen(false)} wide />
+          ))}
+          <button
+            onClick={logout}
+            className="text-left px-3 py-2.5 text-sm font-medium text-[#948773] hover:text-[#24211a] transition"
+          >
+            Abmelden
+          </button>
+        </div>
+      )}
     </header>
+  )
+}
+
+function Tab({ tab: { to, label, icon: Icon, end }, onPick, wide }) {
+  return (
+    <NavLink
+      to={to}
+      end={end}
+      onClick={onPick}
+      className={({ isActive }) =>
+        `flex items-center gap-2 rounded-lg font-semibold whitespace-nowrap transition ${
+          wide ? 'px-3 py-2.5 text-sm' : 'px-3 py-1.5 text-xs'
+        } ${isActive ? 'bg-[#3d372c] text-[#e9e0d2]' : 'text-[#595042] hover:bg-[#f1e9dc]'}`
+      }
+    >
+      <Icon />
+      {label}
+    </NavLink>
   )
 }
 

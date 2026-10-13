@@ -144,7 +144,7 @@ function Runde({ id, onBack }) {
           <p className="text-[11px] uppercase tracking-wide text-[#948773] mb-2">
             {frage.aspekt}
           </p>
-          <h3 className="text-sm font-bold text-[#24211a] mb-3 sm:mb-5">{frage.text}</h3>
+          <h3 className="text-[15px] sm:text-sm font-bold text-[#24211a] mb-3 sm:mb-5">{frage.text}</h3>
 
           <div className="flex flex-col gap-1.5 sm:gap-2">
             {frage.optionen.map((option) => {
@@ -161,7 +161,7 @@ function Runde({ id, onBack }) {
                   key={option.wert}
                   onClick={() => antworten(option.wert)}
                   disabled={!!result}
-                  className={`text-left px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-[13px] sm:text-sm border transition ${tone}`}
+                  className={`text-left px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl text-[15px] sm:text-sm border transition ${tone}`}
                 >
                   {option.label}
                 </button>
@@ -171,7 +171,7 @@ function Runde({ id, onBack }) {
 
           {result && (
             <div className="mt-5 flex flex-col gap-3">
-              <p className="text-xs text-[#736856]">
+              <p className="text-[13px] sm:text-xs text-[#736856]">
                 {result.correct ? 'Richtig.' : `Leider falsch — richtig ist ${result.richtig}.`}
               </p>
 
