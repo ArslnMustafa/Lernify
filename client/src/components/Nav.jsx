@@ -5,7 +5,6 @@ import { useAuth } from '../auth/AuthContext.jsx'
 const TABS = [
   { to: '/training', label: 'Training', icon: CapIcon },
   { to: '/vergleich', label: 'Vergleich', icon: CompareIcon },
-  { to: '/schreiben', label: 'Schreiben', icon: PenIcon },
   { to: '/karteikarten', label: 'Karteikarten', icon: CardsIcon },
   { to: '/simulation', label: 'Simulation', icon: TimerIcon },
   { to: '/theorie', label: 'Theorie', icon: BookIcon },
@@ -91,14 +90,6 @@ function CapIcon() {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M22 9 12 5 2 9l10 4z" />
       <path d="M6 11v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5" />
-    </svg>
-  )
-}
-
-function PenIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" />
     </svg>
   )
 }

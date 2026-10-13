@@ -5,12 +5,12 @@ import Theorie from './pages/Theorie.jsx'
 import Training from './pages/Training.jsx'
 import Vergleich from './pages/Vergleich.jsx'
 import Simulation from './pages/Simulation.jsx'
-import Schreiben from './pages/Schreiben.jsx'
 import ProtectedRoute from './auth/ProtectedRoute.jsx'
 
-// Probeklausur ist herausgenommen. Die Seiten (pages/Dashboard.jsx,
-// pages/ExamTake.jsx), die Prüfungen in der Datenbank und /api/exams bleiben,
-// damit der Abschnitt mit wenigen Zeilen zurückkommen kann.
+// Probeklausur und Schreiben sind herausgenommen. Ihre Seiten
+// (pages/Dashboard.jsx, pages/ExamTake.jsx, pages/Schreiben.jsx), ihre Daten in
+// der Datenbank und ihre Endpunkte bleiben, damit die Abschnitte mit wenigen
+// Zeilen zurückkommen können.
 const PROTECTED = [
   { path: '/', element: <Navigate to="/training" replace /> },
   { path: '/karteikarten', element: <Karteikarten /> },
@@ -18,7 +18,6 @@ const PROTECTED = [
   { path: '/training', element: <Training /> },
   { path: '/vergleich', element: <Vergleich /> },
   { path: '/simulation', element: <Simulation /> },
-  { path: '/schreiben', element: <Schreiben /> },
   // An address that no longer exists — a bookmark to the old exam list, say —
   // leads to the trainer instead of an empty page.
   { path: '*', element: <Navigate to="/training" replace /> },

@@ -48,13 +48,11 @@ Bu PIN'ler herkese açık demo değerleridir; kurulumdan sonra değiştirin.
 - **Vergleich** — iki eseri karşılaştırma; her satır aynı zamanda "hangisi?" sorusu.
 - **Karteikarten**, **Theorie** — eser kartları ve teori katalogu.
 - **Simulation** — 20/30/40 karışık soruluk süreli deneme, sonunda değerlendirme ve geçmiş.
-- **Schreiben** — sınavın yazılı kısmı: eseri kendi cümlelerinle tarif ediyorsun, model cevap
-  dört parça halinde açılıyor (Bildmerkmale / Form-Raum / Konstruktion-Wirkung / Einordnung),
-  hangilerini yazdığını işaretliyorsun. 4 üzerinden puan kaydediliyor ve hangi parçayı sürekli
-  atladığın istatistikte görünüyor. Diğer modüllerden bağımsız çalışır.
 
-Probeklausur bölümü arayüzden kaldırıldı; sayfaları (`client/src/pages/Dashboard.jsx`,
-`ExamTake.jsx`), veritabanındaki sınavlar ve `/api/exams` duruyor, geri eklemek birkaç satır.
+
+Probeklausur ve Schreiben bölümleri arayüzden kaldırıldı; sayfaları
+(`client/src/pages/Dashboard.jsx`, `ExamTake.jsx`, `Schreiben.jsx`), verileri ve uç noktaları
+(`/api/exams`, `/api/schreiben`) duruyor, geri eklemek birkaç satır.
 
 Uygulama telefona kurulabilir (PWA): ana ekrana eklenince tam ekran açılır, arayüz ve
 görülen resimler önbellekte tutulur.
