@@ -6,6 +6,7 @@ const TABS = [
   { to: '/training', label: 'Training', icon: CapIcon },
   { to: '/vergleich', label: 'Vergleich', icon: CompareIcon },
   { to: '/karteikarten', label: 'Karteikarten', icon: CardsIcon },
+  { to: '/simulation', label: 'Simulation', icon: TimerIcon },
   { to: '/probeklausur', label: 'Probeklausur', icon: ExamIcon },
   { to: '/theorie', label: 'Theorie', icon: BookIcon },
 ]
@@ -90,6 +91,15 @@ function CapIcon() {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M22 9 12 5 2 9l10 4z" />
       <path d="M6 11v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5" />
+    </svg>
+  )
+}
+
+function TimerIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="12" cy="13" r="8" />
+      <path d="M12 9v4l2.5 2.5M9 2h6" />
     </svg>
   )
 }

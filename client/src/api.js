@@ -55,4 +55,12 @@ export const api = {
     request(`/vergleich/${id}/frage?gestellt=${gestellt.join(',')}`),
   vergleichAntwort: (payload) =>
     request('/vergleich/antwort', { method: 'POST', body: JSON.stringify(payload) }),
+  simulationStart: (laenge) =>
+    request('/simulation/start', { method: 'POST', body: JSON.stringify({ laenge }) }),
+  simulationAbgeben: (id, antworten) =>
+    request(`/simulation/${id}/abgeben`, {
+      method: 'POST',
+      body: JSON.stringify({ antworten }),
+    }),
+  simulationVerlauf: () => request('/simulation/verlauf'),
 }

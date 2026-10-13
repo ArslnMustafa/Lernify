@@ -55,6 +55,17 @@ db.exec(`
     UNIQUE(user_id, item_key)
   );
 
+  CREATE TABLE IF NOT EXISTS simulation_runs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    started_at TEXT NOT NULL DEFAULT (datetime('now')),
+    finished_at TEXT,
+    total INTEGER NOT NULL,
+    correct INTEGER,
+    seconds INTEGER,
+    questions TEXT NOT NULL
+  );
+
   CREATE TABLE IF NOT EXISTS attempts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     exam_id INTEGER NOT NULL REFERENCES exams(id) ON DELETE CASCADE,
