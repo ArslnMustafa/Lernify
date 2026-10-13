@@ -47,6 +47,30 @@ router.get("/:id", (req, res) => {
   res.json({ exam, questions });
 });
 
+// The trainer shows at once whether an answer was right; the practice exam
+// does the same, so the correct option has to come from here rather than
+// travelling with the questions.
+router.post("/:id/pruefen", (req, res) => {
+  const examId = Number(req.params.id);
+
+  if (!assertAssigned(examId, req.user.id)) {
+    return res.status(404).json({ error: "Prüfung nicht gefunden." });
+  }
+
+  const question = db
+    .prepare("SELECT id, type, correct_index FROM questions WHERE id = ? AND exam_id = ?")
+    .get(Number(req.body?.questionId), examId);
+
+  if (!question || question.type === "open") {
+    return res.status(400).json({ error: "Ungültige Frage." });
+  }
+
+  res.json({
+    correct: Number(req.body?.index) === question.correct_index,
+    correctIndex: question.correct_index,
+  });
+});
+
 router.post("/:id/submit", (req, res) => {
   const examId = Number(req.params.id);
 

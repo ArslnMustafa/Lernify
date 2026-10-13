@@ -51,6 +51,11 @@ export const api = {
   getExam: (id) => request(`/exams/${id}`),
   submitExam: (id, answers) =>
     request(`/exams/${id}/submit`, { method: 'POST', body: JSON.stringify({ answers }) }),
+  pruefeAntwort: (examId, questionId, index) =>
+    request(`/exams/${examId}/pruefen`, {
+      method: 'POST',
+      body: JSON.stringify({ questionId, index }),
+    }),
   listBuildings: () => request('/catalog/buildings'),
   listTheory: () => request('/catalog/theory'),
   trainerStats: () => request('/trainer/stats'),

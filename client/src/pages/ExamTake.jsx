@@ -10,6 +10,7 @@ export default function ExamTake() {
   const [answers, setAnswers] = useState([])
   const [current, setCurrent] = useState(0)
   const [revealed, setRevealed] = useState({})
+  const [checks, setChecks] = useState({})
   const [drafts, setDrafts] = useState({})
   const [result, setResult] = useState(null)
   const [error, setError] = useState('')
@@ -30,6 +31,18 @@ export default function ExamTake() {
 
   function selectAnswer(value) {
     setAnswers((prev) => prev.map((a, i) => (i === current ? value : a)))
+  }
+
+  // A choice is final: it is answered, shown as right or wrong, and stays that way.
+  async function chooseOption(index) {
+    if (checks[current]) return
+    selectAnswer(index)
+    try {
+      const data = await api.pruefeAntwort(id, questions[current].id, index)
+      setChecks((prev) => ({ ...prev, [current]: data }))
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   async function handleSubmit() {
@@ -110,19 +123,37 @@ export default function ExamTake() {
             />
           ) : (
             <div className="flex flex-col gap-1.5 sm:gap-2">
-              {question.options.map((option, i) => (
-                <button
-                  key={i}
-                  onClick={() => selectAnswer(i)}
-                  className={`text-left px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl text-[15px] sm:text-sm border transition ${
-                    answers[current] === i
-                      ? 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
-                      : 'bg-[#f1e9dc]/50 text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
-                  }`}
-                >
-                  {option}
-                </button>
-              ))}
+              {question.options.map((option, i) => {
+                const geprueft = checks[current]
+                const istLoesung = geprueft && i === geprueft.correctIndex
+                const falschGewaehlt = geprueft && i === answers[current] && !geprueft.correct
+
+                let tone = 'bg-[#f1e9dc]/50 text-[#24211a] border-[#d9ccb6]'
+                if (istLoesung) tone = 'bg-[#6b7250] text-[#f7f4ef] border-[#6b7250]'
+                else if (falschGewaehlt) tone = 'bg-[#8c4b3f] text-[#f7f4ef] border-[#8c4b3f]'
+                else if (!geprueft && answers[current] === i)
+                  tone = 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
+                else if (!geprueft) tone += ' hover:border-[#b8ab97]'
+
+                return (
+                  <button
+                    key={i}
+                    onClick={() => chooseOption(i)}
+                    disabled={!!geprueft}
+                    className={`text-left px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl text-[15px] sm:text-sm border transition ${tone}`}
+                  >
+                    {option}
+                  </button>
+                )
+              })}
+
+              {checks[current] && (
+                <p className="text-[13px] sm:text-xs text-[#736856] mt-1">
+                  {checks[current].correct
+                    ? 'Richtig.'
+                    : `Leider falsch — richtig ist: ${question.options[checks[current].correctIndex]}`}
+                </p>
+              )}
             </div>
           )}
         </div>
