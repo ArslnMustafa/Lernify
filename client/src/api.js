@@ -44,4 +44,10 @@ export const api = {
   trainerNext: (box) => request(`/trainer/next?box=${box}`),
   trainerAnswer: (payload) =>
     request('/trainer/answer', { method: 'POST', body: JSON.stringify(payload) }),
+  listVergleiche: () => request('/vergleich'),
+  getVergleich: (id) => request(`/vergleich/${id}`),
+  vergleichFrage: (id, gestellt) =>
+    request(`/vergleich/${id}/frage?gestellt=${gestellt.join(',')}`),
+  vergleichAntwort: (payload) =>
+    request('/vergleich/antwort', { method: 'POST', body: JSON.stringify(payload) }),
 }

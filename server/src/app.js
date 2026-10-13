@@ -6,6 +6,7 @@ const authRoutes = require("./routes/auth");
 const examRoutes = require("./routes/exams");
 const catalogRoutes = require("./routes/catalog");
 const trainerRoutes = require("./routes/trainer");
+const vergleichRoutes = require("./routes/vergleich");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/exams", examRoutes);
 app.use("/api/catalog", catalogRoutes);
 app.use("/api/trainer", trainerRoutes);
+app.use("/api/vergleich", vergleichRoutes);
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 

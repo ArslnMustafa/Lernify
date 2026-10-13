@@ -1,53 +1,10 @@
-const fs = require("fs");
-const path = require("path");
 const express = require("express");
 const db = require("../db");
 const { requireAuth } = require("../middleware/auth");
-const { keys, reader } = require("../bilder");
+const { buildings, byKey } = require("../bauwerke");
 
 const router = express.Router();
 router.use(requireAuth);
-
-const dataFile = (name) =>
-  JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "data", name), "utf8"));
-
-const { baseBuildings } = dataFile("baugeschichte.json");
-const rueckblicke = dataFile("rueckblicke.json");
-
-const normalise = (value) => value.toLowerCase().replace(/[^a-zäöüß0-9]/g, "");
-
-// The catalogue carries the images; the handout adds exam descriptions to the
-// ones it shares and 66 further buildings of its own.
-const bild = reader();
-const buildings = baseBuildings.map((b, i) => ({
-  ...b,
-  key: String(i),
-  image: bild(keys.bauwerk(b.name), b.image),
-}));
-const byName = new Map(buildings.map((b) => [normalise(b.name), b]));
-
-for (const card of rueckblicke) {
-  const existing = byName.get(normalise(card.name));
-  if (existing) {
-    existing.bildmerkmale = card.bildmerkmale;
-    continue;
-  }
-
-  const added = {
-    key: `rb${card.name}`,
-    name: card.name,
-    location: card.location,
-    architect: card.architect,
-    year: card.year,
-    style: card.thema,
-    image: bild(keys.karte(card.name), card.image),
-    bildmerkmale: card.bildmerkmale,
-  };
-  buildings.push(added);
-  byName.set(normalise(card.name), added);
-}
-
-const byKey = new Map(buildings.map((b) => [b.key, b]));
 
 // Leitner boxes: a correct answer promotes one box, a wrong answer sends it back to the start.
 const FIRST_BOX = 1;

@@ -5,6 +5,7 @@ import ExamTake from './pages/ExamTake.jsx'
 import Karteikarten from './pages/Karteikarten.jsx'
 import Theorie from './pages/Theorie.jsx'
 import Training from './pages/Training.jsx'
+import Vergleich from './pages/Vergleich.jsx'
 import ProtectedRoute from './auth/ProtectedRoute.jsx'
 
 const PROTECTED = [
@@ -13,6 +14,7 @@ const PROTECTED = [
   { path: '/karteikarten', element: <Karteikarten /> },
   { path: '/theorie', element: <Theorie /> },
   { path: '/training', element: <Training /> },
+  { path: '/vergleich', element: <Vergleich /> },
 ]
 
 export default function App() {

@@ -1,0 +1,319 @@
+[
+ {
+  "id": "crystal-palace-galerie-des-machines",
+  "thema": "Weltausstellungshallen aus Eisen und Glas",
+  "frage": "Zwei Hallen, die zeigen, was der Ingenieurbau des 19. Jahrhunderts konnte — mit 38 Jahren Abstand.",
+  "a": "Crystal Palace",
+  "b": "Galerie des Machines",
+  "aspekte": [
+   {
+    "aspekt": "Bauaufgabe",
+    "a": "Halle für die allererste Weltausstellung, errichtet im Hyde Park und als temporärer Bau gedacht.",
+    "b": "Maschinenhalle der Weltausstellung zum 100. Jahrestag der Französischen Revolution, zusammen mit dem Eiffelturm das Schaustück der Schau."
+   },
+   {
+    "aspekt": "Konstruktion",
+    "a": "Gusseiserne Stützen und Träger in einem durchgehenden Raster, dazu Holz und Glas — ein Baukasten aus vorgefertigten, immer gleichen Teilen.",
+    "b": "Dreigelenkbögen aus Schmiedeeisen und Stahl, die sich zum Boden hin zu einem Punkt verjüngen und dort gelenkig aufgelagert sind."
+   },
+   {
+    "aspekt": "Spannweite",
+    "a": "Das Tragwerk überspannt jeweils nur ein Rastermaß von rund 7,30 m (24 Fuß); die Größe entsteht durch Reihung, nicht durch Spannweite.",
+    "b": "Rund 115 m stützenfrei bei etwa 45 m Höhe — die größte Spannweite ihrer Zeit, gebaut als ein einziger Raum."
+   },
+   {
+    "aspekt": "Raumwirkung",
+    "a": "Ein gleichmäßiges, additives Hallensystem mit Tonnengewölbe über dem Querschiff; der Raum wirkt endlos gereiht und immateriell hell.",
+    "b": "Ein einziger gewaltiger Raum, dessen Bögen nach unten immer dünner werden, sodass das Dach über dem Boden zu schweben scheint."
+   },
+   {
+    "aspekt": "Bauzeit und Vorfertigung",
+    "a": "In rund neun Monaten montiert, weil fast alle Teile genormt und auswechselbar waren — ein Gewächshausprinzip im Maßstab eines Palastes.",
+    "b": "Industriell gefertigte Stahlteile, die auf der Baustelle zu Bögen zusammengesetzt wurden; die Ingenieurleistung steht sichtbar im Vordergrund."
+   },
+   {
+    "aspekt": "Weiteres Schicksal",
+    "a": "Nach der Ausstellung abgebaut, in Sydenham vergrößert wieder aufgebaut und 1936 bei einem Brand zerstört.",
+    "b": "Blieb zunächst stehen, wurde aber 1910 abgerissen."
+   }
+  ],
+  "gemeinsam": [
+   "Beide sind Hallen einer Weltausstellung und sollten die industrielle Leistungsfähigkeit ihres Landes vorführen.",
+   "Beide bestehen aus Eisen und Glas und wurden aus industriell vorgefertigten Teilen in kurzer Zeit montiert.",
+   "Beide wurden von Ingenieuren geprägt und gelten als Schlüsselbauten des Ingenieurbaus — und beide existieren heute nicht mehr."
+  ]
+ },
+ {
+  "id": "aeg-fagus",
+  "thema": "Der Industriebau wird Architektur",
+  "frage": "Zwei Fabriken aus derselben Berliner Werkbund-Umgebung, zwei gegensätzliche Antworten auf die Frage, wie ein Industriebau aussehen soll.",
+  "a": "AEG Turbinenfabrik",
+  "b": "Fagus-Werk",
+  "aspekte": [
+   {
+    "aspekt": "Haltung",
+    "a": "Die Fabrik wird zum monumentalen Bau überhöht: Giebelfront, Symmetrie und schwere Ecken machen aus der Produktionshalle einen „Tempel der Arbeit“.",
+    "b": "Die Fabrik wird so leicht wie möglich: kein Monument, sondern ein transparenter, horizontal gegliederter Körper für Arbeit und Licht."
+   },
+   {
+    "aspekt": "Ecke",
+    "a": "Die Ecken sind massive, leicht geneigte Betonpylone — sie wirken tragend und geben dem Bau sein wuchtiges Gesicht.",
+    "b": "Die berühmte Ecke ist stützenfrei verglast: die Stützen stehen zurück, die Glashaut läuft um die Kante herum."
+   },
+   {
+    "aspekt": "Fassade und Tragwerk",
+    "a": "Die Stahl-Dreigelenkbinder stehen in der Fassadenebene, die Glasflächen sind zwischen ihnen leicht zurückgesetzt — das Tragwerk bleibt ablesbar.",
+    "b": "Die Glasfassade hängt als Vorhang vor dem Tragwerk; schmale Backsteinpfeiler gliedern sie, ohne die Fläche zu unterbrechen."
+   },
+   {
+    "aspekt": "Material",
+    "a": "Stahl, Beton und Glas, aber in einer Schwere, die an Stein denken lässt.",
+    "b": "Gelber Backstein, Stahl und viel Glas, mit betont dünnen Profilen und durchlaufenden Brüstungsbändern."
+   },
+   {
+    "aspekt": "Wirkung in der Architekturgeschichte",
+    "a": "Markiert den Anspruch, dass auch ein Industriebau Gestaltung und Firmenidentität trägt — der Bauherr ließ vom selben Architekten Produkte, Grafik und Bauten entwerfen.",
+    "b": "Gilt als einer der ersten Bauten, an denen die Vorhangfassade und die aufgelöste Ecke vorgeführt werden — ein Ausgangspunkt des Neuen Bauens."
+   }
+  ],
+  "gemeinsam": [
+   "Beide entstehen im Umfeld des Deutschen Werkbunds und behandeln den Industriebau als vollwertige architektonische Aufgabe.",
+   "Beide arbeiten mit Stahlskelett und großen Glasflächen statt mit tragenden Außenwänden.",
+   "Der Architekt des jüngeren Baus hatte zuvor im Büro des älteren mitgearbeitet."
+  ]
+ },
+ {
+  "id": "savoye-tugendhat",
+  "thema": "Das Wohnhaus als Manifest der Moderne",
+  "frage": "Zwei fast gleichzeitig gebaute Villen, zwei völlig verschiedene Vorstellungen davon, wie modernes Wohnen aussieht.",
+  "a": "Villa Savoye",
+  "b": "Haus Tugendhat",
+  "aspekte": [
+   {
+    "aspekt": "Verhältnis zum Grundstück",
+    "a": "Ein freistehender weißer Körper, der auf Stützen über der Wiese schwebt und nach allen Seiten gleich wirkt.",
+    "b": "In den Hang gebaut: von der Straße zeigt sich ein zurückhaltendes, fast geschlossenes Geschoss, zum Garten öffnet sich der Bau über zwei Ebenen."
+   },
+   {
+    "aspekt": "Programm",
+    "a": "Gebaut als Vorführung von fünf Punkten: Pilotis, Dachgarten, freier Grundriss, Langfenster, freie Fassadengestaltung.",
+    "b": "Gebaut als fließender Raum: ein großer Wohnbereich, der nur durch freistehende Wandscheiben gegliedert wird."
+   },
+   {
+    "aspekt": "Raumfolge",
+    "a": "Eine Rampe führt als architektonischer Spaziergang durch alle Ebenen bis auf den Dachgarten.",
+    "b": "Eine freistehende Onyxwand und eine halbrunde Holzwand teilen den Hauptraum, ohne ihn zu schließen; die Möblierung übernimmt die Zonierung."
+   },
+   {
+    "aspekt": "Stützen",
+    "a": "Runde Stahlbetonstützen im Raster, die den Baukörper anheben und den Grundriss von der Konstruktion befreien.",
+    "b": "Verchromte Stahlstützen mit Kreuzquerschnitt, die im Raum stehen bleiben und ihn nicht unterteilen."
+   },
+   {
+    "aspekt": "Technische Besonderheit",
+    "a": "Das Haus ist ganz auf das Auto bezogen: der Wendekreis des Wagens bestimmt den Grundriss des Erdgeschosses.",
+    "b": "Die großen Fensterscheiben lassen sich elektrisch im Boden versenken, sodass der Wohnraum zum Garten hin offen steht."
+   }
+  ],
+  "gemeinsam": [
+   "Beide sind Wohnhäuser, die als gebautes Programm der Moderne gelesen werden, und beide stehen heute auf der UNESCO-Welterbeliste.",
+   "Beide nutzen ein Skelett aus Stahl oder Stahlbeton, um Außenwände und Grundriss von der Tragstruktur zu lösen.",
+   "Beide haben ein Flachdach, große Glasflächen und eine strikt moderne, ornamentlose Formensprache."
+  ]
+ },
+ {
+  "id": "stalinallee-hansaviertel",
+  "thema": "Wiederaufbau im geteilten Berlin",
+  "frage": "Zwei Berliner Wohnbauprojekte der 1950er Jahre, mit denen Ost und West ihr jeweiliges Gesellschaftsmodell vorführen wollten.",
+  "a": "Frankfurter Tor / Stalinallee",
+  "b": "Hansaviertel / Interbau",
+  "aspekte": [
+   {
+    "aspekt": "Städtebauliches Leitbild",
+    "a": "Geschlossene Blockrandbebauung an einer rund 90 m breiten Magistrale: ein durchgehender, symmetrisch komponierter Straßenraum.",
+    "b": "Aufgelockerte Stadtlandschaft im Grünen: freistehende Punkt- und Scheibenhäuser ohne Straßenrandbebauung."
+   },
+   {
+    "aspekt": "Formensprache",
+    "a": "Rückgriff auf „nationale Traditionen“ in der Nachfolge Schinkels Berliner Klassizismus, mit Gesimsen, Pilastern und Turmpaar als Stadttor.",
+    "b": "Internationale Nachkriegsmoderne: Flachdächer, Rasterfassaden, Balkone, kein historisches Zitat."
+   },
+   {
+    "aspekt": "Entwurfsverfahren",
+    "a": "Ein Kollektiv unter staatlicher Leitung entwirft die Magistrale als Gesamtanlage mit einheitlichem Erscheinungsbild.",
+    "b": "Rund 50 Architektinnen und Architekten aus mehreren Ländern bauen je ein eigenes Haus — unter anderem Gropius, Aalto und Niemeyer."
+   },
+   {
+    "aspekt": "Material und Oberfläche",
+    "a": "Die Fassaden sind mit Keramikplatten aus Meißen verkleidet, was den Bauten den Beinamen „Arbeiterpaläste“ eintrug.",
+    "b": "Sichtbeton, Putz und Glas, dazu farbige Flächen — die Häuser sollen leicht und seriell wirken."
+   },
+   {
+    "aspekt": "Botschaft",
+    "a": "Der Wohnungsbau wird zur repräsentativen Staatsarchitektur: Wohnen an einer Prachtstraße für die Werktätigen.",
+    "b": "Der Wohnungsbau wird zum Versprechen von Licht, Luft und individueller Freiheit in der offenen Stadt."
+   }
+  ],
+  "gemeinsam": [
+   "Beide sind Wiederaufbauprojekte im geteilten Berlin der 1950er Jahre und wurden als Schaufenster des eigenen Systems inszeniert.",
+   "Beide beantworten dieselbe Frage — wie soll die zerstörte Großstadt wieder bewohnbar werden — mit einem kompletten städtebaulichen Modell.",
+   "Beide stehen heute unter Denkmalschutz."
+  ]
+ },
+ {
+  "id": "palast-humboldtforum",
+  "thema": "Ein Ort, zwei politische Bauten",
+  "frage": "Dieselbe Stelle in der Berliner Mitte, zweimal neu besetzt — jedes Mal mit einem Bau, der ein Staatsverständnis ausdrücken sollte.",
+  "a": "Palast der Republik",
+  "b": "Humboldtforum / Berliner Schloss",
+  "aspekte": [
+   {
+    "aspekt": "Haltung zur Geschichte des Ortes",
+    "a": "Der barocke Vorgängerbau war gesprengt worden; der Neubau setzt bewusst etwas anderes an seine Stelle und bricht mit der höfischen Vergangenheit.",
+    "b": "Der Neubau holt den gesprengten Vorgängerbau in Teilen zurück: drei Fassaden und der Schlüterhof sind rekonstruiert."
+   },
+   {
+    "aspekt": "Baukörper und Fassade",
+    "a": "Eine breit gelagerte, horizontale Scheibe mit bronzefarben verspiegeltem Glas, hinter dem die Konstruktion verschwindet.",
+    "b": "Barocke Steinfassaden an drei Seiten, während die Ostseite als nüchterne moderne Front von Franco Stella ausgeführt ist."
+   },
+   {
+    "aspekt": "Nutzung",
+    "a": "Parlament und Volkshaus in einem: Volkskammersaal, dazu Foyers, Gaststätten, Theater und sogar eine Bowlingbahn.",
+    "b": "Museum und Forum: vor allem die außereuropäischen Sammlungen, dazu Veranstaltungs- und Ausstellungsflächen."
+   },
+   {
+    "aspekt": "Konstruktion",
+    "a": "Stahlskelett mit großen Spannweiten; der verbaute Spritzasbest wurde später zum Grund für die Schließung.",
+    "b": "Stahlbetonbau, dem die rekonstruierten Sandsteinfassaden vorgeblendet sind — Spendenmittel finanzierten den Fassadenschmuck."
+   },
+   {
+    "aspekt": "Streit",
+    "a": "Nach 1990 wurde über Erhalt oder Abriss gestritten; zwischen 2006 und 2008 wurde der Bau vollständig zurückgebaut.",
+    "b": "Umstritten sind die Rekonstruktion selbst und die Herkunft der gezeigten Sammlungen aus kolonialen Zusammenhängen."
+   }
+  ],
+  "gemeinsam": [
+   "Beide stehen auf demselben Grundstück in der Berliner Mitte und ersetzen jeweils einen abgerissenen Vorgängerbau.",
+   "Beide wurden als Haus „für alle“ beworben und sind damit politische Bauten, nicht nur Nutzbauten.",
+   "Beide waren schon vor der Fertigstellung Gegenstand heftiger öffentlicher Auseinandersetzungen."
+  ]
+ },
+ {
+  "id": "pompidou-staatsgalerie",
+  "thema": "High-Tech und Postmoderne",
+  "frage": "Zwei Museen aus den 1970er Jahren, die beide mit der strengen Nachkriegsmoderne brechen — in entgegengesetzte Richtungen.",
+  "a": "Centre Pompidou",
+  "b": "Neue Staatsgalerie",
+  "aspekte": [
+   {
+    "aspekt": "Grundidee",
+    "a": "Das Gebäude als technische Maschine: Tragwerk und Haustechnik liegen außen, damit die Geschosse innen frei bleiben.",
+    "b": "Das Gebäude als Collage aus Zitaten: historische Figuren werden aufgenommen, verfremdet und mit modernen Elementen gemischt."
+   },
+   {
+    "aspekt": "Fassade",
+    "a": "Rohre und Leitungen sind nach Funktion farbig codiert — blau Lüftung, grün Wasser, gelb Elektrik, rot Erschließung.",
+    "b": "Travertin- und Sandsteinplatten als Verkleidung, dazu knallig grüne und pinke Geländer, Fensterrahmen und Vordächer."
+   },
+   {
+    "aspekt": "Raum",
+    "a": "Stützenfreie Hallengeschosse von rund 50 m Spannweite, erschlossen durch eine außen liegende Rolltreppenröhre.",
+    "b": "Eine offene Rotunde im Zentrum, über die ein öffentlicher Fußweg mitten durch das Gebäude führt."
+   },
+   {
+    "aspekt": "Verhältnis zur Stadt",
+    "a": "Der Bau rückt zurück und gibt die Hälfte des Grundstücks als abschüssigen Platz frei, der zur Bühne wird.",
+    "b": "Der Bau nimmt die Baukante und das Material der Nachbarschaft auf und verbindet zwei unterschiedlich hohe Straßen miteinander."
+   },
+   {
+    "aspekt": "Einordnung",
+    "a": "Gilt als Hauptwerk der High-Tech-Architektur.",
+    "b": "Gilt als Hauptwerk der Postmoderne in Deutschland."
+   }
+  ],
+  "gemeinsam": [
+   "Beide gehen aus einem internationalen Wettbewerb hervor und wurden von jungen, damals wenig gebauten Architekten gewonnen.",
+   "Beide verstehen das Museum als öffentlichen Stadtraum, der auch ohne Ausstellungsbesuch betreten wird.",
+   "Beide wurden bei ihrer Eröffnung heftig kritisiert und sind heute Besuchermagnete."
+  ]
+ },
+ {
+  "id": "barcelona-paris",
+  "thema": "Der deutsche Pavillon als Staatsporträt",
+  "frage": "Zweimal vertritt ein deutscher Pavillon den Staat auf einer Weltausstellung — acht Jahre und ein Systemwechsel liegen dazwischen.",
+  "a": "Barcelona-Pavillon",
+  "b": "Deutscher Pavillon Paris",
+  "aspekte": [
+   {
+    "aspekt": "Baukörper",
+    "a": "Flach gelagert und horizontal: ein niedriges Dach über frei stehenden Wandscheiben, ohne Fassade im üblichen Sinn.",
+    "b": "Betont vertikal: ein hoher Pfeilerturm, der als Zeichen über den Ausstellungsplatz hinausragt."
+   },
+   {
+    "aspekt": "Raum",
+    "a": "Der Raum fließt zwischen den Scheiben hindurch nach außen; es gibt keinen festen Rundgang und fast nichts auszustellen.",
+    "b": "Eine strenge Achse führt auf den Eingang zu; der Bau ist Kulisse und Rahmen für Repräsentation."
+   },
+   {
+    "aspekt": "Material",
+    "a": "Onyx, Marmor, Travertin, verchromte Stahlstützen und Wasserbecken — kostbare Flächen ohne Ornament.",
+    "b": "Schwerer Steinverschnitt, Pfeilerordnung und plastischer Schmuck, darunter der Adler mit Hakenkreuz an der Spitze."
+   },
+   {
+    "aspekt": "Botschaft",
+    "a": "Die junge Republik zeigt sich als offen, modern und zurückhaltend.",
+    "b": "Der NS-Staat zeigt sich als monumental und ewig; der Bau wurde bewusst gegenüber dem sowjetischen Pavillon platziert."
+   },
+   {
+    "aspekt": "Nachleben",
+    "a": "Nach der Ausstellung abgebaut und erst 1986 am originalen Ort rekonstruiert.",
+    "b": "Nach der Ausstellung abgebrochen; erhalten sind vor allem Fotos und Pläne der Selbstinszenierung."
+   }
+  ],
+  "gemeinsam": [
+   "Beide sind temporäre Pavillons auf einer Weltausstellung und hatten die Aufgabe, den deutschen Staat zu verkörpern.",
+   "Beide verzichten weitgehend auf ausgestellte Produkte — der Bau selbst ist die Botschaft.",
+   "Beide sind nach der Ausstellung verschwunden."
+  ]
+ },
+ {
+  "id": "elbphilharmonie-philharmonie",
+  "thema": "Konzertsaal als Wahrzeichen",
+  "frage": "Zwei Konzerthäuser nach demselben Saalprinzip, getrennt durch ein halbes Jahrhundert.",
+  "a": "Elbphilharmonie",
+  "b": "Berliner Philharmonie",
+  "aspekte": [
+   {
+    "aspekt": "Baukörper",
+    "a": "Ein gläserner Aufbau mit wellenförmiger Oberkante sitzt auf einem alten Backstein-Kaispeicher, dessen Mauern erhalten blieben.",
+    "b": "Ein zeltartig aufgefalteter Baukörper, der von innen nach außen aus der Saalform entwickelt ist."
+   },
+   {
+    "aspekt": "Entwurfsansatz",
+    "a": "Alt und neu werden übereinandergesetzt; die Fuge zwischen Speicher und Aufbau ist eine öffentliche Aussichtsebene.",
+    "b": "„Musik im Mittelpunkt“: der Saal bestimmt die Form, das Foyer entwickelt sich als Landschaft aus Treppen und Ebenen darum herum."
+   },
+   {
+    "aspekt": "Saal",
+    "a": "Weinbergsaal mit rund 2100 Plätzen, akustisch ausgelegt von Yasuhisa Toyota, mit der „Weißen Haut“ aus gefrästen Gipsfaserplatten.",
+    "b": "Der erste Weinbergsaal überhaupt: das Publikum sitzt in Terrassen rund um das Orchester, rund 2200 Plätze."
+   },
+   {
+    "aspekt": "Städtebau",
+    "a": "Kopfbau eines neuen Stadtquartiers auf altem Hafengelände, als Landmarke am Wasser gesetzt.",
+    "b": "Erster Bau des Kulturforums am damaligen Rand der geteilten Stadt, in der Nähe der Mauer."
+   },
+   {
+    "aspekt": "Bauprozess",
+    "a": "Bauzeit und Kosten liefen weit aus dem Ruder — aus 77 Millionen Euro wurden rund 866 Millionen.",
+    "b": "In rund sechs Jahren errichtet; die goldfarbene Aluminiumverkleidung kam erst 1978–1981 dazu."
+   }
+  ],
+  "gemeinsam": [
+   "Beide Säle folgen dem Weinbergprinzip: das Orchester steht in der Mitte, das Publikum sitzt in Terrassen ringsum.",
+   "Beide sind zum Wahrzeichen ihrer Stadt geworden und haben die Entwicklung ihres Quartiers angestoßen.",
+   "Bei beiden ist das Foyer als öffentlicher Raum Teil des Entwurfs, nicht bloßer Vorraum."
+  ]
+ }
+]
