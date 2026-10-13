@@ -14,39 +14,49 @@ export default function Nav() {
 
   return (
     <header className="bg-[#fdfaf4] border-b border-[#d9ccb6] sticky top-0 z-10">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
-        <div className="flex items-center gap-3">
-          <span className="w-8 h-8 rounded-full bg-[#3d372c] text-[#e9e0d2] flex items-center justify-center font-bold text-xs">
+      <div className="max-w-5xl mx-auto px-3 sm:px-6 py-2 sm:py-3 flex flex-col md:flex-row md:items-center gap-1.5 md:gap-6">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#3d372c] text-[#e9e0d2] flex items-center justify-center font-bold text-[10px] sm:text-xs">
             L
           </span>
-          <span className="font-bold text-[#24211a]">Lernify</span>
-          <span className="px-2.5 py-1 rounded-full bg-[#f1e9dc] border border-[#d9ccb6] text-[11px] font-medium text-[#595042]">
+          <span className="font-bold text-sm sm:text-base text-[#24211a]">Lernify</span>
+          <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-[#f1e9dc] border border-[#d9ccb6] text-[10px] sm:text-[11px] font-medium text-[#595042]">
             {user.name}
           </span>
+
+          {/* On the phone the sign-out sits in the first row, so the tabs get one of their own. */}
+          <button
+            onClick={logout}
+            className="md:hidden ml-auto text-[11px] font-medium text-[#948773] hover:text-[#24211a] transition"
+          >
+            Abmelden
+          </button>
         </div>
 
-        <nav className="flex flex-wrap items-center gap-1 md:ml-auto">
+        <nav className="flex items-center gap-0.5 sm:gap-1 md:ml-auto">
           {TABS.map(({ to, label, icon: Icon, end }) => (
             <NavLink
               key={to}
               to={to}
               end={end}
               className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                `flex-1 md:flex-none flex items-center justify-center gap-2 px-2 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold whitespace-nowrap transition ${
                   isActive
                     ? 'bg-[#3d372c] text-[#e9e0d2]'
                     : 'text-[#595042] hover:bg-[#f1e9dc]'
                 }`
               }
             >
-              <Icon />
+              <span className="hidden md:inline">
+                <Icon />
+              </span>
               {label}
             </NavLink>
           ))}
 
           <button
             onClick={logout}
-            className="ml-2 text-xs font-medium text-[#948773] hover:text-[#24211a] transition"
+            className="hidden md:inline ml-2 text-xs font-medium text-[#948773] hover:text-[#24211a] transition"
           >
             Abmelden
           </button>

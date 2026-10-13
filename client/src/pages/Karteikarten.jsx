@@ -27,7 +27,7 @@ export default function Karteikarten() {
     <div className="min-h-screen bg-[#e9e0d2]">
       <Nav />
 
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 py-8">
+      <main className="max-w-2xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-base font-bold text-[#24211a]">Karteikarten</h2>
           {buildings.length > 0 && (

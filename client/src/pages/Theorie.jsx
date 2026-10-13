@@ -28,7 +28,7 @@ export default function Theorie() {
     <div className="min-h-screen bg-[#e9e0d2]">
       <Nav />
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+      <main className="max-w-3xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <h2 className="text-base font-bold text-[#24211a]">
             Theorie — Fragen und Antworten
@@ -50,7 +50,7 @@ export default function Theorie() {
           <p className="text-sm text-[#736856]">Keine Treffer.</p>
         )}
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5 sm:gap-2">
           {visible.map((item, i) => (
             <div
               key={item.id}

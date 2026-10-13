@@ -80,7 +80,7 @@ export default function ExamTake() {
   const allAnswered = answers.every((a) => a !== null)
 
   return (
-    <div className="min-h-screen bg-[#e9e0d2] px-4 py-8">
+    <div className="min-h-screen bg-[#e9e0d2] px-3 sm:px-6 py-4 sm:py-8">
       <div className="max-w-xl mx-auto">
         <div className="flex items-center justify-between mb-4">
           <Link to="/" className="text-xs text-[#736856] hover:text-[#24211a]">
@@ -91,8 +91,8 @@ export default function ExamTake() {
           </span>
         </div>
 
-        <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-6">
-          <h2 className="text-sm font-bold text-[#24211a] mb-5">{question.text}</h2>
+        <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-4 sm:p-6">
+          <h2 className="text-sm font-bold text-[#24211a] mb-3 sm:mb-5">{question.text}</h2>
 
           <StudyImage src={question.image_url} />
 
@@ -109,12 +109,12 @@ export default function ExamTake() {
               onSelfRate={selectAnswer}
             />
           ) : (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5 sm:gap-2">
               {question.options.map((option, i) => (
                 <button
                   key={i}
                   onClick={() => selectAnswer(i)}
-                  className={`text-left px-4 py-3 rounded-xl text-sm border transition ${
+                  className={`text-left px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-[13px] sm:text-sm border transition ${
                     answers[current] === i
                       ? 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
                       : 'bg-[#f1e9dc]/50 text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'

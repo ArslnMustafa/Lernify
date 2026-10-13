@@ -59,23 +59,25 @@ export default function Training() {
     <div className="min-h-screen bg-[#e9e0d2]">
       <Nav />
 
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 py-8">
-        <h2 className="text-base font-bold text-[#24211a] mb-4">Führerschein-Modus</h2>
+      <main className="max-w-2xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
+        <h2 className="text-sm sm:text-base font-bold text-[#24211a] mb-2 sm:mb-4">
+          Führerschein-Modus
+        </h2>
 
-        <div className="grid grid-cols-3 gap-2 mb-6">
+        <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-2.5 sm:mb-6">
           {BOXES.map((item) => (
             <button
               key={item.box}
               onClick={() => setBox(item.box)}
-              className={`px-3 py-3 rounded-xl border text-left transition ${
+              className={`px-2.5 py-2 sm:px-3 sm:py-3 rounded-xl border text-left transition ${
                 box === item.box
                   ? 'bg-[#3d372c] text-[#e9e0d2] border-[#3d372c]'
                   : 'bg-[#fdfaf4] text-[#24211a] border-[#d9ccb6] hover:border-[#b8ab97]'
               }`}
             >
-              <span className="block text-lg font-bold">{counts[item.box]}</span>
+              <span className="block text-base sm:text-lg font-bold">{counts[item.box]}</span>
               <span
-                className={`block text-[11px] leading-tight ${
+                className={`block text-[10px] sm:text-[11px] leading-tight ${
                   box === item.box ? 'text-[#d9cfbe]' : 'text-[#948773]'
                 }`}
               >
@@ -96,19 +98,19 @@ export default function Training() {
         )}
 
         {question && (
-          <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-6">
-            <h3 className="text-sm font-bold text-[#24211a] mb-5">{question.text}</h3>
+          <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-4 sm:p-6">
+            <h3 className="text-sm font-bold text-[#24211a] mb-3 sm:mb-5">{question.text}</h3>
 
             <StudyImage src={question.image} />
 
             {question.hint?.length > 0 && (
-              <div className="mb-4">
+              <div className="mb-3 sm:mb-4">
                 {hintShown ? (
-                  <div className="bg-[#f1e9dc]/60 border border-[#d9ccb6] rounded-xl px-4 py-3">
-                    <p className="text-[11px] uppercase tracking-wide text-[#948773] mb-1">
+                  <div className="bg-[#f1e9dc]/60 border border-[#d9ccb6] rounded-xl px-3 py-2 sm:px-4 sm:py-3">
+                    <p className="text-[10px] uppercase tracking-wide text-[#948773] mb-0.5 sm:mb-1">
                       Tipp
                     </p>
-                    <ul className="text-xs text-[#4a4336] flex flex-col gap-1">
+                    <ul className="text-[11px] sm:text-xs text-[#4a4336] flex flex-col gap-0.5 sm:gap-1">
                       {question.hint.map((line) => (
                         <li key={line}>{line}</li>
                       ))}
@@ -118,7 +120,7 @@ export default function Training() {
                   <button
                     type="button"
                     onClick={() => setHintShown(true)}
-                    className="text-xs text-[#736856] border border-[#d9ccb6] rounded-xl px-3 py-2 hover:border-[#b8ab97]"
+                    className="text-[11px] sm:text-xs text-[#736856] border border-[#d9ccb6] rounded-lg px-3 py-1.5 hover:border-[#b8ab97]"
                   >
                     Tipp anzeigen
                   </button>
@@ -126,7 +128,7 @@ export default function Training() {
               </div>
             )}
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5 sm:gap-2">
               {question.options.map((option) => {
                 const isAnswer = result && option === result.correctAnswer
                 const isWrongPick = result && option === picked && !result.correct
@@ -141,7 +143,7 @@ export default function Training() {
                     key={option}
                     onClick={() => answer(option)}
                     disabled={!!result}
-                    className={`text-left px-4 py-3 rounded-xl text-sm border transition ${tone}`}
+                    className={`text-left px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-[13px] sm:text-sm border transition ${tone}`}
                   >
                     {option}
                   </button>
@@ -150,7 +152,7 @@ export default function Training() {
             </div>
 
             {result && (
-              <div className="mt-5 flex items-center justify-between gap-3">
+              <div className="mt-3 sm:mt-5 flex items-center justify-between gap-3">
                 <p className="text-xs text-[#736856]">
                   {result.correct ? 'Richtig.' : 'Leider falsch.'}{' '}
                   {result.toBox !== result.fromBox && (

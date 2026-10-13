@@ -18,8 +18,8 @@ export default function Vergleich() {
     <div className="min-h-screen bg-[#e9e0d2]">
       <Nav />
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
-        <h2 className="text-lg font-bold text-[#24211a] mb-1">Vergleich</h2>
+      <main className="max-w-3xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
+        <h2 className="text-base sm:text-lg font-bold text-[#24211a] mb-1">Vergleich</h2>
         <p className="text-xs text-[#736856] mb-6">
           Zwei Bauwerke nebeneinander: Erkenne, auf welches von beiden eine Aussage zutrifft.
         </p>
@@ -140,13 +140,13 @@ function Runde({ id, onBack }) {
       {error && <p className="text-sm text-[#8c4b3f]">{error}</p>}
 
       {frage ? (
-        <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-6">
+        <div className="bg-[#fdfaf4] border border-[#d9ccb6] rounded-2xl p-4 sm:p-6">
           <p className="text-[11px] uppercase tracking-wide text-[#948773] mb-2">
             {frage.aspekt}
           </p>
-          <h3 className="text-sm font-bold text-[#24211a] mb-5">{frage.text}</h3>
+          <h3 className="text-sm font-bold text-[#24211a] mb-3 sm:mb-5">{frage.text}</h3>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1.5 sm:gap-2">
             {frage.optionen.map((option) => {
               const isAnswer = result && option.wert === result.gilt
               const isWrongPick = result && option.wert === picked && !result.correct
@@ -161,7 +161,7 @@ function Runde({ id, onBack }) {
                   key={option.wert}
                   onClick={() => antworten(option.wert)}
                   disabled={!!result}
-                  className={`text-left px-4 py-3 rounded-xl text-sm border transition ${tone}`}
+                  className={`text-left px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-[13px] sm:text-sm border transition ${tone}`}
                 >
                   {option.label}
                 </button>
