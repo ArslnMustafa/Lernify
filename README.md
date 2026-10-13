@@ -39,6 +39,19 @@ Bu PIN'ler herkese açık demo değerleridir; kurulumdan sonra değiştirin.
 Üretim ortamında `server/.env` dosyasında güçlü bir `JWT_SECRET` tanımlanmalı
 (bkz. `server/.env.example`).
 
+## Bölümler
+
+- **Training** — Führerschein usulü kutular (Leitner). Doğru cevaplanan kart kutusuna göre
+  dinlenir (2. kutu 2 gün, 3. kutu 1 hafta) ve süresi dolunca geri gelir. Kutuların yanında
+  iki ek yığın var: *Heute fällig* (süresi dolanlar) ve *Meine Fehler* (daha önce yanlış
+  yapılanlar, en çok yanlış yapılan daha sık). Altta konu bazında doğruluk oranı.
+- **Vergleich** — iki eseri karşılaştırma; her satır aynı zamanda "hangisi?" sorusu.
+- **Karteikarten**, **Probeklausur**, **Theorie** — eser kartları, sınavlar, teori katalogu.
+- **Simulation** — 20/30/40 karışık soruluk süreli deneme, sonunda değerlendirme ve geçmiş.
+
+Uygulama telefona kurulabilir (PWA): ana ekrana eklenince tam ekran açılır, arayüz ve
+görülen resimler önbellekte tutulur.
+
 ## Soru resimleri
 
 Her sorunun bir resmi olmalı. Katalogdaki 150 yapının resmi veri dosyasında

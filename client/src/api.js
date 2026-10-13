@@ -9,16 +9,29 @@ export function setToken(token) {
   else localStorage.removeItem(TOKEN_KEY)
 }
 
+export class OfflineError extends Error {
+  constructor() {
+    super('Keine Verbindung.')
+    this.name = 'OfflineError'
+  }
+}
+
 async function request(path, options = {}) {
   const token = getToken()
-  const res = await fetch(`/api${path}`, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(options.headers || {}),
-    },
-  })
+  let res
+  try {
+    res = await fetch(`/api${path}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(options.headers || {}),
+      },
+    })
+  } catch {
+    // The server was never reached, so nothing is known about the session.
+    throw new OfflineError()
+  }
 
   const data = await res.json().catch(() => ({}))
 

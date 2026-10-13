@@ -1,7 +1,27 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { api, getToken, setToken } from '../api'
+import { api, getToken, setToken, OfflineError } from '../api'
 
 const AuthContext = createContext(null)
+
+// Who was signed in last, so an offline start knows whose name to show.
+const SPEICHER = 'lernify_user'
+
+function merken(user) {
+  try {
+    if (user) localStorage.setItem(SPEICHER, JSON.stringify(user))
+    else localStorage.removeItem(SPEICHER)
+  } catch {
+    /* a browser without storage simply forgets */
+  }
+}
+
+function gemerkt() {
+  try {
+    return JSON.parse(localStorage.getItem(SPEICHER) || 'null')
+  } catch {
+    return null
+  }
+}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
@@ -14,8 +34,21 @@ export function AuthProvider({ children }) {
     }
     api
       .me()
-      .then((data) => setUser(data.user))
-      .catch(() => setToken(null))
+      .then((data) => {
+        setUser(data.user)
+        merken(data.user)
+      })
+      .catch((err) => {
+        // Without a connection the session cannot be checked — and cannot be
+        // declared invalid either, so the last known user stays signed in.
+        if (err instanceof OfflineError) {
+          const bekannt = gemerkt()
+          if (bekannt) return setUser(bekannt)
+          return
+        }
+        setToken(null)
+        merken(null)
+      })
       .finally(() => setLoading(false))
   }, [])
 
@@ -23,11 +56,13 @@ export function AuthProvider({ children }) {
     const data = await api.login(username, password)
     setToken(data.token)
     setUser(data.user)
+    merken(data.user)
   }
 
   function logout() {
     setToken(null)
     setUser(null)
+    merken(null)
   }
 
   return (
