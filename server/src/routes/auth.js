@@ -32,6 +32,27 @@ function recordFailure(key) {
   }
 }
 
+// A session lasts seven days, so most visits never reach /login. The owner
+// wants to hear about those too — but one page load may ask who it is more
+// than once, and that is one visit, not two.
+const SAME_VISIT_MS = 60 * 1000;
+const lastSeen = new Map();
+
+function isSameVisit(key) {
+  const now = Date.now();
+  const previous = lastSeen.get(key);
+  lastSeen.set(key, now);
+
+  // Keep the map from growing forever on a long-running server.
+  if (lastSeen.size > 500) {
+    for (const [entry, seen] of lastSeen) {
+      if (now - seen > SAME_VISIT_MS) lastSeen.delete(entry);
+    }
+  }
+
+  return previous !== undefined && now - previous < SAME_VISIT_MS;
+}
+
 router.get("/users", (req, res) => {
   const users = db
     .prepare("SELECT username, name FROM users ORDER BY name")
@@ -67,11 +88,15 @@ router.post("/login", (req, res) => {
 
   failures.delete(key);
 
+  // A fresh sign-in always counts, and it starts the visit window.
+  isSameVisit(`${user.username}:${req.ip}:${req.get("user-agent")}`);
+
   sendLoginAlert({
     name: user.name,
     username: user.username,
     ip: req.ip,
     userAgent: req.get("user-agent"),
+    anlass: "anmeldung",
   });
 
   const token = jwt.sign(
@@ -87,6 +112,18 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/me", requireAuth, (req, res) => {
+  const userAgent = req.get("user-agent");
+
+  if (!isSameVisit(`${req.user.username}:${req.ip}:${userAgent}`)) {
+    sendLoginAlert({
+      name: req.user.name,
+      username: req.user.username,
+      ip: req.ip,
+      userAgent,
+      anlass: "geoeffnet",
+    });
+  }
+
   res.json({ user: req.user });
 });
 

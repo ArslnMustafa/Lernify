@@ -25,15 +25,24 @@ function berlinTime(date) {
   }).format(date);
 }
 
+// Two things are worth knowing about: someone typing the PIN, and someone
+// opening Lernify with a session that is still valid.
+const ANLASS = {
+  anmeldung: { titel: "Anmeldung bei Lernify", betreff: "hat sich angemeldet" },
+  geoeffnet: { titel: "Lernify geöffnet", betreff: "hat Lernify geöffnet" },
+};
+
 // Login must succeed even when the mail does not, so this never throws and is
 // never awaited by the request.
-async function sendLoginAlert({ name, username, ip, userAgent }) {
+async function sendLoginAlert({ name, username, ip, userAgent, anlass = "anmeldung" }) {
   if (!enabled) return;
 
+  const art = ANLASS[anlass] || ANLASS.anmeldung;
   const location = await lookupLocation(ip);
 
   const rows = [
     ["Wer", `${name} (${username})`],
+    ["Was", anlass === "anmeldung" ? "Mit PIN angemeldet" : "Mit bestehender Sitzung geöffnet"],
     ["Wann", berlinTime(new Date())],
     ["Ort", location || "unbekannt"],
     ["Gerät", describeDevice(userAgent) || "unbekannt"],
@@ -42,7 +51,7 @@ async function sendLoginAlert({ name, username, ip, userAgent }) {
 
   const html = `
     <div style="font-family:system-ui,sans-serif;color:#3d372c">
-      <h2 style="margin:0 0 12px">Anmeldung bei Lernify</h2>
+      <h2 style="margin:0 0 12px">${art.titel}</h2>
       <table cellpadding="6" style="border-collapse:collapse">
         ${rows
           .map(
@@ -66,7 +75,7 @@ async function sendLoginAlert({ name, username, ip, userAgent }) {
       body: JSON.stringify({
         from: LOGIN_ALERT_FROM,
         to: LOGIN_ALERT_TO.split(",").map((address) => address.trim()),
-        subject: `Lernify: ${name} hat sich angemeldet`,
+        subject: `Lernify: ${name} ${art.betreff}`,
         html,
       }),
     });
