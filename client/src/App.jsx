@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import ExamTake from './pages/ExamTake.jsx'
@@ -9,7 +9,8 @@ import Vergleich from './pages/Vergleich.jsx'
 import ProtectedRoute from './auth/ProtectedRoute.jsx'
 
 const PROTECTED = [
-  { path: '/', element: <Dashboard /> },
+  { path: '/', element: <Navigate to="/training" replace /> },
+  { path: '/probeklausur', element: <Dashboard /> },
   { path: '/exams/:id', element: <ExamTake /> },
   { path: '/karteikarten', element: <Karteikarten /> },
   { path: '/theorie', element: <Theorie /> },

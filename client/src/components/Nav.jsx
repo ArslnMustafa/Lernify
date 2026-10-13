@@ -6,7 +6,7 @@ const TABS = [
   { to: '/training', label: 'Training', icon: CapIcon },
   { to: '/vergleich', label: 'Vergleich', icon: CompareIcon },
   { to: '/karteikarten', label: 'Karteikarten', icon: CardsIcon },
-  { to: '/', label: 'Probeklausur', icon: ExamIcon, end: true },
+  { to: '/probeklausur', label: 'Probeklausur', icon: ExamIcon },
   { to: '/theorie', label: 'Theorie', icon: BookIcon },
 ]
 

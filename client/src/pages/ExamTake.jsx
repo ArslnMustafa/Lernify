@@ -65,7 +65,7 @@ export default function ExamTake() {
             {Math.round((result.score / result.total) * 100)}% richtig
           </p>
           <Link
-            to="/"
+            to="/probeklausur"
             className="inline-block w-full py-2.5 rounded-xl bg-[#3d372c] text-[#e9e0d2] text-sm font-medium hover:bg-[#24211a] transition"
           >
             Zurück zu meinen Prüfungen
@@ -83,7 +83,7 @@ export default function ExamTake() {
     <div className="min-h-screen bg-[#e9e0d2] px-3 sm:px-6 py-4 sm:py-8">
       <div className="max-w-xl mx-auto">
         <div className="flex items-center justify-between mb-4">
-          <Link to="/" className="text-xs text-[#736856] hover:text-[#24211a]">
+          <Link to="/probeklausur" className="text-xs text-[#736856] hover:text-[#24211a]">
             ← Übersicht
           </Link>
           <span className="text-xs text-[#948773]">
