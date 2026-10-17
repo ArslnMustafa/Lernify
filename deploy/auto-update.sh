@@ -50,10 +50,24 @@ fi
 sag "Neustart: $RESTART"
 $RESTART >/dev/null 2>&1 || sag "WARNUNG: Neustart meldete einen Fehler."
 
+# Fragt die Seite, ob sie wach ist. Lieber zwei Wege als einer: fehlt curl,
+# würde sonst jedes Update für kaputt gehalten und zurückgerollt.
+anklopfen() {
+  if command -v curl >/dev/null 2>&1; then
+    curl -fsS --max-time 8 "$HEALTH_URL" >/dev/null 2>&1
+  else
+    node -e '
+      fetch(process.argv[1], { signal: AbortSignal.timeout(8000) })
+        .then((a) => process.exit(a.ok ? 0 : 1))
+        .catch(() => process.exit(1));
+    ' "$HEALTH_URL" >/dev/null 2>&1
+  fi
+}
+
 gesund() {
   for _ in $(seq "$VERSUCHE"); do
     sleep 2
-    curl -fsS --max-time 8 "$HEALTH_URL" >/dev/null 2>&1 && return 0
+    anklopfen && return 0
   done
   return 1
 }
