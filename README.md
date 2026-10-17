@@ -71,6 +71,21 @@ git'e girmez, `git pull` ile çakışmaz.
 Uygulama telefona kurulabilir (PWA): ana ekrana eklenince tam ekran açılır, arayüz ve
 görülen resimler önbellekte tutulur.
 
+## Telefondan değişiklik yapmak
+
+Claude uygulamasının **Code** sekmesinden (ya da claude.ai/code) bu depoya bir oturum açıp ne
+istediğini yazabilirsin; değişiklik GitHub'a gider. Sunucunun bunu kendiliğinden alması için
+cron:
+
+```
+*/2 * * * * /home/mustafaarslan.com/Lernify/deploy/auto-update.sh >> /var/log/lernify-update.log 2>&1
+```
+
+`auto-update.sh` yeni commit yoksa hiçbir şey yazmaz. Yeni commit varsa çeker, gerekiyorsa
+`npm install` yapar, PM2'yi yeniden başlatır ve `/api/health` ile kontrol eder. Site cevap
+vermezse **eski commit'e geri döner** ve tekrar başlatır; log'a da yazar. Canlı dizinde elle
+yapılmış değişiklik varsa hiç dokunmaz.
+
 ## Soru resimleri
 
 Her sorunun bir resmi olmalı. Katalogdaki 150 yapının resmi veri dosyasında
