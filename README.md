@@ -81,6 +81,14 @@ cron:
 */2 * * * * /home/mustafaarslan.com/Lernify/deploy/auto-update.sh >> /var/log/lernify-update.log 2>&1
 ```
 
+Kurulduktan sonra kontrol:
+
+```
+crontab -l | tail -2                      # satır yerinde mi
+tail -f /var/log/lernify-update.log       # güncellemeleri canlı izle
+bash deploy/auto-update.sh                # elle bir tur çalıştır
+```
+
 `auto-update.sh` yeni commit yoksa hiçbir şey yazmaz. Yeni commit varsa çeker, gerekiyorsa
 `npm install` yapar, PM2'yi yeniden başlatır ve `/api/health` ile kontrol eder. Site cevap
 vermezse **eski commit'e geri döner** ve tekrar başlatır; log'a da yazar. Canlı dizinde elle
