@@ -1,12 +1,33 @@
 const TOKEN_KEY = 'lernify_token'
 
+// "Angemeldet bleiben" angehakt: der Token liegt im localStorage und
+// uebersteht das Schliessen des Browsers. Nicht angehakt: er liegt im
+// sessionStorage und ist mit dem Tab weg. Das ist der Unterschied an einem
+// fremden Rechner.
 export function getToken() {
-  return localStorage.getItem(TOKEN_KEY)
+  try {
+    return sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY)
+  } catch {
+    return null
+  }
 }
 
-export function setToken(token) {
-  if (token) localStorage.setItem(TOKEN_KEY, token)
-  else localStorage.removeItem(TOKEN_KEY)
+export function setToken(token, dauerhaft = true) {
+  try {
+    localStorage.removeItem(TOKEN_KEY)
+    sessionStorage.removeItem(TOKEN_KEY)
+    if (token) (dauerhaft ? localStorage : sessionStorage).setItem(TOKEN_KEY, token)
+  } catch {
+    /* ohne Speicher bleibt die Anmeldung auf diesen Tab beschraenkt */
+  }
+}
+
+export function tokenDauerhaft() {
+  try {
+    return Boolean(localStorage.getItem(TOKEN_KEY))
+  } catch {
+    return true
+  }
 }
 
 export class OfflineError extends Error {

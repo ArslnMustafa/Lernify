@@ -1,15 +1,18 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { api, getToken, setToken, OfflineError } from '../api'
+import { api, getToken, setToken, tokenDauerhaft, OfflineError } from '../api'
 
 const AuthContext = createContext(null)
 
 // Who was signed in last, so an offline start knows whose name to show.
 const SPEICHER = 'lernify_user'
 
-function merken(user) {
+function merken(user, dauerhaft = tokenDauerhaft()) {
   try {
-    if (user) localStorage.setItem(SPEICHER, JSON.stringify(user))
-    else localStorage.removeItem(SPEICHER)
+    localStorage.removeItem(SPEICHER)
+    sessionStorage.removeItem(SPEICHER)
+    if (user) {
+      ;(dauerhaft ? localStorage : sessionStorage).setItem(SPEICHER, JSON.stringify(user))
+    }
   } catch {
     /* a browser without storage simply forgets */
   }
@@ -17,7 +20,9 @@ function merken(user) {
 
 function gemerkt() {
   try {
-    return JSON.parse(localStorage.getItem(SPEICHER) || 'null')
+    return JSON.parse(
+      sessionStorage.getItem(SPEICHER) || localStorage.getItem(SPEICHER) || 'null'
+    )
   } catch {
     return null
   }
@@ -52,11 +57,11 @@ export function AuthProvider({ children }) {
       .finally(() => setLoading(false))
   }, [])
 
-  async function login(username, password) {
+  async function login(username, password, dauerhaft = true) {
     const data = await api.login(username, password)
-    setToken(data.token)
+    setToken(data.token, dauerhaft)
     setUser(data.user)
-    merken(data.user)
+    merken(data.user, dauerhaft)
   }
 
   function logout() {
