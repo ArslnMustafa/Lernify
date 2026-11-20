@@ -117,3 +117,19 @@ listeler, yanlış eşleşmeler orada görülür. Resim bulunamazsa nedenini de 
 kalırsa çalışmayı durdurup `pruefen` komutunu önerir. Bulunanlar her seferinde
 kaydedildiği için script'i tekrar çalıştırmak sadece eksikleri dener. `apply-images.js` sınavları yeniden
 kurmadan sadece resimleri güncellediği için sonuçlar silinmez.
+
+## Deutsch (A2 → B1)
+
+Eigener Bereich unter `/deutsch`, sichtbar nur für die Benutzernamen in
+`DEUTSCH_FUER` (Umgebungsvariable, durch Komma getrennt; Standard: `mustafa`).
+Für diese Benutzer ist `/deutsch` auch die Startseite.
+
+- Inhalte: `server/src/deutsch/wortschatz.js` (Wörter in den Bereichen Alltag,
+  Beruf und Prüfung, mit Artikel, Plural bzw. Perfekt, Türkisch und Beispielsatz)
+  und `server/src/deutsch/grammatik.js` (Themen mit türkischer Erklärung und Übungen).
+- Lernstand im selben Karteikasten wie der Trainer (`trainer_progress`),
+  Schlüssel beginnen mit `de:`. Das Zurücksetzen des Trainers lässt sie stehen.
+- API: `/api/deutsch/uebersicht`, `/karten/next`, `/karten/answer`, `/woerter`,
+  `/grammatik/:thema`, `/grammatik/answer`.
+- Schlüssel von Wörtern und Reihenfolge der Übungen nicht ändern, sonst geht
+  der Lernstand dieser Karten verloren.

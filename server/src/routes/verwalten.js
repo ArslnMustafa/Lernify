@@ -53,9 +53,10 @@ const BEREICHE = {
   training: {
     titel: "Trainingsfortschritt",
     zaehlen: (userId) =>
-      db.prepare("SELECT COUNT(*) AS n FROM trainer_progress WHERE user_id = ?").get(userId).n,
+      db.prepare("SELECT COUNT(*) AS n FROM trainer_progress WHERE user_id = ? AND item_key NOT LIKE 'de:%'").get(userId).n,
     loeschen: (userId) =>
-      db.prepare("DELETE FROM trainer_progress WHERE user_id = ?").run(userId),
+      // Deutsch (de:...) hat eigenen Lernstand und bleibt beim Zuruecksetzen des Trainers erhalten
+      db.prepare("DELETE FROM trainer_progress WHERE user_id = ? AND item_key NOT LIKE 'de:%'").run(userId),
   },
   simulation: {
     titel: "Simulationsdurchläufe",

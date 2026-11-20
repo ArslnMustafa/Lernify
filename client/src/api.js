@@ -118,4 +118,14 @@ export const api = {
     }),
   pinAendern: (alt, neu) =>
     request('/verwalten/pin', { method: 'POST', body: JSON.stringify({ alt, neu }) }),
+  // Deutsch (nur fuer freigeschaltete Benutzer)
+  deutschUebersicht: () => request('/deutsch/uebersicht'),
+  deutschKarte: (bereich, modus, ohne) =>
+    request(`/deutsch/karten/next?bereich=${bereich || ''}&modus=${modus || 'faellig'}&ohne=${encodeURIComponent(ohne || '')}`),
+  deutschKarteAntwort: (payload) =>
+    request('/deutsch/karten/answer', { method: 'POST', body: JSON.stringify(payload) }),
+  deutschWoerter: (bereich) => request(`/deutsch/woerter?bereich=${bereich || ''}`),
+  deutschThema: (key) => request(`/deutsch/grammatik/${encodeURIComponent(key)}`),
+  deutschThemaAntwort: (payload) =>
+    request('/deutsch/grammatik/answer', { method: 'POST', body: JSON.stringify(payload) }),
 }

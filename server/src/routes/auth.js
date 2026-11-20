@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const db = require("../db");
 const { verifyPassword } = require("../password");
-const { JWT_SECRET } = require("../config");
+const { JWT_SECRET, hatDeutsch } = require("../config");
 const { requireAuth } = require("../middleware/auth");
 const { sendLoginAlert } = require("../notify");
 
@@ -107,7 +107,7 @@ router.post("/login", (req, res) => {
 
   res.json({
     token,
-    user: { id: user.id, username: user.username, name: user.name },
+    user: { id: user.id, username: user.username, name: user.name, deutsch: hatDeutsch(user) },
   });
 });
 
@@ -124,7 +124,7 @@ router.get("/me", requireAuth, (req, res) => {
     });
   }
 
-  res.json({ user: req.user });
+  res.json({ user: { ...req.user, deutsch: hatDeutsch(req.user) } });
 });
 
 module.exports = router;

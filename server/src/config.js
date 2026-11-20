@@ -41,7 +41,13 @@ function loadJwtSecret() {
 
 loadEnvFile();
 
+// Wer den Bereich Deutsch sieht: Benutzernamen, durch Komma getrennt.
+const DEUTSCH_FUER = (process.env.DEUTSCH_FUER || "mustafa")
+  .split(",").map((n) => n.trim().toLowerCase()).filter(Boolean);
+const hatDeutsch = (user) => Boolean(user && DEUTSCH_FUER.includes(String(user.username || "").toLowerCase()));
+
 module.exports = {
+  hatDeutsch,
   JWT_SECRET: loadJwtSecret(),
   PORT: process.env.PORT || 4000,
   RESEND_API_KEY: process.env.RESEND_API_KEY || "",

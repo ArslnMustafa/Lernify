@@ -25,6 +25,8 @@ function gespeichertesThema() {
 export default function Nav() {
   const { user, logout } = useAuth()
   const [open, setOpen] = useState(false)
+  // Deutsch steht vorne, aber nur fuer die, die es freigeschaltet haben
+  const tabs = user.deutsch ? [{ to: '/deutsch', label: 'Deutsch', icon: SpeechIcon }, ...TABS] : TABS
   const [thema, setThema] = useState(() => gespeichertesThema() || 'system')
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export default function Nav() {
 
         {/* Wide screens show the sections as tabs, the phone keeps one button. */}
         <nav className="hidden md:flex items-center gap-1 ml-auto">
-          {TABS.map((tab) => (
+          {tabs.map((tab) => (
             <Tab key={tab.to} tab={tab} />
           ))}
           <button
@@ -89,7 +91,7 @@ export default function Nav() {
 
       {open && (
         <div className="md:hidden border-t border-[var(--rand)] bg-[var(--karte)] px-3 pb-3 pt-2 flex flex-col gap-1">
-          {TABS.map((tab) => (
+          {tabs.map((tab) => (
             <Tab key={tab.to} tab={tab} onPick={() => setOpen(false)} wide />
           ))}
           <button
@@ -189,6 +191,15 @@ function BookIcon() {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" />
       <path d="M4 19a2 2 0 0 1 2-2h13" />
+    </svg>
+  )
+}
+
+function SpeechIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" />
+      <path d="M8.5 10.5h7M8.5 14h4" />
     </svg>
   )
 }
