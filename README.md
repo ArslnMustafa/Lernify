@@ -137,6 +137,12 @@ Für diese Benutzer ist `/deutsch` auch die Startseite.
   „Kenne ich schon" schiebt ein neues Wort direkt in die letzte Box.
 - Grammatik B1/B2 mit Lektion in `server/src/deutsch/grammatik-aufbau.js`; der
   Lernpfad ist nach Niveau sortiert.
+- Prüfungssimulation: `server/src/deutsch/pruefungen.js` (Modelltests im Stil von
+  DTZ / Goethe B1 und B2, eigene Texte; Teile `rf`, `mc`, `zuordnen`). Lesen mit
+  Zeitlimit und ohne Zurück, Hörtexte liest der Browser vor (je Sprecher eine eigene
+  Stimme/Tonhöhe, höchstens zweimal). Die Lösungen verlassen den Server erst bei der
+  Abgabe; Ergebnisse in der Tabelle `deutsch_pruefung`. Bestanden je Modul ab 60 %.
+  Der Zwischenstand liegt im Browser (localStorage), ein Neuladen kostet nichts.
 - Lernstand im selben Karteikasten wie der Trainer (`trainer_progress`),
   Schlüssel beginnen mit `de:`. Das Zurücksetzen des Trainers lässt sie stehen.
 - Lektionen: `server/src/deutsch/lektionen.js` (zu jedem Grammatikthema
@@ -147,6 +153,6 @@ Für diese Benutzer ist `/deutsch` auch die Startseite.
 - Vorlesen über die Sprachausgabe des Browsers (`client/src/deutsch/ui.jsx`), kein Dienst nötig.
 - API: `/api/deutsch/uebersicht`, `/karten/next`, `/karten/answer`, `/karten/kenne`, `/woerter`,
   `/lektion/:thema`, `/lektion/:thema/gelesen`, `/grammatik/answer`, `/kaliplar`,
-  `/tipps`, `/wiederholung`.
+  `/tipps`, `/wiederholung`, `/pruefungen`, `/pruefungen/:key`, `/pruefungen/:key/abgabe`.
 - Schlüssel von Wörtern und Reihenfolge der Übungen nicht ändern, sonst geht
   der Lernstand dieser Karten verloren.

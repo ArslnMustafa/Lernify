@@ -10,6 +10,7 @@ const { THEMEN, byKey: themaByKey, uebungKey } = require("../deutsch/grammatik")
 const { LEKTIONEN } = require("../deutsch/lektionen");
 const { SITUATIONEN } = require("../deutsch/redemittel");
 const { TIPPS } = require("../deutsch/tipps");
+const { PRUEFUNGEN, byKey: pruefungByKey } = require("../deutsch/pruefungen");
 
 // Punkte und Serie: jeden Tag ein kleines Ziel, damit das Lernen jeden Tag stattfindet.
 db.exec(`
@@ -18,6 +19,19 @@ db.exec(`
     tag TEXT NOT NULL,
     xp INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (user_id, tag)
+  );
+`);
+// Jeder abgegebene Modelltest, mit Antworten, damit man spaeter nachsehen kann
+db.exec(`
+  CREATE TABLE IF NOT EXISTS deutsch_pruefung (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    test TEXT NOT NULL,
+    lesen INTEGER NOT NULL, lesen_max INTEGER NOT NULL,
+    hoeren INTEGER NOT NULL, hoeren_max INTEGER NOT NULL,
+    sekunden INTEGER,
+    antworten TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
 `);
 const TAGESZIEL = 50;
@@ -125,7 +139,7 @@ router.get("/uebersicht", (req, res) => {
   });
   const naechste = grammatik.find((t) => !t.fertig) || null;
   res.json({ bereiche, niveaus, grammatik, naechste: naechste && naechste.key, xp: xpStand(req.user.id),
-    kaliplar: SITUATIONEN.length, tipps: TIPPS.length });
+    kaliplar: SITUATIONEN.length, tipps: TIPPS.length, pruefungen: PRUEFUNGEN.length });
 });
 
 // ---------- Wortschatz ----------
@@ -399,6 +413,74 @@ router.post("/grammatik/answer", (req, res) => {
   const richtig = antwort === richtigeAntwort;
   const box = speichern(req.user.id, uebungKey(t.key, Number(i)), "grammatik", richtig);
   res.json({ richtig, loesung: richtigeAntwort, hinweis, ...box });
+});
+
+// ---------- Pruefungssimulation ----------
+// Bestanden ist ein Modul wie in der echten Pruefung ab 60 Prozent.
+const BESTEHEN = 0.6;
+const ergebnisZeile = (r) => r && {
+  lesen: r.lesen, lesenMax: r.lesen_max, hoeren: r.hoeren, hoerenMax: r.hoeren_max,
+  bestanden: r.lesen >= r.lesen_max * BESTEHEN && r.hoeren >= r.hoeren_max * BESTEHEN,
+  sekunden: r.sekunden, datum: r.created_at,
+};
+
+router.get("/pruefungen", (req, res) => {
+  const rows = db.prepare("SELECT * FROM deutsch_pruefung WHERE user_id = ? ORDER BY id DESC").all(req.user.id);
+  res.json({
+    pruefungen: PRUEFUNGEN.map((p) => {
+      const meine = rows.filter((r) => r.test === p.key);
+      const beste = meine.slice().sort((a, b) => (b.lesen + b.hoeren) - (a.lesen + a.hoeren))[0];
+      return {
+        key: p.key, niveau: p.niveau, titel: p.titel, thema: p.thema, minuten: p.minuten,
+        fragen: p.teile.reduce((n, t) => n + t.fragen.length, 0),
+        teile: p.teile.map((t) => ({ id: t.id, modul: t.modul, titel: t.titel })),
+        versuche: meine.length, letztes: ergebnisZeile(meine[0]), bestes: ergebnisZeile(beste),
+      };
+    }),
+  });
+});
+
+// Der Test ohne Loesungen und Erklaerungen. Die Hoertexte muessen mit, weil der Browser vorliest.
+router.get("/pruefungen/:key", (req, res) => {
+  const p = pruefungByKey.get(req.params.key);
+  if (!p) return res.status(404).json({ error: "Test nicht gefunden." });
+  res.json({
+    key: p.key, niveau: p.niveau, titel: p.titel, thema: p.thema, minuten: p.minuten,
+    teile: p.teile.map(({ fragen, ...t }) => ({
+      ...t,
+      fragen: fragen.map(({ loesung, erklaerung, ...f }) => f),
+    })),
+  });
+});
+
+router.post("/pruefungen/:key/abgabe", (req, res) => {
+  const p = pruefungByKey.get(req.params.key);
+  if (!p) return res.status(404).json({ error: "Test nicht gefunden." });
+  const antworten = (req.body && typeof req.body.antworten === "object" && req.body.antworten) || {};
+  const sekunden = Math.max(0, Math.min(6 * 3600, Math.round(Number(req.body?.sekunden) || 0)));
+  const punkte = { lesen: 0, lesenMax: 0, hoeren: 0, hoerenMax: 0 };
+  const auswertung = {};
+  for (const t of p.teile) {
+    for (const f of t.fragen) {
+      const a = antworten[f.id];
+      const richtig = a !== undefined && a !== null && a === f.loesung;
+      punkte[t.modul + "Max"] += 1;
+      if (richtig) punkte[t.modul] += 1;
+      auswertung[f.id] = { richtig, antwort: a ?? null, loesung: f.loesung, erklaerung: f.erklaerung };
+    }
+  }
+  const sauber = Object.fromEntries(Object.entries(auswertung).map(([id, x]) => [id, x.antwort]));
+  db.prepare(`INSERT INTO deutsch_pruefung (user_id, test, lesen, lesen_max, hoeren, hoeren_max, sekunden, antworten)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)`)
+    .run(req.user.id, p.key, punkte.lesen, punkte.lesenMax, punkte.hoeren, punkte.hoerenMax, sekunden, JSON.stringify(sauber));
+  // Zwei Punkte je richtige Antwort, damit ein ganzer Test ungefaehr ein Tagesziel ist
+  const xp = (punkte.lesen + punkte.hoeren) * 2;
+  if (xp) xpDazu(req.user.id, xp);
+  res.json({
+    ...punkte, xp,
+    bestanden: { lesen: punkte.lesen >= punkte.lesenMax * BESTEHEN, hoeren: punkte.hoeren >= punkte.hoerenMax * BESTEHEN },
+    auswertung,
+  });
 });
 
 module.exports = router;

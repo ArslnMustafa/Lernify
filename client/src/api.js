@@ -132,6 +132,10 @@ export const api = {
   deutschGelesen: (key) =>
     request(`/deutsch/lektion/${encodeURIComponent(key)}/gelesen`, { method: 'POST', body: '{}' }),
   deutschKaliplar: () => request('/deutsch/kaliplar'),
+  deutschPruefungen: () => request('/deutsch/pruefungen'),
+  deutschPruefung: (key) => request(`/deutsch/pruefungen/${encodeURIComponent(key)}`),
+  deutschPruefungAbgabe: (key, payload) =>
+    request(`/deutsch/pruefungen/${encodeURIComponent(key)}/abgabe`, { method: 'POST', body: JSON.stringify(payload) }),
   deutschTipps: () => request('/deutsch/tipps'),
   deutschWiederholung: () => request('/deutsch/wiederholung'),
   deutschThemaAntwort: (payload) =>

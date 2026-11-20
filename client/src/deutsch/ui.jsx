@@ -30,6 +30,41 @@ export function sprechen(text, { langsam = false, fertig } = {}) {
   synth.speak(u)
 }
 
+/**
+ * Hoertext mit mehreren Sprechern vorlesen: jeder Sprecher bekommt eine eigene
+ * Stimme (wenn es mehrere deutsche gibt) und Tonhoehe. Saetze einzeln, weil manche
+ * Browser lange Aeusserungen nach etwa 15 Sekunden abbrechen.
+ * zeile(i) meldet, welche Zeile gerade dran ist; fertig() kommt am Ende oder bei Abbruch.
+ */
+export function dialogVorlesen(zeilen, { fertig, zeile } = {}) {
+  if (!kannSprechen()) { if (fertig) fertig(); return }
+  const synth = window.speechSynthesis
+  synth.cancel()
+  const stimmen = synth.getVoices().filter((v) => v.lang?.startsWith('de'))
+  const sprecher = [...new Set(zeilen.map((z) => z[0]))]
+  const teile = []
+  zeilen.forEach(([wer, satz], i) => {
+    for (const stueck of satz.split(/(?<=[.!?])\s+/)) teile.push({ i, wer, stueck })
+  })
+  let ende = false
+  const schluss = () => { if (!ende) { ende = true; if (fertig) fertig() } }
+  teile.forEach(({ i, wer, stueck }, k) => {
+    const u = new SpeechSynthesisUtterance(stueck)
+    u.lang = 'de-DE'
+    const n = sprecher.indexOf(wer)
+    if (stimmen.length) u.voice = stimmen[n % stimmen.length]
+    u.pitch = [1, 0.78, 1.2][n % 3]
+    u.rate = 0.95
+    u.onstart = () => { if (zeile) zeile(i) }
+    u.onerror = schluss
+    if (k === teile.length - 1) u.onend = schluss
+    synth.speak(u)
+  })
+}
+export function stillsein() {
+  if (kannSprechen()) window.speechSynthesis.cancel()
+}
+
 /** Lautsprecher-Knopf. Zweimal tippen = langsam. */
 export function Hoeren({ text, klein = false, className = '' }) {
   const [an, setAn] = useState(false)

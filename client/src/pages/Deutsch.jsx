@@ -222,10 +222,22 @@ export default function Deutsch() {
               <Kachel to="/deutsch/wiederholung" titel="Konu tekrarı" text="Başladığın konulardan karışık sorular ve özetler" zeichen="🔁" />
             </div>
 
+            {/* ---------- Pruefung ---------- */}
+            <Link
+              to="/deutsch/pruefung"
+              className="group mt-8 flex items-center gap-4 p-5 rounded-2xl bg-[var(--knopf)] text-[var(--auf-knopf)] hover:bg-[var(--knopf-tief)] transition"
+            >
+              <span className="text-3xl transition group-hover:scale-110" aria-hidden="true">🎓</span>
+              <span className="flex-1 min-w-0">
+                <span className="block font-bold">Prüfungssimulation</span>
+                <span className="block text-xs opacity-80">{d.pruefungen} deneme sınavı · DTZ / Goethe B1 ve B2 · Lesen süreli, Hören sesli</span>
+              </span>
+              <span aria-hidden="true" className="text-xl transition group-hover:translate-x-1">→</span>
+            </Link>
+
             <h3 className="mt-8 mb-3 text-sm font-bold text-[var(--text-mittel)]">Bald</h3>
             <div className="grid gap-3 sm:grid-cols-2">
               <Bald titel="Schreiben" text="Mektup, e-posta ve görüş yazısı; örnek cevap ve kontrol listesiyle." />
-              <Bald titel="Prüfungssimulation" text="DTZ, Goethe B1 ve B2 formatında, süreli deneme sınavı." />
             </div>
           </>
         )}
