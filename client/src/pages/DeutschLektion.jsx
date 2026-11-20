@@ -74,7 +74,7 @@ export default function DeutschLektion() {
 
         {l && (
           <>
-            <p className="mt-3 text-xs font-semibold text-[var(--text-schwach)]">Lektion {l.nr} von {l.von}</p>
+            <p className="mt-3 text-xs font-semibold text-[var(--text-schwach)]">Lektion {l.nr} von {l.von}{l.niveau && <span className="ml-2 px-1.5 py-0.5 rounded-md bg-[var(--feld)] text-[var(--text-mittel)]">{l.niveau}</span>}</p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">{l.titel}</h2>
             <p className="text-sm text-[var(--text-leise)]">{l.kurz}</p>
 

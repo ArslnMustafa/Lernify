@@ -3,8 +3,9 @@ import { useSearchParams, Link } from 'react-router-dom'
 import { api } from '../api'
 import Nav from '../components/Nav.jsx'
 import { Hoeren, sprechen, feiern, MitArtikel } from '../deutsch/ui.jsx'
+import { Luecke } from './DeutschLektion.jsx'
 
-const BEREICHE = [['', 'Alle'], ['alltag', 'Alltag'], ['beruf', 'Beruf'], ['pruefung', 'Prüfung']]
+const BEREICHE = [['', 'Alle'], ['haeufig', 'Häufig'], ['alltag', 'Alltag'], ['beruf', 'Beruf'], ['pruefung', 'Prüfung'], ['b2', 'B2']]
 const MODI = [['faellig', 'Heute'], ['fehler', 'Fehler'], ['alle', 'Alle Wörter']]
 
 // Eine Karte nach der anderen: antworten, die Karte dreht sich um und zeigt das Wort
@@ -21,6 +22,7 @@ export default function DeutschKarten() {
   const [zaehler, setZaehler] = useState({ richtig: 0, falsch: 0, folge: 0 })
   const [error, setError] = useState('')
   const timer = useRef(0)
+  const [kenneHinweis, setKenneHinweis] = useState('')
 
   const laden = useCallback((letzte) => {
     // Alte Frage sofort weg, sonst ist sie bis zur neuen kurz wieder anklickbar
@@ -42,6 +44,7 @@ export default function DeutschKarten() {
 
   async function antworten(option, el) {
     if (ergebnis) return
+    setKenneHinweis('')
     setGewaehlt(option)
     try {
       const r = await api.deutschKarteAntwort({ itemKey: frage.itemKey, art: frage.art, antwort: option })
@@ -55,7 +58,19 @@ export default function DeutschKarten() {
     }
   }
 
+  // Ein neues Wort, das man schon kennt: gleich in die letzte Box, kommt in zehn Tagen zur Kontrolle
+  async function kenne() {
+    try {
+      const r = await api.deutschKenne(frage.itemKey)
+      setKenneHinweis(`„${r.karte.wort}“ übersprungen, kommt in 10 Tagen zur Kontrolle.`)
+      laden(frage.itemKey)
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
   const deutscheFrage = frage && (frage.art === 'bedeutung' || frage.art === 'artikel')
+  const luecke = frage?.art === 'luecke'
 
   return (
     <div className="min-h-screen bg-[var(--flaeche)]">
@@ -73,6 +88,7 @@ export default function DeutschKarten() {
         <Auswahl werte={MODI} aktiv={modus} onPick={(v) => setzen('modus', v === 'faellig' ? '' : v)} label="Auswahl" />
 
         {error && <p className="text-sm text-[var(--rot)] mt-4">{error}</p>}
+        {kenneHinweis && <p className="text-xs text-[var(--text-leise)] mt-3" role="status">{kenneHinweis}</p>}
 
         {leer && (
           <div className="de-schritt mt-5 p-6 rounded-2xl bg-[var(--karte)] border border-[var(--rand)] text-center">
@@ -93,12 +109,16 @@ export default function DeutschKarten() {
               {/* ---------- Vorderseite: Frage ---------- */}
               <div className={`de-flip-vorn rounded-3xl bg-[var(--karte)] border border-[var(--rand)] p-5 sm:p-6 shadow-[0_12px_30px_-18px_rgba(0,0,0,.35)] ${ergebnis && !ergebnis.richtig ? 'de-falsch' : ''}`}>
                 <div className="flex justify-between text-[11px] text-[var(--text-schwach)]">
-                  <span>{frage.thema}{frage.neu ? ' · neues Wort' : ''}</span>
+                  <span className="flex items-center gap-1.5">
+                    <Niveau n={frage.niveau} />{frage.thema}{frage.neu ? ' · neues Wort' : ''}
+                  </span>
                   <span>{frage.hinweis}</span>
                 </div>
                 <div className="mt-3 flex items-center gap-3">
-                  <p className={`flex-1 font-extrabold text-[var(--text)] tracking-tight ${deutscheFrage ? 'text-3xl' : 'text-xl'}`}>
-                    {frage.art === 'bedeutung' ? <MitArtikel text={frage.text} /> : frage.text}
+                  <p className={`flex-1 text-[var(--text)] tracking-tight ${deutscheFrage ? 'text-3xl font-extrabold' : luecke ? 'text-xl leading-snug' : 'text-xl font-extrabold'}`}>
+                    {frage.art === 'bedeutung' ? <MitArtikel text={frage.text} />
+                      : luecke ? <Luecke satz={frage.text} fuellung={ergebnis ? ergebnis.loesung : gewaehlt} richtig={ergebnis?.richtig} />
+                        : frage.text}
                   </p>
                   {deutscheFrage && <Hoeren text={frage.text} />}
                 </div>
@@ -122,6 +142,11 @@ export default function DeutschKarten() {
                     )
                   })}
                 </div>
+                {frage.neu && !ergebnis && (
+                  <button onClick={kenne} className="mt-4 w-full text-center text-xs font-semibold text-[var(--text-leise)] hover:text-[var(--text)] underline-offset-2 hover:underline">
+                    Kenne ich schon – überspringen
+                  </button>
+                )}
               </div>
 
               {/* ---------- Rueckseite: das Wort ---------- */}
@@ -138,6 +163,11 @@ export default function DeutschKarten() {
                       <Hoeren text={ergebnis.karte.wort} />
                     </div>
                     {ergebnis.karte.form !== '–' && <p className="text-sm text-[var(--text-leise)]">{ergebnis.karte.form}</p>}
+                    <p className="mt-1 flex flex-wrap items-center gap-1.5 text-[11px] text-[var(--text-schwach)]">
+                      <Niveau n={ergebnis.karte.niveau} />
+                      {ergebnis.karte.bereichName} · {ergebnis.karte.thema}
+                      {ergebnis.karte.rang && ergebnis.karte.rang <= 30 && <span className="px-1.5 py-0.5 rounded-md bg-[color-mix(in_srgb,var(--gold)_18%,var(--karte))] text-[var(--text-mittel)] font-semibold">sehr häufig</span>}
+                    </p>
                     <p className="text-[15px] text-[var(--text-mittel)] mt-1">{ergebnis.karte.tr}</p>
                     <div className="mt-4 flex items-start gap-3 p-3.5 rounded-xl bg-[var(--feld)]">
                       <Hoeren text={ergebnis.karte.beispiel} klein className="mt-0.5" />
@@ -161,12 +191,17 @@ export default function DeutschKarten() {
   )
 }
 
+export function Niveau({ n }) {
+  if (!n) return null
+  return <span className="px-1.5 py-0.5 rounded-md bg-[var(--feld)] text-[10px] font-bold text-[var(--text-mittel)] leading-none">{n}</span>
+}
+
 function Auswahl({ werte, aktiv, onPick, label }) {
   return (
     <div role="group" aria-label={label} className="flex gap-1 p-1 mb-2 rounded-xl bg-[var(--karte)] border border-[var(--rand)]">
       {werte.map(([wert, name]) => (
         <button key={wert} onClick={() => onPick(wert)} aria-pressed={aktiv === wert}
-          className={`flex-1 px-2 py-1.5 rounded-lg text-xs font-semibold transition ${aktiv === wert ? 'bg-[var(--knopf)] text-[var(--auf-knopf)]' : 'text-[var(--text-mittel)] hover:bg-[var(--feld)]'}`}>
+          className={`flex-1 min-w-0 px-1 sm:px-2 py-1.5 rounded-lg text-xs font-semibold truncate transition ${aktiv === wert ? 'bg-[var(--knopf)] text-[var(--auf-knopf)]' : 'text-[var(--text-mittel)] hover:bg-[var(--feld)]'}`}>
           {name}
         </button>
       ))}

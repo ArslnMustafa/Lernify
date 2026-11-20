@@ -124,7 +124,9 @@ export const api = {
     request(`/deutsch/karten/next?bereich=${bereich || ''}&modus=${modus || 'faellig'}&ohne=${encodeURIComponent(ohne || '')}`),
   deutschKarteAntwort: (payload) =>
     request('/deutsch/karten/answer', { method: 'POST', body: JSON.stringify(payload) }),
-  deutschWoerter: (bereich) => request(`/deutsch/woerter?bereich=${bereich || ''}`),
+  deutschWoerter: () => request('/deutsch/woerter'),
+  deutschKenne: (itemKey) =>
+    request('/deutsch/karten/kenne', { method: 'POST', body: JSON.stringify({ itemKey }) }),
   deutschThema: (key) => request(`/deutsch/grammatik/${encodeURIComponent(key)}`),
   deutschLektion: (key) => request(`/deutsch/lektion/${encodeURIComponent(key)}`),
   deutschGelesen: (key) =>

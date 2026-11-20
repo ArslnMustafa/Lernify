@@ -1,4 +1,4 @@
-// Deutsch fuer Mustafa: Grammatik von A2 nach B1.
+// Deutsch fuer Mustafa: Grammatik von A2 nach B2 (B1/B2-Themen in grammatik-aufbau.js).
 // Erklaerungen auf Tuerkisch (Muttersprache), Uebungen auf Deutsch.
 // Jede Uebung: [satz mit ___, [optionen], richtige option, hinweis auf Tuerkisch]
 // Beim Aendern: Reihenfolge der Uebungen nicht umstellen, der Lernstand haengt am Index.
@@ -249,6 +249,17 @@ const THEMEN = [
     ],
   },
 ];
+
+// Niveau der Themen in dieser Datei; die Reihenfolge im Lernpfad folgt dem Niveau
+const NIVEAU = {
+  perfekt: "A2", trennbar: "A2", modal: "A2", kasus: "A2", wechsel: "A2", reflexiv: "A2", komparativ: "A2",
+  nebensatz: "B1", praeteritum: "B1", adjektiv: "B1", hoeflich: "B1",
+};
+for (const t of THEMEN) t.niveau = NIVEAU[t.key];
+const AUFBAU = require("./grammatik-aufbau").THEMEN;
+THEMEN.push(...AUFBAU.map(({ lektion, ...t }) => t));
+const STUFE = { A2: 0, B1: 1, B2: 2 };
+THEMEN.sort((a, b) => STUFE[a.niveau] - STUFE[b.niveau]); // stabil: innerhalb des Niveaus bleibt die Reihenfolge
 
 const byKey = new Map(THEMEN.map((t) => [t.key, t]));
 // Ein Uebungsschluessel: de:g:<thema>:<index>

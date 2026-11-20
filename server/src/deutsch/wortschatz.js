@@ -1,7 +1,9 @@
-// Deutsch fuer Mustafa (Stand A2, Ziel B1): Wortschatz in drei Bereichen.
+// Deutsch fuer Mustafa (Stand A2, Ziel B2): Wortschatz in fuenf Bereichen.
+//   haeufig  - die haeufigsten Woerter (eigene Datei haeufig.js), werden zuerst gelernt
 //   alltag   - Leben in Deutschland: Wohnung, Einkaufen, Arzt, Aemter, Verkehr, Freizeit
 //   beruf    - Arbeit: Bewerbung, Arbeitsplatz, Vertrag, Kunden, Termine
 //   pruefung - was in DTZ und Goethe B1 immer wieder vorkommt: Briefe, Meinung, Redemittel
+//   b2       - Aufbauwortschatz bis B2 (eigene Datei b2.js)
 //
 // Spalten: [key, bereich, thema, artikel, wort, form, tuerkisch, beispiel]
 //   artikel  "der" | "die" | "die (Pl.)" fuer reine Pluralwoerter | "" fuer alles ausser Nomen
@@ -157,20 +159,58 @@ const ROWS = [
   ["durchsage", "pruefung", "Verbinden", "die", "Durchsage", "die Durchsagen", "anons", "Achtung, eine Durchsage: Der Zug fällt heute aus."],
 ];
 
+const HAEUFIG = require("./haeufig").ROWS;
+const AUFBAU = require("./b2").ROWS;
+
+// Reihenfolge = Reihenfolge auf der Startseite
 const BEREICHE = {
+  haeufig: { name: "Häufige Wörter", beschreibung: "Die Wörter, die du jeden Tag hörst: Verben, kleine Wörter, Bindewörter" },
   alltag: { name: "Alltag", beschreibung: "Wohnung, Einkaufen, Arzt, Ämter, Verkehr und Freizeit" },
   beruf: { name: "Beruf", beschreibung: "Bewerbung, Arbeitsplatz, Vertrag, Kunden und Termine" },
   pruefung: { name: "Prüfung", beschreibung: "Briefe, Meinung und Redemittel für DTZ und Goethe B1" },
+  b2: { name: "Aufbau B2", beschreibung: "Feste Wendungen, Gesellschaft und Argumentieren bis B2" },
 };
+// Die alten Bereiche haben kein eigenes Niveau pro Wort
+const NIVEAU = { alltag: "A2", beruf: "B1", pruefung: "B1" };
 
-const woerter = ROWS.map(([key, bereich, thema, artikel, wort, form, tr, beispiel]) => ({
-  key: "de:w:" + key, bereich, thema, artikel, wort, form, tr, beispiel,
-  // Mit Artikel, so wie man das Wort lernen soll
-  voll: artikel && artikel !== "die (Pl.)" ? artikel + " " + wort : wort,
-  nomen: artikel === "der" || artikel === "die" || artikel === "das",
-}));
+function wort({ key, bereich, thema, niveau, artikel, wort, form, tr, beispiel, rang }) {
+  return {
+    key: "de:w:" + key, bereich, thema, niveau, artikel, wort, form, tr, beispiel, rang,
+    // Mit Artikel, so wie man das Wort lernen soll
+    voll: artikel && artikel !== "die (Pl.)" ? artikel + " " + wort : wort,
+    nomen: artikel === "der" || artikel === "die" || artikel === "das",
+    // Verben erkennt man an der Perfektform in der zweiten Spalte
+    verb: / – (hat|ist) /.test(form),
+  };
+}
+
+// Haeufige Woerter: Rang innerhalb des Themas (1 = am haeufigsten)
+const proThema = {};
+const woerter = [
+  ...HAEUFIG.map(([key, thema, niveau, artikel, w, form, tr, beispiel]) =>
+    wort({ key: "h." + key, bereich: "haeufig", thema, niveau, artikel, wort: w, form, tr, beispiel,
+      rang: (proThema[thema] = (proThema[thema] || 0) + 1) })),
+  ...ROWS.map(([key, bereich, thema, artikel, w, form, tr, beispiel]) =>
+    wort({ key, bereich, thema, niveau: NIVEAU[bereich], artikel, wort: w, form, tr, beispiel })),
+  ...AUFBAU.map(([key, thema, niveau, artikel, w, form, tr, beispiel]) =>
+    wort({ key: "b2." + key, bereich: "b2", thema, niveau, artikel, wort: w, form, tr, beispiel })),
+];
 
 const byKey = new Map(woerter.map((w) => [w.key, w]));
 if (byKey.size !== woerter.length) throw new Error("Wortschatz: doppelter Schlüssel");
+// Dasselbe Wort zweimal wuerde sich als Ablenker selbst widersprechen
+const gesehen = new Map();
+for (const w of woerter) {
+  if (gesehen.has(w.voll)) throw new Error("Wortschatz: " + w.voll + " doppelt (" + gesehen.get(w.voll) + ", " + w.key + ")");
+  gesehen.set(w.voll, w.key);
+}
+// Gleiche Bedeutung zweimal: bei "Wie heißt das auf Deutsch?" waeren zwei Antworten richtig
+const tr = new Map();
+for (const w of woerter) {
+  if (tr.has(w.tr)) throw new Error("Wortschatz: Bedeutung „" + w.tr + "“ doppelt (" + tr.get(w.tr) + ", " + w.key + ")");
+  tr.set(w.tr, w.key);
+}
+const NIVEAUS = ["A1", "A2", "B1", "B2"];
+for (const w of woerter) if (!NIVEAUS.includes(w.niveau)) throw new Error("Wortschatz: Niveau fehlt bei " + w.key);
 
-module.exports = { woerter, byKey, BEREICHE };
+module.exports = { woerter, byKey, BEREICHE, NIVEAUS };

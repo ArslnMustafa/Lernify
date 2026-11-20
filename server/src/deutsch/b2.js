@@ -1,0 +1,87 @@
+// Aufbauwortschatz B2: was zwischen B1 und B2 dazukommt. Feste Wendungen
+// (Nomen-Verb-Verbindungen), Woerter fuer Gesellschaft und Arbeit, und alles,
+// was man zum Argumentieren in Texten und in der muendlichen Pruefung braucht.
+//
+// Spalten wie in haeufig.js: [key, thema, niveau, artikel, wort, form, tuerkisch, beispiel]
+
+const ROWS = [
+  // ---------- Feste Wendungen (Nomen-Verb-Verbindungen) ----------
+  ["eine-entscheidung-treffen", "Feste Wendungen", "B1", "", "eine Entscheidung treffen", "trifft – hat getroffen", "karar vermek", "Wir müssen bis Freitag eine Entscheidung treffen."],
+  ["in-frage-kommen", "Feste Wendungen", "B2", "", "in Frage kommen", "kommt in Frage – ist in Frage gekommen", "söz konusu olmak, uygun olmak", "Eine Wohnung ohne Balkon kommt für uns nicht in Frage."],
+  ["zur-verfuegung-stehen", "Feste Wendungen", "B2", "", "zur Verfügung stehen", "steht zur Verfügung – hat zur Verfügung gestanden", "hazır bulunmak, kullanıma açık olmak", "Für Fragen stehe ich Ihnen gern zur Verfügung."],
+  ["ruecksicht-nehmen", "Feste Wendungen", "B2", "", "Rücksicht nehmen (auf)", "nimmt Rücksicht – hat Rücksicht genommen", "(-i) dikkate almak, saygı göstermek", "Bitte nehmen Sie Rücksicht auf die Nachbarn."],
+  ["in-kauf-nehmen", "Feste Wendungen", "B2", "", "in Kauf nehmen", "nimmt in Kauf – hat in Kauf genommen", "(dezavantajı) göze almak", "Für die gute Stelle nehme ich den langen Weg in Kauf."],
+  ["eine-rolle-spielen", "Feste Wendungen", "B1", "", "eine Rolle spielen", "spielt eine Rolle – hat eine Rolle gespielt", "rol oynamak, önemli olmak", "Das Gehalt spielt für mich eine große Rolle."],
+  ["zum-ausdruck-bringen", "Feste Wendungen", "B2", "", "zum Ausdruck bringen", "bringt zum Ausdruck – hat zum Ausdruck gebracht", "ifade etmek", "Im Brief bringt er seine Enttäuschung zum Ausdruck."],
+  ["in-anspruch-nehmen", "Feste Wendungen", "B2", "", "in Anspruch nehmen", "nimmt in Anspruch – hat in Anspruch genommen", "yararlanmak; (zaman) almak", "Sie können eine kostenlose Beratung in Anspruch nehmen."],
+  ["massnahmen-ergreifen", "Feste Wendungen", "B2", "", "Maßnahmen ergreifen", "ergreift – hat ergriffen", "önlem almak", "Die Stadt muss Maßnahmen gegen den Verkehr ergreifen."],
+  ["sich-muehe-geben", "Feste Wendungen", "B1", "", "sich Mühe geben", "gibt sich Mühe – hat sich Mühe gegeben", "çaba göstermek", "Er gibt sich viel Mühe mit seinem Deutsch."],
+  ["einen-antrag-stellen", "Feste Wendungen", "B1", "", "einen Antrag stellen", "stellt – hat gestellt", "başvuru yapmak, dilekçe vermek", "Ich möchte einen Antrag auf Wohngeld stellen."],
+  ["stellung-nehmen", "Feste Wendungen", "B2", "", "Stellung nehmen (zu)", "nimmt Stellung – hat Stellung genommen", "(hakkında) görüş bildirmek", "Nehmen Sie Stellung zu der Frage."],
+  ["in-kontakt-treten", "Feste Wendungen", "B2", "", "in Kontakt treten (mit)", "tritt in Kontakt – ist in Kontakt getreten", "irtibata geçmek", "Bitte treten Sie mit unserer Kundenberatung in Kontakt."],
+  ["kritik-ueben", "Feste Wendungen", "B2", "", "Kritik üben (an)", "übt Kritik – hat Kritik geübt", "eleştirmek", "Viele Bürger üben Kritik an den hohen Preisen."],
+  ["einfluss-haben", "Feste Wendungen", "B2", "", "Einfluss haben (auf)", "hat Einfluss – hat Einfluss gehabt", "(-e) etkisi olmak", "Das Wetter hat Einfluss auf unsere Stimmung."],
+  ["in-betracht-ziehen", "Feste Wendungen", "B2", "", "in Betracht ziehen", "zieht in Betracht – hat in Betracht gezogen", "göz önünde bulundurmak", "Wir ziehen auch einen Umzug in Betracht."],
+  ["zur-sprache-bringen", "Feste Wendungen", "B2", "", "zur Sprache bringen", "bringt zur Sprache – hat zur Sprache gebracht", "gündeme getirmek", "Ich möchte das Thema in der Besprechung zur Sprache bringen."],
+  ["unter-druck-stehen", "Feste Wendungen", "B2", "", "unter Druck stehen", "steht unter Druck – hat unter Druck gestanden", "baskı altında olmak", "Vor der Prüfung stehe ich ziemlich unter Druck."],
+
+  // ---------- Gesellschaft und Arbeit ----------
+  ["entwicklung", "Gesellschaft", "B1", "die", "Entwicklung", "die Entwicklungen", "gelişme", "Die Entwicklung der Mieten macht vielen Sorgen."],
+  ["auswirkung", "Gesellschaft", "B2", "die", "Auswirkung", "die Auswirkungen", "etki, sonuç", "Welche Auswirkungen hat die Digitalisierung auf die Arbeit?"],
+  ["folge", "Gesellschaft", "B1", "die", "Folge", "die Folgen", "sonuç, netice", "Rauchen hat schlimme Folgen für die Gesundheit."],
+  ["ursache", "Gesellschaft", "B2", "die", "Ursache", "die Ursachen", "neden", "Die Ursache des Problems ist noch unklar."],
+  ["umwelt", "Gesellschaft", "B1", "die", "Umwelt", "–", "çevre", "Wir sollten mehr für die Umwelt tun."],
+  ["verantwortung", "Gesellschaft", "B2", "die", "Verantwortung", "–", "sorumluluk", "Eltern tragen die Verantwortung für ihre Kinder."],
+  ["gleichberechtigung", "Gesellschaft", "B2", "die", "Gleichberechtigung", "–", "eşitlik (haklar)", "Gleichberechtigung im Beruf ist noch nicht selbstverständlich."],
+  ["arbeitslosigkeit", "Gesellschaft", "B2", "die", "Arbeitslosigkeit", "–", "işsizlik", "Die Arbeitslosigkeit ist im Ruhrgebiet gesunken."],
+  ["herausforderung", "Gesellschaft", "B2", "die", "Herausforderung", "die Herausforderungen", "zorluk, meydan okuma", "Eine neue Sprache zu lernen ist eine große Herausforderung."],
+  ["gesetz", "Gesellschaft", "B1", "das", "Gesetz", "die Gesetze", "yasa, kanun", "Das neue Gesetz gilt ab Januar."],
+  ["bevoelkerung", "Gesellschaft", "B2", "die", "Bevölkerung", "–", "nüfus, halk", "Ein Viertel der Bevölkerung hat Wurzeln im Ausland."],
+  ["einkommen", "Gesellschaft", "B1", "das", "Einkommen", "die Einkommen", "gelir", "Die Miete sollte nicht mehr als ein Drittel des Einkommens kosten."],
+  ["steuer", "Gesellschaft", "B1", "die", "Steuer", "die Steuern", "vergi", "Die Steuererklärung muss bis Juli abgegeben werden."],
+  ["wirtschaft", "Gesellschaft", "B2", "die", "Wirtschaft", "–", "ekonomi", "Die Wirtschaft braucht mehr Fachkräfte."],
+  ["fachkraft", "Gesellschaft", "B2", "die", "Fachkraft", "die Fachkräfte", "kalifiye eleman", "In der Pflege fehlen viele Fachkräfte."],
+  ["nachhaltigkeit", "Gesellschaft", "B2", "die", "Nachhaltigkeit", "–", "sürdürülebilirlik", "Viele Firmen werben mit Nachhaltigkeit."],
+  ["vorurteil", "Gesellschaft", "B2", "das", "Vorurteil", "die Vorurteile", "önyargı", "Man sollte Vorurteile abbauen."],
+  ["integration", "Gesellschaft", "B1", "die", "Integration", "–", "uyum, entegrasyon", "Die Sprache ist der Schlüssel zur Integration."],
+  ["gehaltserhoehung", "Gesellschaft", "B2", "die", "Gehaltserhöhung", "die Gehaltserhöhungen", "zam (maaş artışı)", "Ich möchte über eine Gehaltserhöhung sprechen."],
+  ["arbeitsbedingungen", "Gesellschaft", "B2", "die (Pl.)", "Arbeitsbedingungen", "–", "çalışma koşulları", "Die Arbeitsbedingungen in der neuen Firma sind besser."],
+
+  // ---------- Argumentieren ----------
+  ["standpunkt", "Argumentieren", "B2", "der", "Standpunkt", "die Standpunkte", "bakış açısı, görüş", "Ich verstehe Ihren Standpunkt, sehe das aber anders."],
+  ["argument", "Argumentieren", "B1", "das", "Argument", "die Argumente", "argüman, gerekçe", "Das ist ein gutes Argument."],
+  ["behaupten", "Argumentieren", "B2", "", "behaupten", "behauptet – hat behauptet", "iddia etmek", "Er behauptet, dass er nichts davon wusste."],
+  ["vermuten", "Argumentieren", "B2", "", "vermuten", "vermutet – hat vermutet", "tahmin etmek, sanmak", "Ich vermute, dass der Zug Verspätung hat."],
+  ["bezweifeln", "Argumentieren", "B2", "", "bezweifeln", "bezweifelt – hat bezweifelt", "şüphe etmek", "Ich bezweifle, dass das so einfach ist."],
+  ["ueberzeugen", "Argumentieren", "B2", "", "überzeugen", "überzeugt – hat überzeugt", "ikna etmek", "Ihre Argumente haben mich überzeugt."],
+  ["beruecksichtigen", "Argumentieren", "B2", "", "berücksichtigen", "berücksichtigt – hat berücksichtigt", "dikkate almak", "Man muss auch die Kosten berücksichtigen."],
+  ["betonen", "Argumentieren", "B2", "", "betonen", "betont – hat betont", "vurgulamak", "Ich möchte betonen, dass das meine persönliche Meinung ist."],
+  ["hinweisen", "Argumentieren", "B2", "", "hinweisen (auf)", "weist hin – hat hingewiesen", "(-e) dikkat çekmek", "Ich möchte darauf hinweisen, dass die Frist morgen endet."],
+  ["sich-auswirken", "Argumentieren", "B2", "", "sich auswirken (auf)", "wirkt sich aus – hat sich ausgewirkt", "(-e) yansımak, etkisini göstermek", "Stress wirkt sich auf die Gesundheit aus."],
+  ["beitragen", "Argumentieren", "B2", "", "beitragen (zu)", "trägt bei – hat beigetragen", "katkıda bulunmak", "Jeder kann zum Umweltschutz beitragen."],
+  ["hingegen", "Argumentieren", "B2", "", "hingegen", "–", "buna karşın", "In der Stadt ist es laut, auf dem Land hingegen ruhig."],
+  ["dennoch", "Argumentieren", "B2", "", "dennoch", "–", "yine de (resmî ‘trotzdem’)", "Die Wohnung ist klein, dennoch fühlen wir uns wohl."],
+  ["folglich", "Argumentieren", "B2", "", "folglich", "–", "dolayısıyla", "Der Zug fiel aus, folglich kam ich zu spät."],
+  ["zumal", "Argumentieren", "B2", "", "zumal", "–", "hele ki, özellikle de (çünkü)", "Ich nehme das Rad, zumal das Wetter so schön ist."],
+  ["sofern", "Argumentieren", "B2", "", "sofern", "–", "-dığı sürece, şayet", "Sofern nichts dazwischenkommt, bin ich um acht da."],
+  ["im-gegensatz-zu", "Argumentieren", "B2", "", "im Gegensatz zu", "+ Dativ", "-in aksine", "Im Gegensatz zu meinem Bruder koche ich gern."],
+  ["aufgrund", "Argumentieren", "B2", "", "aufgrund", "+ Genitiv", "nedeniyle", "Aufgrund des Streiks fallen viele Züge aus."],
+  ["bezueglich", "Argumentieren", "B2", "", "bezüglich", "+ Genitiv", "ile ilgili olarak", "Ich schreibe Ihnen bezüglich Ihrer Anzeige."],
+  ["angesichts", "Argumentieren", "B2", "", "angesichts", "+ Genitiv", "karşısında, göz önüne alındığında", "Angesichts der hohen Preise kaufen viele weniger ein."],
+
+  // ---------- Adjektive B2 ----------
+  ["erheblich", "Adjektive B2", "B2", "", "erheblich", "–", "önemli ölçüde, ciddi", "Die Kosten sind erheblich gestiegen."],
+  ["zunehmend", "Adjektive B2", "B2", "", "zunehmend", "–", "giderek artan", "Viele Menschen arbeiten zunehmend von zu Hause aus."],
+  ["offensichtlich", "Adjektive B2", "B2", "", "offensichtlich", "–", "belli ki, apaçık", "Offensichtlich hat er die E-Mail nicht gelesen."],
+  ["vorhanden", "Adjektive B2", "B2", "", "vorhanden", "–", "mevcut", "Ein Parkplatz ist leider nicht vorhanden."],
+  ["zuverlaessig", "Adjektive B2", "B1", "", "zuverlässig", "–", "güvenilir", "Er ist ein sehr zuverlässiger Kollege."],
+  ["umstritten", "Adjektive B2", "B2", "", "umstritten", "–", "tartışmalı", "Das neue Gesetz ist sehr umstritten."],
+  ["angemessen", "Adjektive B2", "B2", "", "angemessen", "–", "uygun, makul", "Ich finde den Preis angemessen."],
+  ["nachvollziehbar", "Adjektive B2", "B2", "", "nachvollziehbar", "–", "anlaşılır, makul", "Ihre Entscheidung ist für mich nachvollziehbar."],
+  ["wesentlich", "Adjektive B2", "B2", "", "wesentlich", "–", "esaslı; (Adverb) çok daha", "Die neue Wohnung ist wesentlich größer."],
+  ["ausreichend", "Adjektive B2", "B2", "", "ausreichend", "–", "yeterli (resmî), yeterli düzeyde", "Bitte achten Sie auf ausreichend Schlaf."],
+  ["selbstverstaendlich", "Adjektive B2", "B1", "", "selbstverständlich", "–", "elbette, doğal", "Selbstverständlich helfen wir Ihnen."],
+  ["vorlaeufig", "Adjektive B2", "B2", "", "vorläufig", "–", "geçici, şimdilik", "Das ist nur eine vorläufige Lösung."],
+];
+
+module.exports = { ROWS };

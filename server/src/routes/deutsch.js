@@ -5,7 +5,7 @@ const express = require("express");
 const db = require("../db");
 const { requireAuth } = require("../middleware/auth");
 const { hatDeutsch } = require("../config");
-const { woerter, byKey: wortByKey, BEREICHE } = require("../deutsch/wortschatz");
+const { woerter, byKey: wortByKey, BEREICHE, NIVEAUS } = require("../deutsch/wortschatz");
 const { THEMEN, byKey: themaByKey, uebungKey } = require("../deutsch/grammatik");
 const { LEKTIONEN } = require("../deutsch/lektionen");
 const { SITUATIONEN } = require("../deutsch/redemittel");
@@ -107,19 +107,24 @@ router.get("/uebersicht", (req, res) => {
       themen: [...new Set(list.map((w) => w.thema))],
     };
   });
+  // Fortschritt je Niveau: wie viele Woerter sitzen schon (Box 3 oder 4)
+  const niveaus = NIVEAUS.map((n) => {
+    const list = woerter.filter((w) => w.niveau === n);
+    return { niveau: n, woerter: list.length, sicher: list.filter((w) => boxOf(s.get(w.key)) >= 3).length };
+  });
   const grammatik = THEMEN.map((t) => {
     const keys = t.uebungen.map((_, i) => uebungKey(t.key, i));
     const sicher = keys.filter((k) => boxOf(s.get(k)) >= 2).length;
     const gelesen = s.has("de:l:" + t.key);
     return {
-      key: t.key, titel: t.titel, kurz: t.kurz, uebungen: keys.length,
+      key: t.key, titel: t.titel, kurz: t.kurz, niveau: t.niveau, uebungen: keys.length,
       gemacht: keys.filter((k) => s.has(k)).length, sicher, gelesen,
       // Eine Lektion gilt als geschafft: gelesen und mindestens drei Viertel sicher
       fertig: gelesen && sicher >= Math.ceil(keys.length * 0.75),
     };
   });
   const naechste = grammatik.find((t) => !t.fertig) || null;
-  res.json({ bereiche, grammatik, naechste: naechste && naechste.key, xp: xpStand(req.user.id),
+  res.json({ bereiche, niveaus, grammatik, naechste: naechste && naechste.key, xp: xpStand(req.user.id),
     kaliplar: SITUATIONEN.length, tipps: TIPPS.length });
 });
 
@@ -145,10 +150,89 @@ const ARTEN = {
     fest: true,
   },
 };
-const artenFuer = (w) => (w.nomen ? ["bedeutung", "deutsch", "artikel"] : ["bedeutung", "deutsch"]);
+// Luecke im Beispielsatz: das Wort steht dort als Infinitiv, 3. Person oder Partizip.
+// Die Ablenker haben dieselbe Form, damit nur die Bedeutung entscheidet.
+const nurWort = (x) => x.replace(/\s*\(.*\)$/, "").replace(/^sich /, "");
+function formenVon(w) {
+  const f = {};
+  if (w.verb) {
+    const [dritte, perfekt] = w.form.split(" – ");
+    f.inf = nurWort(w.wort);
+    f.dritte = dritte.split(" ")[0];
+    f.partizip = perfekt.split(" ").pop();
+  } else {
+    f.wort = nurWort(w.wort);
+  }
+  // Nur einzelne Woerter taugen fuer eine Luecke
+  for (const k of Object.keys(f)) if (!/^[\p{L}-]+$/u.test(f[k])) delete f[k];
+  return f;
+}
+const gross = (x) => x.charAt(0).toUpperCase() + x.slice(1);
+const LUECKE = new Map();
+for (const w of woerter) {
+  const f = formenVon(w);
+  for (const art of ["wort", "inf", "partizip", "dritte"]) {
+    if (!f[art]) continue;
+    const m = new RegExp("(^|[^\\p{L}])(" + f[art] + ")(?=[^\\p{L}]|$)", "iu").exec(w.beispiel);
+    // "ist" oder "hat" als Luecke lehrt nichts
+    if (!m || /^(ist|hat|sein|haben|wird|werden)$/i.test(m[2])) continue;
+    const start = m.index + m[1].length;
+    LUECKE.set(w.key, {
+      art, loesung: m[2],
+      satz: w.beispiel.slice(0, start) + "___" + w.beispiel.slice(start + m[2].length),
+    });
+    break;
+  }
+}
+// Auch reine Pluralwoerter (die Kosten) sind Nomen und gross geschrieben
+const klasse = (w) => (w.artikel ? "nomen" : w.verb ? "verb" : "rest");
+function lueckeOptionen(w, l) {
+  const kandidaten = (nachbarn) => [...new Set(nachbarn
+    .filter((x) => x.key !== w.key && klasse(x) === klasse(w))
+    .map((x) => formenVon(x)[l.art]).filter(Boolean)
+    // Gross am Satzanfang, sonst wie das Wort selbst
+    .map((x) => (l.loesung[0] === l.loesung[0].toUpperCase() ? gross(x) : klasse(w) === "nomen" ? x : x.toLowerCase()))
+    .filter((x) => x.toLowerCase() !== l.loesung.toLowerCase()))];
+  // Aus anderen Themen, sonst passen zwei Antworten (einen Termin verschieben / vereinbaren)
+  let pool = kandidaten(woerter.filter((x) => x.bereich === w.bereich && x.thema !== w.thema));
+  if (pool.length < 3) pool = kandidaten(woerter.filter((x) => x.thema !== w.thema));
+  return [l.loesung, ...shuffle(pool).slice(0, 3)];
+}
+ARTEN.luecke = {
+  frage: (w) => ({ text: LUECKE.get(w.key).satz, hinweis: "Welches Wort passt?" }),
+  antwort: (w) => LUECKE.get(w.key).loesung,
+  optionen: (w) => lueckeOptionen(w, LUECKE.get(w.key)),
+};
+
+const artenFuer = (w) => [
+  "bedeutung", "deutsch",
+  ...(w.nomen ? ["artikel"] : []),
+  ...(LUECKE.has(w.key) ? ["luecke"] : []),
+];
 
 function karteFuer(w) {
-  return { wort: w.voll, form: w.form, tr: w.tr, beispiel: w.beispiel, thema: w.thema, bereich: w.bereich };
+  return {
+    wort: w.voll, form: w.form, tr: w.tr, beispiel: w.beispiel, thema: w.thema, bereich: w.bereich,
+    bereichName: BEREICHE[w.bereich].name, niveau: w.niveau, rang: w.rang || null,
+  };
+}
+
+// Neue Woerter in der Reihenfolge, in der sie gelernt werden sollen:
+// zuerst die haeufigen (reihum aus den Themen, das haeufigste zuerst), dazwischen
+// ab und zu eins aus Alltag, Beruf und Pruefung; B2 erst, wenn die haeufigen durch sind.
+function neueWoerter(alle, s) {
+  const neu = alle.filter((w) => !s.has(w.key));
+  const haeufig = neu.filter((w) => w.bereich === "haeufig").sort((a, b) => a.rang - b.rang);
+  const andere = ["alltag", "beruf", "pruefung", ...(haeufig.length ? [] : ["b2"])]
+    .map((b) => neu.filter((w) => w.bereich === b));
+  const reihum = [];
+  for (let i = 0; andere.some((l) => i < l.length); i++) for (const l of andere) if (l[i]) reihum.push(l[i]);
+  const ergebnis = [];
+  while (haeufig.length || reihum.length) {
+    ergebnis.push(...haeufig.splice(0, 2));
+    if (reihum.length) ergebnis.push(reihum.shift());
+  }
+  return ergebnis;
 }
 
 router.get("/karten/next", (req, res) => {
@@ -168,13 +252,8 @@ router.get("/karten/next", (req, res) => {
   } else {
     // Faellige zuerst; neue Woerter nur in kleinen Portionen dazu, damit es kein Berg wird
     const faellig = alle.filter((w) => s.has(w.key) && istFaellig(s.get(w.key), now));
-    // Neue Woerter abwechselnd aus den Bereichen, nicht alle aus dem ersten
-    const proBereich = Object.keys(BEREICHE).map((b) => alle.filter((w) => w.bereich === b && !s.has(w.key)));
-    const neu = [];
-    for (let i = 0; neu.length < 10 && proBereich.some((l) => i < l.length); i++) {
-      for (const l of proBereich) if (l[i] && neu.length < 10) neu.push(l[i]);
-    }
-    pool = faellig.length ? faellig.concat(neu.slice(0, 5)) : neu;
+    const neu = neueWoerter(alle, s).slice(0, faellig.length ? 4 : 8);
+    pool = faellig.concat(neu);
   }
   if (!pool.length) {
     return res.json({ frage: null, neu: alle.filter((w) => !s.has(w.key)).length });
@@ -186,7 +265,9 @@ router.get("/karten/next", (req, res) => {
   const w = pick(auswahl);
   const e = s.get(w.key);
   const moeglich = artenFuer(w);
-  const art = e && e.box > FIRST_BOX && moeglich.includes(e.kind) ? e.kind : pick(moeglich);
+  // Ein neues Wort zeigt zuerst seine Bedeutung; danach wechseln die Fragearten
+  const art = !e ? "bedeutung"
+    : e.box > FIRST_BOX && moeglich.includes(e.kind) && Math.random() < 0.5 ? e.kind : pick(moeglich);
   const A = ARTEN[art];
   // Ablenker moeglichst aus demselben Bereich, damit sie plausibel sind
   const nachbarn = woerter.filter((x) => x.key !== w.key && x.bereich === w.bereich);
@@ -194,7 +275,7 @@ router.get("/karten/next", (req, res) => {
     frage: {
       itemKey: w.key, art, ...A.frage(w),
       optionen: A.fest ? A.optionen() : shuffle(A.optionen(w, nachbarn)),
-      thema: w.thema, bereich: w.bereich, neu: !e,
+      thema: w.thema, bereich: w.bereich, niveau: w.niveau, neu: !e,
     },
     rest: new Set(pool.map((x) => x.key)).size,
   });
@@ -209,13 +290,32 @@ router.post("/karten/answer", (req, res) => {
   res.json({ richtig, loesung: ARTEN[art].antwort(w), karte: karteFuer(w), ...box });
 });
 
-// Nachschlagen: alle Woerter eines Bereichs mit Lernstand
+// "Kenne ich schon": ein neues Wort sofort in die letzte Box, damit bekannte
+// Grundwoerter nicht wochenlang Zeit kosten. Es kommt in zehn Tagen einmal zur Kontrolle.
+router.post("/karten/kenne", (req, res) => {
+  const w = wortByKey.get(String((req.body || {}).itemKey));
+  if (!w) return res.status(400).json({ error: "Unbekanntes Wort." });
+  db.prepare(
+    `INSERT INTO trainer_progress (user_id, item_key, box, kind, correct_count, wrong_count, due_at, updated_at)
+     VALUES (?, ?, ?, 'bedeutung', 1, 0, datetime('now', ?), datetime('now'))
+     ON CONFLICT(user_id, item_key) DO NOTHING`
+  ).run(req.user.id, w.key, LAST_BOX, "+" + RUHE_TAGE[LAST_BOX] + " days");
+  res.json({ ok: true, karte: karteFuer(w) });
+});
+
+// Nachschlagen: alle Woerter mit Lernstand
 router.get("/woerter", (req, res) => {
   const s = stand(req.user.id);
-  const bereich = BEREICHE[req.query.bereich] ? req.query.bereich : null;
   res.json({
-    woerter: woerter.filter((w) => !bereich || w.bereich === bereich)
-      .map((w) => ({ key: w.key, ...karteFuer(w), box: boxOf(s.get(w.key)), gesehen: s.has(w.key) })),
+    bereiche: Object.entries(BEREICHE).map(([key, b]) => ({ key, name: b.name })),
+    niveaus: NIVEAUS,
+    woerter: woerter.map((w) => {
+      const e = s.get(w.key);
+      return {
+        key: w.key, ...karteFuer(w), artikel: w.nomen ? w.artikel : "",
+        box: boxOf(e), gesehen: Boolean(e), richtig: e ? e.correct_count : 0, falsch: e ? e.wrong_count : 0,
+      };
+    }),
   });
 });
 
@@ -226,7 +326,7 @@ router.get("/lektion/:thema", (req, res) => {
   const s = stand(req.user.id);
   const i = THEMEN.indexOf(t);
   res.json({
-    key: t.key, nr: i + 1, von: THEMEN.length, titel: t.titel, kurz: t.kurz,
+    key: t.key, nr: i + 1, von: THEMEN.length, titel: t.titel, kurz: t.kurz, niveau: t.niveau,
     erklaerung: t.erklaerung, beispiele: t.beispiele, ...LEKTIONEN[t.key],
     gelesen: s.has("de:l:" + t.key),
     uebungen: t.uebungen.map(([satz, optionen], j) => {

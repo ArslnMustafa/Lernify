@@ -118,7 +118,7 @@ kalırsa çalışmayı durdurup `pruefen` komutunu önerir. Bulunanlar her sefer
 kaydedildiği için script'i tekrar çalıştırmak sadece eksikleri dener. `apply-images.js` sınavları yeniden
 kurmadan sadece resimleri güncellediği için sonuçlar silinmez.
 
-## Deutsch (A2 → B1)
+## Deutsch (A2 → B2)
 
 Eigener Bereich unter `/deutsch`, sichtbar nur für die Benutzernamen in
 `DEUTSCH_FUER` (Umgebungsvariable, durch Komma getrennt; Standard: `mustafa`).
@@ -127,6 +127,16 @@ Für diese Benutzer ist `/deutsch` auch die Startseite.
 - Inhalte: `server/src/deutsch/wortschatz.js` (Wörter in den Bereichen Alltag,
   Beruf und Prüfung, mit Artikel, Plural bzw. Perfekt, Türkisch und Beispielsatz)
   und `server/src/deutsch/grammatik.js` (Themen mit türkischer Erklärung und Übungen).
+- Häufige Wörter zuerst: `server/src/deutsch/haeufig.js` (die häufigsten Verben,
+  kleinen Wörter, Bindewörter, Adjektive und Nomen, je Thema nach Häufigkeit
+  sortiert). Neue Karten kommen zu zwei Dritteln von dort; Aufbauwortschatz B2
+  (`server/src/deutsch/b2.js`) erst, wenn die häufigen durch sind. Jedes Wort hat
+  ein Niveau (A1–B2); eine Bedeutung darf nur einmal vorkommen (wird beim Start geprüft).
+- Fragearten: Bedeutung, Deutsch, Artikel und Lücke im Beispielsatz (Infinitiv,
+  3. Person oder Partizip; Ablenker in derselben Form aus anderen Themen).
+  „Kenne ich schon" schiebt ein neues Wort direkt in die letzte Box.
+- Grammatik B1/B2 mit Lektion in `server/src/deutsch/grammatik-aufbau.js`; der
+  Lernpfad ist nach Niveau sortiert.
 - Lernstand im selben Karteikasten wie der Trainer (`trainer_progress`),
   Schlüssel beginnen mit `de:`. Das Zurücksetzen des Trainers lässt sie stehen.
 - Lektionen: `server/src/deutsch/lektionen.js` (zu jedem Grammatikthema
@@ -135,7 +145,7 @@ Für diese Benutzer ist `/deutsch` auch die Startseite.
 - Kalıplar nach Situation: `server/src/deutsch/redemittel.js`; Tüyolar: `server/src/deutsch/tipps.js`.
 - Punkte und Serie: Tabelle `deutsch_xp` (XP pro Tag, Tagesziel 50, Tag nach deutscher Zeit).
 - Vorlesen über die Sprachausgabe des Browsers (`client/src/deutsch/ui.jsx`), kein Dienst nötig.
-- API: `/api/deutsch/uebersicht`, `/karten/next`, `/karten/answer`, `/woerter`,
+- API: `/api/deutsch/uebersicht`, `/karten/next`, `/karten/answer`, `/karten/kenne`, `/woerter`,
   `/lektion/:thema`, `/lektion/:thema/gelesen`, `/grammatik/answer`, `/kaliplar`,
   `/tipps`, `/wiederholung`.
 - Schlüssel von Wörtern und Reihenfolge der Übungen nicht ändern, sonst geht

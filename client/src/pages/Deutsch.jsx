@@ -5,7 +5,7 @@ import Nav from '../components/Nav.jsx'
 import { ZielRing, Zaehler, MitArtikel } from '../deutsch/ui.jsx'
 
 // Startseite Deutsch: Tagesziel und Serie, Lernpfad durch die Lektionen,
-// Wortschatz in drei Bereichen, Kaliplar, Tueyolar und Wiederholung.
+// Wortschatz (haeufige Woerter zuerst), Niveau-Leiter A1 bis B2, Kaliplar, Tueyolar und Wiederholung.
 const WUERFEL = [
   ['der Termin', 'randevu'], ['die Wohnung', 'ev'], ['das Gehalt', 'maaş'],
   ['die Stelle', 'iş, pozisyon'], ['der Urlaub', 'izin, tatil'], ['das Rezept', 'reçete'],
@@ -38,7 +38,7 @@ export default function Deutsch() {
             <section className="de-auf relative overflow-hidden rounded-3xl bg-[var(--karte)] border border-[var(--rand)] p-5 sm:p-6 flex flex-col sm:flex-row gap-6 items-center">
               <div className="flex-1 w-full">
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">Deutsch lernen</h2>
-                <p className="text-sm text-[var(--text-leise)] mt-1">A2'den B1'e, her gün biraz.</p>
+                <p className="text-sm text-[var(--text-leise)] mt-1">A2'den B2'ye, her gün biraz.</p>
 
                 <div className="mt-5 flex items-center gap-4">
                   <div className="relative w-[92px] h-[92px] shrink-0">
@@ -88,8 +88,33 @@ export default function Deutsch() {
               </div>
             </section>
 
+            {/* ---------- Niveau-Leiter: wie viele Woerter je Stufe sitzen ---------- */}
+            <section className="de-auf de-auf-1 mt-4 p-4 rounded-2xl bg-[var(--karte)] border border-[var(--rand)]" aria-label="Fortschritt nach Niveau">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-bold text-[var(--text)]">Dein Weg bis B2</span>
+                <span className="text-[11px] text-[var(--text-leise)]">sichere Wörter je Niveau</span>
+              </div>
+              <ol className="grid grid-cols-4 gap-2">
+                {d.niveaus.map((n, i) => {
+                  const anteil = n.woerter ? n.sicher / n.woerter : 0
+                  return (
+                    <li key={n.niveau} className="min-w-0">
+                      <span className="flex items-baseline justify-between gap-1">
+                        <span className="text-sm font-extrabold text-[var(--text)]">{n.niveau}</span>
+                        <span className="text-[10px] tabular-nums text-[var(--text-leise)] truncate">{n.sicher}/{n.woerter}</span>
+                      </span>
+                      <span className="mt-1 block h-2 rounded-full bg-[var(--feld)] overflow-hidden">
+                        <span className="block h-full rounded-full bg-[var(--gruen)]"
+                          style={{ width: `${Math.round(anteil * 100)}%`, transition: `width 1s ${0.2 + i * 0.1}s cubic-bezier(.2,.8,.2,1)` }} />
+                      </span>
+                    </li>
+                  )
+                })}
+              </ol>
+            </section>
+
             {/* ---------- Weiter ---------- */}
-            <div className="de-auf de-auf-1 mt-4 grid gap-3 sm:grid-cols-2">
+            <div className="de-auf de-auf-2 mt-4 grid gap-3 sm:grid-cols-2">
               <Link
                 to={naechste ? `/deutsch/lektion/${naechste.key}` : '/deutsch/wiederholung'}
                 className="group flex items-center justify-between gap-3 px-5 py-4 rounded-2xl bg-[var(--knopf)] text-[var(--auf-knopf)] hover:bg-[var(--knopf-tief)] transition"
@@ -115,14 +140,22 @@ export default function Deutsch() {
             </div>
 
             {/* ---------- Lernpfad ---------- */}
-            <h3 className="de-auf de-auf-2 mt-8 mb-1 text-lg font-bold text-[var(--text)]">Dein Lernpfad</h3>
+            <h3 className="de-auf de-auf-3 mt-8 mb-1 text-lg font-bold text-[var(--text)]">Dein Lernpfad</h3>
             <p className="text-xs text-[var(--text-leise)] mb-4">Her ders: konu anlatımı, sık hatalar, tüyolar, kalıplar, alıştırma ve özet.</p>
             <ol className="de-pfad flex flex-col items-center gap-2 py-2">
               {d.grammatik.map((t, i) => {
                 const jetzt = t.key === d.naechste
                 const zustand = t.fertig ? 'fertig' : jetzt ? 'jetzt' : ''
+                const neueStufe = i === 0 || d.grammatik[i - 1].niveau !== t.niveau
                 return (
-                  <li key={t.key} className="de-auf w-full flex justify-center" style={{ animationDelay: `${0.2 + i * 0.04}s` }}>
+                  <li key={t.key} className="de-auf w-full flex flex-col items-center" style={{ animationDelay: `${0.2 + i * 0.04}s` }}>
+                    {neueStufe && (
+                      <span className="my-3 flex items-center gap-3 w-full max-w-sm text-xs font-bold text-[var(--text-mittel)]">
+                        <span className="flex-1 h-px bg-[var(--rand-stark)]" />
+                        Niveau {t.niveau}
+                        <span className="flex-1 h-px bg-[var(--rand-stark)]" />
+                      </span>
+                    )}
                     <Link
                       to={`/deutsch/lektion/${t.key}`}
                       className="flex items-center gap-3 group"
@@ -152,14 +185,22 @@ export default function Deutsch() {
             </ol>
 
             {/* ---------- Wortschatz ---------- */}
-            <h3 className="mt-8 mb-3 text-lg font-bold text-[var(--text)]">Wortschatz</h3>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="mt-8 mb-3 flex items-baseline justify-between gap-3">
+              <h3 className="text-lg font-bold text-[var(--text)]">Wortschatz</h3>
+              <Link to="/deutsch/woerter" className="text-xs font-semibold text-[var(--text-mittel)] hover:text-[var(--text)] hover:underline">Wortliste →</Link>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
               {d.bereiche.map((b, i) => (
                 <Link
                   key={b.key}
                   to={`/deutsch/karten?bereich=${b.key}`}
-                  className={`de-auf de-auf-${i + 1} block p-4 rounded-2xl bg-[var(--karte)] border border-[var(--rand)] hover:border-[var(--rand-stark)] hover:-translate-y-0.5 transition`}
+                  className={`de-auf de-auf-${Math.min(i + 1, 6)} block p-4 rounded-2xl border hover:-translate-y-0.5 transition ${
+                    b.key === 'haeufig'
+                      ? 'sm:col-span-2 bg-[color-mix(in_srgb,var(--gold)_12%,var(--karte))] border-[var(--gold)]'
+                      : 'bg-[var(--karte)] border-[var(--rand)] hover:border-[var(--rand-stark)]'
+                  }`}
                 >
+                  {b.key === 'haeufig' && <span className="block text-[11px] font-bold text-[var(--text-mittel)] mb-1">⭐ Öncelik: önce bunlar öğretilir</span>}
                   <span className="block font-bold text-[var(--text)]">{b.name}</span>
                   <span className="block text-xs text-[var(--text-leise)] mt-0.5 min-h-[2.5em]">{b.beschreibung}</span>
                   <span className="block mt-3 h-1.5 rounded-full bg-[var(--feld)] overflow-hidden" aria-hidden="true">
@@ -174,7 +215,8 @@ export default function Deutsch() {
 
             {/* ---------- Mehr ---------- */}
             <h3 className="mt-8 mb-3 text-lg font-bold text-[var(--text)]">Nachschlagen und wiederholen</h3>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Kachel to="/deutsch/woerter" titel="Wortliste" text="Bütün kelimeler: ara, filtrele, dinle" zeichen="📖" />
               <Kachel to="/deutsch/kaliplar" titel="Kalıplar" text={`${d.kaliplar} durumda hazır cümleler, sesli`} zeichen="💬" />
               <Kachel to="/deutsch/tipps" titel="Tüyolar" text={`${d.tipps} püf noktası: artikel, kelime sırası, sınav`} zeichen="💡" />
               <Kachel to="/deutsch/wiederholung" titel="Konu tekrarı" text="Başladığın konulardan karışık sorular ve özetler" zeichen="🔁" />
@@ -183,7 +225,7 @@ export default function Deutsch() {
             <h3 className="mt-8 mb-3 text-sm font-bold text-[var(--text-mittel)]">Bald</h3>
             <div className="grid gap-3 sm:grid-cols-2">
               <Bald titel="Schreiben" text="Mektup, e-posta ve görüş yazısı; örnek cevap ve kontrol listesiyle." />
-              <Bald titel="Prüfungssimulation" text="DTZ ve Goethe B1 formatında, süreli deneme sınavı." />
+              <Bald titel="Prüfungssimulation" text="DTZ, Goethe B1 ve B2 formatında, süreli deneme sınavı." />
             </div>
           </>
         )}

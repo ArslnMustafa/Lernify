@@ -406,4 +406,7 @@ const LEKTIONEN = {
   },
 };
 
+// Die Lektionen der B1/B2-Themen stehen direkt bei ihren Uebungen
+for (const t of require("./grammatik-aufbau").THEMEN) LEKTIONEN[t.key] = t.lektion;
+
 module.exports = { LEKTIONEN };

@@ -12,6 +12,7 @@ import DeutschLektion from './pages/DeutschLektion.jsx'
 import DeutschKaliplar from './pages/DeutschKaliplar.jsx'
 import DeutschTipps from './pages/DeutschTipps.jsx'
 import DeutschWiederholung from './pages/DeutschWiederholung.jsx'
+import DeutschWoerter from './pages/DeutschWoerter.jsx'
 import { useAuth } from './auth/AuthContext.jsx'
 import ProtectedRoute from './auth/ProtectedRoute.jsx'
 
@@ -28,6 +29,7 @@ const PROTECTED = [
   { path: '/deutsch/kaliplar', element: <NurDeutsch><DeutschKaliplar /></NurDeutsch> },
   { path: '/deutsch/tipps', element: <NurDeutsch><DeutschTipps /></NurDeutsch> },
   { path: '/deutsch/wiederholung', element: <NurDeutsch><DeutschWiederholung /></NurDeutsch> },
+  { path: '/deutsch/woerter', element: <NurDeutsch><DeutschWoerter /></NurDeutsch> },
   // Alte Adresse der Grammatikseiten
   { path: '/deutsch/grammatik/:thema', element: <AlteGrammatik /> },
   { path: '/karteikarten', element: <Karteikarten /> },
