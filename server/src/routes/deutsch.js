@@ -7,6 +7,42 @@ const { requireAuth } = require("../middleware/auth");
 const { hatDeutsch } = require("../config");
 const { woerter, byKey: wortByKey, BEREICHE } = require("../deutsch/wortschatz");
 const { THEMEN, byKey: themaByKey, uebungKey } = require("../deutsch/grammatik");
+const { LEKTIONEN } = require("../deutsch/lektionen");
+const { SITUATIONEN } = require("../deutsch/redemittel");
+const { TIPPS } = require("../deutsch/tipps");
+
+// Punkte und Serie: jeden Tag ein kleines Ziel, damit das Lernen jeden Tag stattfindet.
+db.exec(`
+  CREATE TABLE IF NOT EXISTS deutsch_xp (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    tag TEXT NOT NULL,
+    xp INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (user_id, tag)
+  );
+`);
+const TAGESZIEL = 50;
+const XP = { richtig: 10, falsch: 3, gelesen: 15 };
+// Der Tag wechselt um Mitternacht in Deutschland, nicht in UTC
+const tagVon = (d) => d.toLocaleDateString("sv-SE", { timeZone: "Europe/Berlin" });
+function xpDazu(userId, punkte) {
+  db.prepare(`INSERT INTO deutsch_xp (user_id, tag, xp) VALUES (?, ?, ?)
+              ON CONFLICT(user_id, tag) DO UPDATE SET xp = xp + excluded.xp`).run(userId, tagVon(new Date()), punkte);
+}
+function xpStand(userId) {
+  const rows = db.prepare("SELECT tag, xp FROM deutsch_xp WHERE user_id = ?").all(userId);
+  const proTag = new Map(rows.map((r) => [r.tag, r.xp]));
+  const heute = tagVon(new Date());
+  const tag = (n) => tagVon(new Date(Date.now() - n * 86400000));
+  // Serie: heute noch nicht gelernt bricht sie nicht, erst ein ganzer leerer Tag
+  let serie = 0;
+  for (let n = proTag.get(heute) ? 0 : 1; proTag.get(tag(n)) > 0; n++) serie++;
+  const woche = [];
+  for (let n = 6; n >= 0; n--) woche.push({ tag: tag(n), xp: proTag.get(tag(n)) || 0 });
+  return {
+    heute: proTag.get(heute) || 0, ziel: TAGESZIEL, serie, woche,
+    gesamt: rows.reduce((s2, r) => s2 + r.xp, 0),
+  };
+}
 
 const router = express.Router();
 router.use(requireAuth);
@@ -45,7 +81,8 @@ function speichern(userId, key, kind, richtig) {
        wrong_count = wrong_count + excluded.wrong_count,
        due_at = excluded.due_at, updated_at = datetime('now')`
   ).run(userId, key, next, kind, richtig ? 1 : 0, richtig ? 0 : 1, "+" + (RUHE_TAGE[next] || 0) + " days");
-  return { fromBox: box, toBox: next, wiederIn: RUHE_TAGE[next] || 0 };
+  xpDazu(userId, richtig ? XP.richtig : XP.falsch);
+  return { fromBox: box, toBox: next, wiederIn: RUHE_TAGE[next] || 0, xp: richtig ? XP.richtig : XP.falsch };
 }
 
 const pick = (list) => list[Math.floor(Math.random() * list.length)];
@@ -72,13 +109,18 @@ router.get("/uebersicht", (req, res) => {
   });
   const grammatik = THEMEN.map((t) => {
     const keys = t.uebungen.map((_, i) => uebungKey(t.key, i));
+    const sicher = keys.filter((k) => boxOf(s.get(k)) >= 2).length;
+    const gelesen = s.has("de:l:" + t.key);
     return {
       key: t.key, titel: t.titel, kurz: t.kurz, uebungen: keys.length,
-      gemacht: keys.filter((k) => s.has(k)).length,
-      sicher: keys.filter((k) => boxOf(s.get(k)) >= 2).length,
+      gemacht: keys.filter((k) => s.has(k)).length, sicher, gelesen,
+      // Eine Lektion gilt als geschafft: gelesen und mindestens drei Viertel sicher
+      fertig: gelesen && sicher >= Math.ceil(keys.length * 0.75),
     };
   });
-  res.json({ bereiche, grammatik });
+  const naechste = grammatik.find((t) => !t.fertig) || null;
+  res.json({ bereiche, grammatik, naechste: naechste && naechste.key, xp: xpStand(req.user.id),
+    kaliplar: SITUATIONEN.length, tipps: TIPPS.length });
 });
 
 // ---------- Wortschatz ----------
@@ -175,6 +217,63 @@ router.get("/woerter", (req, res) => {
     woerter: woerter.filter((w) => !bereich || w.bereich === bereich)
       .map((w) => ({ key: w.key, ...karteFuer(w), box: boxOf(s.get(w.key)), gesehen: s.has(w.key) })),
   });
+});
+
+// ---------- Lektion (Konu anlatimi + Uebungen) ----------
+router.get("/lektion/:thema", (req, res) => {
+  const t = themaByKey.get(req.params.thema);
+  if (!t) return res.status(404).json({ error: "Lektion nicht gefunden." });
+  const s = stand(req.user.id);
+  const i = THEMEN.indexOf(t);
+  res.json({
+    key: t.key, nr: i + 1, von: THEMEN.length, titel: t.titel, kurz: t.kurz,
+    erklaerung: t.erklaerung, beispiele: t.beispiele, ...LEKTIONEN[t.key],
+    gelesen: s.has("de:l:" + t.key),
+    uebungen: t.uebungen.map(([satz, optionen], j) => {
+      const e = s.get(uebungKey(t.key, j));
+      return { i: j, satz, optionen: shuffle(optionen), box: boxOf(e), gemacht: Boolean(e) };
+    }),
+    vorige: i > 0 ? { key: THEMEN[i - 1].key, titel: THEMEN[i - 1].titel } : null,
+    naechste: i < THEMEN.length - 1 ? { key: THEMEN[i + 1].key, titel: THEMEN[i + 1].titel } : null,
+  });
+});
+
+// Konu anlatimi zu Ende gelesen: einmal Punkte, danach nur noch vermerkt
+router.post("/lektion/:thema/gelesen", (req, res) => {
+  const t = themaByKey.get(req.params.thema);
+  if (!t) return res.status(404).json({ error: "Lektion nicht gefunden." });
+  const key = "de:l:" + t.key;
+  const neu = !db.prepare("SELECT 1 FROM trainer_progress WHERE user_id = ? AND item_key = ?").get(req.user.id, key);
+  if (neu) {
+    db.prepare(`INSERT INTO trainer_progress (user_id, item_key, box, kind, correct_count, wrong_count, due_at)
+                VALUES (?, ?, 1, 'lektion', 0, 0, NULL)`).run(req.user.id, key);
+    xpDazu(req.user.id, XP.gelesen);
+  }
+  res.json({ ok: true, xp: neu ? XP.gelesen : 0 });
+});
+
+router.get("/kaliplar", (req, res) => res.json({ situationen: SITUATIONEN }));
+router.get("/tipps", (req, res) => res.json({ tipps: TIPPS }));
+
+// Konu tekrari: gemischte Uebungen aus Themen, die schon angefangen wurden.
+// Falsch beantwortete und faellige zuerst.
+router.get("/wiederholung", (req, res) => {
+  const s = stand(req.user.id);
+  const now = jetzt();
+  const alle = [];
+  for (const t of THEMEN) {
+    t.uebungen.forEach(([satz, optionen], i) => {
+      const e = s.get(uebungKey(t.key, i));
+      if (!e) return;
+      const gewicht = (e.wrong_count > 0 ? 3 : 0) + (istFaellig(e, now) ? 2 : 0) + (e.box <= 2 ? 1 : 0);
+      alle.push({ thema: t.key, titel: t.titel, i, satz, optionen: shuffle(optionen), gewicht, r: Math.random() });
+    });
+  }
+  alle.sort((a, b) => b.gewicht - a.gewicht || a.r - b.r);
+  const auswahl = shuffle(alle.slice(0, 10)).map(({ gewicht, r, ...u }) => u);
+  const themen = THEMEN.filter((t) => s.has("de:l:" + t.key) || t.uebungen.some((_, i) => s.has(uebungKey(t.key, i))))
+    .map((t) => ({ key: t.key, titel: t.titel, ozet: LEKTIONEN[t.key].ozet }));
+  res.json({ uebungen: auswahl, themen });
 });
 
 // ---------- Grammatik ----------

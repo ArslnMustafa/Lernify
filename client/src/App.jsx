@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useParams } from 'react-router-dom'
 import Login from './pages/Login.jsx'
 import Karteikarten from './pages/Karteikarten.jsx'
 import Theorie from './pages/Theorie.jsx'
@@ -8,7 +8,10 @@ import Simulation from './pages/Simulation.jsx'
 import Verwalten from './pages/Verwalten.jsx'
 import Deutsch from './pages/Deutsch.jsx'
 import DeutschKarten from './pages/DeutschKarten.jsx'
-import DeutschGrammatik from './pages/DeutschGrammatik.jsx'
+import DeutschLektion from './pages/DeutschLektion.jsx'
+import DeutschKaliplar from './pages/DeutschKaliplar.jsx'
+import DeutschTipps from './pages/DeutschTipps.jsx'
+import DeutschWiederholung from './pages/DeutschWiederholung.jsx'
 import { useAuth } from './auth/AuthContext.jsx'
 import ProtectedRoute from './auth/ProtectedRoute.jsx'
 
@@ -21,7 +24,12 @@ const PROTECTED = [
   { path: '/', element: <Start /> },
   { path: '/deutsch', element: <NurDeutsch><Deutsch /></NurDeutsch> },
   { path: '/deutsch/karten', element: <NurDeutsch><DeutschKarten /></NurDeutsch> },
-  { path: '/deutsch/grammatik/:thema', element: <NurDeutsch><DeutschGrammatik /></NurDeutsch> },
+  { path: '/deutsch/lektion/:thema', element: <NurDeutsch><DeutschLektion /></NurDeutsch> },
+  { path: '/deutsch/kaliplar', element: <NurDeutsch><DeutschKaliplar /></NurDeutsch> },
+  { path: '/deutsch/tipps', element: <NurDeutsch><DeutschTipps /></NurDeutsch> },
+  { path: '/deutsch/wiederholung', element: <NurDeutsch><DeutschWiederholung /></NurDeutsch> },
+  // Alte Adresse der Grammatikseiten
+  { path: '/deutsch/grammatik/:thema', element: <AlteGrammatik /> },
   { path: '/karteikarten', element: <Karteikarten /> },
   { path: '/theorie', element: <Theorie /> },
   { path: '/training', element: <Training /> },
@@ -37,6 +45,11 @@ const PROTECTED = [
 function NurDeutsch({ children }) {
   const { user } = useAuth()
   return user?.deutsch ? children : <Navigate to="/training" replace />
+}
+
+function AlteGrammatik() {
+  const { thema } = useParams()
+  return <Navigate to={`/deutsch/lektion/${thema}`} replace />
 }
 
 function Start() {

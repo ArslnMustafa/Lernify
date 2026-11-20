@@ -126,6 +126,12 @@ export const api = {
     request('/deutsch/karten/answer', { method: 'POST', body: JSON.stringify(payload) }),
   deutschWoerter: (bereich) => request(`/deutsch/woerter?bereich=${bereich || ''}`),
   deutschThema: (key) => request(`/deutsch/grammatik/${encodeURIComponent(key)}`),
+  deutschLektion: (key) => request(`/deutsch/lektion/${encodeURIComponent(key)}`),
+  deutschGelesen: (key) =>
+    request(`/deutsch/lektion/${encodeURIComponent(key)}/gelesen`, { method: 'POST', body: '{}' }),
+  deutschKaliplar: () => request('/deutsch/kaliplar'),
+  deutschTipps: () => request('/deutsch/tipps'),
+  deutschWiederholung: () => request('/deutsch/wiederholung'),
   deutschThemaAntwort: (payload) =>
     request('/deutsch/grammatik/answer', { method: 'POST', body: JSON.stringify(payload) }),
 }

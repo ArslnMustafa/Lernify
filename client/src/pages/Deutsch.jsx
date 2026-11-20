@@ -2,90 +2,187 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../api'
 import Nav from '../components/Nav.jsx'
+import { ZielRing, Zaehler, MitArtikel } from '../deutsch/ui.jsx'
 
-// Startseite fuer Deutsch: drei Bereiche Wortschatz, Grammatik von A2 nach B1.
-// Erklaerungen auf Tuerkisch, Uebungen auf Deutsch.
+// Startseite Deutsch: Tagesziel und Serie, Lernpfad durch die Lektionen,
+// Wortschatz in drei Bereichen, Kaliplar, Tueyolar und Wiederholung.
+const WUERFEL = [
+  ['der Termin', 'randevu'], ['die Wohnung', 'ev'], ['das Gehalt', 'maaş'],
+  ['die Stelle', 'iş, pozisyon'], ['der Urlaub', 'izin, tatil'], ['das Rezept', 'reçete'],
+]
+const WOCHENTAG = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa']
+// Zickzack des Lernpfads (Verschiebung nach rechts in Pixeln)
+const ZICKZACK = [0, 46, 72, 46, 0, -46, -72, -46]
+
 export default function Deutsch() {
-  const [daten, setDaten] = useState(null)
+  const [d, setD] = useState(null)
   const [error, setError] = useState('')
 
   useEffect(() => {
-    api.deutschUebersicht().then(setDaten).catch((err) => setError(err.message))
+    api.deutschUebersicht().then(setD).catch((err) => setError(err.message))
   }, [])
 
-  const faelligGesamt = daten ? daten.bereiche.reduce((s, b) => s + (b.faellig - b.neu), 0) : 0
+  const faellig = d ? d.bereiche.reduce((s, b) => s + (b.faellig - b.neu), 0) : 0
+  const naechste = d?.grammatik.find((t) => t.key === d.naechste)
 
   return (
     <div className="min-h-screen bg-[var(--flaeche)]">
       <Nav />
       <main className="max-w-3xl mx-auto px-3 sm:px-6 py-5 sm:py-8">
-        <h2 className="text-xl sm:text-2xl font-bold text-[var(--text)]">Deutsch</h2>
-        <p className="text-sm text-[var(--text-leise)] mt-1">
-          A2'den B1'e: günlük hayat, iş ve sınav için. Kelimeler kutu sistemiyle tekrar edilir,
-          bildiğin kelime birkaç gün dinlenir.
-        </p>
+        {error && <p className="text-sm text-[var(--rot)]">{error}</p>}
+        {!d && !error && <p className="text-sm text-[var(--text-leise)]">Wird geladen...</p>}
 
-        {error && <p className="text-sm text-[var(--rot)] mt-4">{error}</p>}
-        {!daten && !error && <p className="text-sm text-[var(--text-leise)] mt-4">Wird geladen...</p>}
-
-        {daten && (
+        {d && (
           <>
-            <Link
-              to="/deutsch/karten"
-              className="mt-5 flex items-center justify-between gap-3 px-4 py-3.5 rounded-2xl bg-[var(--knopf)] text-[var(--auf-knopf)] hover:bg-[var(--knopf-tief)] transition"
-            >
-              <span>
-                <span className="block font-bold">Heute üben</span>
-                <span className="block text-xs opacity-80">
-                  {faelligGesamt > 0
-                    ? `${faelligGesamt} Wörter sind zur Wiederholung dran, dazu ein paar neue`
-                    : 'Neue Wörter aus allen drei Bereichen'}
-                </span>
-              </span>
-              <span aria-hidden="true" className="text-lg">▶</span>
-            </Link>
+            {/* ---------- Kopf: Ziel, Serie, Wuerfel ---------- */}
+            <section className="de-auf relative overflow-hidden rounded-3xl bg-[var(--karte)] border border-[var(--rand)] p-5 sm:p-6 flex flex-col sm:flex-row gap-6 items-center">
+              <div className="flex-1 w-full">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">Deutsch lernen</h2>
+                <p className="text-sm text-[var(--text-leise)] mt-1">A2'den B1'e, her gün biraz.</p>
 
-            <h3 className="mt-7 mb-2 text-sm font-bold text-[var(--text)]">Wortschatz</h3>
+                <div className="mt-5 flex items-center gap-4">
+                  <div className="relative w-[92px] h-[92px] shrink-0">
+                    <ZielRing wert={d.xp.heute} ziel={d.xp.ziel} />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-xl font-extrabold text-[var(--text)] tabular-nums"><Zaehler wert={d.xp.heute} /></span>
+                      <span className="text-[10px] text-[var(--text-leise)]">von {d.xp.ziel} XP</span>
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-[var(--text)]">
+                      <span className="de-flamme mr-1" aria-hidden="true">🔥</span>
+                      {d.xp.serie > 0 ? `${d.xp.serie} ${d.xp.serie === 1 ? 'Tag' : 'Tage'} in Folge` : 'Heute die Serie starten'}
+                    </p>
+                    <p className="text-xs text-[var(--text-leise)] mt-0.5">
+                      {d.xp.heute >= d.xp.ziel ? 'Tagesziel erreicht. Stark!' : `Noch ${d.xp.ziel - d.xp.heute} XP bis zum Tagesziel`}
+                    </p>
+                    <div className="mt-3 flex items-end gap-1.5 h-12" aria-label="XP der letzten sieben Tage">
+                      {d.xp.woche.map((w, i) => {
+                        const h = Math.max(4, Math.min(48, (w.xp / d.xp.ziel) * 40))
+                        return (
+                          <div key={w.tag} className="flex flex-col items-center gap-1 flex-1">
+                            <span
+                              className={`w-full max-w-[18px] rounded-md ${w.xp >= d.xp.ziel ? 'bg-[var(--gold)]' : w.xp > 0 ? 'bg-[var(--mittel)]' : 'bg-[var(--feld)]'}`}
+                              style={{ height: h, transition: `height .8s ${i * 0.06}s cubic-bezier(.2,.8,.2,1)` }}
+                              title={`${w.tag}: ${w.xp} XP`}
+                            />
+                            <span className="text-[9px] text-[var(--text-schwach)]">{WOCHENTAG[new Date(w.tag + 'T12:00:00').getDay()]}</span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Platz rundherum, damit der gedrehte Wuerfel nicht am Rand abgeschnitten wird */}
+              <div className="de-buehne shrink-0 my-4 sm:my-2 sm:mx-10" aria-hidden="true">
+                <div className="de-wuerfel">
+                  {WUERFEL.map(([de, tr]) => (
+                    <div key={de} className="de-seite">
+                      <b><MitArtikel text={de} /></b>
+                      <small>{tr}</small>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* ---------- Weiter ---------- */}
+            <div className="de-auf de-auf-1 mt-4 grid gap-3 sm:grid-cols-2">
+              <Link
+                to={naechste ? `/deutsch/lektion/${naechste.key}` : '/deutsch/wiederholung'}
+                className="group flex items-center justify-between gap-3 px-5 py-4 rounded-2xl bg-[var(--knopf)] text-[var(--auf-knopf)] hover:bg-[var(--knopf-tief)] transition"
+              >
+                <span className="min-w-0">
+                  <span className="block text-xs opacity-75">{naechste ? 'Weiter mit der Lektion' : 'Alle Lektionen geschafft'}</span>
+                  <span className="block font-bold truncate">{naechste ? naechste.titel : 'Wiederholen'}</span>
+                </span>
+                <span aria-hidden="true" className="text-xl transition group-hover:translate-x-1">→</span>
+              </Link>
+              <Link
+                to="/deutsch/karten"
+                className="group flex items-center justify-between gap-3 px-5 py-4 rounded-2xl bg-[var(--karte)] border border-[var(--rand)] hover:border-[var(--rand-stark)] transition"
+              >
+                <span className="min-w-0">
+                  <span className="block text-xs text-[var(--text-leise)]">Wortschatz</span>
+                  <span className="block font-bold text-[var(--text)]">
+                    {faellig > 0 ? `${faellig} ${faellig === 1 ? 'Wort' : 'Wörter'} wiederholen` : 'Neue Wörter lernen'}
+                  </span>
+                </span>
+                <span aria-hidden="true" className="text-xl text-[var(--text-mittel)] transition group-hover:translate-x-1">→</span>
+              </Link>
+            </div>
+
+            {/* ---------- Lernpfad ---------- */}
+            <h3 className="de-auf de-auf-2 mt-8 mb-1 text-lg font-bold text-[var(--text)]">Dein Lernpfad</h3>
+            <p className="text-xs text-[var(--text-leise)] mb-4">Her ders: konu anlatımı, sık hatalar, tüyolar, kalıplar, alıştırma ve özet.</p>
+            <ol className="de-pfad flex flex-col items-center gap-2 py-2">
+              {d.grammatik.map((t, i) => {
+                const jetzt = t.key === d.naechste
+                const zustand = t.fertig ? 'fertig' : jetzt ? 'jetzt' : ''
+                return (
+                  <li key={t.key} className="de-auf w-full flex justify-center" style={{ animationDelay: `${0.2 + i * 0.04}s` }}>
+                    <Link
+                      to={`/deutsch/lektion/${t.key}`}
+                      className="flex items-center gap-3 group"
+                      style={{ transform: `translateX(${ZICKZACK[i % ZICKZACK.length]}px)` }}
+                    >
+                      <span className={jetzt ? 'de-puls' : ''}>
+                        <span
+                          className={`de-knoten ${zustand} w-14 h-14 rounded-full flex items-center justify-center text-lg font-extrabold ${
+                            t.fertig ? 'bg-[var(--gruen)] text-[var(--auf-farbe)]'
+                              : jetzt ? 'bg-[var(--gold)] text-[#2b1d0c]'
+                                : 'bg-[var(--karte)] text-[var(--text-mittel)] border border-[var(--rand-stark)]'
+                          }`}
+                        >
+                          {t.fertig ? '✓' : i + 1}
+                        </span>
+                      </span>
+                      <span className="w-40 sm:w-52">
+                        <span className="block text-sm font-bold text-[var(--text)] leading-tight group-hover:underline">{t.titel}</span>
+                        <span className="block text-[11px] text-[var(--text-leise)] leading-snug">
+                          {t.fertig ? 'geschafft' : t.gemacht ? `${t.sicher} von ${t.uebungen} sicher` : t.kurz}
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ol>
+
+            {/* ---------- Wortschatz ---------- */}
+            <h3 className="mt-8 mb-3 text-lg font-bold text-[var(--text)]">Wortschatz</h3>
             <div className="grid gap-3 sm:grid-cols-3">
-              {daten.bereiche.map((b) => (
+              {d.bereiche.map((b, i) => (
                 <Link
                   key={b.key}
                   to={`/deutsch/karten?bereich=${b.key}`}
-                  className="block p-4 rounded-2xl bg-[var(--karte)] border border-[var(--rand)] hover:border-[var(--rand-stark)] transition"
+                  className={`de-auf de-auf-${i + 1} block p-4 rounded-2xl bg-[var(--karte)] border border-[var(--rand)] hover:border-[var(--rand-stark)] hover:-translate-y-0.5 transition`}
                 >
                   <span className="block font-bold text-[var(--text)]">{b.name}</span>
                   <span className="block text-xs text-[var(--text-leise)] mt-0.5 min-h-[2.5em]">{b.beschreibung}</span>
-                  <Balken wert={b.sicher} von={b.woerter} />
+                  <span className="block mt-3 h-1.5 rounded-full bg-[var(--feld)] overflow-hidden" aria-hidden="true">
+                    <span className="block h-full rounded-full bg-[var(--gruen)]" style={{ width: `${Math.round((b.sicher / b.woerter) * 100)}%`, transition: 'width 1s' }} />
+                  </span>
                   <span className="block text-xs text-[var(--text-mittel)] mt-1.5">
-                    {b.sicher} von {b.woerter} sicher
-                    {b.woerter - b.neu > 0 && b.faellig - b.neu > 0 ? ` · ${b.faellig - b.neu} fällig` : ''}
+                    {b.sicher} von {b.woerter} sicher{b.faellig - b.neu > 0 ? ` · ${b.faellig - b.neu} fällig` : ''}
                   </span>
                 </Link>
               ))}
             </div>
 
-            <h3 className="mt-7 mb-2 text-sm font-bold text-[var(--text)]">Grammatik</h3>
-            <div className="rounded-2xl bg-[var(--karte)] border border-[var(--rand)] divide-y divide-[var(--rand)] overflow-hidden">
-              {daten.grammatik.map((t) => (
-                <Link
-                  key={t.key}
-                  to={`/deutsch/grammatik/${t.key}`}
-                  className="flex items-center gap-3 px-4 py-3 hover:bg-[var(--feld)] transition"
-                >
-                  <span className="flex-1 min-w-0">
-                    <span className="block font-semibold text-[var(--text)] text-[15px]">{t.titel}</span>
-                    <span className="block text-xs text-[var(--text-leise)]">{t.kurz}</span>
-                  </span>
-                  <span className="text-xs tabular-nums text-[var(--text-mittel)] whitespace-nowrap">
-                    {t.gemacht === 0 ? 'neu' : `${t.sicher}/${t.uebungen}`}
-                  </span>
-                </Link>
-              ))}
+            {/* ---------- Mehr ---------- */}
+            <h3 className="mt-8 mb-3 text-lg font-bold text-[var(--text)]">Nachschlagen und wiederholen</h3>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <Kachel to="/deutsch/kaliplar" titel="Kalıplar" text={`${d.kaliplar} durumda hazır cümleler, sesli`} zeichen="💬" />
+              <Kachel to="/deutsch/tipps" titel="Tüyolar" text={`${d.tipps} püf noktası: artikel, kelime sırası, sınav`} zeichen="💡" />
+              <Kachel to="/deutsch/wiederholung" titel="Konu tekrarı" text="Başladığın konulardan karışık sorular ve özetler" zeichen="🔁" />
             </div>
 
-            <h3 className="mt-7 mb-2 text-sm font-bold text-[var(--text)]">Als Nächstes</h3>
+            <h3 className="mt-8 mb-3 text-sm font-bold text-[var(--text-mittel)]">Bald</h3>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Bald titel="Schreiben" text="Mektup, e-posta ve görüş yazısı; yazdığını örnek cevapla karşılaştırırsın." />
+              <Bald titel="Schreiben" text="Mektup, e-posta ve görüş yazısı; örnek cevap ve kontrol listesiyle." />
               <Bald titel="Prüfungssimulation" text="DTZ ve Goethe B1 formatında, süreli deneme sınavı." />
             </div>
           </>
@@ -95,12 +192,16 @@ export default function Deutsch() {
   )
 }
 
-function Balken({ wert, von }) {
-  const prozent = von ? Math.round((wert / von) * 100) : 0
+function Kachel({ to, titel, text, zeichen }) {
   return (
-    <span className="block mt-3 h-1.5 rounded-full bg-[var(--feld)] overflow-hidden" aria-hidden="true">
-      <span className="block h-full rounded-full bg-[var(--gruen)]" style={{ width: `${prozent}%` }} />
-    </span>
+    <Link
+      to={to}
+      className="group block p-4 rounded-2xl bg-[var(--karte)] border border-[var(--rand)] hover:border-[var(--rand-stark)] hover:-translate-y-0.5 transition"
+    >
+      <span className="block text-2xl transition group-hover:scale-110 origin-left" aria-hidden="true">{zeichen}</span>
+      <span className="block mt-2 font-bold text-[var(--text)]">{titel}</span>
+      <span className="block text-xs text-[var(--text-leise)] mt-0.5">{text}</span>
+    </Link>
   )
 }
 

@@ -129,7 +129,14 @@ Für diese Benutzer ist `/deutsch` auch die Startseite.
   und `server/src/deutsch/grammatik.js` (Themen mit türkischer Erklärung und Übungen).
 - Lernstand im selben Karteikasten wie der Trainer (`trainer_progress`),
   Schlüssel beginnen mit `de:`. Das Zurücksetzen des Trainers lässt sie stehen.
+- Lektionen: `server/src/deutsch/lektionen.js` (zu jedem Grammatikthema
+  Einstieg, Tabelle, typische Fehler, Tüyolar, Kalıplar und Özet). Die Seite
+  führt in fünf Schritten durch: Konu → Hatalar & tüyolar → Kalıplar → Alıştırma → Özet.
+- Kalıplar nach Situation: `server/src/deutsch/redemittel.js`; Tüyolar: `server/src/deutsch/tipps.js`.
+- Punkte und Serie: Tabelle `deutsch_xp` (XP pro Tag, Tagesziel 50, Tag nach deutscher Zeit).
+- Vorlesen über die Sprachausgabe des Browsers (`client/src/deutsch/ui.jsx`), kein Dienst nötig.
 - API: `/api/deutsch/uebersicht`, `/karten/next`, `/karten/answer`, `/woerter`,
-  `/grammatik/:thema`, `/grammatik/answer`.
+  `/lektion/:thema`, `/lektion/:thema/gelesen`, `/grammatik/answer`, `/kaliplar`,
+  `/tipps`, `/wiederholung`.
 - Schlüssel von Wörtern und Reihenfolge der Übungen nicht ändern, sonst geht
   der Lernstand dieser Karten verloren.
