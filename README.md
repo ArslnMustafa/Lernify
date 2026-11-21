@@ -143,6 +143,9 @@ Für diese Benutzer ist `/deutsch` auch die Startseite.
   Stimme/Tonhöhe, höchstens zweimal). Die Lösungen verlassen den Server erst bei der
   Abgabe; Ergebnisse in der Tabelle `deutsch_pruefung`. Bestanden je Modul ab 60 %.
   Der Zwischenstand liegt im Browser (localStorage), ein Neuladen kostet nichts.
+- Telegram-Bot von mustafaarslan.com: dieselben Deutsch-Routen unter `/api/bot/deutsch`,
+  Zugang per `X-Bot-Key` (Umgebungsvariable `BOT_KEY`, ohne sie ist der Weg aus) und
+  `X-Bot-User` (Lernify-Benutzername). Siehe `server/src/middleware/bot.js`.
 - Lernstand im selben Karteikasten wie der Trainer (`trainer_progress`),
   Schlüssel beginnen mit `de:`. Das Zurücksetzen des Trainers lässt sie stehen.
 - Lektionen: `server/src/deutsch/lektionen.js` (zu jedem Grammatikthema

@@ -59,7 +59,8 @@ function xpStand(userId) {
 }
 
 const router = express.Router();
-router.use(requireAuth);
+// Angemeldet per Login (JWT) oder schon vom Bot-Zugang erkannt (middleware/bot.js)
+router.use((req, res, next) => (req.user ? next() : requireAuth(req, res, next)));
 router.use((req, res, next) => {
   if (hatDeutsch(req.user)) return next();
   res.status(403).json({ error: "Deutsch ist für dich nicht freigeschaltet." });

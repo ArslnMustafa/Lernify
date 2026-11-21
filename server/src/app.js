@@ -11,6 +11,7 @@ const simulationRoutes = require("./routes/simulation");
 const schreibenRoutes = require("./routes/schreiben");
 const verwaltenRoutes = require("./routes/verwalten");
 const deutschRoutes = require("./routes/deutsch");
+const { botZugang } = require("./middleware/bot");
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.use("/api/simulation", simulationRoutes);
 app.use("/api/schreiben", schreibenRoutes);
 app.use("/api/verwalten", verwaltenRoutes);
 app.use("/api/deutsch", deutschRoutes);
+// Dieselben Deutsch-Routen fuer den Telegram-Bot (gemeinsamer Schluessel statt Login)
+app.use("/api/bot/deutsch", botZugang, deutschRoutes);
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 
